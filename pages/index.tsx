@@ -1,10 +1,5 @@
-import Head from 'next/head'
+import { Layout } from '../components/ui/layout'
 
 export default function Home() {
-  return (
-    <div className="m-2 text-gray-800 font-bold">
-      Hallo
-    </div>
-  )
+  return <Layout></Layout>
 }
-
