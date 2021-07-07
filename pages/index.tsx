@@ -1,52 +1,33 @@
 import { useRouter } from 'next/router'
-import { ReactElement } from 'react'
+import React, { ReactElement, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { GroupList } from '../components/groups/GroupList'
-import { Button } from '../components/ui/Button'
+import { EmptyText } from '../components/ui/EmptyText'
 import { Layout } from '../components/ui/Layout'
-import { ToolbarContainer } from '../components/ui/ToolbarContainer'
+import { AppState } from '../redux'
 
-export default function Home(): ReactElement {
+export default function Home(): ReactElement | null {
   const router = useRouter()
+  const fileData = useSelector((state: AppState) => state.dataFile.fileData)
+
+  useEffect(() => {
+    if (fileData === null) return
+    router.push('/groups')
+  }, [fileData, router])
 
   return (
-    <Layout
-      header={
-        <>
-          <Button showBorder={false} onClick={() => router.push('/config')}>
-            Einstellungen
-          </Button>
-        </>
-      }
-      left={
-        <ToolbarContainer
-          toolbarItems={[{ type: 'button', label: 'Neue Gruppe', action() {} }]}
-        >
-          <GroupList />
-        </ToolbarContainer>
-      }
-      right={
-        <ToolbarContainer
-          toolbarItems={[
-            { type: 'button', label: 'Neues Projekt', action() {} },
-          ]}
-        >
-          <div>Detail-Content</div>
-        </ToolbarContainer>
-      }
-    >
-      <ToolbarContainer
-        toolbarItems={[
-          { type: 'button', label: 'Gruppe bearbeiten', action() {} },
-          {
-            type: 'button',
-            buttonType: 'delete',
-            label: 'Gruppe löschen',
-            action() {},
-          },
-        ]}
-      >
-        <h1 className="text-3xl">{'---'}</h1>
-      </ToolbarContainer>
+    <Layout left={fileData !== null ? <GroupList /> : null}>
+      {fileData === null ? (
+        <EmptyText>
+          <p className="font-semibold mb-4">Willkommen bei ProjectFusion!</p>
+          <p>
+            Erstelle eine neue Datei oder öffne eine vorhandene über das
+            &quot;Datei&quot;-Menü oben.
+          </p>
+        </EmptyText>
+      ) : (
+        <EmptyText>Bitte wähle links eine Gruppe aus.</EmptyText>
+      )}
     </Layout>
   )
 }

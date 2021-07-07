@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { ThunkConfig } from '.'
-import { awaitTryCatch, tryCatch } from '../../tools/tryCatch'
+import { asyncTryCatch, tryCatch } from '../../tools/tryCatch'
 import { FileData } from '../../types/FileData'
 import { filePickerOptions, FilePickerResult } from './filePicker'
 
@@ -11,14 +11,14 @@ function getDefaultData(): FileData {
 export const createFile = createAsyncThunk<FilePickerResult, void, ThunkConfig>(
   'dataFile/createFile',
   async (_, thunk) => {
-    const fileHandle = await awaitTryCatch(() =>
+    const fileHandle = await asyncTryCatch(() =>
       showSaveFilePicker(filePickerOptions),
     )
     if (fileHandle.caught) {
       return thunk.rejectWithValue(fileHandle.error)
     }
 
-    const writable = await awaitTryCatch(() =>
+    const writable = await asyncTryCatch(() =>
       fileHandle.value.createWritable(),
     )
     if (writable.caught) {
@@ -30,14 +30,14 @@ export const createFile = createAsyncThunk<FilePickerResult, void, ThunkConfig>(
     if (defaultContent.caught) {
       return thunk.rejectWithValue(defaultContent.error)
     }
-    const writeResult = await awaitTryCatch(() =>
+    const writeResult = await asyncTryCatch(() =>
       writable.value.write(defaultContent.value),
     )
     if (writeResult.caught) {
       return thunk.rejectWithValue(writeResult.error)
     }
 
-    const closeResult = await awaitTryCatch(() => writable.value.close())
+    const closeResult = await asyncTryCatch(() => writable.value.close())
     if (closeResult.caught) {
       return thunk.rejectWithValue(closeResult.error)
     }

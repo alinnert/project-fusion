@@ -1,10 +1,11 @@
-import { FC, PropsWithChildren } from 'react'
+import { FC, PropsWithChildren, ReactElement } from 'react'
 import { Button, ButtonType } from './Button'
 
 interface ToolbarButton {
   type: 'button'
   buttonType?: ButtonType
   label: string
+  icon?: ReactElement
   action: () => void
 }
 
@@ -26,6 +27,7 @@ export const ToolbarContainer: FC<PropsWithChildren<Props>> = ({
             item.type === 'button' ? (
               <Button
                 key={index}
+                icon={item.icon}
                 buttonType={item.buttonType ?? 'default'}
                 onClick={item.action}
               >

@@ -12,12 +12,6 @@ module.exports = {
         danger: colors.rose,
         neutral: colors.blueGray,
       },
-      boxShadow: {
-        button: `
-          0 1px 1px -1px rgba(0, 0, 0, 0.5),
-          0 1px 5px -1px rgba(0, 0, 0, 0.3)
-        `,
-      },
     },
   },
   variants: {

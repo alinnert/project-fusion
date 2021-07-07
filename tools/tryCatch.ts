@@ -12,7 +12,7 @@ function normalizeError(error: unknown): Error {
   return new Error('unknown error')
 }
 
-export async function awaitTryCatch<T>(
+export async function asyncTryCatch<T>(
   getValue: () => Promise<T>,
 ): Promise<TryCatchResult<T>> {
   try {

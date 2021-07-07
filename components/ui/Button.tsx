@@ -1,25 +1,33 @@
-import { ButtonHTMLAttributes, FC, PropsWithChildren } from 'react'
+import {
+  ButtonHTMLAttributes,
+  FC,
+  PropsWithChildren,
+  ReactElement,
+} from 'react'
+import { Heroicon } from './Heroicon'
 
 export type ButtonType = 'default' | 'primary' | 'delete'
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  icon?: ReactElement
   buttonType?: ButtonType
-  showBorder?: boolean
+  flat?: boolean
 }
 
 export const Button: FC<PropsWithChildren<Props>> = ({
   children,
+  icon,
   buttonType = 'default',
-  showBorder = true,
+  flat = true,
   ...buttonProps
 }) => {
   function getButtonClasses(type: Props['buttonType']): string {
     const fontBaseClasses = 'text-sm font-semibold'
-    const boxBaseClasses = 'px-3 py-1 rounded shadow-button'
+    const boxBaseClasses = 'flex items-center px-3 py-1 rounded shadow'
     const darkTextClasses =
       'text-neutral-700 hover:text-neutral-900 active:text-neutral-900'
     const lightTextClasses = 'text-white'
-    const noBorderClasses = 'border-none'
+    const shadowClasses = flat ? 'shadow' : ''
 
     switch (type) {
       default:
@@ -28,23 +36,15 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           ${fontBaseClasses}
           ${boxBaseClasses}
           ${darkTextClasses}
-          ${
-            showBorder
-              ? 'border border-neutral-400 hover:border-neutral-500'
-              : noBorderClasses
-          }
-          bg-neutral-50 hover:bg-neutral-100 active:bg-neutral-200
+          ${shadowClasses}
+          bg-neutral-50 hover:bg-neutral-100 active:bg-neutral-300
         `
       case 'primary':
         return `
           ${fontBaseClasses}
           ${boxBaseClasses}
           ${lightTextClasses}
-          ${
-            showBorder
-              ? 'border border-brand-800 hover:border-brand-900'
-              : noBorderClasses
-          }
+          ${shadowClasses}
           bg-brand-600 hover:bg-brand-700 active:bg-brand-800
         `
       case 'delete':
@@ -52,7 +52,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           ${fontBaseClasses}
           ${boxBaseClasses}
           ${lightTextClasses}
-          ${showBorder ? 'border border-danger-900' : noBorderClasses}
+          ${shadowClasses}
           bg-danger-700 hover:bg-danger-800 active:bg-danger-900
         `
     }
@@ -60,6 +60,11 @@ export const Button: FC<PropsWithChildren<Props>> = ({
 
   return (
     <button className={getButtonClasses(buttonType)} {...buttonProps}>
+      {icon !== undefined ? (
+        <div className="mr-2">
+          <Heroicon icon={icon} />
+        </div>
+      ) : null}
       {children}
     </button>
   )

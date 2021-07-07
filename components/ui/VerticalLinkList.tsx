@@ -1,24 +1,27 @@
 import { useRouter } from 'next/router'
-import { MouseEvent, ReactElement, useState } from 'react'
-import { ProjectGroup } from '../../types/FileData'
+import { MouseEvent, ReactElement } from 'react'
 import { LinkListItem } from './LinkListItem'
 
-interface Props<T> {
-  items: Array<ProjectGroup>
-  currentId?: ProjectGroup['id'] | null
+export interface LinkItem {
+  id: string
+  name: string
 }
 
-export function VerticalLinkList<T>({
+interface Props<T extends LinkItem> {
+  items: Array<T>
+  createLink: (item: T) => string
+  currentId?: T['id'] | null
+}
+
+export function VerticalLinkList<T extends LinkItem>({
   items,
+  createLink,
   currentId,
 }: Props<T>): ReactElement {
   const router = useRouter()
 
-  function handleItemClick(
-    item: ProjectGroup,
-    event: MouseEvent<HTMLDivElement>,
-  ) {
-    router.push(item.id)
+  function handleItemClick(item: T, event: MouseEvent<HTMLDivElement>) {
+    router.push(createLink(item))
   }
 
   return (

@@ -1,10 +1,13 @@
-import { FC, PropsWithChildren, ReactNode, useMemo } from 'react'
+import React, { FC, PropsWithChildren, ReactNode, useMemo } from 'react'
 import { useSelector } from 'react-redux'
-import { AppState, useAppDispatch } from '../../redux'
-import { createFile } from '../../redux/dataFile/createFileThunk'
-import { openFile } from '../../redux/dataFile/openFileThunk'
+import { AppState } from '../../redux'
+import { FileControls } from '../dataFile/FileControls'
+import { ViewAreaTabs } from '../dataFile/ViewAreaTabs'
 import { Button } from './Button'
+import { HeaderButton } from './HeaderButton'
+import { HeaderSearch } from './HeaderSearch'
 import { Input } from './Input'
+import { Logo } from './Logo'
 
 interface Props {
   header?: ReactNode
@@ -18,19 +21,8 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
   left,
   right,
 }) => {
-  const dispatch = useAppDispatch()
-  const fileName = useSelector(
-    (state: AppState) => state.dataFile.fileName ?? '(no file)',
-  )
+  const fileData = useSelector((state: AppState) => state.dataFile.fileData)
   const showRightPanel = useMemo(() => right ?? null !== null, [right])
-
-  function handleCreateProjectClick(): void {
-    dispatch(createFile())
-  }
-
-  function handleOpenProjectClick(): void {
-    dispatch(openFile())
-  }
 
   return (
     <div
@@ -53,37 +45,23 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
             flex items-center
           "
         >
-          <div className="mr-4 text-xl font-semibold tracking-wide">
-            ProjectFusion
-          </div>
+          <Logo />
 
-          <span className="inline-flex items-center gap-x-2">
-            <Button showBorder={false} onClick={handleCreateProjectClick}>
-              Neue Datei
-            </Button>
-            <Button showBorder={false} onClick={handleOpenProjectClick}>
-              Datei öffnen
-            </Button>
-            {fileName ?? '(no file)'}
+          <span className="flex items-center gap-x-2">
+            <FileControls />
+            {fileData !== null ? <ViewAreaTabs /> : null}
             {header}
           </span>
         </div>
 
-        <div
-          className="
-            row-start-1 col-start-2
-            flex items-center gap-x-2
-          "
-        >
-          <Input
-            showBorder={false}
-            placeholder="Suchen / Zu Projekt springen..."
-          />
-          <Button showBorder={false}>Suchen</Button>
+        <div className="row-start-1 col-start-2 flex items-center gap-x-2">
+          {fileData !== null ? <HeaderSearch /> : null}
         </div>
       </div>
 
-      <div className="row-start-2 col-start-1 bg-neutral-50">{left}</div>
+      <div className="row-start-2 col-start-1 bg-neutral-50 border-r border-neutral-400">
+        {left}
+      </div>
 
       <div
         className={`row-start-2 col-start-2 ${
@@ -94,7 +72,9 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
       </div>
 
       {showRightPanel ? (
-        <div className="row-start-2 col-start-3">{right}</div>
+        <div className="row-start-2 col-start-3 border-l border-neutral-400">
+          {right}
+        </div>
       ) : null}
     </div>
   )
