@@ -1,14 +1,24 @@
+export interface PseudoGroup {
+  id: string
+  name: string
+}
+
 export interface ProjectGroup {
   id: string
   name: string
-  color?: string
+  color: string
+  notes: string
+  projects: Array<keyof FileData['projects']>
 }
+
+export type ProjectStatus = 'important' | 'normal' | 'archived';
 
 export interface Project {
   id: string
   name: string
   projectNumber: string
-  status: 'important' | 'normal' | 'archived'
+  status: ProjectStatus
+  notes: string
 }
 
 export interface Settings {
@@ -16,7 +26,7 @@ export interface Settings {
 }
 
 export interface FileData {
-  groups: ProjectGroup[]
-  projects: Project[]
+  groups: Array<ProjectGroup>
+  projects: Record<string, Project>
   settings: Settings
 }

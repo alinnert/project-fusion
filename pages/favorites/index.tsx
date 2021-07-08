@@ -9,7 +9,7 @@ export default function Favorites(): ReactElement | null {
 
   return (
     <Layout
-      left={fileData !== null ? <GroupList currentId="" /> : null}
+      left={fileData !== null ? <GroupList currentId="/favorites" /> : null}
     >
       Favoriten
     </Layout>

@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import React, { FC, ReactElement } from 'react'
-import { HeaderButton } from './HeaderButton'
+import { Button } from './Button'
 
 export interface TabItem {
   label: string
@@ -24,9 +24,12 @@ export const HeaderTabs: FC<Props> = ({ tabs }) => {
     <div className="flex gap-x-1">
       {tabs.map((tab) => (
         <div key={tab.href} onClick={() => handleItemClick(tab)}>
-          <HeaderButton current={tab.current} icon={tab.icon}>
+          <Button
+            buttonType={tab.current ? 'header-current' : 'header'}
+            icon={tab.icon}
+          >
             {tab.label}
-          </HeaderButton>
+          </Button>
         </div>
       ))}
     </div>

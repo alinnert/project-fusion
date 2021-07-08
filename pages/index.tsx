@@ -12,7 +12,7 @@ export default function Home(): ReactElement | null {
 
   useEffect(() => {
     if (fileData === null) return
-    router.push('/groups')
+    router.push('/favorites')
   }, [fileData, router])
 
   return (

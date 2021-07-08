@@ -20,7 +20,7 @@ export const ViewAreaTabs: FC<Props> = ({}) => {
       {
         label: 'Daten',
         icon: <CollectionIcon />,
-        href: '/groups',
+        href: '/favorites',
         current: !isConfigPage,
       },
       {

@@ -15,7 +15,7 @@ export const LinkListItem: FC<PropsWithChildren<Props>> = ({
     () =>
       classnames(
         'px-4 py-2 rounded',
-        'hover:bg-neutral-200 current:bg-brand-700',
+        'hover:bg-neutral-200 active:bg-neutral-300 current:bg-brand-700',
         'font-semibold current:text-white',
         { current },
       ),

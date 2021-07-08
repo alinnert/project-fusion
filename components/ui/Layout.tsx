@@ -3,10 +3,7 @@ import { useSelector } from 'react-redux'
 import { AppState } from '../../redux'
 import { FileControls } from '../dataFile/FileControls'
 import { ViewAreaTabs } from '../dataFile/ViewAreaTabs'
-import { Button } from './Button'
-import { HeaderButton } from './HeaderButton'
 import { HeaderSearch } from './HeaderSearch'
-import { Input } from './Input'
 import { Logo } from './Logo'
 
 interface Props {

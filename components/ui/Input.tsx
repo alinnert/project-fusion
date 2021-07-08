@@ -1,29 +1,33 @@
-import { FC, InputHTMLAttributes, useState } from 'react'
+import { FC, InputHTMLAttributes, useMemo } from 'react'
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  inputType?: 'default'
-  showBorder?: boolean
+  inputType?: 'default' | 'header'
 }
 
-export const Input: FC<Props> = ({
-  inputType = 'default',
-  showBorder = true,
-  ...inputProps
-}) => {
-  function getInputClasses(): string {
-    const textBaseClasses = 'text-neutral-800 text-sm'
-    const boxBaseClasses = 'w-60 px-2 py-1 rounded'
-    const noBorderClasses = 'border-none'
-    const neutralBorderClasses = showBorder
-      ? 'border border-neutral-600'
-      : noBorderClasses
+export const Input: FC<Props> = ({ inputType = 'default', ...inputProps }) => {
+  const inputClasses = useMemo(() => {
+    const boxClasses = 'w-60 px-2 py-1 rounded'
+    const textClasses = 'text-sm'
 
     switch (inputType) {
       default:
       case 'default':
-        return `${textBaseClasses} ${boxBaseClasses} ${neutralBorderClasses}`
+        return [
+          boxClasses,
+          textClasses,
+          'border border-neutral-600',
+          'text-neutral-800',
+        ].join(' ')
+      case 'header':
+        return [
+          boxClasses,
+          textClasses,
+          'bg-white/30 hover:bg-white/40 focus:bg-white',
+          'placeholder-brand-200 hover:placeholder-brand-100 focus:placeholder-black/50',
+          'text-white focus:text-black',
+        ].join(' ')
     }
-  }
+  }, [inputType])
 
-  return <input className={getInputClasses()} type="text" {...inputProps} />
+  return <input className={inputClasses} type="text" {...inputProps} />
 }

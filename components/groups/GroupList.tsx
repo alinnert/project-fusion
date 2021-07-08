@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { FC, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { AppState } from '../../redux'
-import { ProjectGroup } from '../../types/FileData'
+import { ProjectGroup, PseudoGroup } from '../../types/FileData'
 import { ToolbarContainer } from '../ui/ToolbarContainer'
 import { VerticalLinkList } from '../ui/VerticalLinkList'
 
@@ -21,8 +21,10 @@ export const GroupList: FC<Props> = ({ currentId }) => {
     return typeof groupId === 'string' ? groupId : null
   }, [currentId, router.query])
 
-  const items = useMemo<ProjectGroup[]>(() => {
-    return [{ id: '', name: 'Favoriten' }, ...(fileContent?.groups ?? [])]
+  const items = useMemo<Array<ProjectGroup | PseudoGroup>>(() => {
+    const groups = fileContent?.groups ?? []
+    const favoritesGroup: PseudoGroup = { id: '/favorites', name: 'Favoriten' }
+    return [favoritesGroup, ...groups]
   }, [fileContent?.groups])
 
   return (
@@ -34,7 +36,9 @@ export const GroupList: FC<Props> = ({ currentId }) => {
     >
       <VerticalLinkList
         items={items}
-        createLink={(item) => `/groups/${item.id}`}
+        createLink={(item) =>
+          item.id.startsWith('/') ? item.id : `/groups/${item.id}`
+        }
         currentId={currentGroupId}
       />
     </ToolbarContainer>

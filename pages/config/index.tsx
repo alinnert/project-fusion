@@ -5,10 +5,8 @@ import { Layout } from '../../components/ui/Layout'
 
 export default function Config(): ReactElement | null {
   return (
-    <Layout left={<SettingsCategoryList />}>
-      <EmptyText>
-        Wähle links eine Kategorie aus.
-      </EmptyText>
+    <Layout left={<SettingsCategoryList currentId="" />}>
+      <EmptyText>Wähle links eine Kategorie aus.</EmptyText>
     </Layout>
   )
 }

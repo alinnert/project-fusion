@@ -39,7 +39,21 @@ export const GroupDetailView: FC<Props> = ({}) => {
         },
       ]}
     >
-      <h1 className="text-3xl">{currentGroup.name}</h1>
+      <div className="px-4 py-2">
+        <h1
+          className="text-3xl mb-8"
+          style={{ color: currentGroup.color ?? 'inherit' }}
+        >
+          {currentGroup.name}
+        </h1>
+
+        {currentGroup.notes.trim() !== '' ? (
+          <>
+            <div className="text-xl font-semibold mb-2">Notizen</div>
+            <div className="prose select-text">{currentGroup.notes}</div>
+          </>
+        ) : null}
+      </div>
     </ToolbarContainer>
   )
 }
