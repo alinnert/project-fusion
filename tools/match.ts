@@ -1,4 +1,4 @@
-export function match<T extends string>(
+export function match<T extends string | number>(
   value: T,
   choices: Record<T, string>,
 ): string {

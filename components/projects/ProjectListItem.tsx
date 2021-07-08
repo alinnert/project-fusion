@@ -1,10 +1,10 @@
 import {
   ArchiveIcon,
   ArrowCircleDownIcon,
+  DocumentDuplicateIcon,
   DotsHorizontalIcon,
   ExclamationIcon,
   PencilIcon,
-  ReplyIcon,
   TrashIcon,
 } from '@heroicons/react/solid'
 import React, { FC, useMemo } from 'react'
@@ -42,7 +42,7 @@ export const ProjectListItem: FC<Props> = ({
     }
 
     items.push(
-      { label: 'Verschieben', icon: <ReplyIcon /> },
+      { label: 'Duplizieren', icon: <DocumentDuplicateIcon /> },
       { label: 'Löschen', icon: <TrashIcon /> },
     )
 

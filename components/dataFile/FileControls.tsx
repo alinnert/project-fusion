@@ -1,7 +1,6 @@
 import {
-  DocumentIcon,
-  FolderIcon,
-  PlusIcon,
+  DatabaseIcon,
+  DocumentAddIcon, FolderIcon,
   XIcon
 } from '@heroicons/react/solid'
 import { useRouter } from 'next/router'
@@ -24,7 +23,7 @@ export const FileControls: FC<Props> = ({}) => {
     const mainMenuItems: Array<MenuItem> = [
       {
         label: 'Erstellen',
-        icon: <PlusIcon />,
+        icon: <DocumentAddIcon />,
         action() {
           dispatch(createFile())
           router.push('/')
@@ -55,17 +54,17 @@ export const FileControls: FC<Props> = ({}) => {
   if (fileName === null) {
     return (
       <DropdownMenu
-        icon={<DocumentIcon />}
+        icon={<DatabaseIcon />}
         items={menuItems}
         buttonType="header"
       >
-        Datei
+        Datenbank
       </DropdownMenu>
     )
   }
 
   return (
-    <DropdownMenu icon={<DocumentIcon />} items={menuItems} buttonType="header">
+    <DropdownMenu icon={<DatabaseIcon />} items={menuItems} buttonType="header">
       {fileName}
     </DropdownMenu>
   )

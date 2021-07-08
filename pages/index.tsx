@@ -1,3 +1,4 @@
+import { SparklesIcon } from '@heroicons/react/outline'
 import { useRouter } from 'next/router'
 import React, { ReactElement, useEffect } from 'react'
 import { useSelector } from 'react-redux'
@@ -18,12 +19,12 @@ export default function Home(): ReactElement | null {
   return (
     <Layout left={fileData !== null ? <GroupList /> : null}>
       {fileData === null ? (
-        <EmptyText>
-          <p className="font-semibold mb-4">Willkommen bei ProjectFusion!</p>
-          <p>
-            Erstelle eine neue Datei oder öffne eine vorhandene über das
-            &quot;Datei&quot;-Menü oben.
-          </p>
+        <EmptyText
+          title="Willkommen bei ProjectFusion!"
+          icon={<SparklesIcon />}
+        >
+          Erstelle eine neue Datei oder öffne eine vorhandene über das
+          &quot;Datei&quot;-Menü oben.
         </EmptyText>
       ) : (
         <EmptyText>Bitte wähle links eine Gruppe aus.</EmptyText>

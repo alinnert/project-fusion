@@ -1,3 +1,4 @@
+import { InboxIcon } from '@heroicons/react/outline'
 import { PlusIcon } from '@heroicons/react/solid'
 import React, { FC, ReactNode, useMemo } from 'react'
 import { Project, ProjectStatus } from '../../types/FileData'
@@ -50,14 +51,16 @@ export const ProjectList: FC<Props> = ({ projects }) => {
       ]}
     >
       {projects.length === 0 ? (
-        <EmptyText>Es gibt derzeit keine Projekte in dieser Gruppe.</EmptyText>
-      ) : null}
-
-      <div className="px-2 py-4 text-lg">
-        {getGroupedItems('important', 'Wichtige Projekte')}
-        {getGroupedItems('normal', 'Normale Projekte')}
-        {getGroupedItems('archived', 'Archivierte Projekte')}
-      </div>
+        <EmptyText icon={<InboxIcon />}>
+          Es gibt derzeit keine Projekte in dieser Gruppe.
+        </EmptyText>
+      ) : (
+        <div className="px-2 py-4 text-lg">
+          {getGroupedItems('important', 'Wichtige Projekte')}
+          {getGroupedItems('normal', 'Normale Projekte')}
+          {getGroupedItems('archived', 'Archivierte Projekte')}
+        </div>
+      )}
     </ToolbarContainer>
   )
 }
