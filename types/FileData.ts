@@ -11,13 +11,12 @@ export interface ProjectGroup {
   projects: Array<keyof FileData['projects']>
 }
 
-export type ProjectStatus = 'important' | 'normal' | 'archived';
-
 export interface Project {
   id: string
   name: string
   projectNumber: string
-  status: ProjectStatus
+  important: boolean
+  archived: boolean
   notes: string
 }
 

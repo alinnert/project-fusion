@@ -24,10 +24,16 @@ export default function GroupById(): ReactElement | null {
         .map((projectId) => fileData?.projects[projectId])
         .filter((project) => project !== undefined) as Array<Project>) ?? []
     ).sort((projectA, projectB) => {
-      if (projectA.status === 'important') return -1
-      if (projectB.status === 'important') return 1
-      if (projectA.status === 'archived') return 1
-      if (projectB.status === 'archived') return -1
+      if (
+        (projectA.important && projectB.important) ||
+        (!projectA.important && !projectB.important)
+      ) {
+        const pnA = parseInt(projectB.projectNumber)
+        const pnB = parseInt(projectA.projectNumber)
+        return pnA > pnB ? 1 : pnA < pnB ? -1 : 0
+      }
+      if (projectA.important) return -1
+      if (projectB.important) return 1
       return 0
     })
   }, [fileData?.projects, group?.projects])

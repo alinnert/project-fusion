@@ -4,7 +4,7 @@ import Document, {
   Head,
   Html,
   Main,
-  NextScript
+  NextScript,
 } from 'next/document'
 
 export default class AppDocument extends Document {
@@ -18,7 +18,9 @@ export default class AppDocument extends Document {
   render() {
     return (
       <Html>
-        <Head />
+        <Head>
+          <meta name="theme-color" content="#0369A1" />
+        </Head>
         <body className="select-none">
           <Main />
           <NextScript />

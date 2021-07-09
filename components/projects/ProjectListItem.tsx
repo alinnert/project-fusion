@@ -4,6 +4,7 @@ import {
   DocumentDuplicateIcon,
   DotsHorizontalIcon,
   ExclamationIcon,
+  InboxIcon,
   PencilIcon,
   TrashIcon,
 } from '@heroicons/react/solid'
@@ -18,46 +19,51 @@ export const ProjectListItem: FC<Props> = ({
   id,
   name,
   projectNumber,
-  status,
+  important,
+  archived,
   notes,
 }) => {
   const menuItems = useMemo<Array<MenuItem>>(() => {
     const items: Array<MenuItem> = [
       { label: 'Bearbeiten', icon: <PencilIcon /> },
+
+      important
+        ? {
+            label: 'Markierung: "Normal"',
+            icon: <ArrowCircleDownIcon />,
+          }
+        : { label: 'Markierung: "Wichtig"', icon: <ExclamationIcon /> },
+
+      archived
+        ? { label: 'Aus Archiv wiederherstellen', icon: <InboxIcon /> }
+        : { label: 'Archivieren', icon: <ArchiveIcon /> },
+
+      { label: 'Duplizieren', icon: <DocumentDuplicateIcon /> },
+
+      { label: 'Löschen', icon: <TrashIcon /> },
     ]
 
-    if (status !== 'important') {
-      items.push({ label: 'Markierung: "Wichtig"', icon: <ExclamationIcon /> })
-    }
-
-    if (status !== 'normal') {
-      items.push({
-        label: 'Markierung: "Normal"',
-        icon: <ArrowCircleDownIcon />,
-      })
-    }
-
-    if (status !== 'archived') {
-      items.push({ label: 'Archivieren', icon: <ArchiveIcon /> })
-    }
-
-    items.push(
-      { label: 'Duplizieren', icon: <DocumentDuplicateIcon /> },
-      { label: 'Löschen', icon: <TrashIcon /> },
-    )
-
     return items
-  }, [status])
+  }, [archived, important])
+
+  const textClasses = useMemo(() => {
+    return [
+      'select-text',
+      match(String(important) as 'true' | 'false', {
+        true: archived ? 'text-yellow-500' : 'text-yellow-700',
+        false: archived ? 'text-neutral-500' : 'text-neutral-700',
+      }),
+    ].join(' ')
+  }, [archived, important])
 
   return (
     <div
       key={id}
       className={[
         'px-4 py-2 mb-2 last:mb-0 rounded',
-        match(status, {
-          normal: 'bg-neutral-100',
-          important: 'bg-yellow-100',
-          archived: ['bg-neutral-50', 'text-neutral-400'].join(' '),
+        match(String(important) as 'true' | 'false', {
+          true: archived ? 'bg-yellow-100/40' : 'bg-yellow-100',
+          false: archived ? 'bg-neutral-100/40' : 'bg-neutral-100',
         }),
       ].join(' ')}
     >
@@ -65,32 +71,16 @@ export const ProjectListItem: FC<Props> = ({
         className={[
           'flex',
           'text-lg',
-          match(status, {
-            normal: '',
-            important: 'font-semibold text-yellow-800',
-            archived: '',
+          match(String(important) as 'true' | 'false', {
+            true: 'font-semibold text-yellow-800',
+            false: '',
           }),
         ].join(' ')}
       >
-        <div
-          className={[
-            'select-text',
-            'flex-1',
-            status === 'archived' ? 'italic' : '',
-          ].join(' ')}
-        >
-          {name}
-        </div>
+        <div className={`flex-1 pr-4 ${textClasses}`}>{name}</div>
 
         {projectNumber !== undefined ? (
-          <div
-            className={[
-              'select-text',
-              status === 'archived' ? 'italic' : '',
-            ].join(' ')}
-          >
-            {projectNumber}
-          </div>
+          <div className={textClasses}>{projectNumber}</div>
         ) : null}
 
         <div className="ml-2">
@@ -104,7 +94,7 @@ export const ProjectListItem: FC<Props> = ({
       </div>
 
       {notes.trim() !== '' ? (
-        <div className="prose select-text">{notes}</div>
+        <div className="prose select-text text-base mt-2">{notes}</div>
       ) : null}
     </div>
   )

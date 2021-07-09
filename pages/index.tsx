@@ -23,8 +23,8 @@ export default function Home(): ReactElement | null {
           title="Willkommen bei ProjectFusion!"
           icon={<SparklesIcon />}
         >
-          Erstelle eine neue Datei oder öffne eine vorhandene über das
-          &quot;Datei&quot;-Menü oben.
+          Erstelle eine neue Datenbank oder öffne eine vorhandene über das
+          &quot;Datenbank&quot;-Menü oben links.
         </EmptyText>
       ) : (
         <EmptyText>Bitte wähle links eine Gruppe aus.</EmptyText>

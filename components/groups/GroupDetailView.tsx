@@ -49,7 +49,6 @@ export const GroupDetailView: FC<Props> = ({}) => {
 
         {currentGroup.notes.trim() !== '' ? (
           <>
-            <div className="text-xl font-semibold mb-2">Notizen</div>
             <div className="prose select-text">{currentGroup.notes}</div>
           </>
         ) : null}

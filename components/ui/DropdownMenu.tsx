@@ -1,5 +1,5 @@
 import { Menu } from '@headlessui/react'
-import React, { FC, PropsWithChildren, ReactElement } from 'react'
+import React, { FC, Fragment, PropsWithChildren, ReactElement } from 'react'
 import { match } from '../../tools/match'
 import { Button, ButtonType } from './Button'
 import { DropdownMenuItem } from './DropdownMenuItem'
@@ -26,10 +26,12 @@ export const DropdownMenu: FC<PropsWithChildren<Props>> = ({
 }) => {
   return (
     <Menu as="div" className="relative flex items-center">
-      <Menu.Button>
-        <Button icon={icon} buttonType={buttonType}>
-          {children}
-        </Button>
+      <Menu.Button as={Fragment}>
+        <div>
+          <Button icon={icon} buttonType={buttonType}>
+            {children}
+          </Button>
+        </div>
       </Menu.Button>
 
       <Menu.Items
@@ -37,8 +39,8 @@ export const DropdownMenu: FC<PropsWithChildren<Props>> = ({
           absolute z-50 w-max
           ${match(align, { left: 'left-0', right: 'right-0' })}
           top-full
-          p-1 shadow-md rounded
-          bg-white
+          p-1 rounded border border-black/10 shadow-xl
+          bg-white/60 backdrop-filter backdrop-blur-lg
           text-black
         `}
       >
