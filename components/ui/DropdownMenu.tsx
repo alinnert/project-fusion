@@ -40,7 +40,7 @@ export const DropdownMenu: FC<PropsWithChildren<Props>> = ({
           ${match(align, { left: 'left-0', right: 'right-0' })}
           top-full
           p-1 rounded border border-black/10 shadow-xl
-          bg-white/60 backdrop-filter backdrop-blur-lg
+          bg-white/70 backdrop-filter backdrop-blur-lg
           text-black
         `}
       >

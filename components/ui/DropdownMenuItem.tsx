@@ -27,7 +27,7 @@ export const DropdownMenuItem: FC<Props> = ({
       className={[
         'flex items-center',
         'py-2 pl-2 pr-12 rounded',
-        isActive ? 'bg-brand-600 text-white' : 'text-neutral-700',
+        isActive ? 'bg-gradient-brand text-white' : 'text-neutral-700',
         'active:hover:bg-brand-700',
       ].join(' ')}
     >

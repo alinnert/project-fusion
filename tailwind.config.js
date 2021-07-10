@@ -8,7 +8,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brand: colors.teal,
+        ...colors,
+        brand: colors.sky,
+        accent: colors.cyan,
         danger: colors.rose,
         neutral: colors.blueGray,
       },
@@ -22,8 +24,7 @@ module.exports = {
     plugin(({ addVariant, e }) => {
       addVariant('current', ({ modifySelectors, separator }) => {
         modifySelectors(
-          ({ className }) =>
-            `.current.${e(`current${separator}${className}`)}`,
+          ({ className }) => `.current.${e(`current${separator}${className}`)}`,
         )
       })
     }),

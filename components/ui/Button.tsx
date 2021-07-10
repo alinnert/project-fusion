@@ -67,7 +67,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           fontBaseClasses,
           lightTextClasses,
           shadowClasses,
-          'bg-danger-700 hover:bg-danger-800 active:bg-danger-900',
+          'bg-danger-800 hover:bg-danger-700 active:bg-danger-600',
         ].join(' ')
       
       case 'flat':
@@ -82,8 +82,8 @@ export const Button: FC<PropsWithChildren<Props>> = ({
         return [
           boxBaseClasses,
           fontBaseClasses,
-          'hover:bg-brand-700 active:bg-brand-800',
-          'text-brand-200 hover:text-white',
+          'hover:bg-black/20 active:bg-black/40',
+          'text-white/80 hover:text-white',
         ].join(' ')
 
       case 'header-current':

@@ -32,7 +32,8 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
         className="
           row-start-1 col-start-1 col-span-3
           grid grid-cols-[1fr,auto]
-          bg-brand-600 text-white
+          bg-gradient-brand
+          text-white
           px-4 py-2
         "
       >

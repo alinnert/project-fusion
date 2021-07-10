@@ -22,8 +22,8 @@ export const Input: FC<Props> = ({ inputType = 'default', ...inputProps }) => {
         return [
           boxClasses,
           textClasses,
-          'bg-white/30 hover:bg-white/40 focus:bg-white',
-          'placeholder-brand-200 hover:placeholder-brand-100 focus:placeholder-black/50',
+          'bg-white/40 hover:bg-white/50 focus:bg-white',
+          'placeholder-white/80 hover:placeholder-white focus:placeholder-black/50',
           'text-white focus:text-black',
         ].join(' ')
     }
