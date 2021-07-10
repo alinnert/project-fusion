@@ -1,15 +1,15 @@
 import { CogIcon, CollectionIcon } from '@heroicons/react/solid'
 import { useRouter } from 'next/router'
 import React, { FC, useMemo } from 'react'
-import { useSelector } from 'react-redux'
-import { AppState } from '../../redux'
+import { useAppSelector } from '../../redux'
+import { selectIsFileOpen } from '../../redux/database'
 import { HeaderTabs, TabItem } from '../ui/HeaderTabs'
 
 interface Props {}
 
 export const ViewAreaTabs: FC<Props> = ({}) => {
   const router = useRouter()
-  const fileData = useSelector((state: AppState) => state.dataFile.fileData)
+  const isFileOpen = useAppSelector(selectIsFileOpen)
 
   const isConfigPage = useMemo(() => {
     return router.pathname.startsWith('/config')
@@ -33,7 +33,7 @@ export const ViewAreaTabs: FC<Props> = ({}) => {
     [isConfigPage],
   )
 
-  if (fileData === null) return null
+  if (!isFileOpen) return null
 
   return (
     <div className="mx-8">

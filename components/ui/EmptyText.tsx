@@ -26,7 +26,7 @@ export const EmptyText: FC<PropsWithChildren<Props>> = ({
           </div>
         ) : null}
 
-        <div className="text-xl text-neutral-600">{children}</div>
+        <div className="prose prose-brand">{children}</div>
       </div>
     </div>
   )

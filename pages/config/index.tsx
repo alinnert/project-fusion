@@ -2,7 +2,7 @@ import { CogIcon } from '@heroicons/react/outline'
 import React, { ReactElement } from 'react'
 import { SettingsCategoryList } from '../../components/settings/SettingsCategoryList'
 import { EmptyText } from '../../components/ui/EmptyText'
-import { Layout } from '../../components/ui/Layout'
+import { Layout } from '../../components/app/Layout'
 
 export default function Config(): ReactElement | null {
   return (

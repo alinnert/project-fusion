@@ -1,49 +1,54 @@
 import { useRouter } from 'next/router'
 import React, { ReactElement, useMemo } from 'react'
-import { useSelector } from 'react-redux'
 import { GroupDetailView } from '../../../components/groups/GroupDetailView'
 import { GroupList } from '../../../components/groups/GroupList'
 import { ProjectList } from '../../../components/projects/ProjectList'
-import { Layout } from '../../../components/ui/Layout'
-import { AppState } from '../../../redux'
-import { Project } from '../../../types/FileData'
+import { Layout } from '../../../components/app/Layout'
+import { useAppSelector } from '../../../redux'
+import { selectIsFileOpen } from '../../../redux/database'
+import { Project } from '../../../redux/projects'
 
 export default function GroupById(): ReactElement | null {
   const router = useRouter()
-  const fileData = useSelector((state: AppState) => state.dataFile.fileData)
+  const isFileOpen = useAppSelector(selectIsFileOpen)
+  const groups = useAppSelector((state) => state.groups.entities)
+  const projects = useAppSelector((state) => state.projects.entities)
 
   const group = useMemo(() => {
     const groupIdParam = router.query.groupId ?? ''
     const groupId = Array.isArray(groupIdParam) ? groupIdParam[0] : groupIdParam
-    return fileData?.groups.find((group) => group.id === groupId)
-  }, [fileData?.groups, router.query.groupId])
+    return groups[groupId]
+  }, [groups, router.query.groupId])
 
-  const projects = useMemo<Array<Project>>(() => {
-    return (
+  const groupProjects = useMemo<Array<Project>>(() => {
+    const currentProjects =
       (group?.projects
-        .map((projectId) => fileData?.projects[projectId])
+        .map((projectId) => projects[projectId])
         .filter((project) => project !== undefined) as Array<Project>) ?? []
-    ).sort((projectA, projectB) => {
-      if (
-        (projectA.important && projectB.important) ||
-        (!projectA.important && !projectB.important)
-      ) {
-        const pnA = parseInt(projectB.projectNumber)
-        const pnB = parseInt(projectA.projectNumber)
-        return pnA > pnB ? 1 : pnA < pnB ? -1 : 0
-      }
-      if (projectA.important) return -1
-      if (projectB.important) return 1
-      return 0
-    })
-  }, [fileData?.projects, group?.projects])
+
+    return currentProjects.sort(defaultProjectSorting)
+  }, [group?.projects, projects])
 
   return (
     <Layout
-      left={fileData !== null ? <GroupList /> : null}
-      right={<ProjectList projects={projects} />}
+      left={isFileOpen ? <GroupList /> : null}
+      right={<ProjectList projects={groupProjects} />}
     >
-      {fileData !== null ? <GroupDetailView /> : null}
+      {isFileOpen ? <GroupDetailView /> : null}
     </Layout>
   )
+}
+
+function defaultProjectSorting(projectA: Project, projectB: Project): number {
+  if (
+    (projectA.important && projectB.important) ||
+    (!projectA.important && !projectB.important)
+  ) {
+    const pnA = parseInt(projectB.projectNumber)
+    const pnB = parseInt(projectA.projectNumber)
+    return pnA > pnB ? 1 : pnA < pnB ? -1 : 0
+  }
+  if (projectA.important) return -1
+  if (projectB.important) return 1
+  return 0
 }

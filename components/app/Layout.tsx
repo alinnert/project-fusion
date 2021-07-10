@@ -1,10 +1,10 @@
 import React, { FC, PropsWithChildren, ReactNode, useMemo } from 'react'
-import { useSelector } from 'react-redux'
-import { AppState } from '../../redux'
+import { useAppSelector } from '../../redux'
+import { selectIsFileOpen } from '../../redux/database'
 import { FileControls } from '../dataFile/FileControls'
 import { ViewAreaTabs } from '../dataFile/ViewAreaTabs'
-import { HeaderSearch } from './HeaderSearch'
-import { Logo } from './Logo'
+import { HeaderSearch } from '../ui/HeaderSearch'
+import { Logo } from '../ui/Logo'
 
 interface Props {
   header?: ReactNode
@@ -18,7 +18,7 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
   left,
   right,
 }) => {
-  const fileData = useSelector((state: AppState) => state.dataFile.fileData)
+  const isFileOpen = useAppSelector(selectIsFileOpen)
   const showRightPanel = useMemo(() => right ?? null !== null, [right])
 
   return (
@@ -46,13 +46,13 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
 
           <span className="flex items-center gap-x-2">
             <FileControls />
-            {fileData !== null ? <ViewAreaTabs /> : null}
+            {isFileOpen ? <ViewAreaTabs /> : null}
             {header}
           </span>
         </div>
 
         <div className="row-start-1 col-start-2 flex items-center gap-x-2">
-          {fileData !== null ? <HeaderSearch /> : null}
+          {isFileOpen ? <HeaderSearch /> : null}
         </div>
       </div>
 

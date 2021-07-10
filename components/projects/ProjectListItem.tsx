@@ -1,16 +1,17 @@
 import {
   ArchiveIcon,
-  ArrowCircleDownIcon,
+  ChevronDoubleDownIcon,
   DocumentDuplicateIcon,
   DotsHorizontalIcon,
-  ExclamationIcon,
   InboxIcon,
   PencilIcon,
-  TrashIcon,
+  StarIcon,
+  TrashIcon
 } from '@heroicons/react/solid'
+import marked from 'marked'
 import React, { FC, useMemo } from 'react'
+import { Project } from '../../redux/projects'
 import { match } from '../../tools/match'
-import { Project } from '../../types/FileData'
 import { DropdownMenu, MenuItem } from '../ui/DropdownMenu'
 
 interface Props extends Project {}
@@ -29,13 +30,13 @@ export const ProjectListItem: FC<Props> = ({
 
       important
         ? {
-            label: 'Markierung: "Normal"',
-            icon: <ArrowCircleDownIcon />,
+            label: 'Aus Favoriten entfernen',
+            icon: <ChevronDoubleDownIcon />,
           }
-        : { label: 'Markierung: "Wichtig"', icon: <ExclamationIcon /> },
+        : { label: 'Zu Favoriten', icon: <StarIcon /> },
 
       archived
-        ? { label: 'Aus Archiv wiederherstellen', icon: <InboxIcon /> }
+        ? { label: 'In aktive Projekte verschieben', icon: <InboxIcon /> }
         : { label: 'Archivieren', icon: <ArchiveIcon /> },
 
       { label: 'Duplizieren', icon: <DocumentDuplicateIcon /> },
@@ -50,11 +51,16 @@ export const ProjectListItem: FC<Props> = ({
     return [
       'select-text',
       match(String(important) as 'true' | 'false', {
-        true: archived ? 'text-yellow-500' : 'text-yellow-700',
-        false: archived ? 'text-neutral-500' : 'text-neutral-700',
+        true: archived ? 'text-yellow-400 italic' : 'text-yellow-700',
+        false: archived ? 'text-neutral-400 italic' : 'text-neutral-700',
       }),
     ].join(' ')
   }, [archived, important])
+
+  const parsedNotes = useMemo(() => {
+    if (notes.trim() === '') return ''
+    return marked(notes)
+  }, [notes])
 
   return (
     <div
@@ -94,7 +100,10 @@ export const ProjectListItem: FC<Props> = ({
       </div>
 
       {notes.trim() !== '' ? (
-        <div className="prose select-text text-base mt-2">{notes}</div>
+        <div
+          className="prose prose-brand select-text text-base mt-2"
+          dangerouslySetInnerHTML={{ __html: parsedNotes }}
+        ></div>
       ) : null}
     </div>
   )

@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brand: colors.sky,
+        brand: colors.teal,
         danger: colors.rose,
         neutral: colors.blueGray,
       },
@@ -18,6 +18,7 @@ module.exports = {
     extend: {},
   },
   plugins: [
+    require('@tailwindcss/typography'),
     plugin(({ addVariant, e }) => {
       addVariant('current', ({ modifySelectors, separator }) => {
         modifySelectors(

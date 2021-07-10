@@ -1,4 +1,5 @@
-import React, { FC, ReactElement } from 'react'
+import { ArrowSmRightIcon } from '@heroicons/react/solid'
+import React, { FC, ReactElement, useMemo } from 'react'
 import { Heroicon } from './Heroicon'
 
 interface Props {
@@ -14,9 +15,11 @@ export const DropdownMenuItem: FC<Props> = ({
   icon,
   action,
 }) => {
-  function handleItemClick() {
-    return action?.()
-  }
+  const replacedLabel = useMemo(() => {
+    return label.includes('->') ? label.split('->') : label
+  }, [label])
+
+  const handleItemClick = () => action?.()
 
   return (
     <div
@@ -34,7 +37,19 @@ export const DropdownMenuItem: FC<Props> = ({
         </div>
       ) : null}
 
-      <div className="text-sm font-semibold">{label}</div>
+      <div className="text-sm font-semibold">
+        {Array.isArray(replacedLabel) ? (
+          <div className="flex">
+            {replacedLabel[0]}
+            <div className="mx-1">
+              <Heroicon icon={<ArrowSmRightIcon />} />
+            </div>
+            {replacedLabel[1]}
+          </div>
+        ) : (
+          replacedLabel
+        )}
+      </div>
     </div>
   )
 }

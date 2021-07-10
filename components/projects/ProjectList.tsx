@@ -1,7 +1,7 @@
 import { InboxIcon } from '@heroicons/react/outline'
 import { PlusIcon } from '@heroicons/react/solid'
 import React, { FC, ReactNode, useMemo } from 'react'
-import { Project } from '../../types/FileData'
+import { Project } from '../../redux/projects'
 import { EmptyText } from '../ui/EmptyText'
 import { ToolbarContainer } from '../ui/ToolbarContainer'
 import { ProjectListItem } from './ProjectListItem'
@@ -56,8 +56,11 @@ export const ProjectList: FC<Props> = ({ projects }) => {
       ]}
     >
       {projects.length === 0 ? (
-        <EmptyText icon={<InboxIcon />}>
-          Es gibt derzeit keine Projekte in dieser Gruppe.
+        <EmptyText icon={<InboxIcon />} title="Keine Projekte vorhanden">
+          <p>Es gibt derzeit keine Projekte in dieser Gruppe.</p>
+          <p>
+            Du kannst ein neues Projekt mit dem Button [+&nbsp;Projekt] oben anlegen.
+          </p>
         </EmptyText>
       ) : (
         <div className="px-2 py-4 text-lg">

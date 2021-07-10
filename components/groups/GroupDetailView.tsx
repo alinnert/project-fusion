@@ -1,25 +1,31 @@
 import { PencilIcon, TrashIcon } from '@heroicons/react/solid'
+import marked from 'marked'
 import { useRouter } from 'next/router'
 import React, { FC, useMemo } from 'react'
-import { useSelector } from 'react-redux'
-import { AppState } from '../../redux'
-import { ProjectGroup } from '../../types/FileData'
+import { useAppSelector } from '../../redux'
+import { ProjectGroup } from '../../redux/groups'
 import { ToolbarContainer } from '../ui/ToolbarContainer'
 
 interface Props {}
 
 export const GroupDetailView: FC<Props> = ({}) => {
   const router = useRouter()
-  const groups = useSelector(
-    (state: AppState) => state.dataFile.fileData?.groups,
-  )
+  const groups = useAppSelector((state) => state.groups.entities)
 
-  const currentGroup = useMemo<ProjectGroup | null>(() => {
-    const { groupId } = router.query
-    return groups?.find((group) => group.id === groupId) ?? null
+  const currentGroup = useMemo<ProjectGroup | undefined>(() => {
+    const { groupId: groupIdValue } = router.query
+    if (groupIdValue === undefined) return
+    const groupId = Array.isArray(groupIdValue) ? groupIdValue[0] : groupIdValue
+    return groups[groupId]
   }, [groups, router.query])
 
-  if (currentGroup === null) return null
+  const parsedNotes = useMemo(() => {
+    if (currentGroup === undefined) return ''
+    if (currentGroup.notes.trim() === '') return ''
+    return marked(currentGroup.notes)
+  }, [currentGroup])
+
+  if (currentGroup === undefined) return null
 
   return (
     <ToolbarContainer
@@ -49,7 +55,10 @@ export const GroupDetailView: FC<Props> = ({}) => {
 
         {currentGroup.notes.trim() !== '' ? (
           <>
-            <div className="prose select-text">{currentGroup.notes}</div>
+            <div
+              className="prose prose-brand select-text"
+              dangerouslySetInnerHTML={{ __html: parsedNotes }}
+            />
           </>
         ) : null}
       </div>

@@ -1,7 +1,7 @@
 import { get } from 'idb-keyval'
 import { FC, PropsWithChildren, useEffect } from 'react'
 import { useAppDispatch } from '../redux'
-import { openFileFromHandle } from '../redux/dataFile/openFileFromHandleThunk'
+import { openDatabaseWithFilehandle } from '../redux/database/openDatabaseWithFilehandle'
 import { asyncTryCatch } from '../tools/tryCatch'
 
 interface Props {}
@@ -17,7 +17,7 @@ export const WrappedApp: FC<PropsWithChildren<Props>> = ({ children }) => {
       if (fileHandleResult.caught) return
       if (fileHandleResult.value === undefined) return
       const fileHandle = fileHandleResult.value
-      dispatch(openFileFromHandle(fileHandle))
+      openDatabaseWithFilehandle(fileHandle)
     }
     run()
   }, [dispatch])

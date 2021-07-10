@@ -1,15 +1,15 @@
 import {
   DatabaseIcon,
-  DocumentAddIcon, FolderIcon,
+  DocumentAddIcon,
+  FolderIcon,
   XIcon
 } from '@heroicons/react/solid'
 import { useRouter } from 'next/router'
 import React, { FC, useMemo } from 'react'
-import { useSelector } from 'react-redux'
-import { AppState, useAppDispatch } from '../../redux'
-import { closeFile } from '../../redux/dataFile'
-import { createFile } from '../../redux/dataFile/createFileThunk'
-import { openFile } from '../../redux/dataFile/openFileThunk'
+import { useAppDispatch, useAppSelector } from '../../redux'
+import { closeDatabase, selectIsFileOpen } from '../../redux/database'
+import { createDatabase } from '../../redux/database/createDatabase'
+import { openDatabase } from '../../redux/database/openDatabase'
 import { DropdownMenu, MenuItem } from '../ui/DropdownMenu'
 
 interface Props {}
@@ -17,7 +17,8 @@ interface Props {}
 export const FileControls: FC<Props> = ({}) => {
   const router = useRouter()
   const dispatch = useAppDispatch()
-  const fileName = useSelector((state: AppState) => state.dataFile.fileName)
+  const filename = useAppSelector((state) => state.database.filename)
+  const isFileOpen = useAppSelector(selectIsFileOpen)
 
   const menuItems = useMemo(() => {
     const mainMenuItems: Array<MenuItem> = [
@@ -25,7 +26,8 @@ export const FileControls: FC<Props> = ({}) => {
         label: 'Erstellen',
         icon: <DocumentAddIcon />,
         action() {
-          dispatch(createFile())
+          // dispatch(createFile())
+          createDatabase()
           router.push('/')
         },
       },
@@ -33,7 +35,8 @@ export const FileControls: FC<Props> = ({}) => {
         label: 'Öffnen',
         icon: <FolderIcon className="h-5 w-5" />,
         action() {
-          dispatch(openFile())
+          // dispatch(openFile())
+          openDatabase()
           router.push('/')
         },
       },
@@ -42,16 +45,17 @@ export const FileControls: FC<Props> = ({}) => {
     const closeMenuItem: MenuItem = {
       label: 'Schließen',
       action() {
-        dispatch(closeFile())
+        // dispatch(closeFile())
+        dispatch(closeDatabase())
         router.push('/')
       },
       icon: <XIcon />,
     }
 
-    return [...mainMenuItems, ...(fileName !== null ? [closeMenuItem] : [])]
-  }, [dispatch, fileName, router])
+    return [...mainMenuItems, ...(isFileOpen ? [closeMenuItem] : [])]
+  }, [dispatch, isFileOpen, router])
 
-  if (fileName === null) {
+  if (!isFileOpen) {
     return (
       <DropdownMenu
         icon={<DatabaseIcon />}
@@ -65,7 +69,7 @@ export const FileControls: FC<Props> = ({}) => {
 
   return (
     <DropdownMenu icon={<DatabaseIcon />} items={menuItems} buttonType="header">
-      {fileName}
+      {filename}
     </DropdownMenu>
   )
 }
