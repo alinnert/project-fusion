@@ -36,7 +36,7 @@ export const LinkListItem: FC<PropsWithChildren<Props>> = ({
         <div
           className={classNames(
             'flex-0 self-center',
-            'p-1 mr-2',
+            'p-1 mr-4',
             'rounded',
             matchBool(current && icon !== null, 'bg-white text-black'),
           )}

@@ -18,21 +18,28 @@ const slice = createSlice({
   reducers: {
     addProject: adapter.addOne,
     setProject: adapter.setOne,
+    updateProject: adapter.updateOne,
     removeProject: adapter.removeOne,
     setProjects: adapter.setAll,
   },
   extraReducers(builder) {
     builder.addCase(setDatabase, (state, { payload }) => {
-      state.entities = payload.database.projects
+      adapter.setAll(state, payload.database.projects)
     })
 
     builder.addCase(closeDatabase, (state) => {
-      return adapter.getInitialState()
+      adapter.removeAll(state)
     })
   },
 })
 
 export const {
   reducer: projectsReducer,
-  actions: { addProject, setProject, removeProject, setProjects },
+  actions: {
+    addProject,
+    setProject,
+    updateProject,
+    removeProject,
+    setProjects,
+  },
 } = slice

@@ -1,12 +1,9 @@
-import {
-  FolderAddIcon,
-  FolderIcon,
-  PlusIcon,
-  StarIcon,
-} from '@heroicons/react/solid'
+import { FolderIcon, PlusIcon, StarIcon } from '@heroicons/react/solid'
 import { useRouter } from 'next/router'
 import { FC, useMemo } from 'react'
-import { useAppSelector } from '../../redux'
+import { useAppDispatch, useAppSelector } from '../../redux'
+import { updateCategory } from '../../redux/categories'
+import { addGroup } from '../../redux/groups'
 import { resolveIds } from '../../tools/resolveIds'
 import { ToolbarContainer } from '../ui/ToolbarContainer'
 import {
@@ -21,6 +18,7 @@ interface Props {
 
 export const GroupList: FC<Props> = ({ currentId }) => {
   const router = useRouter()
+  const dispatch = useAppDispatch()
   const categoryIds = useAppSelector((state) => state.settings.categoryOrder)
   const categories = useAppSelector((state) => state.categories.entities)
   const groups = useAppSelector((state) => state.groups.entities)
@@ -57,15 +55,21 @@ export const GroupList: FC<Props> = ({ currentId }) => {
     return categorizedGroups
   }, [categories, categoryIds, groups])
 
+  function handleAddButtonClick() {
+    dispatch(
+      addGroup({ id: 'foo', name: 'Foo', notes: '', color: '', projects: [] }),
+    )
+    dispatch(updateCategory({ id: 'abe', changes: { groups: ['foo'] } }))
+  }
+
   return (
     <ToolbarContainer
       toolbarItems={[
-        { type: 'button', label: 'Gruppe', icon: <PlusIcon />, action() {} },
         {
           type: 'button',
-          label: 'Kategorie',
-          icon: <FolderAddIcon />,
-          action() {},
+          label: 'Gruppe',
+          icon: <PlusIcon />,
+          action: handleAddButtonClick,
         },
       ]}
     >

@@ -16,20 +16,27 @@ const slice = createSlice({
   reducers: {
     addCategory: adapter.addOne,
     setCategory: adapter.setOne,
+    updateCategory: adapter.updateOne,
     removeCategory: adapter.removeOne,
     setCategories: adapter.setAll,
   },
   extraReducers(builder) {
     builder.addCase(setDatabase, (state, { payload }) => {
-      state.entities = payload.database.categories
+      adapter.setAll(state, payload.database.categories)
     })
     builder.addCase(closeDatabase, (state) => {
-      return adapter.getInitialState()
+      adapter.removeAll(state)
     })
   },
 })
 
 export const {
   reducer: categoriesReducer,
-  actions: { addCategory, setCategory, removeCategory, setCategories },
+  actions: {
+    addCategory,
+    setCategory,
+    updateCategory,
+    removeCategory,
+    setCategories,
+  },
 } = slice

@@ -18,21 +18,22 @@ const slice = createSlice({
   reducers: {
     addGroup: adapter.addOne,
     setGroup: adapter.setOne,
+    updateGroup: adapter.updateOne,
     removeGroup: adapter.removeOne,
     setGroups: adapter.setAll,
   },
   extraReducers(builder) {
     builder.addCase(setDatabase, (state, { payload }) => {
-      state.entities = payload.database.groups
+      adapter.setAll(state, payload.database.groups)
     })
 
     builder.addCase(closeDatabase, (state) => {
-      return adapter.getInitialState()
+      adapter.removeAll(state)
     })
   },
 })
 
 export const {
   reducer: groupsReducer,
-  actions: { addGroup, setGroup, removeGroup, setGroups },
+  actions: { addGroup, setGroup, updateGroup, removeGroup, setGroups },
 } = slice
