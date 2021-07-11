@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { FC, InputHTMLAttributes, useMemo } from 'react'
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
@@ -12,20 +13,20 @@ export const Input: FC<Props> = ({ inputType = 'default', ...inputProps }) => {
     switch (inputType) {
       default:
       case 'default':
-        return [
+        return classNames(
           boxClasses,
           textClasses,
           'border border-neutral-600',
           'text-neutral-800',
-        ].join(' ')
+        )
       case 'header':
-        return [
+        return classNames(
           boxClasses,
           textClasses,
           'bg-white/40 hover:bg-white/50 focus:bg-white',
           'placeholder-white/80 hover:placeholder-white focus:placeholder-black/50',
           'text-white focus:text-black',
-        ].join(' ')
+        )
     }
   }, [inputType])
 

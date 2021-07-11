@@ -1,13 +1,17 @@
-import { FolderAddIcon, PlusIcon } from '@heroicons/react/solid'
+import {
+  FolderAddIcon,
+  FolderIcon,
+  PlusIcon,
+  StarIcon,
+} from '@heroicons/react/solid'
 import { useRouter } from 'next/router'
 import { FC, useMemo } from 'react'
 import { useAppSelector } from '../../redux'
-import { ProjectGroup } from '../../redux/groups'
 import { resolveIds } from '../../tools/resolveIds'
 import { ToolbarContainer } from '../ui/ToolbarContainer'
 import {
-  BasicLinkItem,
-  LinkListItems,
+  CategorizedLinkItems,
+  LinkItem,
   VerticalLinkList,
 } from '../ui/VerticalLinkList'
 
@@ -27,16 +31,26 @@ export const GroupList: FC<Props> = ({ currentId }) => {
     return typeof groupId === 'string' ? groupId : null
   }, [currentId, router.query])
 
-  const prefixedItems = useMemo<Array<BasicLinkItem>>(() => {
-    return [{ id: '/favorites', name: 'Favoriten' }]
+  const prefixedItems = useMemo<LinkItem[]>(() => {
+    return [
+      {
+        id: '/favorites',
+        name: 'Favoriten',
+        icon: <StarIcon />,
+        iconColor: '#D97706',
+      },
+    ]
   }, [])
 
-  const items = useMemo(() => {
+  const items = useMemo<CategorizedLinkItems>(() => {
     const categoryObjects = resolveIds(categoryIds, categories)
-    const categorizedGroups: LinkListItems<ProjectGroup> = categoryObjects.map(
+    const categorizedGroups: CategorizedLinkItems = categoryObjects.map(
       (category) => {
         const categoryGroups = resolveIds(category.groups, groups)
-        return [category, categoryGroups]
+        const categoryLinkItems: LinkItem[] = categoryGroups.map((group) => {
+          return { ...group, iconColor: group.color }
+        })
+        return [category, categoryLinkItems]
       },
     )
 
@@ -58,6 +72,8 @@ export const GroupList: FC<Props> = ({ currentId }) => {
       <VerticalLinkList
         items={items}
         prefixedItems={prefixedItems}
+        showIcons={true}
+        defaultIcon={<FolderIcon />}
         urlPrefix="/groups/"
         currentId={currentGroupId}
       />

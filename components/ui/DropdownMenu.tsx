@@ -1,4 +1,5 @@
 import { Menu } from '@headlessui/react'
+import classNames from 'classnames'
 import React, { FC, Fragment, PropsWithChildren, ReactElement } from 'react'
 import { match } from '../../tools/match'
 import { Button, ButtonType } from './Button'
@@ -35,14 +36,14 @@ export const DropdownMenu: FC<PropsWithChildren<Props>> = ({
       </Menu.Button>
 
       <Menu.Items
-        className={`
-          absolute z-50 w-max
-          ${match(align, { left: 'left-0', right: 'right-0' })}
-          top-full
-          p-1 rounded border border-black/10 shadow-xl
-          bg-white/70 backdrop-filter backdrop-blur-lg
-          text-black
-        `}
+        className={classNames(
+          'absolute z-50 w-max',
+          match(align, { left: 'left-0', right: 'right-0' }),
+          'top-full',
+          'p-1 rounded-md border border-black/10 shadow-xl',
+          'bg-white/70 backdrop-filter backdrop-blur-lg',
+          'text-black',
+        )}
       >
         {items.map((item, index) => (
           <Menu.Item key={index}>

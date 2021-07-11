@@ -8,10 +8,11 @@ import {
   StarIcon,
   TrashIcon,
 } from '@heroicons/react/solid'
+import classNames from 'classnames'
 import marked from 'marked'
 import React, { FC, useMemo } from 'react'
 import { Project } from '../../redux/projects'
-import { match } from '../../tools/match'
+import { match, matchBool } from '../../tools/match'
 import { DropdownMenu, MenuItem } from '../ui/DropdownMenu'
 
 interface Props extends Project {}
@@ -48,17 +49,22 @@ export const ProjectListItem: FC<Props> = ({
   }, [archived, important])
 
   const textClasses = useMemo(() => {
-    return [
+    return classNames(
       'select-text',
-      match(String(important) as 'true' | 'false', {
-        true: archived
-          ? 'text-amber-500 italic line-through'
-          : 'text-amber-800',
-        false: archived
-          ? 'text-neutral-400 italic line-through'
-          : 'text-neutral-800',
-      }),
-    ].join(' ')
+      matchBool(
+        important,
+        matchBool(
+          archived,
+          'text-amber-500 italic line-through',
+          'text-amber-800',
+        ),
+        matchBool(
+          archived,
+          'text-neutral-400 italic line-through',
+          'text-neutral-800',
+        ),
+      ),
+    )
   }, [archived, important])
 
   const parsedNotes = useMemo(() => {
@@ -69,25 +75,24 @@ export const ProjectListItem: FC<Props> = ({
   return (
     <div
       key={id}
-      className={[
-        'px-4 py-2 mb-2 last:mb-0 rounded',
-        match(String(important) as 'true' | 'false', {
-          true: archived ? 'bg-amber-100/40' : 'bg-amber-100',
-          false: archived ? 'bg-neutral-100/40' : 'bg-neutral-100',
-        }),
-      ].join(' ')}
+      className={classNames(
+        'px-4 py-2 mb-2 last:mb-0',
+        'rounded',
+        matchBool(
+          important,
+          matchBool(archived, 'bg-amber-100/40', 'bg-amber-100'),
+          matchBool(archived, 'bg-neutral-100/40', 'bg-neutral-100'),
+        ),
+      )}
     >
       <div
-        className={[
+        className={classNames(
           'flex',
           'text-lg',
-          match(String(important) as 'true' | 'false', {
-            true: 'font-semibold text-amber-800',
-            false: '',
-          }),
-        ].join(' ')}
+          matchBool(important, 'font-semibold text-amber-800'),
+        )}
       >
-        <div className={`flex-1 pr-4 ${textClasses}`}>{name}</div>
+        <div className={classNames('flex-1 pr-4', textClasses)}>{name}</div>
 
         {projectNumber !== undefined ? (
           <div className={textClasses}>{projectNumber}</div>

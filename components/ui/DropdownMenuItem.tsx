@@ -1,5 +1,7 @@
 import { ArrowSmRightIcon } from '@heroicons/react/solid'
+import classNames from 'classnames'
 import React, { FC, ReactElement, useMemo } from 'react'
+import { matchBool } from '../../tools/match'
 import { Heroicon } from './Heroicon'
 
 interface Props {
@@ -24,12 +26,16 @@ export const DropdownMenuItem: FC<Props> = ({
   return (
     <div
       onClick={handleItemClick}
-      className={[
+      className={classNames(
         'flex items-center',
         'py-2 pl-2 pr-12 rounded',
-        isActive ? 'bg-gradient-brand text-white' : 'text-neutral-700',
+        matchBool(
+          isActive,
+          'bg-gradient-brand text-white',
+          'text-neutral-700',
+        ),
         'active:hover:bg-brand-700',
-      ].join(' ')}
+      )}
     >
       {icon !== undefined ? (
         <div className="mr-3">

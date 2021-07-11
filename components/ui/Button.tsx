@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import {
   ButtonHTMLAttributes,
   Children,
@@ -6,6 +7,7 @@ import {
   ReactElement,
   useMemo,
 } from 'react'
+import { matchBool } from '../../tools/match'
 import { Heroicon } from './Heroicon'
 
 export type ButtonType =
@@ -44,55 +46,55 @@ export const Button: FC<PropsWithChildren<Props>> = ({
     switch (buttonType) {
       default:
       case 'default':
-        return [
+        return classNames(
           fontBaseClasses,
           boxBaseClasses,
           darkTextClasses,
           shadowClasses,
           'bg-neutral-50 hover:bg-neutral-100 active:bg-neutral-300',
-        ].join(' ')
+        )
 
       case 'primary':
-        return [
+        return classNames(
           boxBaseClasses,
           fontBaseClasses,
           lightTextClasses,
           shadowClasses,
           'bg-brand-600 hover:bg-brand-700 active:bg-brand-800',
-        ].join(' ')
+        )
 
       case 'delete':
-        return [
+        return classNames(
           boxBaseClasses,
           fontBaseClasses,
           lightTextClasses,
           shadowClasses,
           'bg-danger-800 hover:bg-danger-700 active:bg-danger-600',
-        ].join(' ')
-      
+        )
+
       case 'flat':
-        return [
+        return classNames(
           boxBaseClasses,
           fontBaseClasses,
           darkTextClasses,
-          'hover:bg-black/10 active:bg-black/20'
-        ].join(' ')
+          'hover:bg-black/10 active:bg-black/20',
+        )
 
       case 'header':
-        return [
+        return classNames(
           boxBaseClasses,
           fontBaseClasses,
           'hover:bg-black/20 active:bg-black/40',
           'text-white/80 hover:text-white',
-        ].join(' ')
+        )
 
       case 'header-current':
-        return [
+        return classNames(
           fontBaseClasses,
           boxBaseClasses,
           'bg-white',
           'text-brand-800',
-        ].join(' ')
+        )
     }
   }, [buttonType, hasChildren])
 
@@ -102,10 +104,10 @@ export const Button: FC<PropsWithChildren<Props>> = ({
       case 'default':
       case 'primary':
       case 'delete':
-        return hasChildren ? 'mr-2' : ''
+        return matchBool(hasChildren, 'mr-2')
       case 'header':
       case 'header-current':
-        return hasChildren ? 'mr-1' : ''
+        return matchBool(hasChildren, 'mr-1')
     }
   }, [buttonType, hasChildren])
 
