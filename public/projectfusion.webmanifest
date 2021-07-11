@@ -1,0 +1,31 @@
+{
+  "name": "ProjectFusion",
+  "description": "Verwalte Informationen und Notizen zu den Projekten, an denen du gerade arbeitest.",
+  "lang": "de-DE",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#0369A1",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "icon-500.png",
+      "sizes": "500x500",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    }
+  ]
+}

@@ -20,6 +20,7 @@ export default class AppDocument extends Document {
       <Html>
         <Head>
           <meta name="theme-color" content="#0369A1" />
+          <link rel="manifest" href="/projectfusion.webmanifest" />
         </Head>
         <body className="select-none">
           <Main />

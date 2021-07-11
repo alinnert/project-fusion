@@ -6,7 +6,7 @@ import {
   InboxIcon,
   PencilIcon,
   StarIcon,
-  TrashIcon
+  TrashIcon,
 } from '@heroicons/react/solid'
 import marked from 'marked'
 import React, { FC, useMemo } from 'react'
@@ -51,8 +51,12 @@ export const ProjectListItem: FC<Props> = ({
     return [
       'select-text',
       match(String(important) as 'true' | 'false', {
-        true: archived ? 'text-yellow-400 italic' : 'text-yellow-700',
-        false: archived ? 'text-neutral-400 italic' : 'text-neutral-700',
+        true: archived
+          ? 'text-amber-500 italic line-through'
+          : 'text-amber-800',
+        false: archived
+          ? 'text-neutral-400 italic line-through'
+          : 'text-neutral-800',
       }),
     ].join(' ')
   }, [archived, important])
@@ -68,7 +72,7 @@ export const ProjectListItem: FC<Props> = ({
       className={[
         'px-4 py-2 mb-2 last:mb-0 rounded',
         match(String(important) as 'true' | 'false', {
-          true: archived ? 'bg-yellow-100/40' : 'bg-yellow-100',
+          true: archived ? 'bg-amber-100/40' : 'bg-amber-100',
           false: archived ? 'bg-neutral-100/40' : 'bg-neutral-100',
         }),
       ].join(' ')}
@@ -78,7 +82,7 @@ export const ProjectListItem: FC<Props> = ({
           'flex',
           'text-lg',
           match(String(important) as 'true' | 'false', {
-            true: 'font-semibold text-yellow-800',
+            true: 'font-semibold text-amber-800',
             false: '',
           }),
         ].join(' ')}
