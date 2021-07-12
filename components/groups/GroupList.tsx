@@ -2,7 +2,7 @@ import { FolderIcon, PlusIcon, StarIcon } from '@heroicons/react/solid'
 import { useRouter } from 'next/router'
 import { FC, useMemo } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux'
-import { updateCategory } from '../../redux/categories'
+import { addGroupToCategory, updateCategory } from '../../redux/categories'
 import { addGroup } from '../../redux/groups'
 import { resolveIds } from '../../tools/resolveIds'
 import { ToolbarContainer } from '../ui/ToolbarContainer'
@@ -57,9 +57,15 @@ export const GroupList: FC<Props> = ({ currentId }) => {
 
   function handleAddButtonClick() {
     dispatch(
-      addGroup({ id: 'foo', name: 'Foo', notes: '', color: '', projects: [] }),
+      addGroup({
+        id: 'foo',
+        name: 'Foo',
+        notes: 'Standard-Notizen',
+        color: '',
+        projects: [],
+      }),
     )
-    dispatch(updateCategory({ id: 'abe', changes: { groups: ['foo'] } }))
+    dispatch(addGroupToCategory({ category: 'abe', group: 'foo' }))
   }
 
   return (
