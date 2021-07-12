@@ -39,9 +39,8 @@ export const DropdownMenu: FC<PropsWithChildren<Props>> = ({
         className={classNames(
           'absolute z-50 w-max',
           match(align, { left: 'left-0', right: 'right-0' }),
-          'top-full',
-          'p-1 rounded-md border border-black/10 shadow-xl',
-          'bg-white/70 backdrop-filter backdrop-blur-lg',
+          'top-full p-1',
+          'bg-blur',
           'text-black',
         )}
       >

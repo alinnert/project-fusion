@@ -3,9 +3,14 @@ import { FC, InputHTMLAttributes, useMemo } from 'react'
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   inputType?: 'default' | 'header'
+  label?: string
 }
 
-export const Input: FC<Props> = ({ inputType = 'default', ...inputProps }) => {
+export const Input: FC<Props> = ({
+  inputType = 'default',
+  label,
+  ...inputProps
+}) => {
   const inputClasses = useMemo(() => {
     const boxClasses = 'w-60 px-2 py-1 rounded'
     const textClasses = 'text-sm'
@@ -30,5 +35,12 @@ export const Input: FC<Props> = ({ inputType = 'default', ...inputProps }) => {
     }
   }, [inputType])
 
-  return <input className={inputClasses} type="text" {...inputProps} />
+  return (
+    <div>
+      <label>
+        <span className="font-semibold text-sm">{label}</span>
+        <input className={inputClasses} type="text" {...inputProps} />
+      </label>
+    </div>
+  )
 }

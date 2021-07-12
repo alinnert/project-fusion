@@ -1,9 +1,7 @@
 import { FolderIcon, PlusIcon, StarIcon } from '@heroicons/react/solid'
 import { useRouter } from 'next/router'
-import { FC, useMemo } from 'react'
+import React, { FC, useMemo } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux'
-import { addGroupToCategory, updateCategory } from '../../redux/categories'
-import { addGroup } from '../../redux/groups'
 import { resolveIds } from '../../tools/resolveIds'
 import { ToolbarContainer } from '../ui/ToolbarContainer'
 import {
@@ -55,19 +53,6 @@ export const GroupList: FC<Props> = ({ currentId }) => {
     return categorizedGroups
   }, [categories, categoryIds, groups])
 
-  function handleAddButtonClick() {
-    dispatch(
-      addGroup({
-        id: 'foo',
-        name: 'Foo',
-        notes: 'Standard-Notizen',
-        color: '',
-        projects: [],
-      }),
-    )
-    dispatch(addGroupToCategory({ category: 'abe', group: 'foo' }))
-  }
-
   return (
     <ToolbarContainer
       toolbarItems={[
@@ -75,7 +60,7 @@ export const GroupList: FC<Props> = ({ currentId }) => {
           type: 'button',
           label: 'Gruppe',
           icon: <PlusIcon />,
-          action: handleAddButtonClick,
+          action() {},
         },
       ]}
     >

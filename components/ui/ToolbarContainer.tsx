@@ -1,4 +1,6 @@
-import { FC, PropsWithChildren, ReactElement } from 'react'
+import { Popover } from '@headlessui/react'
+import classNames from 'classnames'
+import React, { FC, PropsWithChildren, ReactElement } from 'react'
 import { Button, ButtonType } from './Button'
 
 interface ToolbarButton {
@@ -9,7 +11,15 @@ interface ToolbarButton {
   action: () => void
 }
 
-type ToolbarItem = ToolbarButton
+interface ToolbarPopover {
+  type: 'popover'
+  buttonType?: ButtonType
+  label: string
+  icon?: ReactElement
+  panel: ReactElement
+}
+
+type ToolbarItem = ToolbarButton | ToolbarPopover
 
 interface Props {
   toolbarItems?: ToolbarItem[]
@@ -33,6 +43,28 @@ export const ToolbarContainer: FC<PropsWithChildren<Props>> = ({
               >
                 {item.label}
               </Button>
+            ) : item.type === 'popover' ? (
+              <Popover key={index} className="relative">
+                <Popover.Button>
+                  <div>
+                    <Button
+                      icon={item.icon}
+                      buttonType={item.buttonType ?? 'default'}
+                    >
+                      {item.label}
+                    </Button>
+                  </div>
+                </Popover.Button>
+                <Popover.Panel
+                  className={classNames(
+                    'absolute top-full',
+                    'p-2',
+                    'bg-blur',
+                  )}
+                >
+                  {item.panel}
+                </Popover.Panel>
+              </Popover>
             ) : null,
           )}
         </div>
