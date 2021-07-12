@@ -30,7 +30,7 @@ export const ToolbarContainer: FC<PropsWithChildren<Props>> = ({
   toolbarItems = [],
 }) => {
   return (
-    <div className="grid grid-rows-[auto,1fr] overflow-hidden h-full">
+    <div className="grid grid-rows-[auto,1fr] h-full overflow-hidden">
       {toolbarItems.length > 0 ? (
         <div className="bg-neutral-200 p-2 flex gap-x-2">
           {toolbarItems.map((item, index) =>
@@ -69,7 +69,7 @@ export const ToolbarContainer: FC<PropsWithChildren<Props>> = ({
           )}
         </div>
       ) : null}
-      <div className="row-start-2 overflow-auto">{children}</div>
+      <div className="row-start-2 h-full overflow-auto">{children}</div>
     </div>
   )
 }

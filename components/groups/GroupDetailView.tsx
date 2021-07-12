@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import React, { FC, useMemo } from 'react'
 import { useAppSelector } from '../../redux'
 import { ProjectGroup } from '../../redux/groups'
-import { Heroicon } from '../ui/Heroicon'
+import { PageContent } from '../ui/PageContent'
 import { ToolbarContainer } from '../ui/ToolbarContainer'
 
 interface Props {}
@@ -46,26 +46,18 @@ export const GroupDetailView: FC<Props> = ({}) => {
         },
       ]}
     >
-      <div className="px-4 py-4">
-        <h1 className="flex items-center text-3xl mb-8">
-          <div
-            className="flex-0 ml-2 mr-4"
-            style={{ color: currentGroup.color }}
-          >
-            <Heroicon icon={<FolderIcon />} scale={2} />
-          </div>
-          <div className="flex-1">{currentGroup.name}</div>
-        </h1>
-
+      <PageContent
+        title={currentGroup.name}
+        titleIcon={<FolderIcon />}
+        titleIconColor={currentGroup.color}
+      >
         {currentGroup.notes.trim() !== '' ? (
-          <>
-            <div
-              className="prose prose-brand select-text"
-              dangerouslySetInnerHTML={{ __html: parsedNotes }}
-            />
-          </>
+          <div
+            className="prose prose-brand select-text"
+            dangerouslySetInnerHTML={{ __html: parsedNotes }}
+          />
         ) : null}
-      </div>
+      </PageContent>
     </ToolbarContainer>
   )
 }

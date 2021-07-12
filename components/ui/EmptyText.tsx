@@ -12,7 +12,7 @@ export const EmptyText: FC<PropsWithChildren<Props>> = ({
   icon,
 }) => {
   return (
-    <div className="h-full grid items-center justify-center p-16">
+    <div className="h-full grid items-center justify-center px-12 py-4 overflow-y-auto">
       <div className="text-center">
         {icon !== undefined ? (
           <div className="flex justify-center text-brand-200 mb-8">

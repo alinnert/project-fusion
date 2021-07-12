@@ -24,7 +24,7 @@ export const ViewAreaTabs: FC<Props> = ({}) => {
         current: !isConfigPage,
       },
       {
-        label: 'Konfiguration',
+        label: 'Einstellungen',
         icon: <CogIcon />,
         href: '/config',
         current: isConfigPage,

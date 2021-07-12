@@ -1,22 +1,16 @@
 import classNames from 'classnames'
-import {
-  Children,
-  cloneElement,
-  FC,
-  isValidElement,
-  PropsWithChildren,
-  ReactElement,
-} from 'react'
+import { Children, cloneElement, FC, isValidElement, ReactElement } from 'react'
 import { match } from '../../tools/match'
 
 interface Props {
   icon: ReactElement<{ className: string }>
+  color?: string
   scale?: 1 | 2 | 3 | 4
 }
 
-export const Heroicon: FC<Props> = ({ icon, scale = 1 }) => {
+export const Heroicon: FC<Props> = ({ icon, color, scale = 1 }) => {
   return (
-    <>
+    <div style={{ color }}>
       {Children.map(icon, (child) => {
         if (!isValidElement(child)) return null
         return cloneElement(child, {
@@ -31,6 +25,6 @@ export const Heroicon: FC<Props> = ({ icon, scale = 1 }) => {
           ),
         })
       })}
-    </>
+    </div>
   )
 }

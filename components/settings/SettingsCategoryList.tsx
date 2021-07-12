@@ -1,7 +1,6 @@
+import { LinkIcon, TagIcon } from '@heroicons/react/solid'
 import React, { FC, useMemo } from 'react'
-import {
-  CategorizedLinkItems, VerticalLinkList
-} from '../ui/VerticalLinkList'
+import { CategorizedLinkItems, VerticalLinkList } from '../ui/VerticalLinkList'
 
 interface Props {
   currentId: string
@@ -11,10 +10,20 @@ export const SettingsCategoryList: FC<Props> = ({ currentId }) => {
   const items = useMemo<CategorizedLinkItems>(() => {
     return [
       [
-        { id: 'foo', name: 'Einstellungen' },
+        { id: 'foo', name: 'Datenbank' },
         [
-          { id: 'sections', name: 'Bereiche' },
-          { id: 'links', name: 'URLs' },
+          {
+            id: 'categories',
+            name: 'Kategorien',
+            icon: <TagIcon />,
+            iconColor: 'saddlebrown',
+          },
+          {
+            id: 'links',
+            name: 'URLs',
+            icon: <LinkIcon />,
+            iconColor: 'dodgerblue',
+          },
         ],
       ],
     ]
@@ -24,6 +33,7 @@ export const SettingsCategoryList: FC<Props> = ({ currentId }) => {
     <VerticalLinkList
       items={items}
       urlPrefix="/config/"
+      showIcons
       currentId={currentId}
     />
   )
