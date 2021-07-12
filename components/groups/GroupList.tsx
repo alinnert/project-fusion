@@ -2,10 +2,7 @@ import { FolderIcon, PlusIcon, StarIcon } from '@heroicons/react/solid'
 import { useRouter } from 'next/router'
 import React, { FC, useMemo } from 'react'
 import { useAppSelector } from '../../redux'
-import {
-  selectGroupIdsWithoutCategory,
-  selectGroupsWithoutCategory,
-} from '../../redux/groups'
+import { selectGroupsWithoutCategory } from '../../redux/groups'
 import { resolveIds } from '../../tools/resolveIds'
 import { ToolbarContainer } from '../ui/ToolbarContainer'
 import {
@@ -23,7 +20,6 @@ export const GroupList: FC<Props> = ({ currentId }) => {
   const categoryIds = useAppSelector((state) => state.settings.categoryOrder)
   const categories = useAppSelector((state) => state.categories.entities)
   const groups = useAppSelector((state) => state.groups.entities)
-  const uncategorizedGroupIds = useAppSelector(selectGroupIdsWithoutCategory)
   const uncategorizedGroups = useAppSelector(selectGroupsWithoutCategory)
 
   const currentGroupId = useMemo<string | null>(() => {
@@ -60,7 +56,7 @@ export const GroupList: FC<Props> = ({ currentId }) => {
 
     const groupsWithoutCategory: CategorizedLinkItems = [
       [
-        { id: '', name: 'Unsortiert', groups: uncategorizedGroupIds },
+        { id: '', name: 'Unsortiert' },
         uncategorizedGroups.map((group) => ({
           ...group,
           iconColor: group.color,
@@ -69,13 +65,7 @@ export const GroupList: FC<Props> = ({ currentId }) => {
     ]
 
     return [...groupsWithoutCategory, ...categorizedGroups]
-  }, [
-    categories,
-    categoryIds,
-    groups,
-    uncategorizedGroupIds,
-    uncategorizedGroups,
-  ])
+  }, [categories, categoryIds, groups, uncategorizedGroups])
 
   function handleAddGroupButtonClick() {
     router.push('/new_group')

@@ -1,8 +1,12 @@
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import { Fragment, MouseEvent, ReactElement } from 'react'
-import { Category } from '../../redux/categories'
 import { LinkListItem } from './LinkListItem'
+
+export interface LinkCategory {
+  id: string
+  name: string
+}
 
 export interface LinkItem {
   id: string
@@ -11,7 +15,7 @@ export interface LinkItem {
   iconColor?: string
 }
 
-export type CategorizedLinkItems = Array<[Category, LinkItem[]]>
+export type CategorizedLinkItems = Array<[LinkCategory, LinkItem[]]>
 
 export type LinkListPrefixedItems = Array<LinkItem>
 
@@ -68,7 +72,7 @@ export function VerticalLinkList({
                 'mt-6 first:mt-0 mb-1',
               )}
             >
-              <div className="w-3 h-px bg-neutral-300" />
+              <div className={classNames('w-1 h-px bg-neutral-300')} />
               <div className="text-sm font-semibold text-brand-600">
                 {category.name}
               </div>

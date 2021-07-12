@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { FC, MouseEvent, PropsWithChildren, ReactElement, useMemo } from 'react'
+import { FC, MouseEvent, PropsWithChildren, ReactElement } from 'react'
 import { matchBool } from '../../tools/match'
 import { Heroicon } from './Heroicon'
 
@@ -48,7 +48,12 @@ export const LinkListItem: FC<PropsWithChildren<Props>> = ({
             <div className="w-[20px] h-[20px]"></div>
           )}
         </div>
-      ) : null}
+      ) : (
+        <div className="py-1">
+          <div className="w-1 h-[20px]"></div>
+        </div>
+      )}
+
       <div className="flex-1">{children}</div>
     </div>
   )

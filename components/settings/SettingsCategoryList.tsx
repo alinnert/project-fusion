@@ -1,21 +1,28 @@
 import React, { FC, useMemo } from 'react'
-import { LinkListPrefixedItems, VerticalLinkList } from '../ui/VerticalLinkList'
+import {
+  CategorizedLinkItems, VerticalLinkList
+} from '../ui/VerticalLinkList'
 
 interface Props {
   currentId: string
 }
 
 export const SettingsCategoryList: FC<Props> = ({ currentId }) => {
-  const items = useMemo<LinkListPrefixedItems>(() => {
+  const items = useMemo<CategorizedLinkItems>(() => {
     return [
-      { id: 'sections', name: 'Bereiche' },
-      { id: 'links', name: 'URLs' },
+      [
+        { id: 'foo', name: 'Einstellungen' },
+        [
+          { id: 'sections', name: 'Bereiche' },
+          { id: 'links', name: 'URLs' },
+        ],
+      ],
     ]
   }, [])
 
   return (
     <VerticalLinkList
-      prefixedItems={items}
+      items={items}
       urlPrefix="/config/"
       currentId={currentId}
     />
