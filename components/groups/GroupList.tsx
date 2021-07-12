@@ -1,7 +1,11 @@
 import { FolderIcon, PlusIcon, StarIcon } from '@heroicons/react/solid'
 import { useRouter } from 'next/router'
 import React, { FC, useMemo } from 'react'
-import { useAppDispatch, useAppSelector } from '../../redux'
+import { useAppSelector } from '../../redux'
+import {
+  selectGroupIdsWithoutCategory,
+  selectGroupsWithoutCategory,
+} from '../../redux/groups'
 import { resolveIds } from '../../tools/resolveIds'
 import { ToolbarContainer } from '../ui/ToolbarContainer'
 import {
@@ -16,10 +20,11 @@ interface Props {
 
 export const GroupList: FC<Props> = ({ currentId }) => {
   const router = useRouter()
-  const dispatch = useAppDispatch()
   const categoryIds = useAppSelector((state) => state.settings.categoryOrder)
   const categories = useAppSelector((state) => state.categories.entities)
   const groups = useAppSelector((state) => state.groups.entities)
+  const uncategorizedGroupIds = useAppSelector(selectGroupIdsWithoutCategory)
+  const uncategorizedGroups = useAppSelector(selectGroupsWithoutCategory)
 
   const currentGroupId = useMemo<string | null>(() => {
     if (currentId !== undefined) return currentId
@@ -40,18 +45,41 @@ export const GroupList: FC<Props> = ({ currentId }) => {
 
   const items = useMemo<CategorizedLinkItems>(() => {
     const categoryObjects = resolveIds(categoryIds, categories)
+
     const categorizedGroups: CategorizedLinkItems = categoryObjects.map(
       (category) => {
         const categoryGroups = resolveIds(category.groups, groups)
-        const categoryLinkItems: LinkItem[] = categoryGroups.map((group) => {
-          return { ...group, iconColor: group.color }
-        })
+        const categoryLinkItems: LinkItem[] = categoryGroups.map((group) => ({
+          ...group,
+          iconColor: group.color,
+        }))
+
         return [category, categoryLinkItems]
       },
     )
 
-    return categorizedGroups
-  }, [categories, categoryIds, groups])
+    const groupsWithoutCategory: CategorizedLinkItems = [
+      [
+        { id: '', name: 'Unsortiert', groups: uncategorizedGroupIds },
+        uncategorizedGroups.map((group) => ({
+          ...group,
+          iconColor: group.color,
+        })),
+      ],
+    ]
+
+    return [...groupsWithoutCategory, ...categorizedGroups]
+  }, [
+    categories,
+    categoryIds,
+    groups,
+    uncategorizedGroupIds,
+    uncategorizedGroups,
+  ])
+
+  function handleAddGroupButtonClick() {
+    router.push('/new_group')
+  }
 
   return (
     <ToolbarContainer
@@ -60,7 +88,7 @@ export const GroupList: FC<Props> = ({ currentId }) => {
           type: 'button',
           label: 'Gruppe',
           icon: <PlusIcon />,
-          action() {},
+          action: handleAddGroupButtonClick,
         },
       ]}
     >

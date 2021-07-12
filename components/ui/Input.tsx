@@ -21,6 +21,7 @@ export const Input: FC<Props> = ({
         return classNames(
           boxClasses,
           textClasses,
+          'w-auto',
           'border border-neutral-600',
           'text-neutral-800',
         )
@@ -37,7 +38,7 @@ export const Input: FC<Props> = ({
 
   return (
     <div>
-      <label>
+      <label className="flex flex-col">
         <span className="font-semibold text-sm">{label}</span>
         <input className={inputClasses} type="text" {...inputProps} />
       </label>

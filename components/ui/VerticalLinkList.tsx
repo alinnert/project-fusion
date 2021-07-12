@@ -74,7 +74,9 @@ export function VerticalLinkList({
               </div>
               <div className="flex-1 h-px bg-neutral-300" />
             </div>
-            <div>{links.map((group) => createLinkListItem(group))}</div>
+            <div className="flex flex-col gap-y-1">
+              {links.map((group) => createLinkListItem(group))}
+            </div>
           </Fragment>
         ))}
     </div>
