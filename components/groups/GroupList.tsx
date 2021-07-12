@@ -10,6 +10,7 @@ import {
   LinkItem,
   VerticalLinkList,
 } from '../ui/VerticalLinkList'
+import { useGroupFromRoute } from './useGroupFromRoute'
 
 interface Props {
   currentId?: string
@@ -21,12 +22,7 @@ export const GroupList: FC<Props> = ({ currentId }) => {
   const categories = useAppSelector((state) => state.categories.entities)
   const groups = useAppSelector((state) => state.groups.entities)
   const uncategorizedGroups = useAppSelector(selectGroupsWithoutCategory)
-
-  const currentGroupId = useMemo<string | null>(() => {
-    if (currentId !== undefined) return currentId
-    const { groupId } = router.query
-    return typeof groupId === 'string' ? groupId : null
-  }, [currentId, router.query])
+  const { groupId } = useGroupFromRoute()
 
   const prefixedItems = useMemo<LinkItem[]>(() => {
     return [
@@ -88,7 +84,7 @@ export const GroupList: FC<Props> = ({ currentId }) => {
         showIcons={true}
         defaultIcon={<FolderIcon />}
         urlPrefix="/groups/"
-        currentId={currentGroupId}
+        currentId={groupId}
       />
     </ToolbarContainer>
   )

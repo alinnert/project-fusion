@@ -2,31 +2,18 @@ import { FolderIcon, PencilIcon, TrashIcon } from '@heroicons/react/solid'
 import marked from 'marked'
 import { useRouter } from 'next/router'
 import React, { FC, useMemo } from 'react'
-import { useAppSelector } from '../../redux'
-import { ProjectGroup } from '../../redux/groups'
+import { Markdown } from '../ui/Markdown'
 import { PageContent } from '../ui/PageContent'
 import { ToolbarContainer } from '../ui/ToolbarContainer'
+import { useGroupFromRoute } from './useGroupFromRoute'
 
 interface Props {}
 
 export const GroupDetailView: FC<Props> = ({}) => {
   const router = useRouter()
-  const groups = useAppSelector((state) => state.groups.entities)
+  const { groupId, group } = useGroupFromRoute()
 
-  const currentGroup = useMemo<ProjectGroup | undefined>(() => {
-    const { groupId: groupIdValue } = router.query
-    if (groupIdValue === undefined) return
-    const groupId = Array.isArray(groupIdValue) ? groupIdValue[0] : groupIdValue
-    return groups[groupId]
-  }, [groups, router.query])
-
-  const parsedNotes = useMemo(() => {
-    if (currentGroup === undefined) return ''
-    if (currentGroup.notes.trim() === '') return ''
-    return marked(currentGroup.notes)
-  }, [currentGroup])
-
-  if (currentGroup === undefined) return null
+  if (group === null) return null
 
   return (
     <ToolbarContainer
@@ -35,7 +22,9 @@ export const GroupDetailView: FC<Props> = ({}) => {
           type: 'button',
           label: 'Bearbeiten',
           icon: <PencilIcon />,
-          action() {},
+          action() {
+            router.push(`/groups/${groupId}/edit`)
+          },
         },
         {
           type: 'button',
@@ -47,16 +36,11 @@ export const GroupDetailView: FC<Props> = ({}) => {
       ]}
     >
       <PageContent
-        title={currentGroup.name}
+        title={group.name}
         titleIcon={<FolderIcon />}
-        titleIconColor={currentGroup.color}
+        titleIconColor={group.color}
       >
-        {currentGroup.notes.trim() !== '' ? (
-          <div
-            className="prose prose-brand select-text"
-            dangerouslySetInnerHTML={{ __html: parsedNotes }}
-          />
-        ) : null}
+        <Markdown text={group.notes} />
       </PageContent>
     </ToolbarContainer>
   )

@@ -12,7 +12,7 @@ import classNames from 'classnames'
 import marked from 'marked'
 import React, { FC, useMemo } from 'react'
 import { Project } from '../../redux/projects'
-import { match, matchBool } from '../../tools/match'
+import { matchBool } from '../../tools/match'
 import { DropdownMenu, MenuItem } from '../ui/DropdownMenu'
 
 interface Props extends Project {}

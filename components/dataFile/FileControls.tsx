@@ -2,7 +2,7 @@ import {
   DatabaseIcon,
   DocumentAddIcon,
   FolderIcon,
-  XIcon
+  XIcon,
 } from '@heroicons/react/solid'
 import { useRouter } from 'next/router'
 import React, { FC, useMemo } from 'react'
@@ -21,38 +21,38 @@ export const FileControls: FC<Props> = ({}) => {
   const isFileOpen = useAppSelector(selectIsFileOpen)
 
   const menuItems = useMemo(() => {
-    const mainMenuItems: Array<MenuItem> = [
-      {
-        label: 'Erstellen',
-        icon: <DocumentAddIcon />,
-        action() {
-          // dispatch(createFile())
-          createDatabase()
-          router.push('/')
-        },
+    const createItem: MenuItem = {
+      label: 'Erstellen',
+      icon: <DocumentAddIcon />,
+      action() {
+        createDatabase()
+        router.push('/')
       },
-      {
-        label: 'Öffnen',
-        icon: <FolderIcon className="h-5 w-5" />,
-        action() {
-          // dispatch(openFile())
-          openDatabase()
-          router.push('/')
-        },
-      },
-    ]
+    }
 
-    const closeMenuItem: MenuItem = {
+    const openItem: MenuItem = {
+      label: 'Öffnen',
+      icon: <FolderIcon className="h-5 w-5" />,
+      action() {
+        openDatabase()
+        router.push('/')
+      },
+    }
+
+    const closeItem: MenuItem = {
       label: 'Schließen',
       action() {
-        // dispatch(closeFile())
         dispatch(closeDatabase())
         router.push('/')
       },
       icon: <XIcon />,
     }
 
-    return [...mainMenuItems, ...(isFileOpen ? [closeMenuItem] : [])]
+    if (isFileOpen) {
+      return [createItem, openItem, closeItem]
+    }
+
+    return [createItem, openItem]
   }, [dispatch, isFileOpen, router])
 
   if (!isFileOpen) {
