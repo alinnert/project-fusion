@@ -1,6 +1,7 @@
 import { LinkIcon, TagIcon } from '@heroicons/react/solid'
 import React, { FC, useMemo } from 'react'
 import { CategorizedLinkItems, VerticalLinkList } from '../ui/VerticalLinkList'
+import colors from 'tailwindcss/colors'
 
 interface Props {
   currentId: string
@@ -16,13 +17,13 @@ export const SettingsCategoryList: FC<Props> = ({ currentId }) => {
             id: 'categories',
             name: 'Kategorien',
             icon: <TagIcon />,
-            iconColor: 'saddlebrown',
+            iconColor: colors.rose[700],
           },
           {
             id: 'links',
             name: 'URLs',
             icon: <LinkIcon />,
-            iconColor: 'dodgerblue',
+            iconColor: colors.sky[700],
           },
         ],
       ],
