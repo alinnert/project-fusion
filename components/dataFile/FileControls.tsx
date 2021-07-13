@@ -7,9 +7,10 @@ import {
 import { useRouter } from 'next/router'
 import React, { FC, useMemo } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux'
-import { closeDatabase, selectIsFileOpen } from '../../redux/database'
-import { createDatabase } from '../../redux/database/createDatabase'
-import { openDatabase } from '../../redux/database/openDatabase'
+import { selectIsFileOpen } from '../../redux/database'
+import { closeDatabaseFile } from '../../redux/database/closeDatabaseFile'
+import { createDatabaseFile } from '../../redux/database/createDatabaseFile'
+import { openDatabaseFile } from '../../redux/database/openDatabaseFile'
 import { DropdownMenu, MenuItem } from '../ui/DropdownMenu'
 
 interface Props {}
@@ -25,7 +26,7 @@ export const FileControls: FC<Props> = ({}) => {
       label: 'Erstellen',
       icon: <DocumentAddIcon />,
       action() {
-        createDatabase()
+        createDatabaseFile()
         router.push('/')
       },
     }
@@ -34,7 +35,7 @@ export const FileControls: FC<Props> = ({}) => {
       label: 'Öffnen',
       icon: <FolderIcon className="h-5 w-5" />,
       action() {
-        openDatabase()
+        openDatabaseFile()
         router.push('/')
       },
     }
@@ -42,7 +43,7 @@ export const FileControls: FC<Props> = ({}) => {
     const closeItem: MenuItem = {
       label: 'Schließen',
       action() {
-        dispatch(closeDatabase())
+        closeDatabaseFile()
         router.push('/')
       },
       icon: <XIcon />,

@@ -6,13 +6,13 @@ import {
   startLoading,
 } from '.'
 import { store } from '..'
-import { asyncTryCatch } from '../../tools/tryCatch'
+import { asyncTry } from '../../tools/tryCatch'
 import { filePickerOptions, getDataFromFileHandle } from './filePicker'
 
-export async function openDatabase(): Promise<void> {
+export async function openDatabaseFile(): Promise<void> {
   store.dispatch(startLoading())
 
-  const filePickerResult = await asyncTryCatch(() =>
+  const filePickerResult = await asyncTry(() =>
     showOpenFilePicker(filePickerOptions),
   )
   if (filePickerResult.caught) {
@@ -22,16 +22,14 @@ export async function openDatabase(): Promise<void> {
 
   const [fileHandle] = filePickerResult.value
 
-  const persistHandleResult = await asyncTryCatch(() =>
+  const persistHandleResult = await asyncTry(() =>
     set('fileHandle', fileHandle),
   )
   if (persistHandleResult.caught) {
     console.error(persistHandleResult.error)
   }
 
-  const fileDataResult = await asyncTryCatch(() =>
-    getDataFromFileHandle(fileHandle),
-  )
+  const fileDataResult = await asyncTry(() => getDataFromFileHandle(fileHandle))
   if (fileDataResult.caught) {
     store.dispatch(setOpenDatabaseError(fileDataResult.error.message))
     return

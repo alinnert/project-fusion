@@ -1,12 +1,12 @@
 import { setDatabase, SetDatabaseActionPayload, setOpenDatabaseError } from '.'
 import { store } from '..'
-import { asyncTryCatch } from '../../tools/tryCatch'
+import { asyncTry } from '../../tools/tryCatch'
 import { getDataFromFileHandle } from './filePicker'
 
-export async function openDatabaseWithFilehandle(
+export async function openDatabaseFielWithHandle(
   fileHandle: FileSystemFileHandle,
 ): Promise<void> {
-  const queryPermissionResult = await asyncTryCatch(() =>
+  const queryPermissionResult = await asyncTry(() =>
     // @ts-expect-error
     fileHandle.queryPermission({ mode: 'readwrite' }),
   )
@@ -20,7 +20,7 @@ export async function openDatabaseWithFilehandle(
   }
 
   if (queryPermissionResult.value === 'prompt') {
-    const requestPermissionResult = await asyncTryCatch(() =>
+    const requestPermissionResult = await asyncTry(() =>
       // @ts-expect-error
       fileHandle.requestPermission({ mode: 'readwrite' }),
     )
@@ -36,9 +36,7 @@ export async function openDatabaseWithFilehandle(
     }
   }
 
-  const fileDataResult = await asyncTryCatch(() =>
-    getDataFromFileHandle(fileHandle),
-  )
+  const fileDataResult = await asyncTry(() => getDataFromFileHandle(fileHandle))
   if (fileDataResult.caught) {
     store.dispatch(setOpenDatabaseError(fileDataResult.error.message))
     return
