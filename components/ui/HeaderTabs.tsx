@@ -6,7 +6,7 @@ export interface TabItem {
   label: string
   icon?: ReactElement
   href: string
-  current: boolean
+  current?: boolean
 }
 
 interface Props {
@@ -15,6 +15,11 @@ interface Props {
 
 export const HeaderTabs: FC<Props> = ({ tabs }) => {
   const router = useRouter()
+
+  function isCurrent(tab: TabItem) {
+    if (tab.current !== undefined) return tab.current
+    return router.pathname.startsWith(tab.href)
+  }
 
   function handleItemClick(tab: TabItem) {
     router.push(tab.href)
@@ -25,7 +30,7 @@ export const HeaderTabs: FC<Props> = ({ tabs }) => {
       {tabs.map((tab) => (
         <div key={tab.href} onClick={() => handleItemClick(tab)}>
           <Button
-            buttonType={tab.current ? 'header-current' : 'header'}
+            buttonType={isCurrent(tab) ? 'header-current' : 'header'}
             icon={tab.icon}
           >
             {tab.label}

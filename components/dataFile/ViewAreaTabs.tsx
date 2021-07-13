@@ -1,4 +1,9 @@
-import { CogIcon, CollectionIcon } from '@heroicons/react/solid'
+import {
+  CogIcon,
+  CollectionIcon,
+  HomeIcon,
+  InformationCircleIcon,
+} from '@heroicons/react/solid'
 import { useRouter } from 'next/router'
 import React, { FC, useMemo } from 'react'
 import { useAppSelector } from '../../redux'
@@ -11,32 +16,40 @@ export const ViewAreaTabs: FC<Props> = ({}) => {
   const router = useRouter()
   const isFileOpen = useAppSelector(selectIsFileOpen)
 
-  const isConfigPage = useMemo(() => {
-    return router.pathname.startsWith('/config')
-  }, [router.pathname])
+  const tabs = useMemo<Array<TabItem>>(() => {
+    const dataItem: TabItem = {
+      label: 'Daten',
+      icon: <CollectionIcon />,
+      href: '/favorites',
+      current:
+        router.pathname.startsWith('/favorites') ||
+        router.pathname.startsWith('/groups'),
+    }
 
-  const tabs = useMemo<Array<TabItem>>(
-    () => [
-      {
-        label: 'Daten',
-        icon: <CollectionIcon />,
-        href: '/favorites',
-        current: !isConfigPage,
-      },
-      {
-        label: 'Einstellungen',
-        icon: <CogIcon />,
-        href: '/config',
-        current: isConfigPage,
-      },
-    ],
-    [isConfigPage],
-  )
+    const configItem: TabItem = {
+      label: 'Einstellungen',
+      icon: <CogIcon />,
+      href: '/config',
+    }
 
-  if (!isFileOpen) return null
+    const startItem: TabItem = {
+      label: 'Willkommen',
+      href: '/',
+      icon: <HomeIcon />,
+      current: router.pathname === '/',
+    }
+
+    const infoItem: TabItem = {
+      label: 'Info',
+      icon: <InformationCircleIcon />,
+      href: '/info',
+    }
+
+    return isFileOpen ? [dataItem, configItem, infoItem] : [startItem, infoItem]
+  }, [isFileOpen, router.pathname])
 
   return (
-    <div className="mx-8">
+    <div>
       <HeaderTabs tabs={tabs} />
     </div>
   )
