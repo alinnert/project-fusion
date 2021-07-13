@@ -1,7 +1,7 @@
 import {
   createEntityAdapter,
   createSlice,
-  PayloadAction
+  PayloadAction,
 } from '@reduxjs/toolkit'
 import { closeDatabase, setDatabase } from '../database'
 import { ProjectGroup } from '../groups'
@@ -27,11 +27,21 @@ const slice = createSlice({
     addGroupToCategory(
       state,
       action: PayloadAction<{
-        category: Category['id']
-        group: ProjectGroup['id']
+        categoryId: Category['id']
+        groupId: ProjectGroup['id']
       }>,
     ) {
-      state.entities[action.payload.category]?.groups.push(action.payload.group)
+      for (const category of Object.values(state.entities)) {
+        if (!category?.groups.includes(action.payload.groupId)) continue
+        category.groups.splice(
+          category.groups.indexOf(action.payload.groupId),
+          1,
+        )
+      }
+
+      state.entities[action.payload.categoryId]?.groups.push(
+        action.payload.groupId,
+      )
     },
   },
   extraReducers(builder) {

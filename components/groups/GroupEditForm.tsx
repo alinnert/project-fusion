@@ -1,17 +1,16 @@
 import { FolderAddIcon, FolderIcon, SaveIcon } from '@heroicons/react/solid'
 import router from 'next/router'
 import React, { ChangeEvent, FC, FormEvent, useMemo, useState } from 'react'
-import slugify from 'slugify'
 import { useAppDispatch, useAppSelector } from '../../redux'
 import { addGroupToCategory, Category } from '../../redux/categories'
 import { selectIsFileOpen } from '../../redux/database'
-import { addGroup, ProjectGroup, setGroup } from '../../redux/groups'
+import { addGroup, ProjectGroup, updateGroup } from '../../redux/groups'
+import { createId } from '../../tools/customNanoId'
 import { Layout } from '../app/Layout'
 import { useCategoryFromGroup } from '../category/useCategoryFromGroup'
 import { Input } from '../ui/Input'
 import { PageContent } from '../ui/PageContent'
 import { ToolbarContainer } from '../ui/ToolbarContainer'
-import { createUniqueGroupId } from './createUniqueGroupId'
 import { GroupList } from './GroupList'
 
 interface Props {
@@ -22,11 +21,9 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
   const dispatch = useAppDispatch()
   const isFileOpen = useAppSelector(selectIsFileOpen)
   const categories = useAppSelector((state) => state.categories.entities)
-  const groupIds = useAppSelector((state) => state.groups.ids)
 
   const { categoryId: categoryIdFromGroup } = useCategoryFromGroup(init)
 
-  const [groupId, setGroupId] = useState(init?.id ?? '')
   const [groupName, setGroupName] = useState(init?.name ?? '')
   const [color, setColor] = useState(init?.color ?? '')
   const [categoryId, setCategoryId] = useState<Category['id'] | null>(
@@ -39,7 +36,7 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
 
   function saveGroup() {
     const newGroup: ProjectGroup = {
-      id: createUniqueGroupId(groupId, groupIds),
+      id: createId(),
       name: groupName,
       color,
       notes: '',
@@ -49,7 +46,7 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
     dispatch(addGroup(newGroup))
 
     if (categoryId !== null) {
-      dispatch(addGroupToCategory({ category: categoryId, group: newGroup.id }))
+      dispatch(addGroupToCategory({ categoryId: categoryId, groupId: newGroup.id }))
     }
 
     router.push(`/groups/${newGroup.id}`)
@@ -59,16 +56,14 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
     if (init === null) return
 
     const updatedGroup: ProjectGroup = {
-      id: groupId,
+      id: init.id,
       name: groupName,
       color,
       notes: '',
       projects: init.projects,
     }
 
-    dispatch(setGroup(updatedGroup))
-
-    // TODO: move between categories
+    updateGroup(updatedGroup, categoryId)
 
     router.push(`/groups/${updatedGroup.id}`)
   }
@@ -76,7 +71,6 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
   function handleGroupNameChange(event: ChangeEvent<HTMLInputElement>) {
     const value = event.target.value
     setGroupName(value)
-    setGroupId(slugify(value))
   }
 
   function handleColorChange(event: ChangeEvent<HTMLInputElement>) {

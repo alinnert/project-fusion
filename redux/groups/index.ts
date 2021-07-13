@@ -3,7 +3,8 @@ import {
   createSelector,
   createSlice,
 } from '@reduxjs/toolkit'
-import { AppState } from '..'
+import { AppState, store } from '..'
+import { addGroupToCategory, Category } from '../categories'
 import { closeDatabase, setDatabase } from '../database'
 import { Project } from '../projects'
 
@@ -23,7 +24,6 @@ const slice = createSlice({
   reducers: {
     addGroup: adapter.addOne,
     setGroup: adapter.setOne,
-    updateGroup: adapter.updateOne,
     removeGroup: adapter.removeOne,
     setGroups: adapter.setAll,
   },
@@ -40,8 +40,19 @@ const slice = createSlice({
 
 export const {
   reducer: groupsReducer,
-  actions: { addGroup, setGroup, updateGroup, removeGroup, setGroups },
+  actions: { addGroup, setGroup, removeGroup, setGroups },
 } = slice
+
+export function updateGroup(
+  group: ProjectGroup,
+  categoryId: Category['id'] | null,
+): void {
+  store.dispatch(setGroup(group))
+  if (categoryId === null) return
+  store.dispatch(
+    addGroupToCategory({ groupId: group.id, categoryId: categoryId }),
+  )
+}
 
 export const selectGroupIdsWithoutCategory = createSelector(
   [(state: AppState) => state.categories.entities, (state) => state.groups.ids],
