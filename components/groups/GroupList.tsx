@@ -84,7 +84,7 @@ export const GroupList: FC<Props> = ({ currentId }) => {
         showIcons={true}
         defaultIcon={<FolderIcon />}
         urlPrefix="/groups/"
-        currentId={groupId}
+        currentId={currentId ?? groupId}
       />
     </ToolbarContainer>
   )
