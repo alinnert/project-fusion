@@ -15,7 +15,9 @@ export type ButtonType =
   | 'primary'
   | 'delete'
   | 'flat'
+  | 'flat-open'
   | 'header'
+  | 'header-open'
   | 'header-current'
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -80,6 +82,14 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           'hover:bg-black/10 active:bg-black/20',
         )
 
+      case 'flat-open':
+        return classNames(
+          boxBaseClasses,
+          fontBaseClasses,
+          darkTextClasses,
+          'bg-black/20',
+        )
+
       case 'header':
         return classNames(
           boxBaseClasses,
@@ -88,10 +98,13 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           'text-white/80 hover:text-white',
         )
 
+      case 'header-open':
+        return classNames(fontBaseClasses, boxBaseClasses, 'bg-black/40')
+
       case 'header-current':
         return classNames(
-          fontBaseClasses,
           boxBaseClasses,
+          fontBaseClasses,
           'bg-white',
           'text-brand-800',
         )
@@ -100,12 +113,16 @@ export const Button: FC<PropsWithChildren<Props>> = ({
 
   const iconContainerClasses = useMemo(() => {
     switch (buttonType) {
+      default:
       case 'flat':
+      case 'flat-open':
       case 'default':
       case 'primary':
       case 'delete':
         return matchBool(hasChildren, 'mr-2')
+
       case 'header':
+      case 'header-open':
       case 'header-current':
         return matchBool(hasChildren, 'mr-1')
     }

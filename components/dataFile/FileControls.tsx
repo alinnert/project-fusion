@@ -2,7 +2,7 @@ import {
   DatabaseIcon,
   DocumentAddIcon,
   FolderIcon,
-  XIcon,
+  XIcon
 } from '@heroicons/react/solid'
 import { useRouter } from 'next/router'
 import React, { FC, useMemo } from 'react'
@@ -54,7 +54,7 @@ export const FileControls: FC<Props> = ({}) => {
     }
 
     return [createItem, openItem]
-  }, [dispatch, isFileOpen, router])
+  }, [isFileOpen, router])
 
   if (!isFileOpen) {
     return (
@@ -69,7 +69,11 @@ export const FileControls: FC<Props> = ({}) => {
   }
 
   return (
-    <DropdownMenu icon={<DatabaseIcon />} items={menuItems} buttonType="header">
+    <DropdownMenu
+      icon={<DatabaseIcon />}
+      items={menuItems}
+      buttonType="header"
+    >
       {filename}
     </DropdownMenu>
   )
