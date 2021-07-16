@@ -23,16 +23,17 @@ export default function Info(): ReactElement | null {
           </p>
 
           <ul>
-            <li>TypeScript</li>
-            <li>React</li>
-            <li>Next.js</li>
-            <li>Redux Toolkit</li>
-            <li>Tailwind CSS</li>
-            <li>Heroicons</li>
-            <li>classnames</li>
-            <li>idb-keyval</li>
-            <li>marked</li>
-            <li>nanoid</li>
+            <li><a href="https://www.typescriptlang.org">TypeScript</a></li>
+            <li><a href="https://reactjs.org">React</a></li>
+            <li><a href="https://nextjs.org">Next.js</a></li>
+            <li><a href="https://redux-toolkit.js.org">Redux Toolkit</a></li>
+            <li><a href="https://tailwindcss.com">Tailwind CSS</a></li>
+            <li><a href="https://headlessui.dev">Headless UI</a></li>
+            <li><a href="https://heroicons.com">Heroicons</a></li>
+            <li><a href="https://github.com/JedWatson/classnames">classnames</a></li>
+            <li><a href="https://github.com/jakearchibald/idb-keyval">idb-keyval</a></li>
+            <li><a href="https://github.com/markedjs/marked">marked</a></li>
+            <li><a href="https://github.com/ai/nanoid">nanoid</a></li>
             <li>Native File System API</li>
           </ul>
         </div>
