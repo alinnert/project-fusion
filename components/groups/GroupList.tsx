@@ -4,6 +4,7 @@ import React, { FC, useMemo } from 'react'
 import { useAppSelector } from '../../redux'
 import { selectGroupsWithoutCategory } from '../../redux/groups'
 import { resolveIds } from '../../tools/resolveIds'
+import { useOrderedCategories } from '../categories/useOrderedCategories'
 import { ToolbarContainer } from '../ui/ToolbarContainer'
 import {
   CategorizedLinkItems,
@@ -18,8 +19,7 @@ interface Props {
 
 export const GroupList: FC<Props> = ({ currentId }) => {
   const router = useRouter()
-  const categoryIds = useAppSelector((state) => state.settings.categoryOrder)
-  const categories = useAppSelector((state) => state.categories.entities)
+  const orderedCategories = useOrderedCategories()
   const groups = useAppSelector((state) => state.groups.entities)
   const uncategorizedGroups = useAppSelector(selectGroupsWithoutCategory)
   const { groupId } = useGroupFromRoute()
@@ -36,9 +36,7 @@ export const GroupList: FC<Props> = ({ currentId }) => {
   }, [])
 
   const items = useMemo<CategorizedLinkItems>(() => {
-    const categoryObjects = resolveIds(categoryIds, categories)
-
-    const categorizedGroups: CategorizedLinkItems = categoryObjects.map(
+    const categorizedGroups: CategorizedLinkItems = orderedCategories.map(
       (category) => {
         const categoryGroups = resolveIds(category.groups, groups)
         const categoryLinkItems: LinkItem[] = categoryGroups.map((group) => ({
@@ -61,7 +59,7 @@ export const GroupList: FC<Props> = ({ currentId }) => {
     ]
 
     return [...groupsWithoutCategory, ...categorizedGroups]
-  }, [categories, categoryIds, groups, uncategorizedGroups])
+  }, [orderedCategories, uncategorizedGroups, groups])
 
   function handleAddGroupButtonClick() {
     router.push('/new_group')

@@ -1,6 +1,10 @@
 import { ArrowDownIcon, ArrowUpIcon, TrashIcon } from '@heroicons/react/solid'
-import React, { FC } from 'react'
-import { useAppSelector } from '../../redux'
+import classNames from 'classnames'
+import React, { FC, useState } from 'react'
+import { useAppDispatch } from '../../redux'
+import { Category, removeCategory } from '../../redux/categories'
+import { swapCategories } from '../../redux/settings'
+import { useOrderedCategories } from '../categories/useOrderedCategories'
 import { Button } from '../ui/Button'
 import { Heroicon } from '../ui/Heroicon'
 import { Input } from '../ui/Input'
@@ -9,7 +13,26 @@ import { PageContent } from '../ui/PageContent'
 interface Props {}
 
 export const CategorySettings: FC<Props> = ({}) => {
-  const categories = useAppSelector((state) => state.categories.entities)
+  const [newCategoryName, setNewCategoryName] = useState('')
+  const dispatch = useAppDispatch()
+  const orderedCategories = useOrderedCategories()
+
+  function handleSwapUp(categoryId: Category['id']) {
+    dispatch(swapCategories({ categoryId, direction: 'down' }))
+  }
+
+  function handleSwapDown(categoryId: Category['id']) {
+    dispatch(swapCategories({ categoryId, direction: 'up' }))
+  }
+
+  function handleAdd() {
+    // TODO: implement me!
+    setNewCategoryName('')
+  }
+
+  function handleDelete(categoryId: Category['id']) {
+    dispatch(removeCategory(categoryId))
+  }
 
   return (
     <PageContent title="Kategorien">
@@ -22,28 +45,55 @@ export const CategorySettings: FC<Props> = ({}) => {
 
       <div className="w-96">
         <div className="mb-8 flex flex-col gap-y-2">
-          <Input label="Kategoriename" />
+          <Input
+            label="Kategoriename"
+            value={newCategoryName}
+            onChange={setNewCategoryName}
+          />
+
           <div className="flex">
-            <Button buttonType="primary">Hinzufügen</Button>
+            <Button buttonType="primary" onClick={handleAdd}>
+              Hinzufügen
+            </Button>
           </div>
         </div>
 
-        <div className="flex flex-col gap-y-2">
-          {Object.values(categories).map((category) =>
+        <div className="flex flex-col">
+          {orderedCategories.map((category, index) =>
             category !== undefined ? (
-              <div key={category.id} className="flex">
+              <div
+                key={category.id}
+                className={classNames(
+                  'flex',
+                  'p-2 rounded-md',
+                  'hover:bg-neutral-200',
+                )}
+              >
                 <div className="flex-1">{category.name}</div>
 
                 <div className="flex-0 flex gap-x-1">
-                  <div className="p-1">
+                  <Button
+                    buttonType="flat"
+                    onClick={() => handleSwapDown(category.id)}
+                    disabled={index >= orderedCategories.length - 1}
+                  >
                     <Heroicon icon={<ArrowDownIcon />} />
-                  </div>
-                  <div className="p-1">
+                  </Button>
+
+                  <Button
+                    buttonType="flat"
+                    onClick={() => handleSwapUp(category.id)}
+                    disabled={index <= 0}
+                  >
                     <Heroicon icon={<ArrowUpIcon />} />
-                  </div>
-                  <div className="p-1">
+                  </Button>
+
+                  <Button
+                    buttonType="flat"
+                    onClick={() => handleDelete(category.id)}
+                  >
                     <Heroicon icon={<TrashIcon />} />
-                  </div>
+                  </Button>
                 </div>
               </div>
             ) : null,

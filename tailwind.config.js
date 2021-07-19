@@ -22,6 +22,13 @@ module.exports = {
   plugins: [
     require('@tailwindcss/typography'),
     plugin(({ addVariant, e }) => {
+      addVariant('enabled', ({ modifySelectors, separator }) => {
+        modifySelectors(
+          ({ className }) =>
+            `.${e(`enabled${separator}${className}`)}:not(:disabled)`,
+        )
+      })
+
       addVariant('current', ({ modifySelectors, separator }) => {
         modifySelectors(
           ({ className }) => `.current.${e(`current${separator}${className}`)}`,

@@ -1,5 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { Category } from '../categories'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { swapArrayElements } from '../../tools/array'
+import { Category, removeCategory } from '../categories'
 import { closeDatabase, setDatabase } from '../database'
 
 export interface Settings {
@@ -14,7 +15,20 @@ function getInitialState(): Settings {
 const slice = createSlice({
   name: 'settings',
   initialState: getInitialState(),
-  reducers: {},
+
+  reducers: {
+    swapCategories(
+      state,
+      action: PayloadAction<{
+        categoryId: Category['id']
+        direction: 'up' | 'down'
+      }>,
+    ) {
+      const index = state.categoryOrder.indexOf(action.payload.categoryId)
+      swapArrayElements(state.categoryOrder, index, action.payload.direction)
+    },
+  },
+
   extraReducers(builder) {
     builder.addCase(setDatabase, (state, { payload }) => {
       Object.assign(state, payload.database.settings)
@@ -23,10 +37,15 @@ const slice = createSlice({
     builder.addCase(closeDatabase, (state) => {
       return getInitialState()
     })
+
+    builder.addCase(removeCategory, (state, { payload }) => {
+      const spliceIndex = state.categoryOrder.indexOf(payload.toString())
+      state.categoryOrder.splice(spliceIndex, 1)
+    })
   },
 })
 
 export const {
   reducer: settingsReducer,
-  actions: {},
+  actions: { swapCategories },
 } = slice

@@ -40,8 +40,12 @@ export const Button: FC<PropsWithChildren<Props>> = ({
       ${hasChildren ? 'px-2' : 'px-1'}
       py-1 rounded
     `
-    const darkTextClasses =
-      'text-neutral-700 hover:text-neutral-900 active:text-neutral-900'
+    const darkTextClasses = `
+      text-neutral-700
+      disabled:text-neutral-300
+      hover:enabled:text-neutral-900
+      active:enabled:text-neutral-900
+    `
     const lightTextClasses = 'text-white'
     const shadowClasses = 'shadow'
 
@@ -53,7 +57,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           boxBaseClasses,
           darkTextClasses,
           shadowClasses,
-          'bg-neutral-50 hover:bg-neutral-100 active:bg-neutral-300',
+          'bg-neutral-50 hover:enabled:bg-neutral-100 active:enabled:bg-neutral-300',
         )
 
       case 'primary':
@@ -62,7 +66,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           fontBaseClasses,
           lightTextClasses,
           shadowClasses,
-          'bg-brand-600 hover:bg-brand-700 active:bg-brand-800',
+          'bg-brand-600 hover:enabled:bg-brand-700 active:enabled:bg-brand-800',
         )
 
       case 'delete':
@@ -71,7 +75,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           fontBaseClasses,
           lightTextClasses,
           shadowClasses,
-          'bg-danger-800 hover:bg-danger-700 active:bg-danger-600',
+          'bg-danger-800 hover:enabled:bg-danger-700 active:enabled:bg-danger-600',
         )
 
       case 'flat':
@@ -79,7 +83,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           boxBaseClasses,
           fontBaseClasses,
           darkTextClasses,
-          'hover:bg-black/10 active:bg-black/20',
+          'hover:enabled:bg-black/10 active:enabled:bg-black/20',
         )
 
       case 'flat-open':
@@ -94,8 +98,8 @@ export const Button: FC<PropsWithChildren<Props>> = ({
         return classNames(
           boxBaseClasses,
           fontBaseClasses,
-          'hover:bg-black/20 active:bg-black/40',
-          'text-white/80 hover:text-white',
+          'hover:enabled:bg-black/20 active:enabled:bg-black/40',
+          'text-white/80 hover:enabled:text-white',
         )
 
       case 'header-open':
