@@ -1,7 +1,22 @@
+import classNames from 'classnames'
 import { FC } from 'react'
+import { defaultMatch, matchString } from '../../tools/match'
 
-interface Props {}
+interface Props {
+  type?: 'default' | 'header'
+}
 
-export const HeaderSeparator: FC<Props> = ({}) => {
-  return <div className="w-px h-4 bg-brand-500 mx-4"></div>
+export const Separator: FC<Props> = ({ type = 'default' }) => {
+  return (
+    <div
+      className={classNames(
+        'w-px h-4',
+        matchString(type, {
+          default: 'bg-neutral-300 mx-1',
+          header: 'bg-brand-500 mx-2',
+          [defaultMatch]: '',
+        }),
+      )}
+    />
+  )
 }

@@ -1,9 +1,16 @@
+import { Dictionary } from '@reduxjs/toolkit'
 import { useMemo } from 'react'
 import { useAppSelector } from '../../redux'
 import { Category } from '../../redux/categories'
 import { resolveIds } from '../../tools/resolveIds'
 
-export function useOrderedCategories(): Category[] {
+interface UseOrderedCategoriesResult {
+  orderedCategories: Category[]
+  orderedCategoryIds: Array<Category['id']>
+  categories: Dictionary<Category>
+}
+
+export function useOrderedCategories(): UseOrderedCategoriesResult {
   const orderedCategoryIds = useAppSelector(
     (state) => state.settings.categoryOrder,
   )
@@ -14,5 +21,5 @@ export function useOrderedCategories(): Category[] {
     return resolveIds(orderedCategoryIds, categories)
   }, [categories, orderedCategoryIds])
 
-  return orderedCategories
+  return { orderedCategoryIds, orderedCategories, categories }
 }

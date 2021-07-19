@@ -6,7 +6,7 @@ import { matchBool } from '../../tools/match'
 import { FileControls } from '../dataFile/FileControls'
 import { ViewAreaTabs } from '../dataFile/ViewAreaTabs'
 import { HeaderSearch } from '../ui/HeaderSearch'
-import { HeaderSeparator } from '../ui/HeaderSeparator'
+import { Separator } from '../ui/HeaderSeparator'
 import { Logo } from '../ui/Logo'
 
 interface Props {
@@ -45,7 +45,7 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
         >
           <Logo />
           <FileControls />
-          <HeaderSeparator />
+          <Separator type="header" />
           <ViewAreaTabs />
 
           <span className="flex items-center gap-x-2">{header}</span>

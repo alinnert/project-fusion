@@ -21,7 +21,7 @@ interface Props {
 export const GroupEditForm: FC<Props> = ({ init = null }) => {
   const dispatch = useAppDispatch()
   const isFileOpen = useAppSelector(selectIsFileOpen)
-  const orderedCategories = useOrderedCategories()
+  const { orderedCategories } = useOrderedCategories()
 
   const { categoryId: categoryIdFromGroup } = useCategoryFromGroup(init)
 

@@ -19,7 +19,7 @@ interface Props {
 
 export const GroupList: FC<Props> = ({ currentId }) => {
   const router = useRouter()
-  const orderedCategories = useOrderedCategories()
+  const { orderedCategories } = useOrderedCategories()
   const groups = useAppSelector((state) => state.groups.entities)
   const uncategorizedGroups = useAppSelector(selectGroupsWithoutCategory)
   const { groupId } = useGroupFromRoute()

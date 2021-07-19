@@ -1,5 +1,4 @@
-import { ArrowDownIcon, ArrowUpIcon, TrashIcon } from '@heroicons/react/solid'
-import classNames from 'classnames'
+import { TrashIcon } from '@heroicons/react/solid'
 import React, { FC, useState } from 'react'
 import { useAppDispatch } from '../../redux'
 import { addCategory, Category, removeCategory } from '../../redux/categories'
@@ -7,23 +6,20 @@ import { swapCategories } from '../../redux/settings'
 import { createId } from '../../tools/customNanoId'
 import { useOrderedCategories } from '../categories/useOrderedCategories'
 import { Button } from '../ui/Button'
-import { Heroicon } from '../ui/Heroicon'
 import { Input } from '../ui/Input'
 import { PageContent } from '../ui/PageContent'
+import { SortableList, SwapDirection } from '../ui/SortableList'
 
 interface Props {}
 
 export const CategorySettings: FC<Props> = ({}) => {
   const [newCategoryName, setNewCategoryName] = useState('')
+  const [selectedId, setSelectedId] = useState<Category['id'] | null>(null)
   const dispatch = useAppDispatch()
-  const orderedCategories = useOrderedCategories()
+  const { categories, orderedCategoryIds } = useOrderedCategories()
 
-  function handleSwapUp(categoryId: Category['id']) {
-    dispatch(swapCategories({ categoryId, direction: 'down' }))
-  }
-
-  function handleSwapDown(categoryId: Category['id']) {
-    dispatch(swapCategories({ categoryId, direction: 'up' }))
+  function handleSwap(categoryId: string, direction: SwapDirection): void {
+    dispatch(swapCategories({ categoryId, direction }))
   }
 
   function handleAdd() {
@@ -31,8 +27,19 @@ export const CategorySettings: FC<Props> = ({}) => {
     setNewCategoryName('')
   }
 
-  function handleDelete(categoryId: Category['id']) {
-    dispatch(removeCategory(categoryId))
+  function handleDelete() {
+    if (selectedId === null) return
+    const previousIndex = orderedCategoryIds.indexOf(selectedId)
+    dispatch(removeCategory(selectedId))
+
+    const newSelectedId =
+      orderedCategoryIds.length === 1
+        ? null
+        : previousIndex === orderedCategoryIds.length - 1
+        ? orderedCategoryIds[orderedCategoryIds.length - 2]
+        : orderedCategoryIds[previousIndex + 1]
+
+    setSelectedId(newSelectedId)
   }
 
   return (
@@ -44,7 +51,8 @@ export const CategorySettings: FC<Props> = ({}) => {
         </p>
       </div>
 
-      <div className="w-96">
+      <div>
+        <div className="text-lg font-semibold mb-4">Neue Kategorie anlegen</div>
         <div className="mb-8 flex flex-col gap-y-2">
           <Input
             label="Kategoriename"
@@ -60,45 +68,30 @@ export const CategorySettings: FC<Props> = ({}) => {
         </div>
 
         <div className="flex flex-col">
-          {orderedCategories.map((category, index) =>
-            category !== undefined ? (
-              <div
-                key={category.id}
-                className={classNames(
-                  'flex',
-                  'p-2 rounded-md',
-                  'hover:bg-neutral-200',
-                )}
-              >
-                <div className="flex-1">{category.name}</div>
-
-                <div className="flex-0 flex gap-x-1">
-                  <Button
-                    buttonType="flat"
-                    onClick={() => handleSwapDown(category.id)}
-                    disabled={index >= orderedCategories.length - 1}
-                  >
-                    <Heroicon icon={<ArrowDownIcon />} />
-                  </Button>
-
-                  <Button
-                    buttonType="flat"
-                    onClick={() => handleSwapUp(category.id)}
-                    disabled={index <= 0}
-                  >
-                    <Heroicon icon={<ArrowUpIcon />} />
-                  </Button>
-
-                  <Button
-                    buttonType="flat"
-                    onClick={() => handleDelete(category.id)}
-                  >
-                    <Heroicon icon={<TrashIcon />} />
-                  </Button>
-                </div>
+          <SortableList
+            ids={orderedCategoryIds}
+            selectedId={selectedId}
+            onSelectedIdChange={setSelectedId}
+            onSwap={handleSwap}
+            additionalButtons={
+              <div className="flex gap-x-1">
+                <Button
+                  disabled={selectedId === null}
+                  buttonType="delete"
+                  icon={<TrashIcon />}
+                  onClick={handleDelete}
+                >
+                  Löschen
+                </Button>
               </div>
-            ) : null,
-          )}
+            }
+          >
+            {(id) => (
+              <div className="flex">
+                <div className="flex-1">{categories[id]?.name}</div>
+              </div>
+            )}
+          </SortableList>
         </div>
       </div>
     </PageContent>
