@@ -2,8 +2,9 @@ import { ArrowDownIcon, ArrowUpIcon, TrashIcon } from '@heroicons/react/solid'
 import classNames from 'classnames'
 import React, { FC, useState } from 'react'
 import { useAppDispatch } from '../../redux'
-import { Category, removeCategory } from '../../redux/categories'
+import { addCategory, Category, removeCategory } from '../../redux/categories'
 import { swapCategories } from '../../redux/settings'
+import { createId } from '../../tools/customNanoId'
 import { useOrderedCategories } from '../categories/useOrderedCategories'
 import { Button } from '../ui/Button'
 import { Heroicon } from '../ui/Heroicon'
@@ -26,7 +27,7 @@ export const CategorySettings: FC<Props> = ({}) => {
   }
 
   function handleAdd() {
-    // TODO: implement me!
+    dispatch(addCategory({ id: createId(), name: newCategoryName, groups: [] }))
     setNewCategoryName('')
   }
 

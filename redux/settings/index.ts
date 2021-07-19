@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { swapArrayElements } from '../../tools/array'
-import { Category, removeCategory } from '../categories'
+import { addCategory, Category, removeCategory } from '../categories'
 import { closeDatabase, setDatabase } from '../database'
 
 export interface Settings {
@@ -36,6 +36,10 @@ const slice = createSlice({
 
     builder.addCase(closeDatabase, (state) => {
       return getInitialState()
+    })
+
+    builder.addCase(addCategory, (state, { payload }) => {
+      state.categoryOrder.push(payload.id)
     })
 
     builder.addCase(removeCategory, (state, { payload }) => {
