@@ -8,6 +8,7 @@ import { addGroup, ProjectGroup, updateGroup } from '../../redux/groups'
 import { createId } from '../../tools/customNanoId'
 import { Layout } from '../app/Layout'
 import { useCategoryFromGroup } from '../categories/useCategoryFromGroup'
+import { useOrderedCategories } from '../categories/useOrderedCategories'
 import { Input } from '../ui/Input'
 import { PageContent } from '../ui/PageContent'
 import { ToolbarContainer } from '../ui/ToolbarContainer'
@@ -20,7 +21,7 @@ interface Props {
 export const GroupEditForm: FC<Props> = ({ init = null }) => {
   const dispatch = useAppDispatch()
   const isFileOpen = useAppSelector(selectIsFileOpen)
-  const categories = useAppSelector((state) => state.categories.entities)
+  const orderedCategories = useOrderedCategories()
 
   const { categoryId: categoryIdFromGroup } = useCategoryFromGroup(init)
 
@@ -46,7 +47,9 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
     dispatch(addGroup(newGroup))
 
     if (categoryId !== null) {
-      dispatch(addGroupToCategory({ categoryId: categoryId, groupId: newGroup.id }))
+      dispatch(
+        addGroupToCategory({ categoryId: categoryId, groupId: newGroup.id }),
+      )
     }
 
     router.push(`/groups/${newGroup.id}`)
@@ -66,11 +69,6 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
     updateGroup(updatedGroup, categoryId)
 
     router.push(`/groups/${updatedGroup.id}`)
-  }
-
-  function handleGroupNameChange(event: ChangeEvent<HTMLInputElement>) {
-    const value = event.target.value
-    setGroupName(value)
   }
 
   function handleColorChange(event: ChangeEvent<HTMLInputElement>) {
@@ -107,7 +105,7 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
           <form onSubmit={handleSubmit} className="w-96 flex flex-col gap-y-4">
             <Input
               label="Gruppenname"
-              onChange={handleGroupNameChange}
+              onChange={setGroupName}
               value={groupName}
             />
 
@@ -129,7 +127,7 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
                 value={categoryId ?? ''}
               >
                 <option value="">[ Unsortiert ]</option>
-                {Object.values(categories).map((category) =>
+                {orderedCategories.map((category) =>
                   category !== undefined ? (
                     <option key={category.id} value={category.id}>
                       {category.name}
