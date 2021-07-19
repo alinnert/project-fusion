@@ -13,9 +13,16 @@ export default function Info(): ReactElement | null {
 
           <p>
             <i>
-              Version 0.1
+              Version 0.0.0.42
               if-you-use-this-in-production-kittens-will-die-pre-alpha
             </i>
+          </p>
+
+          <p>
+            Repository:{' '}
+            <a href="https://github.com/alinnert/project-fusion">
+              github.com/alinnert/project-fusion
+            </a>
           </p>
 
           <p>
@@ -23,17 +30,41 @@ export default function Info(): ReactElement | null {
           </p>
 
           <ul>
-            <li><a href="https://www.typescriptlang.org">TypeScript</a></li>
-            <li><a href="https://reactjs.org">React</a></li>
-            <li><a href="https://nextjs.org">Next.js</a></li>
-            <li><a href="https://redux-toolkit.js.org">Redux Toolkit</a></li>
-            <li><a href="https://tailwindcss.com">Tailwind CSS</a></li>
-            <li><a href="https://headlessui.dev">Headless UI</a></li>
-            <li><a href="https://heroicons.com">Heroicons</a></li>
-            <li><a href="https://github.com/JedWatson/classnames">classnames</a></li>
-            <li><a href="https://github.com/jakearchibald/idb-keyval">idb-keyval</a></li>
-            <li><a href="https://github.com/markedjs/marked">marked</a></li>
-            <li><a href="https://github.com/ai/nanoid">nanoid</a></li>
+            <li>
+              <a href="https://www.typescriptlang.org">TypeScript</a>
+            </li>
+            <li>
+              <a href="https://reactjs.org">React</a>
+            </li>
+            <li>
+              <a href="https://nextjs.org">Next.js</a>
+            </li>
+            <li>
+              <a href="https://redux-toolkit.js.org">Redux Toolkit</a>
+            </li>
+            <li>
+              <a href="https://tailwindcss.com">Tailwind CSS</a>
+            </li>
+            <li>
+              <a href="https://headlessui.dev">Headless UI</a>
+            </li>
+            <li>
+              <a href="https://heroicons.com">Heroicons</a>
+            </li>
+            <li>
+              <a href="https://github.com/JedWatson/classnames">classnames</a>
+            </li>
+            <li>
+              <a href="https://github.com/jakearchibald/idb-keyval">
+                idb-keyval
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/markedjs/marked">marked</a>
+            </li>
+            <li>
+              <a href="https://github.com/ai/nanoid">nanoid</a>
+            </li>
             <li>Native File System API</li>
           </ul>
         </div>
