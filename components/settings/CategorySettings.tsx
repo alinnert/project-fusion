@@ -1,4 +1,5 @@
 import { PencilIcon, TrashIcon } from '@heroicons/react/solid'
+import classNames from 'classnames'
 import React, { FC, useState } from 'react'
 import { useAppDispatch } from '../../redux'
 import {
@@ -11,6 +12,7 @@ import { swapCategories } from '../../redux/settings'
 import { createId } from '../../tools/customNanoId'
 import { useOrderedCategories } from '../categories/useOrderedCategories'
 import { Button } from '../ui/Button'
+import { Headline } from '../ui/Headline'
 import { Input } from '../ui/Input'
 import { PageContent } from '../ui/PageContent'
 import { SortableList, SwapDirection } from '../ui/SortableList'
@@ -73,7 +75,8 @@ export const CategorySettings: FC<Props> = ({}) => {
       </div>
 
       <div>
-        <div className="text-lg font-semibold mb-4">Neue Kategorie anlegen</div>
+        <Headline>Neue Kategorie anlegen</Headline>
+
         <div className="mb-8 flex flex-col gap-y-2">
           <Input
             label="Kategoriename"
@@ -88,6 +91,8 @@ export const CategorySettings: FC<Props> = ({}) => {
           </div>
         </div>
 
+        <Headline>Kategorien verwalten</Headline>
+
         <div className="flex flex-col">
           <SortableList
             ids={orderedCategoryIds}
@@ -95,7 +100,7 @@ export const CategorySettings: FC<Props> = ({}) => {
             onSelectedIdChange={setSelectedId}
             onSwap={handleSwap}
             additionalButtons={
-              <div className="flex gap-x-1">
+              <>
                 <Button
                   disabled={selectedId === null}
                   buttonType="default"
@@ -113,7 +118,7 @@ export const CategorySettings: FC<Props> = ({}) => {
                 >
                   Löschen
                 </Button>
-              </div>
+              </>
             }
           >
             {(id) => (
