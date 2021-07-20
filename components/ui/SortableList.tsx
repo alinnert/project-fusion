@@ -34,12 +34,17 @@ export const SortableList: FC<Props> = ({
   return (
     <div className="">
       <div className="flex items-center gap-x-2 mb-4">
-        <Button icon={<ArrowUpIcon />} onClick={handleSwap('down')}>
-          Nach oben
-        </Button>
-        <Button icon={<ArrowDownIcon />} onClick={handleSwap('up')}>
-          Nach unten
-        </Button>
+        <Button
+          icon={<ArrowUpIcon />}
+          onClick={handleSwap('down')}
+          disabled={selectedId === null || selectedId === ids[0]}
+        />
+
+        <Button
+          icon={<ArrowDownIcon />}
+          onClick={handleSwap('up')}
+          disabled={selectedId === null || selectedId === ids[ids.length - 1]}
+        />
 
         {additionalButtons !== undefined ? (
           <>

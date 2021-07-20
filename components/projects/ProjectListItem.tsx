@@ -6,7 +6,7 @@ import {
   InboxIcon,
   PencilIcon,
   StarIcon,
-  TrashIcon,
+  TrashIcon
 } from '@heroicons/react/solid'
 import classNames from 'classnames'
 import marked from 'marked'
@@ -77,7 +77,7 @@ export const ProjectListItem: FC<Props> = ({
       key={id}
       className={classNames(
         'px-4 py-2 mb-2 last:mb-0',
-        'rounded',
+        'rounded-md shadow',
         matchBool(
           important,
           matchBool(archived, 'bg-amber-100/40', 'bg-amber-100'),

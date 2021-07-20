@@ -1,12 +1,11 @@
-import { PencilIcon, TrashIcon } from '@heroicons/react/solid'
-import classNames from 'classnames'
-import React, { FC, useState } from 'react'
+import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/solid'
+import React, { FC, FormEvent, useState } from 'react'
 import { useAppDispatch } from '../../redux'
 import {
   addCategory,
   Category,
   removeCategory,
-  updateCategory,
+  updateCategory
 } from '../../redux/categories'
 import { swapCategories } from '../../redux/settings'
 import { createId } from '../../tools/customNanoId'
@@ -16,17 +15,24 @@ import { Headline } from '../ui/Headline'
 import { Input } from '../ui/Input'
 import { PageContent } from '../ui/PageContent'
 import { SortableList, SwapDirection } from '../ui/SortableList'
-import { useRenameDialog } from '../ui/useRenameDialog'
+import { useTextPrompt } from '../ui/useTextPrompt'
 
 interface Props {}
 
 export const CategorySettings: FC<Props> = ({}) => {
-  const [newCategoryName, setNewCategoryName] = useState('')
   const [selectedId, setSelectedId] = useState<Category['id'] | null>(null)
   const dispatch = useAppDispatch()
   const { categories, orderedCategoryIds } = useOrderedCategories()
-  const { renameDialog, openRenameDialog } = useRenameDialog({
-    onRename(name) {
+
+  const { dialog: addDialog, openDialog: openAddDialog } = useTextPrompt({
+    onConfirm(name) {
+      if (name.trim() === '') return
+      dispatch(addCategory({ id: createId(), name, groups: [] }))
+    },
+  })
+
+  const { dialog: renameDialog, openDialog: openRenameDialog } = useTextPrompt({
+    onConfirm(name) {
       if (selectedId === null) return
       dispatch(updateCategory({ id: selectedId, changes: { name } }))
     },
@@ -36,9 +42,13 @@ export const CategorySettings: FC<Props> = ({}) => {
     dispatch(swapCategories({ categoryId, direction }))
   }
 
-  function handleAdd() {
-    dispatch(addCategory({ id: createId(), name: newCategoryName, groups: [] }))
-    setNewCategoryName('')
+  function handleAdd2() {
+    openAddDialog({
+      title: 'Neue Kategorie anlegen',
+      inputLabel: 'Name',
+      value: '',
+      primaryButtonLabel: 'Anlegen',
+    })
   }
 
   function handleDelete() {
@@ -60,11 +70,18 @@ export const CategorySettings: FC<Props> = ({}) => {
     if (selectedId === null) return
     const category = categories[selectedId]
     if (category === undefined) return
-    openRenameDialog(category.name)
+
+    openRenameDialog({
+      title: `"${category.name}" umbenennen`,
+      inputLabel: 'Neuer Name',
+      primaryButtonLabel: 'Umbenennen',
+      value: category.name,
+    })
   }
 
   return (
     <PageContent title="Kategorien">
+      {addDialog}
       {renameDialog}
 
       <div className="mb-4">
@@ -75,22 +92,6 @@ export const CategorySettings: FC<Props> = ({}) => {
       </div>
 
       <div>
-        <Headline>Neue Kategorie anlegen</Headline>
-
-        <div className="mb-8 flex flex-col gap-y-2">
-          <Input
-            label="Kategoriename"
-            value={newCategoryName}
-            onChange={setNewCategoryName}
-          />
-
-          <div className="flex">
-            <Button buttonType="primary" onClick={handleAdd}>
-              Hinzufügen
-            </Button>
-          </div>
-        </div>
-
         <Headline>Kategorien verwalten</Headline>
 
         <div className="flex flex-col">
@@ -101,6 +102,14 @@ export const CategorySettings: FC<Props> = ({}) => {
             onSwap={handleSwap}
             additionalButtons={
               <>
+                <Button
+                  buttonType="default"
+                  icon={<PlusIcon />}
+                  onClick={handleAdd2}
+                >
+                  Neu
+                </Button>
+
                 <Button
                   disabled={selectedId === null}
                   buttonType="default"

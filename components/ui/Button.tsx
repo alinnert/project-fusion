@@ -5,7 +5,7 @@ import {
   FC,
   PropsWithChildren,
   ReactElement,
-  useMemo,
+  useMemo
 } from 'react'
 import { matchBool } from '../../tools/match'
 import { Heroicon } from './Heroicon'
@@ -20,34 +20,40 @@ export type ButtonType =
   | 'header-open'
   | 'header-current'
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface Props
+  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
   icon?: ReactElement
   buttonType?: ButtonType
+  className?: string
 }
 
 export const Button: FC<PropsWithChildren<Props>> = ({
   children,
   icon,
   buttonType = 'default',
+  className,
   ...buttonProps
 }) => {
   const hasChildren = useMemo(() => Children.count(children) > 0, [children])
 
   const buttonClasses = useMemo<string>(() => {
     const fontBaseClasses = 'text-sm font-semibold'
-    const boxBaseClasses = `
-      flex items-center
-      ${hasChildren ? 'px-2' : 'px-1'}
-      py-1 rounded
-    `
-    const darkTextClasses = `
-      text-neutral-700
-      disabled:text-neutral-300
-      hover:enabled:text-neutral-900
-      active:enabled:text-neutral-900
-    `
-    const lightTextClasses = 'text-white'
-    const shadowClasses = 'shadow'
+
+    const boxBaseClasses = classNames(
+      'flex items-center',
+      matchBool(hasChildren, 'px-3', 'px-2'),
+      'py-2 rounded',
+    )
+
+    const darkTextClasses = classNames(
+      'text-neutral-700',
+      'disabled:text-black/30',
+      'hover:enabled:text-neutral-900',
+      'active:enabled:text-neutral-900',
+    )
+
+    const lightTextClasses = 'text-white disabled:text-white/40'
+    const shadowClasses = ''
 
     switch (buttonType) {
       default:
@@ -57,7 +63,10 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           boxBaseClasses,
           darkTextClasses,
           shadowClasses,
-          'bg-neutral-50 hover:enabled:bg-neutral-100 active:enabled:bg-neutral-300',
+          'border border-transparent',
+          'bg-neutral-500/20',
+          'hover:enabled:bg-neutral-500/30',
+          'active:enabled:bg-neutral-500/40',
         )
 
       case 'primary':
@@ -66,7 +75,8 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           fontBaseClasses,
           lightTextClasses,
           shadowClasses,
-          'bg-brand-600 hover:enabled:bg-brand-700 active:enabled:bg-brand-800',
+          'border border-transparent',
+          'bg-brand-700 hover:enabled:bg-brand-600 active:enabled:bg-brand-500',
         )
 
       case 'delete':
@@ -75,7 +85,9 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           fontBaseClasses,
           lightTextClasses,
           shadowClasses,
-          'bg-danger-800 hover:enabled:bg-danger-700 active:enabled:bg-danger-600',
+          'border border-transparent',
+          'bg-danger-800',
+          'hover:enabled:bg-danger-700 active:enabled:bg-danger-600',
         )
 
       case 'flat':
@@ -133,13 +145,15 @@ export const Button: FC<PropsWithChildren<Props>> = ({
   }, [buttonType, hasChildren])
 
   return (
-    <button className={buttonClasses} {...buttonProps}>
-      {icon !== undefined ? (
-        <div className={iconContainerClasses}>
-          <Heroicon icon={icon} />
-        </div>
-      ) : null}
-      {children}
-    </button>
+    <div className={classNames(className)}>
+      <button className={buttonClasses} {...buttonProps}>
+        {icon !== undefined ? (
+          <div className={iconContainerClasses}>
+            <Heroicon icon={icon} />
+          </div>
+        ) : null}
+        {children}
+      </button>
+    </div>
   )
 }

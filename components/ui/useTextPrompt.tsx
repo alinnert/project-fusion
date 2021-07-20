@@ -4,40 +4,58 @@ import React, { ReactElement, useCallback, useMemo, useState } from 'react'
 import { Button } from './Button'
 import { Input } from './Input'
 
-interface UseRenameDialogOptions {
-  onRename: (value: string) => void
+interface OpenDialogOptions {
+  title: string
+  inputLabel: string
+  primaryButtonLabel?: string
+  value: string
 }
 
-interface UseRenameDialogResult {
-  renameDialog: ReactElement
-  openRenameDialog: (value: string) => void
+interface Options {
+  primaryButtonLabel?: string
+  onConfirm: (value: string) => void
 }
 
-export function useRenameDialog({
-  onRename,
-}: UseRenameDialogOptions): UseRenameDialogResult {
+interface Result {
+  dialog: ReactElement
+  openDialog: (options: OpenDialogOptions) => void
+}
+
+const primaryButtonDefaultLabel = 'OK'
+
+export function useTextPrompt({ onConfirm }: Options): Result {
+  const [title, setTitle] = useState('')
+  const [inputLabel, setInputLabel] = useState('')
+  const [primaryButtonLabel, setPrimaryButtonLabel] = useState(
+    primaryButtonDefaultLabel,
+  )
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [originalValue, setOriginalValue] = useState('')
-  const [value, setValue] = useState(originalValue)
+  const [value, setValue] = useState('')
 
-  function openRenameDialog(value: string): void {
-    setOriginalValue(value)
+  function openDialog({
+    title,
+    inputLabel,
+    value,
+    primaryButtonLabel,
+  }: OpenDialogOptions): void {
+    setTitle(title)
+    setInputLabel(inputLabel)
     setValue(value)
+    setPrimaryButtonLabel(primaryButtonLabel ?? primaryButtonDefaultLabel)
     setIsModalOpen(true)
   }
 
   function handleClose() {
     setIsModalOpen(false)
-    setOriginalValue('')
     setValue('')
   }
 
-  const handleRename = useCallback(() => {
-    onRename(value)
+  const handleConfirm = useCallback(() => {
+    onConfirm(value)
     setIsModalOpen(false)
-  }, [onRename, value])
+  }, [onConfirm, value])
 
-  const renameDialog = useMemo(() => {
+  const dialog = useMemo(() => {
     return (
       <Dialog
         className={classNames(
@@ -48,7 +66,11 @@ export function useRenameDialog({
         onClose={handleClose}
       >
         <Dialog.Overlay
-          className={classNames('fixed inset-0 z-40', 'bg-black/50')}
+          className={classNames(
+            'fixed inset-0 z-40',
+            'bg-white/80',
+            'backdrop-blur-sm',
+          )}
         />
 
         <div
@@ -56,6 +78,7 @@ export function useRenameDialog({
             'relative z-50',
             'grid grid-cols-1 grid-rows-[auto,auto]',
             'min-w-[400px]',
+            'border border-neutral-200',
             'bg-white rounded-lg shadow-2xl',
           )}
         >
@@ -63,11 +86,11 @@ export function useRenameDialog({
             <Dialog.Title
               className={classNames('mb-4', 'text-lg font-semibold')}
             >
-              &quot;{originalValue}&quot; umbenennen in:
+              {title}
             </Dialog.Title>
 
             <div>
-              <Input value={value} onChange={setValue} />
+              <Input value={value} label={inputLabel} onChange={setValue} />
             </div>
           </div>
 
@@ -79,15 +102,15 @@ export function useRenameDialog({
               'border-t border-neutral-200',
             )}
           >
-            <Button buttonType="primary" onClick={handleRename}>
-              Umbenennen
+            <Button buttonType="primary" onClick={handleConfirm}>
+              {primaryButtonLabel}
             </Button>
             <Button onClick={handleClose}>Abbrechen</Button>
           </div>
         </div>
       </Dialog>
     )
-  }, [handleRename, isModalOpen, originalValue, value])
+  }, [handleConfirm, inputLabel, isModalOpen, primaryButtonLabel, title, value])
 
-  return { renameDialog, openRenameDialog }
+  return { dialog, openDialog }
 }

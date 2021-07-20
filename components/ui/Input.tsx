@@ -2,20 +2,25 @@ import classNames from 'classnames'
 import { ChangeEvent, FC, InputHTMLAttributes, useMemo } from 'react'
 
 interface Props
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
+  extends Omit<
+    InputHTMLAttributes<HTMLInputElement>,
+    'onChange' | 'className'
+  > {
   inputType?: 'default' | 'header'
   label?: string
+  className?: string
   onChange?: (value: string, event: ChangeEvent<HTMLInputElement>) => void
 }
 
 export const Input: FC<Props> = ({
   inputType = 'default',
   label,
+  className,
   onChange,
   ...inputProps
 }) => {
   const inputClasses = useMemo(() => {
-    const boxClasses = 'w-60 px-2 py-1 rounded'
+    const boxClasses = 'w-60 p-2 rounded box-border'
     const textClasses = 'text-sm'
 
     switch (inputType) {
@@ -40,16 +45,17 @@ export const Input: FC<Props> = ({
   }, [inputType])
 
   return (
-    <div>
-      <label className="flex flex-col">
-        <span className="font-semibold text-sm">{label}</span>
-        <input
-          className={inputClasses}
-          type="text"
-          onChange={(event) => onChange?.(event.target.value, event)}
-          {...inputProps}
-        />
-      </label>
-    </div>
+    <label className={classNames('flex flex-col', className)}>
+      {label !== undefined ? (
+        <span className="font-semibold text-sm mb-1">{label}</span>
+      ) : null}
+
+      <input
+        className={inputClasses}
+        type="text"
+        onChange={(event) => onChange?.(event.target.value, event)}
+        {...inputProps}
+      />
+    </label>
   )
 }
