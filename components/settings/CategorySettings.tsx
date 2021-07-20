@@ -1,7 +1,12 @@
-import { TrashIcon } from '@heroicons/react/solid'
+import { PencilIcon, TrashIcon } from '@heroicons/react/solid'
 import React, { FC, useState } from 'react'
 import { useAppDispatch } from '../../redux'
-import { addCategory, Category, removeCategory } from '../../redux/categories'
+import {
+  addCategory,
+  Category,
+  removeCategory,
+  updateCategory,
+} from '../../redux/categories'
 import { swapCategories } from '../../redux/settings'
 import { createId } from '../../tools/customNanoId'
 import { useOrderedCategories } from '../categories/useOrderedCategories'
@@ -9,6 +14,7 @@ import { Button } from '../ui/Button'
 import { Input } from '../ui/Input'
 import { PageContent } from '../ui/PageContent'
 import { SortableList, SwapDirection } from '../ui/SortableList'
+import { useRenameDialog } from '../ui/useRenameDialog'
 
 interface Props {}
 
@@ -17,6 +23,12 @@ export const CategorySettings: FC<Props> = ({}) => {
   const [selectedId, setSelectedId] = useState<Category['id'] | null>(null)
   const dispatch = useAppDispatch()
   const { categories, orderedCategoryIds } = useOrderedCategories()
+  const { renameDialog, openRenameDialog } = useRenameDialog({
+    onRename(name) {
+      if (selectedId === null) return
+      dispatch(updateCategory({ id: selectedId, changes: { name } }))
+    },
+  })
 
   function handleSwap(categoryId: string, direction: SwapDirection): void {
     dispatch(swapCategories({ categoryId, direction }))
@@ -42,8 +54,17 @@ export const CategorySettings: FC<Props> = ({}) => {
     setSelectedId(newSelectedId)
   }
 
+  function handleRename() {
+    if (selectedId === null) return
+    const category = categories[selectedId]
+    if (category === undefined) return
+    openRenameDialog(category.name)
+  }
+
   return (
     <PageContent title="Kategorien">
+      {renameDialog}
+
       <div className="mb-4">
         <p>
           Hier können alle Kategorien konfiguriert werden. Mit Kategorien lassen
@@ -75,6 +96,15 @@ export const CategorySettings: FC<Props> = ({}) => {
             onSwap={handleSwap}
             additionalButtons={
               <div className="flex gap-x-1">
+                <Button
+                  disabled={selectedId === null}
+                  buttonType="default"
+                  icon={<PencilIcon />}
+                  onClick={handleRename}
+                >
+                  Umbenennen
+                </Button>
+
                 <Button
                   disabled={selectedId === null}
                   buttonType="delete"
