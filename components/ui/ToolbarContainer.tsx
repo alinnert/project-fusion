@@ -32,7 +32,7 @@ export const ToolbarContainer: FC<PropsWithChildren<Props>> = ({
   return (
     <div className="grid grid-rows-[auto,1fr] h-full overflow-hidden">
       {toolbarItems.length > 0 ? (
-        <div className="bg-neutral-200 p-2 flex gap-x-2">
+        <div className="bg-neutral-50 border-b border-neutral-300 p-2 flex gap-x-2">
           {toolbarItems.map((item, index) =>
             item.type === 'button' ? (
               <Button

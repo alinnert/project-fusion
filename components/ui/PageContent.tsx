@@ -15,7 +15,7 @@ export const PageContent: FC<PropsWithChildren<Props>> = ({
   titleIconColor,
 }) => {
   return (
-    <div className="p-4 w-full max-w-[600px] overflow-y-auto">
+    <div className="p-4 w-full h-full overflow-y-auto">
       <div className="font-semibold text-3xl mb-6 flex items-center">
         {titleIcon !== undefined ? (
           <div className={classNames('flex-0 mr-4')}>

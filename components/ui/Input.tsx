@@ -1,5 +1,6 @@
 import classNames from 'classnames'
-import { ChangeEvent, FC, InputHTMLAttributes, useMemo } from 'react'
+import React, { ChangeEvent, FC, InputHTMLAttributes, useMemo } from 'react'
+import { FormItem } from './FormItem'
 
 interface Props
   extends Omit<
@@ -45,17 +46,13 @@ export const Input: FC<Props> = ({
   }, [inputType])
 
   return (
-    <label className={classNames('flex flex-col', className)}>
-      {label !== undefined ? (
-        <span className="font-semibold text-sm mb-1">{label}</span>
-      ) : null}
-
+    <FormItem label={label} className={className}>
       <input
         className={inputClasses}
         type="text"
         onChange={(event) => onChange?.(event.target.value, event)}
         {...inputProps}
       />
-    </label>
+    </FormItem>
   )
 }

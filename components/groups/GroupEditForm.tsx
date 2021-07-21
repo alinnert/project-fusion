@@ -1,6 +1,6 @@
 import { FolderAddIcon, FolderIcon, SaveIcon } from '@heroicons/react/solid'
 import router from 'next/router'
-import React, { ChangeEvent, FC, FormEvent, useMemo, useState } from 'react'
+import React, { FC, FormEvent, useMemo, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux'
 import { addGroupToCategory, Category } from '../../redux/categories'
 import { selectIsFileOpen } from '../../redux/database'
@@ -9,8 +9,12 @@ import { createId } from '../../tools/customNanoId'
 import { Layout } from '../app/Layout'
 import { useCategoryFromGroup } from '../categories/useCategoryFromGroup'
 import { useOrderedCategories } from '../categories/useOrderedCategories'
+import { ColorInput } from '../ui/ColorInput'
+import { Form } from '../ui/Form'
 import { Input } from '../ui/Input'
 import { PageContent } from '../ui/PageContent'
+import { Select } from '../ui/Select'
+import { Textarea } from '../ui/Textarea'
 import { ToolbarContainer } from '../ui/ToolbarContainer'
 import { GroupList } from './GroupList'
 
@@ -22,7 +26,6 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
   const dispatch = useAppDispatch()
   const isFileOpen = useAppSelector(selectIsFileOpen)
   const { orderedCategories } = useOrderedCategories()
-
   const { categoryId: categoryIdFromGroup } = useCategoryFromGroup(init)
 
   const [groupName, setGroupName] = useState(init?.name ?? '')
@@ -30,17 +33,34 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
   const [categoryId, setCategoryId] = useState<Category['id'] | null>(
     categoryIdFromGroup,
   )
+  const [notes, setNotes] = useState(init?.notes ?? '')
 
-  const isEditForm = useMemo(() => {
-    return init !== null
-  }, [init])
+  const isValid = useMemo<boolean>(() => {
+    if (groupName.trim() === '') return false
+    if (!color.match(/^#[0-9a-fA-F]{3,6}$/)) return false
+    return true
+  }, [color, groupName])
 
-  function saveGroup() {
+  const isEditForm = useMemo(() => init !== null, [init])
+
+  const categorySelectItems = useMemo(() => {
+    return orderedCategories.map((category) => ({
+      value: category.id,
+      label: category.name,
+    }))
+  }, [orderedCategories])
+
+  const pageTitle = useMemo(() => {
+    const name = groupName !== '' ? groupName : '[kein Name]'
+    return isEditForm ? `${name} (bearbeiten)` : `${name} (anlegen)`
+  }, [groupName, isEditForm])
+
+  function createGroup() {
     const newGroup: ProjectGroup = {
       id: createId(),
       name: groupName,
       color,
-      notes: '',
+      notes,
       projects: [],
     }
 
@@ -62,7 +82,7 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
       id: init.id,
       name: groupName,
       color,
-      notes: '',
+      notes,
       projects: init.projects,
     }
 
@@ -71,17 +91,18 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
     router.push(`/groups/${updatedGroup.id}`)
   }
 
-  function handleColorChange(event: ChangeEvent<HTMLInputElement>) {
-    setColor(event.target.value)
-  }
-
-  function handleCategoryChange(event: ChangeEvent<HTMLSelectElement>) {
-    setCategoryId(event.target.value)
-  }
-
   function handleSubmit(event: FormEvent) {
     event.preventDefault()
-    isEditForm ? editGroup() : saveGroup()
+    isEditForm ? editGroup() : createGroup()
+  }
+
+  function handleCancel() {
+    if (init !== null) {
+      router.push(`/groups/${init.id}`)
+      return
+    }
+
+    router.push(`/`)
   }
 
   return (
@@ -93,50 +114,42 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
             buttonType: 'primary',
             label: 'Speichern',
             icon: <SaveIcon />,
-            action: isEditForm ? editGroup : saveGroup,
+            action: isEditForm ? editGroup : createGroup,
+          },
+          {
+            type: 'button',
+            buttonType: 'default',
+            label: 'Abbrechen',
+            action: handleCancel,
           },
         ]}
       >
         <PageContent
-          title={isEditForm ? 'Gruppe bearbeiten' : 'Neue Gruppe erstellen'}
+          title={pageTitle}
           titleIcon={isEditForm ? <FolderIcon /> : <FolderAddIcon />}
           titleIconColor={color}
         >
-          <form onSubmit={handleSubmit} className="w-96 flex flex-col gap-y-4">
+          <Form onSubmit={handleSubmit}>
             <Input
               label="Gruppenname"
               onChange={setGroupName}
               value={groupName}
             />
 
-            <div className="flex flex-col">
-              <label htmlFor="color">Farbe</label>
-              <input
-                type="color"
-                id="color"
-                onChange={handleColorChange}
-                value={color}
-              />
-            </div>
+            <ColorInput label="Farbe" value={color} onChange={setColor} />
 
-            <div className="flex flex-col">
-              <label htmlFor="cat">Kategorie</label>
-              <select
-                onChange={handleCategoryChange}
-                id="cat"
-                value={categoryId ?? ''}
-              >
-                <option value="">[ Unsortiert ]</option>
-                {orderedCategories.map((category) =>
-                  category !== undefined ? (
-                    <option key={category.id} value={category.id}>
-                      {category.name}
-                    </option>
-                  ) : null,
-                )}
-              </select>
-            </div>
-          </form>
+            <Select
+              items={[
+                { value: '', label: '[ ohne Kategorie ]' },
+                ...categorySelectItems,
+              ]}
+              label="Kategorie"
+              value={categoryId}
+              onChange={setCategoryId}
+            />
+
+            <Textarea value={notes} onChange={setNotes} />
+          </Form>
         </PageContent>
       </ToolbarContainer>
     </Layout>

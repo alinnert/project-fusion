@@ -5,7 +5,7 @@ import {
   FC,
   PropsWithChildren,
   ReactElement,
-  useMemo
+  useMemo,
 } from 'react'
 import { matchBool } from '../../tools/match'
 import { Heroicon } from './Heroicon'
@@ -152,7 +152,13 @@ export const Button: FC<PropsWithChildren<Props>> = ({
             <Heroicon icon={icon} />
           </div>
         ) : null}
-        {children}
+        <div
+          className={classNames(
+            matchBool(icon !== undefined && hasChildren, 'mr-1'),
+          )}
+        >
+          {children}
+        </div>
       </button>
     </div>
   )
