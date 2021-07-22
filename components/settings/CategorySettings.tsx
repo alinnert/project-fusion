@@ -15,7 +15,7 @@ import { Headline } from '../ui/Headline'
 import { Input } from '../ui/Input'
 import { PageContent } from '../ui/PageContent'
 import { SortableList, SwapDirection } from '../ui/SortableList'
-import { useTextPrompt } from '../ui/useTextPrompt'
+import { useTextDialog } from '../ui/useTextDialog'
 
 interface Props {}
 
@@ -24,14 +24,14 @@ export const CategorySettings: FC<Props> = ({}) => {
   const dispatch = useAppDispatch()
   const { categories, orderedCategoryIds } = useOrderedCategories()
 
-  const { dialog: addDialog, openDialog: openAddDialog } = useTextPrompt({
+  const { dialog: addDialog, openDialog: openAddDialog } = useTextDialog({
     onConfirm(name) {
       if (name.trim() === '') return
       dispatch(addCategory({ id: createId(), name, groups: [] }))
     },
   })
 
-  const { dialog: renameDialog, openDialog: openRenameDialog } = useTextPrompt({
+  const { dialog: renameDialog, openDialog: openRenameDialog } = useTextDialog({
     onConfirm(name) {
       if (selectedId === null) return
       dispatch(updateCategory({ id: selectedId, changes: { name } }))
