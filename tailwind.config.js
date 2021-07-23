@@ -21,6 +21,7 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
     plugin(({ addVariant, e }) => {
       addVariant('enabled', ({ modifySelectors, separator }) => {
         modifySelectors(

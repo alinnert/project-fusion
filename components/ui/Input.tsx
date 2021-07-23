@@ -39,7 +39,9 @@ export const Input: FC<Props> = ({
           boxClasses,
           textClasses,
           'bg-white/40 hover:bg-white/50 focus:bg-white',
-          'placeholder-white/80 hover:placeholder-white focus:placeholder-black/50',
+          'placeholder-white/80',
+          'hover:placeholder-white focus:placeholder-black/50',
+          'border-none',
           'text-white focus:text-black',
         )
     }

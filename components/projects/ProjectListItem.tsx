@@ -6,12 +6,13 @@ import {
   InboxIcon,
   PencilIcon,
   StarIcon,
-  TrashIcon
+  TrashIcon,
 } from '@heroicons/react/solid'
 import classNames from 'classnames'
 import marked from 'marked'
-import React, { FC, useMemo } from 'react'
-import { Project } from '../../redux/projects'
+import React, { FC, useCallback, useMemo } from 'react'
+import { useAppDispatch } from '../../redux'
+import { Project, removeProject, updateProject } from '../../redux/projects'
 import { matchBool } from '../../tools/match'
 import { DropdownMenu, MenuItem } from '../ui/DropdownMenu'
 
@@ -25,6 +26,32 @@ export const ProjectListItem: FC<Props> = ({
   archived,
   notes,
 }) => {
+  const dispatch = useAppDispatch()
+
+  const handleAddToFavorites = useCallback(() => {
+    dispatch(updateProject({ id, changes: { important: true } }))
+  }, [dispatch, id])
+
+  const handleRemoveFromFavorites = useCallback(() => {
+    dispatch(updateProject({ id, changes: { important: false } }))
+  }, [dispatch, id])
+
+  const handleAddToArchive = useCallback(() => {
+    dispatch(updateProject({ id, changes: { archived: true } }))
+  }, [dispatch, id])
+
+  const handleRestoreFromArchive = useCallback(() => {
+    dispatch(updateProject({ id, changes: { archived: false } }))
+  }, [dispatch, id])
+
+  const handleDuplicate = useCallback(() => {
+    console.warn('not yet implemented')
+  }, [])
+
+  const handleDelete = useCallback(() => {
+    dispatch(removeProject(id))
+  }, [dispatch, id])
+
   const menuItems = useMemo<Array<MenuItem>>(() => {
     const items: Array<MenuItem> = [
       { label: 'Bearbeiten', icon: <PencilIcon /> },
@@ -33,20 +60,46 @@ export const ProjectListItem: FC<Props> = ({
         ? {
             label: 'Aus Favoriten entfernen',
             icon: <ChevronDoubleDownIcon />,
+            action: handleRemoveFromFavorites,
           }
-        : { label: 'Zu Favoriten', icon: <StarIcon /> },
+        : {
+            label: 'Zu Favoriten',
+            icon: <StarIcon />,
+            action: handleAddToFavorites,
+          },
 
       archived
-        ? { label: 'In aktive Projekte verschieben', icon: <InboxIcon /> }
-        : { label: 'Archivieren', icon: <ArchiveIcon /> },
+        ? {
+            label: 'Zu aktive Projekte',
+            icon: <InboxIcon />,
+            action: handleRestoreFromArchive,
+          }
+        : {
+            label: 'Archivieren',
+            icon: <ArchiveIcon />,
+            action: handleAddToArchive,
+          },
 
-      { label: 'Duplizieren', icon: <DocumentDuplicateIcon /> },
+      {
+        label: 'Duplizieren',
+        icon: <DocumentDuplicateIcon />,
+        action: handleDuplicate,
+      },
 
-      { label: 'Löschen', icon: <TrashIcon /> },
+      { label: 'Löschen', icon: <TrashIcon />, action: handleDelete },
     ]
 
     return items
-  }, [archived, important])
+  }, [
+    archived,
+    handleAddToArchive,
+    handleAddToFavorites,
+    handleDelete,
+    handleDuplicate,
+    handleRemoveFromFavorites,
+    handleRestoreFromArchive,
+    important,
+  ])
 
   const textClasses = useMemo(() => {
     return classNames(
@@ -112,7 +165,7 @@ export const ProjectListItem: FC<Props> = ({
         <div
           className="prose prose-brand select-text text-base mt-2"
           dangerouslySetInnerHTML={{ __html: parsedNotes }}
-        ></div>
+        />
       ) : null}
     </div>
   )
