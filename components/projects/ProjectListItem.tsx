@@ -28,6 +28,10 @@ export const ProjectListItem: FC<Props> = ({
 }) => {
   const dispatch = useAppDispatch()
 
+  const handleEdit = useCallback(() => {
+    console.warn('not yet implemented')
+  }, [])
+
   const handleAddToFavorites = useCallback(() => {
     dispatch(updateProject({ id, changes: { important: true } }))
   }, [dispatch, id])
@@ -54,7 +58,7 @@ export const ProjectListItem: FC<Props> = ({
 
   const menuItems = useMemo<Array<MenuItem>>(() => {
     const items: Array<MenuItem> = [
-      { label: 'Bearbeiten', icon: <PencilIcon /> },
+      { label: 'Bearbeiten', icon: <PencilIcon />, action: handleEdit },
 
       important
         ? {
@@ -96,6 +100,7 @@ export const ProjectListItem: FC<Props> = ({
     handleAddToFavorites,
     handleDelete,
     handleDuplicate,
+    handleEdit,
     handleRemoveFromFavorites,
     handleRestoreFromArchive,
     important,
