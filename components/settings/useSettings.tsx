@@ -1,7 +1,7 @@
 import { LinkIcon, TagIcon } from '@heroicons/react/solid'
 import { useMemo } from 'react'
 import colors from 'tailwindcss/colors'
-import { CategorizedLinkItems, LinkItem } from '../ui/VerticalLinkList'
+import { CategorizedLinkItems } from '../ui/VerticalLinkList'
 
 export function useSettings() {
   const databaseSettings = useMemo(() => {
@@ -14,7 +14,7 @@ export function useSettings() {
       },
       links: {
         id: 'links',
-        name: 'URLs',
+        name: 'Links',
         icon: <LinkIcon />,
         iconColor: colors.sky[700],
       },

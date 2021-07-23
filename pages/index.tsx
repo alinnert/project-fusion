@@ -6,6 +6,8 @@ import { EmptyText } from '../components/ui/EmptyText'
 import { Layout } from '../components/app/Layout'
 import { useAppSelector } from '../redux'
 import { selectIsFileOpen } from '../redux/database'
+import Head from 'next/head'
+import { getPageTitle } from '../tools/getPageTitle'
 
 export default function Home(): ReactElement | null {
   const router = useRouter()
@@ -18,18 +20,24 @@ export default function Home(): ReactElement | null {
   }, [filename, router])
 
   return (
-    <Layout left={isFileOpen ? <GroupList /> : null}>
-      {isFileOpen ? (
-        <EmptyText>Bitte wähle links eine Gruppe aus.</EmptyText>
-      ) : (
-        <EmptyText
-          title="Willkommen bei ProjectFusion!"
-          icon={<SparklesIcon />}
-        >
-          Erstelle eine neue Datenbank oder öffne eine vorhandene über das
-          &quot;Datenbank&quot;-Menü oben links.
-        </EmptyText>
-      )}
-    </Layout>
+    <>
+      <Head>
+        <title>{getPageTitle()}</title>
+      </Head>
+
+      <Layout left={isFileOpen ? <GroupList /> : null}>
+        {isFileOpen ? (
+          <EmptyText>Bitte wähle links eine Gruppe aus.</EmptyText>
+        ) : (
+          <EmptyText
+            title="Willkommen bei ProjectFusion!"
+            icon={<SparklesIcon />}
+          >
+            Erstelle eine neue Datenbank oder öffne eine vorhandene über das
+            &quot;Datenbank&quot;-Menü oben links.
+          </EmptyText>
+        )}
+      </Layout>
+    </>
   )
 }

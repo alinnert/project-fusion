@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import React, { ReactElement } from 'react'
 import { Layout } from '../../../components/app/Layout'
 import { GroupDetailView } from '../../../components/groups/GroupDetailView'
@@ -7,6 +8,7 @@ import { ProjectList } from '../../../components/projects/ProjectList'
 import { useProjectsFromGroup } from '../../../components/projects/useProjectsFromGroup'
 import { useAppSelector } from '../../../redux'
 import { selectIsFileOpen } from '../../../redux/database'
+import { getPageTitle } from '../../../tools/getPageTitle'
 
 export default function GroupById(): ReactElement | null {
   const isFileOpen = useAppSelector(selectIsFileOpen)
@@ -14,11 +16,17 @@ export default function GroupById(): ReactElement | null {
   const groupProjects = useProjectsFromGroup(group)
 
   return (
-    <Layout
-      left={isFileOpen ? <GroupList /> : null}
-      right={<ProjectList projects={groupProjects} />}
-    >
-      {isFileOpen ? <GroupDetailView /> : null}
-    </Layout>
+    <>
+      <Head>
+        <title>{getPageTitle(`${group?.name ?? '---'}`)}</title>
+      </Head>
+
+      <Layout
+        left={isFileOpen ? <GroupList /> : null}
+        right={<ProjectList projects={groupProjects} />}
+      >
+        {isFileOpen ? <GroupDetailView /> : null}
+      </Layout>
+    </>
   )
 }
