@@ -15,6 +15,7 @@ import { useAppDispatch } from '../../redux'
 import { Project, removeProject, updateProject } from '../../redux/projects'
 import { matchBool } from '../../tools/match'
 import { DropdownMenu, MenuItem } from '../ui/DropdownMenu'
+import { useConfirmDialog } from '../ui/useConfirmDialog'
 
 interface Props extends Project {}
 
@@ -27,6 +28,12 @@ export const ProjectListItem: FC<Props> = ({
   notes,
 }) => {
   const dispatch = useAppDispatch()
+  const { dialog: confirmDeleteDialog, openDialog: openConfirmDeleteDialog } =
+    useConfirmDialog({
+      onConfirm() {
+        dispatch(removeProject(id))
+      },
+    })
 
   const handleEdit = useCallback(() => {
     console.warn('not yet implemented')
@@ -53,8 +60,13 @@ export const ProjectListItem: FC<Props> = ({
   }, [])
 
   const handleDelete = useCallback(() => {
-    dispatch(removeProject(id))
-  }, [dispatch, id])
+    openConfirmDeleteDialog({
+      title: 'Projekt löschen?',
+      message: `Soll das Projekt "${name}" gelöscht werden?`,
+      confirmButtonLabel: 'Löschen',
+      confirmButtonType: 'delete',
+    })
+  }, [name, openConfirmDeleteDialog])
 
   const menuItems = useMemo<Array<MenuItem>>(() => {
     const items: Array<MenuItem> = [
@@ -131,47 +143,51 @@ export const ProjectListItem: FC<Props> = ({
   }, [notes])
 
   return (
-    <div
-      key={id}
-      className={classNames(
-        'px-4 py-2 mb-2 last:mb-0',
-        'rounded-md shadow',
-        matchBool(
-          important,
-          matchBool(archived, 'bg-amber-100/40', 'bg-amber-100'),
-          matchBool(archived, 'bg-neutral-100/40', 'bg-neutral-100'),
-        ),
-      )}
-    >
+    <>
+      {confirmDeleteDialog}
+
       <div
+        key={id}
         className={classNames(
-          'flex',
-          'text-lg',
-          matchBool(important, 'font-semibold text-amber-800'),
+          'px-4 py-2 mb-2 last:mb-0',
+          'rounded-md shadow',
+          matchBool(
+            important,
+            matchBool(archived, 'bg-amber-100/40', 'bg-amber-100'),
+            matchBool(archived, 'bg-neutral-100/40', 'bg-neutral-100'),
+          ),
         )}
       >
-        <div className={classNames('flex-1 pr-4', textClasses)}>{name}</div>
-
-        {projectNumber !== undefined ? (
-          <div className={textClasses}>{projectNumber}</div>
-        ) : null}
-
-        <div className="ml-2">
-          <DropdownMenu
-            buttonType="flat"
-            items={menuItems}
-            icon={<DotsHorizontalIcon />}
-            align="right"
-          />
-        </div>
-      </div>
-
-      {notes.trim() !== '' ? (
         <div
-          className="prose prose-brand select-text text-base mt-2"
-          dangerouslySetInnerHTML={{ __html: parsedNotes }}
-        />
-      ) : null}
-    </div>
+          className={classNames(
+            'flex',
+            'text-lg',
+            matchBool(important, 'font-semibold text-amber-800'),
+          )}
+        >
+          <div className={classNames('flex-1 pr-4', textClasses)}>{name}</div>
+
+          {projectNumber !== undefined ? (
+            <div className={textClasses}>{projectNumber}</div>
+          ) : null}
+
+          <div className="ml-2">
+            <DropdownMenu
+              buttonType="flat"
+              items={menuItems}
+              icon={<DotsHorizontalIcon />}
+              align="right"
+            />
+          </div>
+        </div>
+
+        {notes.trim() !== '' ? (
+          <div
+            className="prose prose-brand select-text text-base mt-2"
+            dangerouslySetInnerHTML={{ __html: parsedNotes }}
+          />
+        ) : null}
+      </div>
+    </>
   )
 }
