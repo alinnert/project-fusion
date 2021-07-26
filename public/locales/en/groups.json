@@ -1,0 +1,33 @@
+{
+  "terms": {
+    "group": "group",
+    "favorites": "favorites"
+  },
+  "list": {
+    "noCategory": "Without category",
+    "specialItems": {
+      "favorites": "Favorites"
+    }
+  },
+  "editForm": {
+    "create": {
+      "pageTitle": "Create group",
+      "titleHint": "(create)"
+    },
+    "edit": {
+      "pageTitle": "Edit group",
+      "titleHint": "(edit)"
+    },
+    "labels": {
+      "name": "Group name",
+      "color": "Color",
+      "category": "Category",
+      "notes": "Notes (supports Markdown)"
+    }
+  },
+  "deleteDialog": {
+    "title": "Delete group?",
+    "message": "Do you want to delete the group \"{{group}}\"?",
+    "confirmButton": "Delete group"
+  }
+}

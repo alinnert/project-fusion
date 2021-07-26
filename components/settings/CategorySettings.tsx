@@ -1,11 +1,12 @@
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/solid'
+import { useTranslation } from 'next-i18next'
 import React, { FC, FormEvent, useState } from 'react'
 import { useAppDispatch } from '../../redux'
 import {
   addCategory,
   Category,
   removeCategory,
-  updateCategory
+  updateCategory,
 } from '../../redux/categories'
 import { swapCategories } from '../../redux/settings'
 import { createId } from '../../utils/customNanoId'
@@ -20,6 +21,7 @@ import { useTextDialog } from '../ui/useTextDialog'
 interface Props {}
 
 export const CategorySettings: FC<Props> = ({}) => {
+  const { t } = useTranslation()
   const [selectedId, setSelectedId] = useState<Category['id'] | null>(null)
   const dispatch = useAppDispatch()
   const { categories, orderedCategoryIds } = useOrderedCategories()
@@ -44,10 +46,10 @@ export const CategorySettings: FC<Props> = ({}) => {
 
   function handleAdd2() {
     openAddDialog({
-      title: 'Neue Kategorie anlegen',
-      inputLabel: 'Name',
+      title: t('settings:categories.createDialog.title'),
+      inputLabel: t('settings:categories.createDialog.inputLabel'),
       value: '',
-      primaryButtonLabel: 'Anlegen',
+      primaryButtonLabel: t('buttons.create'),
     })
   }
 
@@ -72,27 +74,26 @@ export const CategorySettings: FC<Props> = ({}) => {
     if (category === undefined) return
 
     openRenameDialog({
-      title: `"${category.name}" umbenennen`,
-      inputLabel: 'Neuer Name',
-      primaryButtonLabel: 'Umbenennen',
+      title: t('settings:categories.renameDialog.title', {
+        category: category.name,
+      }),
+      inputLabel: t('settings:categories.renameDialog.inputLabel'),
+      primaryButtonLabel: t('buttons.rename'),
       value: category.name,
     })
   }
 
   return (
-    <PageContent title="Kategorien">
+    <PageContent title={t('settings:categories.title')}>
       {addDialog}
       {renameDialog}
 
       <div className="mb-4">
-        <p>
-          Hier können alle Kategorien konfiguriert werden. Mit Kategorien lassen
-          sich Projektgruppen kategorisieren.
-        </p>
+        <p>{t('settings:categories.description')}</p>
       </div>
 
       <div>
-        <Headline>Kategorien verwalten</Headline>
+        <Headline>{t('settings:categories.manageCategories')}</Headline>
 
         <div className="flex flex-col">
           <SortableList
@@ -107,7 +108,7 @@ export const CategorySettings: FC<Props> = ({}) => {
                   icon={<PlusIcon />}
                   onClick={handleAdd2}
                 >
-                  Neu
+                  {t('buttons.new')}
                 </Button>
 
                 <Button
@@ -116,7 +117,7 @@ export const CategorySettings: FC<Props> = ({}) => {
                   icon={<PencilIcon />}
                   onClick={handleRename}
                 >
-                  Umbenennen
+                  {t('buttons.rename')}
                 </Button>
 
                 <Button
@@ -125,7 +126,7 @@ export const CategorySettings: FC<Props> = ({}) => {
                   icon={<TrashIcon />}
                   onClick={handleDelete}
                 >
-                  Löschen
+                  {t('buttons.delete')}
                 </Button>
               </>
             }

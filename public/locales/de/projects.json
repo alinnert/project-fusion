@@ -1,0 +1,37 @@
+{
+  "terms": {
+    "project": "Projekt",
+    "project_plural": "Projekte"
+  },
+  "list": {
+    "itemGroups": {
+      "activeProjects": "Aktive Projekte",
+      "archivedProjects": "Archivierte Projekte"
+    },
+    "noProjects": {
+      "title": "Keine Projekte vorhanden",
+      "body": [
+        "Es gibt derzeit keine $t(terms.project_plural) in dieser $t(groups:terms.group).",
+        "Du kannst ein neues $t(terms.project) mit dem Button [+ $t(terms.project)] oben anlegen."
+      ]
+    }
+  },
+  "item": {
+    "actions": {
+      "addToFavorites": "Zu Favoriten",
+      "removeFromFavorites": "Aus Favoriten entfernen",
+      "archiveProject": "Archivieren",
+      "unarchiveProject": "Zu aktive Projekte"
+    }
+  },
+  "favorites": {
+    "noFavorites": {
+      "title": "Keine Favoriten vorhanden",
+      "body": "Hier erscheinen alle Projekte, die als Favorit markiert wurden."
+    }
+  },
+  "deleteDialog": {
+    "title": "Projekt löschen?",
+    "message": "Soll das Projekt \"{{project}}\" gelöscht werden?"
+  }
+}

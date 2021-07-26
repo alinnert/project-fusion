@@ -1,5 +1,6 @@
 import { CogIcon } from '@heroicons/react/outline'
 import { GetStaticProps } from 'next'
+import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import React, { ReactElement } from 'react'
 import { Layout } from '../../components/app/Layout'
@@ -14,15 +15,17 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 }
 
 export default function Config(): ReactElement | null {
+  const { t } = useTranslation()
+
   return (
     <>
       <Head>
-        <title>{getPageTitle('Einstellungen')}</title>
+        <title>{getPageTitle(t('settings:index.title'))}</title>
       </Head>
 
       <Layout left={<SettingsCategoryList currentId="" />}>
-        <EmptyText title="Einstellungen" icon={<CogIcon />}>
-          Hier kannst du Einstellungen für die aktuelle Datei ändern.
+        <EmptyText title={t('settings:index.title')} icon={<CogIcon />}>
+          {t('settings:index.body')}
         </EmptyText>
       </Layout>
     </>

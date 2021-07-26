@@ -1,0 +1,32 @@
+{
+  "navigation": {
+    "database": {
+      "label": "Datenbank",
+      "items": {
+        "categories": "Kategorien",
+        "links": "Links"
+      }
+    }
+  },
+  "index": {
+    "title": "Einstellungen",
+    "body": "Hier kannst du die Einstellungen für die aktuelle Datenbank ändern."
+  },
+  "categories": {
+    "title": "Kategorien",
+    "description": "Hier können alle Kategorien konfiguriert werden. Mit Kategorien lassen sich Projektgruppen kategorisieren.",
+    "manageCategories": "Kategorien verwalten",
+    "createDialog": {
+      "title": "Neue Kategorie anlegen",
+      "inputLabel": "Name"
+    },
+    "renameDialog": {
+      "title": "\"{{category}}\" umbenennen",
+      "inputLabel": "Neuer Name"
+    }
+  },
+  "links": {
+    "title": "Links",
+    "description": "Hier ist es so leer..."
+  }
+}

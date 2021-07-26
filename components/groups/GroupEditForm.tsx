@@ -1,4 +1,10 @@
-import { FolderAddIcon, FolderIcon, SaveIcon } from '@heroicons/react/solid'
+import {
+  FolderAddIcon,
+  FolderIcon,
+  SaveIcon,
+  XIcon,
+} from '@heroicons/react/solid'
+import { useTranslation } from 'next-i18next'
 import router from 'next/router'
 import React, { FC, FormEvent, useMemo, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux'
@@ -23,6 +29,7 @@ interface Props {
 }
 
 export const GroupEditForm: FC<Props> = ({ init = null }) => {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const isFileOpen = useAppSelector(selectIsFileOpen)
   const { orderedCategories } = useOrderedCategories()
@@ -52,8 +59,10 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
 
   const pageTitle = useMemo(() => {
     const name = groupName !== '' ? groupName : '[kein Name]'
-    return isEditForm ? `${name} (bearbeiten)` : `${name} (anlegen)`
-  }, [groupName, isEditForm])
+    return isEditForm
+      ? `${name} ${t('groups:editForm.edit.titleHint')}`
+      : `${name} ${t('groups:editForm.create.titleHint')}`
+  }, [groupName, isEditForm, t])
 
   function createGroup() {
     const newGroup: ProjectGroup = {
@@ -112,14 +121,15 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
           {
             type: 'button',
             buttonType: 'primary',
-            label: 'Speichern',
+            label: t('buttons.save'),
             icon: <SaveIcon />,
             action: isEditForm ? editGroup : createGroup,
           },
           {
             type: 'button',
             buttonType: 'default',
-            label: 'Abbrechen',
+            label: t('buttons.cancel'),
+            icon: <XIcon />,
             action: handleCancel,
           },
         ]}
@@ -131,24 +141,32 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
         >
           <Form onSubmit={handleSubmit}>
             <Input
-              label="Gruppenname"
+              label={t('groups:editForm.labels.name')}
               onChange={setGroupName}
               value={groupName}
             />
 
-            <ColorInput label="Farbe" value={color} onChange={setColor} />
+            <ColorInput
+              label={t('groups:editForm.labels.color')}
+              value={color}
+              onChange={setColor}
+            />
 
             <Select
               items={[
                 { value: '', label: '[ ohne Kategorie ]' },
                 ...categorySelectItems,
               ]}
-              label="Kategorie"
+              label={t('groups:editForm.labels.category')}
               value={categoryId}
               onChange={setCategoryId}
             />
 
-            <Textarea value={notes} onChange={setNotes} />
+            <Textarea
+              label={t('groups:editForm.labels.notes')}
+              value={notes}
+              onChange={setNotes}
+            />
           </Form>
         </PageContent>
       </ToolbarContainer>

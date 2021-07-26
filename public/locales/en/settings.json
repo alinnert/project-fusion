@@ -1,0 +1,32 @@
+{
+  "navigation": {
+    "database": {
+      "label": "Database",
+      "items": {
+        "categories": "Categories",
+        "links": "Links"
+      }
+    }
+  },
+  "index": {
+    "title": "Settings",
+    "body": "Change the settings for the currently opened database."
+  },
+  "categories": {
+    "title": "Categories",
+    "description": "Here you can manage your categories. You can use categories to categorize project groups.",
+    "manageCategories": "Manage categories",
+    "createDialog": {
+      "title": "Create new category",
+      "inputLabel": "Name"
+    },
+    "renameDialog": {
+      "title": "Rename \"{{category}}\"",
+      "inputLabel": "New name"
+    }
+  },
+  "links": {
+    "title": "Links",
+    "description": "It's so empty here..."
+  }
+}

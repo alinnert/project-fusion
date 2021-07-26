@@ -10,6 +10,7 @@ import {
 } from '@heroicons/react/solid'
 import classNames from 'classnames'
 import marked from 'marked'
+import { useTranslation } from 'next-i18next'
 import React, { FC, useCallback, useMemo } from 'react'
 import { useAppDispatch } from '../../redux'
 import { Project, removeProject, updateProject } from '../../redux/projects'
@@ -27,6 +28,7 @@ export const ProjectListItem: FC<Props> = ({
   archived,
   notes,
 }) => {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const { dialog: confirmDeleteDialog, openDialog: openConfirmDeleteDialog } =
     useConfirmDialog({
@@ -61,48 +63,48 @@ export const ProjectListItem: FC<Props> = ({
 
   const handleDelete = useCallback(() => {
     openConfirmDeleteDialog({
-      title: 'Projekt löschen?',
-      message: `Soll das Projekt "${name}" gelöscht werden?`,
-      confirmButtonLabel: 'Löschen',
+      title: t('projects:deleteDialog.title'),
+      message: t('projects:deleteDialog.message', { project: name }),
+      confirmButtonLabel: t('buttons.delete'),
       confirmButtonType: 'delete',
     })
-  }, [name, openConfirmDeleteDialog])
+  }, [name, openConfirmDeleteDialog, t])
 
   const menuItems = useMemo<Array<MenuItem>>(() => {
     const items: Array<MenuItem> = [
-      { label: 'Bearbeiten', icon: <PencilIcon />, action: handleEdit },
+      { label: t('buttons.edit'), icon: <PencilIcon />, action: handleEdit },
 
       important
         ? {
-            label: 'Aus Favoriten entfernen',
+            label: t('projects:item.actions.removeFromFavorites'),
             icon: <ChevronDoubleDownIcon />,
             action: handleRemoveFromFavorites,
           }
         : {
-            label: 'Zu Favoriten',
+            label: t('projects:item.actions.addToFavorites'),
             icon: <StarIcon />,
             action: handleAddToFavorites,
           },
 
       archived
         ? {
-            label: 'Zu aktive Projekte',
+            label: t('projects:item.actions.unarchiveProject'),
             icon: <InboxIcon />,
             action: handleRestoreFromArchive,
           }
         : {
-            label: 'Archivieren',
+            label: t('projects:item.actions.archiveProject'),
             icon: <ArchiveIcon />,
             action: handleAddToArchive,
           },
 
       {
-        label: 'Duplizieren',
+        label: t('buttons.duplicate'),
         icon: <DocumentDuplicateIcon />,
         action: handleDuplicate,
       },
 
-      { label: 'Löschen', icon: <TrashIcon />, action: handleDelete },
+      { label: t('buttons.delete'), icon: <TrashIcon />, action: handleDelete },
     ]
 
     return items
@@ -116,6 +118,7 @@ export const ProjectListItem: FC<Props> = ({
     handleRemoveFromFavorites,
     handleRestoreFromArchive,
     important,
+    t,
   ])
 
   const textClasses = useMemo(() => {

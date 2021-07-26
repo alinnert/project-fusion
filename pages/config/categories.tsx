@@ -1,4 +1,5 @@
 import { GetStaticProps } from 'next'
+import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import React, { ReactElement } from 'react'
 import { Layout } from '../../components/app/Layout'
@@ -14,12 +15,17 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 }
 
 export default function Categories(): ReactElement | null {
+  const { t } = useTranslation()
   const { databaseSettings } = useSettings()
 
   return (
     <>
       <Head>
-        <title>{getPageTitle('Einstellungen: Kategorien')}</title>
+        <title>
+          {getPageTitle(
+            `${t('settings:index.title')}: ${t('settings:categories.title')}`,
+          )}
+        </title>
       </Head>
 
       <Layout

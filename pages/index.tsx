@@ -1,4 +1,5 @@
 import { SparklesIcon } from '@heroicons/react/outline'
+import { DatabaseIcon } from '@heroicons/react/solid'
 import { GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
@@ -36,10 +37,18 @@ export default function Home(): ReactElement | null {
 
       <Layout left={isFileOpen ? <GroupList /> : null}>
         {isFileOpen ? (
-          <EmptyText>Bitte wähle links eine Gruppe aus.</EmptyText>
+          <EmptyText
+            title={t('welcome:fileOpen.title')}
+            icon={<DatabaseIcon />}
+          >
+            {t('welcome:fileOpen.body')}
+          </EmptyText>
         ) : (
-          <EmptyText title={t('welcome:empty.title')} icon={<SparklesIcon />}>
-            {t('welcome:empty.body')}
+          <EmptyText
+            title={t('welcome:noFileOpen.title')}
+            icon={<SparklesIcon />}
+          >
+            {t('welcome:noFileOpen.body')}
           </EmptyText>
         )}
       </Layout>

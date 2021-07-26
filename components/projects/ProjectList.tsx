@@ -1,5 +1,6 @@
 import { InboxIcon } from '@heroicons/react/outline'
 import { PlusIcon } from '@heroicons/react/solid'
+import { useTranslation } from 'next-i18next'
 import React, { FC, ReactNode, useMemo } from 'react'
 import { Project } from '../../redux/projects'
 import { EmptyText } from '../ui/EmptyText'
@@ -13,6 +14,8 @@ interface Props {
 }
 
 export const ProjectList: FC<Props> = ({ projects }) => {
+  const { t } = useTranslation()
+
   const groupedProjects = useMemo<Record<ArchivedString, Project[]>>(() => {
     const groups: Record<ArchivedString, Project[]> = {
       open: [],
@@ -49,23 +52,34 @@ export const ProjectList: FC<Props> = ({ projects }) => {
       toolbarItems={[
         {
           type: 'button',
-          label: 'Projekt',
+          label: t('projects:terms.project'),
           icon: <PlusIcon />,
           action() {},
         },
       ]}
     >
       {projects.length === 0 ? (
-        <EmptyText icon={<InboxIcon />} title="Keine Projekte vorhanden">
-          <p>Es gibt derzeit keine Projekte in dieser Gruppe.</p>
-          <p>
-            Du kannst ein neues Projekt mit dem Button [+&nbsp;Projekt] oben anlegen.
-          </p>
+        <EmptyText
+          icon={<InboxIcon />}
+          title={t('projects:list.noProjects.title')}
+        >
+          {t<string, TemplateStringsArray>('projects:list.noProjects.body', {
+            returnObjects: true,
+          }).map?.((line, index) => (
+            <p key={index}>{line}</p>
+          ))}
         </EmptyText>
       ) : (
         <div className="px-2 py-4 text-lg">
-          {getGroupedItems('open', 'Aktive Projekte')}
-          {getGroupedItems('archived', 'Archivierte Projekte')}
+          {getGroupedItems(
+            'open',
+            t('projects:list.itemGroups.activeProjects'),
+          )}
+
+          {getGroupedItems(
+            'archived',
+            t('projects:list.itemGroups.archivedProjects'),
+          )}
         </div>
       )}
     </ToolbarContainer>

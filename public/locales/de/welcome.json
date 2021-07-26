@@ -1,6 +1,10 @@
 {
-  "empty": {
-    "title": "Willkommen bei $t(common:appName)",
+  "fileOpen": {
+    "title": "Database: {{database}}",
+    "body": "Bitte wähle links eine Gruppe aus."
+  },
+  "noFileOpen": {
+    "title": "Willkommen bei $t(terms.appName)",
     "body": "Erstelle eine neue Datenbank oder öffne eine vorhandene über das \"Datenbank\"-Menü oben links."
   }
 }

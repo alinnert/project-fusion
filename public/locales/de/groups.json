@@ -1,0 +1,33 @@
+{
+  "terms": {
+    "group": "Gruppe",
+    "favorites": "Favoriten"
+  },
+  "list": {
+    "noCategory": "Ohne Kategorie",
+    "specialItems": {
+      "favorites": "Favoriten"
+    }
+  },
+  "editForm": {
+    "create": {
+      "pageTitle": "Gruppe anlegen",
+      "titleHint": "(anlegen)"
+    },
+    "edit": {
+      "pageTitle": "Gruppe bearbeiten",
+      "titleHint": "(bearbeiten)"
+    },
+    "labels": {
+      "name": "Gruppenname",
+      "color": "Farbe",
+      "category": "Kategorie",
+      "notes": "Notizen (Unterstützt Markdown)"
+    }
+  },
+  "deleteDialog": {
+    "title": "Gruppe löschen?",
+    "message": "Soll die Gruppe \"{{group}}\" gelöscht werden?",
+    "confirmButton": "Gruppe löschen"
+  }
+}

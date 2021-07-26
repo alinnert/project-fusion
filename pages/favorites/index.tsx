@@ -1,5 +1,6 @@
 import { StarIcon } from '@heroicons/react/outline'
 import { GetStaticProps } from 'next'
+import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import React, { ReactElement } from 'react'
 import { Layout } from '../../components/app/Layout'
@@ -15,6 +16,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 }
 
 export default function Favorites(): ReactElement | null {
+  const { t } = useTranslation()
   const filename = useAppSelector((state) => state.database.filename)
 
   return (
@@ -27,11 +29,10 @@ export default function Favorites(): ReactElement | null {
         left={filename !== null ? <GroupList currentId="/favorites" /> : null}
       >
         <EmptyText
-          title="Keine wichtigen Projekte vorhanden"
+          title={t('projects:favorites.noFavorites.title')}
           icon={<StarIcon />}
         >
-          Hier erscheinen alle Projekte, die als &quot;wichtig&quot; markiert
-          wurden.
+          {t('projects:favorites.noFavorites.body')}
         </EmptyText>
       </Layout>
     </>

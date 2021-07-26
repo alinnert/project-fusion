@@ -7,6 +7,7 @@ import {
   ReactElement,
   useMemo,
 } from 'react'
+import { capitalize } from '../../utils/capitalize'
 import { matchBool } from '../../utils/match'
 import { Heroicon } from './Heroicon'
 
@@ -157,7 +158,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
             matchBool(icon !== undefined && hasChildren, 'mr-1'),
           )}
         >
-          {children}
+          {typeof children === 'string' ? capitalize(children) : children}
         </div>
       </button>
     </div>

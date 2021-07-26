@@ -1,7 +1,19 @@
 {
-  "appName": "ProjectFusion",
-  "cancel": "Abbrechen",
-  "language": "Sprache",
+  "terms": {
+    "appName": "ProjectFusion",
+    "language": "Sprache"
+  },
+  "buttons": {
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "new": "Neu",
+    "rename": "Umbenennen",
+    "create": "Anlegen",
+    "ok": "OK",
+    "duplicate": "Duplizieren"
+  },
   "header": {
     "menu": {
       "database": {
@@ -18,6 +30,10 @@
       "data": "Daten",
       "config": "Einstellungen",
       "info": "Info"
+    },
+    "search": {
+      "inputPlaceholder": "Suchen / Zu Projekt springen...",
+      "button": "Suchen"
     }
   }
 }

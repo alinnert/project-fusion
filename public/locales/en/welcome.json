@@ -1,6 +1,10 @@
 {
-  "empty": {
-    "title": "Welcome to $t(common:appName)",
+  "fileOpen": {
+    "title": "Database: {{database}}",
+    "body": "Please select a group on the left."
+  },
+  "noFileOpen": {
+    "title": "Welcome to $t(terms.appName)",
     "body": "Create a new database or open an existing one through the \"$t(common:header.menu.database.label)\" menu on the top left."
   }
 }

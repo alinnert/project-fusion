@@ -1,4 +1,5 @@
 import { GetStaticProps } from 'next'
+import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import React, { ReactElement } from 'react'
 import { GroupEditForm } from '../components/groups/GroupEditForm'
@@ -11,10 +12,12 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 }
 
 export default function NewGroup(): ReactElement | null {
+  const { t } = useTranslation()
+
   return (
     <>
       <Head>
-        <title>{getPageTitle('Neue Gruppe')}</title>
+        <title>{getPageTitle(t('groups:editForm.create.pageTitle'))}</title>
       </Head>
 
       <GroupEditForm />

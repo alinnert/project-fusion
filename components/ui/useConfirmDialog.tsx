@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import React, { ReactElement, useCallback, useMemo, useState } from 'react'
 import { AppDialog } from './AppDialog'
 import { Button, ButtonType } from './Button'
@@ -20,11 +21,10 @@ interface Result {
   openDialog: (options: OpenDialogOptions) => void
 }
 
-const confirmButtonDefaultLabel = 'OK'
 const confirmButtonDefaultType: ButtonType = 'primary'
-const cancelButtonDefaultLabel = 'Cancel'
 
 export function useConfirmDialog({ onConfirm, onCancel }: Options): Result {
+  const { t } = useTranslation()
   const [title, setTitle] = useState('')
   const [message, setMessage] = useState('')
   const [confirmButtonLabel, setConfirmButtonLabel] = useState('')
@@ -37,11 +37,9 @@ export function useConfirmDialog({ onConfirm, onCancel }: Options): Result {
   function openDialog(options: OpenDialogOptions): void {
     setTitle(options.title)
     setMessage(options.message)
-    setConfirmButtonLabel(
-      options.confirmButtonLabel ?? confirmButtonDefaultLabel,
-    )
+    setConfirmButtonLabel(options.confirmButtonLabel ?? t('buttons.ok'))
     setConfirmButtonType(options.confirmButtonType ?? confirmButtonDefaultType)
-    setCancelButtonLabel(options.cancelButtonLabel ?? cancelButtonDefaultLabel)
+    setCancelButtonLabel(options.cancelButtonLabel ?? t('buttons.cancel'))
     setIsModalOpen(true)
   }
 

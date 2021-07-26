@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import React, { ReactElement, useCallback, useMemo, useState } from 'react'
 import { AppDialog } from './AppDialog'
 import { Button } from './Button'
@@ -22,6 +23,7 @@ interface Result {
 const primaryButtonDefaultLabel = 'OK'
 
 export function useTextDialog({ onConfirm }: Options): Result {
+  const { t } = useTranslation()
   const [title, setTitle] = useState('')
   const [inputLabel, setInputLabel] = useState('')
   const [primaryButtonLabel, setPrimaryButtonLabel] = useState(
@@ -61,14 +63,22 @@ export function useTextDialog({ onConfirm }: Options): Result {
             <Button buttonType="primary" onClick={handleConfirm}>
               {primaryButtonLabel}
             </Button>
-            <Button onClick={handleClose}>Abbrechen</Button>
+            <Button onClick={handleClose}>{t('buttons.cancel')}</Button>
           </>
         }
       >
         <Input value={value} label={inputLabel} onChange={setValue} />
       </AppDialog>
     )
-  }, [handleConfirm, inputLabel, isModalOpen, primaryButtonLabel, title, value])
+  }, [
+    handleConfirm,
+    inputLabel,
+    isModalOpen,
+    primaryButtonLabel,
+    t,
+    title,
+    value,
+  ])
 
   return { dialog, openDialog }
 }

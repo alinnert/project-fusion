@@ -1,7 +1,7 @@
 import { FolderIcon, PencilIcon, TrashIcon } from '@heroicons/react/solid'
-import marked from 'marked'
+import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
-import React, { FC, useMemo } from 'react'
+import React, { FC } from 'react'
 import { useAppDispatch } from '../../redux'
 import { removeGroup } from '../../redux/groups'
 import { Markdown } from '../ui/Markdown'
@@ -13,6 +13,7 @@ import { useGroupFromRoute } from './useGroupFromRoute'
 interface Props {}
 
 export const GroupDetailView: FC<Props> = ({}) => {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const router = useRouter()
   const { groupId, group } = useGroupFromRoute()
@@ -29,10 +30,13 @@ export const GroupDetailView: FC<Props> = ({}) => {
 
   function handleDelete(): void {
     if (groupId === null) return
+    const groupName = group?.name
+    if (groupName === undefined) return
+    
     openConfirmDeleteDialog({
-      title: 'Gruppe löschen?',
-      message: `Soll die Gruppe "${groupId}" wirklich gelöscht werden?`,
-      confirmButtonLabel: 'Gruppe löschen',
+      title: t('groups:deleteDialog.title'),
+      message: t('groups:deleteDialog.message', { group: groupName }),
+      confirmButtonLabel: t('groups:deleteDialog.confirmButton'),
       confirmButtonType: 'delete',
     })
   }
@@ -42,7 +46,7 @@ export const GroupDetailView: FC<Props> = ({}) => {
       toolbarItems={[
         {
           type: 'button',
-          label: 'Bearbeiten',
+          label: t('buttons.edit'),
           icon: <PencilIcon />,
           action() {
             router.push(`/groups/${groupId}/edit`)
@@ -51,7 +55,7 @@ export const GroupDetailView: FC<Props> = ({}) => {
         {
           type: 'button',
           buttonType: 'delete',
-          label: 'Löschen',
+          label: t('buttons.delete'),
           icon: <TrashIcon />,
           action: handleDelete,
         },

@@ -1,4 +1,5 @@
 import { GetStaticProps } from 'next'
+import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import Image from 'next/image'
 import React, { ReactElement } from 'react'
@@ -14,6 +15,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 }
 
 export default function Info(): ReactElement | null {
+  const { t } = useTranslation()
+
   return (
     <>
       <Head>
@@ -21,26 +24,26 @@ export default function Info(): ReactElement | null {
       </Head>
 
       <Layout>
-        <PageContent title="Über ProjectFusion">
+        <PageContent title={t('info:title')}>
           <div className="prose prose-brand select-text">
             <Image src={LogoPicture} alt="ProjectFusion Logo" />
 
             <p>
               <i>
-                Version 0.0.0.42
+                {t('info:version')} 0.0.0.42
                 if-you-use-this-in-production-kittens-will-die-pre-alpha
               </i>
             </p>
 
             <p>
-              Repository:{' '}
+              {t('info:sourceCode')}:{' '}
               <a href="https://github.com/alinnert/project-fusion">
                 github.com/alinnert/project-fusion
               </a>
             </p>
 
             <p>
-              <strong>Verwendete Technologien:</strong>
+              <strong>{t('info:usedTechnology')}</strong>
             </p>
 
             <ul>

@@ -71,7 +71,8 @@ export const FileControls: FC<Props> = ({}) => {
 
   return (
     <DropdownMenu icon={<DatabaseIcon />} items={menuItems} buttonType="header">
-      {filename}
+      {t('header.menu.database.label')}:{' '}
+      <span className="text-white">{filename}</span>
     </DropdownMenu>
   )
 }

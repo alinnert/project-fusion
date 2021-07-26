@@ -39,7 +39,7 @@ export const LanguageChooser: FC<Props> = ({}) => {
     >
       {currentLanguageKey === 'en'
         ? t('language')
-        : `${t('language')} / Language`}
+        : `${t('terms.language')} (language)`}
     </DropdownMenu>
   )
 }

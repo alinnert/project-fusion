@@ -22,7 +22,7 @@ export const PageContent: FC<PropsWithChildren<Props>> = ({
             <Heroicon icon={titleIcon} color={titleIconColor} scale={2} />
           </div>
         ) : null}
-        <div className="flex-1">{title}</div>
+        <div className="flex-1 select-text">{title}</div>
       </div>
       <div>{children}</div>
     </div>

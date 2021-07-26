@@ -1,8 +1,10 @@
 import { FolderIcon, PlusIcon, StarIcon } from '@heroicons/react/solid'
+import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import React, { FC, useMemo } from 'react'
 import { useAppSelector } from '../../redux'
 import { selectGroupsWithoutCategory } from '../../redux/groups'
+import { capitalize } from '../../utils/capitalize'
 import { resolveIds } from '../../utils/resolveIds'
 import { useOrderedCategories } from '../categories/useOrderedCategories'
 import { ToolbarContainer } from '../ui/ToolbarContainer'
@@ -18,6 +20,7 @@ interface Props {
 }
 
 export const GroupList: FC<Props> = ({ currentId }) => {
+  const { t } = useTranslation()
   const router = useRouter()
   const { orderedCategories } = useOrderedCategories()
   const groups = useAppSelector((state) => state.groups.entities)
@@ -28,12 +31,12 @@ export const GroupList: FC<Props> = ({ currentId }) => {
     return [
       {
         id: '/favorites',
-        name: 'Favoriten',
+        name: capitalize(t('groups:list.specialItems.favorites')),
         icon: <StarIcon />,
         iconColor: '#D97706',
       },
     ]
-  }, [])
+  }, [t])
 
   const items = useMemo<CategorizedLinkItems>(() => {
     const categorizedGroups: CategorizedLinkItems = orderedCategories.map(
@@ -50,7 +53,7 @@ export const GroupList: FC<Props> = ({ currentId }) => {
 
     const groupsWithoutCategory: CategorizedLinkItems = [
       [
-        { id: '', name: 'Unsortiert' },
+        { id: '', name: t('groups:list.noCategory') },
         uncategorizedGroups.map((group) => ({
           ...group,
           iconColor: group.color,
@@ -59,7 +62,7 @@ export const GroupList: FC<Props> = ({ currentId }) => {
     ]
 
     return [...groupsWithoutCategory, ...categorizedGroups]
-  }, [orderedCategories, uncategorizedGroups, groups])
+  }, [orderedCategories, t, uncategorizedGroups, groups])
 
   function handleAddGroupButtonClick() {
     router.push('/new_group')
@@ -70,7 +73,7 @@ export const GroupList: FC<Props> = ({ currentId }) => {
       toolbarItems={[
         {
           type: 'button',
-          label: 'Gruppe',
+          label: t('groups:terms.group'),
           icon: <PlusIcon />,
           action: handleAddGroupButtonClick,
         },

@@ -4,12 +4,13 @@ import { FormItem } from './FormItem'
 
 interface Props {
   value: string
+  label?: string
   onChange?: (value: string) => void
 }
 
-export const Textarea: FC<Props> = ({ value, onChange }) => {
+export const Textarea: FC<Props> = ({ value, label, onChange }) => {
   return (
-    <FormItem label="Notizen">
+    <FormItem label={label}>
       <textarea
         className={classNames(
           'p-2',

@@ -1,5 +1,6 @@
 {
-  "title": "Über $t(common:appName)",
+  "title": "Über $t(terms.appName)",
+  "version": "Version",
   "sourceCode": "Quellcode",
   "usedTechnology": "Verwendete Technologien und Bibliotheken"
 }
