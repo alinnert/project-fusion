@@ -1,13 +1,10 @@
-const path = require('path');
+const path = require('path')
 
 module.exports = {
   i18n: {
-    defaultLocale: 'en',
+    defaultLocale: 'de',
     locales: ['en', 'de'],
-    backend: {
-      loadPath: '/locales/{{lng}}/{{ns}}.json'
-    }
   },
   localePath: path.resolve('./public/locales/'),
-  localeStructure: '{{lng}}/{{ns}}'
+  localeStructure: '{{lng}}/{{ns}}',
 }

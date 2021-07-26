@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import React, { ReactElement } from 'react'
 import { Layout } from '../../../components/app/Layout'
@@ -15,6 +15,10 @@ import { getServerSideTranslations } from '../../../utils/getServerSideTranslati
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const translations = await getServerSideTranslations(locale)
   return { props: { ...translations } }
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return { paths: [], fallback: 'blocking' }
 }
 
 export default function GroupById(): ReactElement | null {
