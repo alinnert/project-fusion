@@ -38,8 +38,8 @@ export const LanguageChooser: FC<Props> = ({}) => {
       align="right"
     >
       {currentLanguageKey === 'en'
-        ? t('common.language')
-        : `${t('common.language')} / Language`}
+        ? t('language')
+        : `${t('language')} / Language`}
     </DropdownMenu>
   )
 }

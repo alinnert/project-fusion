@@ -1,0 +1,6 @@
+{
+  "empty": {
+    "title": "Welcome to $t(common:appName)",
+    "body": "Create a new database or open an existing one through the \"$t(common:header.menu.database.label)\" menu on the top left."
+  }
+}

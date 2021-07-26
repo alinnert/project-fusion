@@ -38,8 +38,8 @@ export default function Home(): ReactElement | null {
         {isFileOpen ? (
           <EmptyText>Bitte wähle links eine Gruppe aus.</EmptyText>
         ) : (
-          <EmptyText title={t('welcome.empty.title')} icon={<SparklesIcon />}>
-            {t('welcome.empty.body')}
+          <EmptyText title={t('welcome:empty.title')} icon={<SparklesIcon />}>
+            {t('welcome:empty.body')}
           </EmptyText>
         )}
       </Layout>
