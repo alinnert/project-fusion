@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import React, { FC, useMemo } from 'react'
 import { useAppSelector } from '../../redux'
 import { selectGroupsWithoutCategory } from '../../redux/groups'
-import { resolveIds } from '../../tools/resolveIds'
+import { resolveIds } from '../../utils/resolveIds'
 import { useOrderedCategories } from '../categories/useOrderedCategories'
 import { ToolbarContainer } from '../ui/ToolbarContainer'
 import {

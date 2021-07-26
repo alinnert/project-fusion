@@ -7,7 +7,7 @@ import React, {
   ReactElement,
   useMemo,
 } from 'react'
-import { defaultMatch, matchString, matchUnion } from '../../tools/match'
+import { defaultMatch, matchString, matchUnion } from '../../utils/match'
 import { Button, ButtonType } from './Button'
 import { DropdownMenuItem } from './DropdownMenuItem'
 

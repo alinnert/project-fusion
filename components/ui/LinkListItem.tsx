@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import { FC, MouseEvent, PropsWithChildren, ReactElement } from 'react'
-import { matchBool } from '../../tools/match'
+import { matchBool } from '../../utils/match'
 import { Heroicon } from './Heroicon'
 
 interface Props {

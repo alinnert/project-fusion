@@ -1,7 +1,7 @@
 import { ArrowSmRightIcon } from '@heroicons/react/solid'
 import classNames from 'classnames'
 import React, { FC, ReactElement, useMemo } from 'react'
-import { matchBool } from '../../tools/match'
+import { matchBool } from '../../utils/match'
 import { Heroicon } from './Heroicon'
 
 interface Props {

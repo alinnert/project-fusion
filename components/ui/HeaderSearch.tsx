@@ -8,7 +8,11 @@ interface Props {}
 export const HeaderSearch: FC<Props> = ({}) => {
   return (
     <>
-      <Input placeholder="Suchen / Zu Projekt springen..." inputType="header" />
+      <Input
+        placeholder="Suchen / Zu Projekt springen..."
+        inputType="header"
+        className="ml-2"
+      />
       <Button buttonType="header" icon={<SearchIcon />}>
         Suchen
       </Button>

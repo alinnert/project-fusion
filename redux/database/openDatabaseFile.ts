@@ -6,7 +6,7 @@ import {
   startLoading,
 } from '.'
 import { store } from '..'
-import { asyncTry } from '../../tools/tryCatch'
+import { asyncTry } from '../../utils/tryCatch'
 import { filePickerOptions, getDataFromFileHandle } from './filePicker'
 
 export async function openDatabaseFile(): Promise<void> {

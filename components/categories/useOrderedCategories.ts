@@ -2,7 +2,7 @@ import { Dictionary } from '@reduxjs/toolkit'
 import { useMemo } from 'react'
 import { useAppSelector } from '../../redux'
 import { Category } from '../../redux/categories'
-import { resolveIds } from '../../tools/resolveIds'
+import { resolveIds } from '../../utils/resolveIds'
 
 interface UseOrderedCategoriesResult {
   orderedCategories: Category[]

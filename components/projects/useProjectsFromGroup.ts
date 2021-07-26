@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { useAppSelector } from '../../redux'
 import { ProjectGroup } from '../../redux/groups'
 import { Project } from '../../redux/projects'
-import { resolveIds } from '../../tools/resolveIds'
+import { resolveIds } from '../../utils/resolveIds'
 import { defaultProjectSorting } from './defaultProjectSorting'
 
 export function useProjectsFromGroup(group: ProjectGroup | null): Project[] {

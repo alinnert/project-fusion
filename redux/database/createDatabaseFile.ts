@@ -7,7 +7,7 @@ import {
   startLoading,
 } from '.'
 import { store } from '..'
-import { asyncTry } from '../../tools/tryCatch'
+import { asyncTry } from '../../utils/tryCatch'
 import { filePickerOptions } from './filePicker'
 
 export async function createDatabaseFile(): Promise<void> {

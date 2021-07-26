@@ -13,7 +13,7 @@ import marked from 'marked'
 import React, { FC, useCallback, useMemo } from 'react'
 import { useAppDispatch } from '../../redux'
 import { Project, removeProject, updateProject } from '../../redux/projects'
-import { matchBool } from '../../tools/match'
+import { matchBool } from '../../utils/match'
 import { DropdownMenu, MenuItem } from '../ui/DropdownMenu'
 import { useConfirmDialog } from '../ui/useConfirmDialog'
 

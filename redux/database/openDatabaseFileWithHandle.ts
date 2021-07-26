@@ -1,6 +1,6 @@
 import { setDatabase, SetDatabaseActionPayload, setOpenDatabaseError } from '.'
 import { store } from '..'
-import { asyncTry } from '../../tools/tryCatch'
+import { asyncTry } from '../../utils/tryCatch'
 import { getDataFromFileHandle } from './filePicker'
 
 export async function openDatabaseFielWithHandle(

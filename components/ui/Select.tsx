@@ -6,7 +6,7 @@ import {
 } from '@heroicons/react/solid'
 import classNames from 'classnames'
 import React, { FC, useMemo, useState } from 'react'
-import { matchBool } from '../../tools/match'
+import { matchBool } from '../../utils/match'
 import { FormItem } from './FormItem'
 import { Heroicon } from './Heroicon'
 

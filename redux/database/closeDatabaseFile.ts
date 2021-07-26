@@ -1,6 +1,6 @@
 import { closeDatabase } from '.'
 import { store } from '..'
-import { asyncTry } from '../../tools/tryCatch'
+import { asyncTry } from '../../utils/tryCatch'
 import { del } from 'idb-keyval'
 
 export async function closeDatabaseFile() {

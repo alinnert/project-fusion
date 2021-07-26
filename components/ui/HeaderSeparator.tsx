@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import { FC } from 'react'
-import { defaultMatch, matchString } from '../../tools/match'
+import { defaultMatch, matchString } from '../../utils/match'
 
 interface Props {
   type?: 'default' | 'header'

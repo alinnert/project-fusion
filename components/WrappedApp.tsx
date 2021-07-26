@@ -2,7 +2,7 @@ import { get } from 'idb-keyval'
 import { FC, PropsWithChildren, useEffect } from 'react'
 import { useAppDispatch } from '../redux'
 import { openDatabaseFielWithHandle } from '../redux/database/openDatabaseFileWithHandle'
-import { asyncTry } from '../tools/tryCatch'
+import { asyncTry } from '../utils/tryCatch'
 
 interface Props {}
 

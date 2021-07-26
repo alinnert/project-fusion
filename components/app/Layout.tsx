@@ -2,22 +2,21 @@ import classNames from 'classnames'
 import React, { FC, PropsWithChildren, ReactNode, useMemo } from 'react'
 import { useAppSelector } from '../../redux'
 import { selectIsFileOpen } from '../../redux/database'
-import { matchBool } from '../../tools/match'
+import { matchBool } from '../../utils/match'
 import { FileControls } from '../dataFile/FileControls'
 import { ViewAreaTabs } from '../dataFile/ViewAreaTabs'
+import { LanguageChooser } from '../settings/LanguageChooser'
 import { HeaderSearch } from '../ui/HeaderSearch'
 import { Separator } from '../ui/HeaderSeparator'
 import { Logo } from '../ui/Logo'
 
 interface Props {
-  header?: ReactNode
   left?: ReactNode
   right?: ReactNode
 }
 
 export const Layout: FC<PropsWithChildren<Props>> = ({
   children,
-  header,
   left,
   right,
 }) => {
@@ -35,7 +34,7 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
         className={classNames(
           'row-start-1 col-start-1 col-span-3',
           'grid grid-cols-[1fr,auto]',
-          'px-4 py-2',
+          'px-2 py-2',
           'bg-gradient-brand',
           'text-white',
         )}
@@ -48,7 +47,9 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
           <Separator type="header" />
           <ViewAreaTabs />
 
-          <span className="flex items-center gap-x-2">{header}</span>
+          <div className="ml-auto">
+            <LanguageChooser />
+          </div>
         </div>
 
         <div

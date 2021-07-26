@@ -2,11 +2,12 @@ import {
   DatabaseIcon,
   DocumentAddIcon,
   FolderIcon,
-  XIcon
+  XIcon,
 } from '@heroicons/react/solid'
+import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import React, { FC, useMemo } from 'react'
-import { useAppDispatch, useAppSelector } from '../../redux'
+import { useAppSelector } from '../../redux'
 import { selectIsFileOpen } from '../../redux/database'
 import { closeDatabaseFile } from '../../redux/database/closeDatabaseFile'
 import { createDatabaseFile } from '../../redux/database/createDatabaseFile'
@@ -16,14 +17,14 @@ import { DropdownMenu, MenuItem } from '../ui/DropdownMenu'
 interface Props {}
 
 export const FileControls: FC<Props> = ({}) => {
+  const { t } = useTranslation()
   const router = useRouter()
-  const dispatch = useAppDispatch()
   const filename = useAppSelector((state) => state.database.filename)
   const isFileOpen = useAppSelector(selectIsFileOpen)
 
   const menuItems = useMemo(() => {
     const createItem: MenuItem = {
-      label: 'Erstellen',
+      label: t('header.menu.database.items.create'),
       icon: <DocumentAddIcon />,
       action() {
         createDatabaseFile()
@@ -32,7 +33,7 @@ export const FileControls: FC<Props> = ({}) => {
     }
 
     const openItem: MenuItem = {
-      label: 'Öffnen',
+      label: t('header.menu.database.items.open'),
       icon: <FolderIcon className="h-5 w-5" />,
       action() {
         openDatabaseFile()
@@ -41,7 +42,7 @@ export const FileControls: FC<Props> = ({}) => {
     }
 
     const closeItem: MenuItem = {
-      label: 'Schließen',
+      label: t('header.menu.database.items.close'),
       action() {
         closeDatabaseFile()
         router.push('/')
@@ -54,7 +55,7 @@ export const FileControls: FC<Props> = ({}) => {
     }
 
     return [createItem, openItem]
-  }, [isFileOpen, router])
+  }, [isFileOpen, router, t])
 
   if (!isFileOpen) {
     return (
@@ -63,17 +64,13 @@ export const FileControls: FC<Props> = ({}) => {
         items={menuItems}
         buttonType="header"
       >
-        Datenbank
+        {t('header.menu.database.label')}
       </DropdownMenu>
     )
   }
 
   return (
-    <DropdownMenu
-      icon={<DatabaseIcon />}
-      items={menuItems}
-      buttonType="header"
-    >
+    <DropdownMenu icon={<DatabaseIcon />} items={menuItems} buttonType="header">
       {filename}
     </DropdownMenu>
   )

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { swapArrayElements } from '../../tools/array'
+import { swapArrayElements } from '../../utils/array'
 import { addCategory, Category, removeCategory } from '../categories'
 import { closeDatabase, setDatabase } from '../database'
 

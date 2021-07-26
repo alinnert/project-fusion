@@ -1,5 +1,5 @@
 import { get } from 'idb-keyval'
-import { asyncTry } from '../../../tools/tryCatch'
+import { asyncTry } from '../../../utils/tryCatch'
 
 export async function writeToFile(content: string): Promise<void> {
   const getHandleResult = await asyncTry(() =>

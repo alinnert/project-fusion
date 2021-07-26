@@ -1,0 +1,36 @@
+{
+  "common": {
+    "appName": "ProjectFusion",
+    "cancel": "Abbrechen",
+    "language": "Sprache"
+  },
+  "header": {
+    "menu": {
+      "database": {
+        "label": "Datenbank",
+        "items": {
+          "create": "Erstellen",
+          "open": "Öffnen",
+          "close": "Schließen"
+        }
+      }
+    },
+    "tabs": {
+      "home": "Willkommen",
+      "data": "Daten",
+      "config": "Einstellungen",
+      "info": "Info"
+    }
+  },
+  "welcome": {
+    "empty": {
+      "title": "Willkommen bei $t(common.appName)",
+      "body": "Erstelle eine neue Datenbank oder öffne eine vorhandene über das \"Datenbank\"-Menü oben links."
+    }
+  },
+  "info": {
+    "title": "Über $t(common.appName)",
+    "sourceCode": "Quellcode",
+    "usedTechnology": "Verwendete Technologien und Bibliotheken"
+  }
+}

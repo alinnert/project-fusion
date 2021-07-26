@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import { Children, cloneElement, FC, isValidElement, ReactElement } from 'react'
-import { defaultMatch, matchString } from '../../tools/match'
+import { defaultMatch, matchString } from '../../utils/match'
 
 interface Props {
   icon: ReactElement<{ className: string }>

@@ -1,7 +1,7 @@
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/solid'
 import classNames from 'classnames'
 import React, { FC, ReactElement, ReactNode } from 'react'
-import { matchBool } from '../../tools/match'
+import { matchBool } from '../../utils/match'
 import { Button } from './Button'
 import { Separator } from './HeaderSeparator'
 

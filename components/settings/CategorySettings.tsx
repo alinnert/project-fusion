@@ -8,7 +8,7 @@ import {
   updateCategory
 } from '../../redux/categories'
 import { swapCategories } from '../../redux/settings'
-import { createId } from '../../tools/customNanoId'
+import { createId } from '../../utils/customNanoId'
 import { useOrderedCategories } from '../categories/useOrderedCategories'
 import { Button } from '../ui/Button'
 import { Headline } from '../ui/Headline'
