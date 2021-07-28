@@ -4,6 +4,7 @@ import Head from 'next/head'
 import React, { ReactElement } from 'react'
 import { Layout } from '../../../components/app/Layout'
 import { GroupEditForm } from '../../../components/groups/GroupEditForm'
+import { GroupList } from '../../../components/groups/GroupList'
 import { useGroupFromRoute } from '../../../components/groups/useGroupFromRoute'
 import { EmptyText } from '../../../components/ui/EmptyText'
 import { getPageTitle } from '../../../utils/getPageTitle'
@@ -43,7 +44,9 @@ export default function Page(): ReactElement | null {
         <title>{getPageTitle(`${group.name} bearbeiten`)}</title>
       </Head>
 
-      <GroupEditForm init={group} />
+      <Layout left={<GroupList />}>
+        <GroupEditForm init={group} />
+      </Layout>
     </>
   )
 }
