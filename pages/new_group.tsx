@@ -2,7 +2,9 @@ import { GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import React, { ReactElement } from 'react'
+import { Layout } from '../components/app/Layout'
 import { GroupEditForm } from '../components/groups/GroupEditForm'
+import { GroupList } from '../components/groups/GroupList'
 import { getPageTitle } from '../utils/getPageTitle'
 import { getServerSideTranslations } from '../utils/getServerSideTranslations'
 
@@ -20,7 +22,9 @@ export default function NewGroup(): ReactElement | null {
         <title>{getPageTitle(t('groups:editForm.create.pageTitle'))}</title>
       </Head>
 
-      <GroupEditForm />
+      <Layout left={<GroupList />}>
+        <GroupEditForm />
+      </Layout>
     </>
   )
 }

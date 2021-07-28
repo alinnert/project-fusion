@@ -3,6 +3,7 @@ import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import React, { FC, useMemo } from 'react'
 import { useAppSelector } from '../../redux'
+import { selectIsFileOpen } from '../../redux/database'
 import { selectGroupsWithoutCategory } from '../../redux/groups'
 import { capitalize } from '../../utils/capitalize'
 import { resolveIds } from '../../utils/resolveIds'
@@ -23,6 +24,7 @@ export const GroupList: FC<Props> = ({ currentId }) => {
   const { t } = useTranslation()
   const router = useRouter()
   const { orderedCategories } = useOrderedCategories()
+  const isFileOpen = useAppSelector(selectIsFileOpen)
   const groups = useAppSelector((state) => state.groups.entities)
   const uncategorizedGroups = useAppSelector(selectGroupsWithoutCategory)
   const { groupId } = useGroupFromRoute()
@@ -66,6 +68,10 @@ export const GroupList: FC<Props> = ({ currentId }) => {
 
   function handleAddGroupButtonClick() {
     router.push('/new_group')
+  }
+
+  if (!isFileOpen) {
+    return null
   }
 
   return (

@@ -7,7 +7,11 @@ export const Form: FC<Props> = ({ children, className, ...formProps }) => {
   return (
     <form
       {...formProps}
-      className={classNames(className, 'flex flex-col gap-y-6 w-[600px]')}
+      className={classNames(
+        className,
+        'flex flex-col gap-y-6',
+        'w-[600px] max-w-full',
+      )}
     >
       {children}
     </form>

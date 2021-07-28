@@ -18,10 +18,18 @@ export function matchUnion<T extends string | number, V extends string>(
   return choices[value] ?? choices[defaultMatch]
 }
 
-export function matchBool(
+export function matchBoolToString(
   value: boolean,
   whenTrue: string,
   whenFalse?: string,
 ): string {
   return value ? whenTrue : whenFalse ?? ''
+}
+
+export function matchBool<T>(
+  value: boolean,
+  whenTrue: T,
+  whenFalse?: T,
+): T | null {
+  return value ? whenTrue : whenFalse ?? null
 }

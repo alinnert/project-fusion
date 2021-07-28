@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import React, { FC, PropsWithChildren, ReactNode, useMemo } from 'react'
 import { useAppSelector } from '../../redux'
 import { selectIsFileOpen } from '../../redux/database'
-import { matchBool } from '../../utils/match'
+import { matchBoolToString } from '../../utils/match'
 import { FileControls } from '../dataFile/FileControls'
 import { ViewAreaTabs } from '../dataFile/ViewAreaTabs'
 import { LanguageChooser } from '../settings/LanguageChooser'
@@ -75,7 +75,7 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
       <div
         className={classNames(
           'row-start-2 col-start-2 overflow-hidden',
-          matchBool(!showRightPanel, 'col-span-2'),
+          matchBoolToString(!showRightPanel, 'col-span-2'),
         )}
       >
         {children}

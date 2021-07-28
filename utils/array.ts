@@ -14,3 +14,14 @@ export function swapArrayElements<T>(
 
   return true
 }
+
+export function removeElementsFromArray(
+  array: Array<unknown>,
+  ...itemsToRemove: Array<unknown>
+): void {
+  for (const item of itemsToRemove) {
+    while (array.includes(item)) {
+      array.splice(array.indexOf(item), 1)
+    }
+  }
+}

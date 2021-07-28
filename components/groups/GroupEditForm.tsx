@@ -6,13 +6,11 @@ import {
 } from '@heroicons/react/solid'
 import { useTranslation } from 'next-i18next'
 import router from 'next/router'
-import React, { FC, FormEvent, useMemo, useState } from 'react'
-import { useAppDispatch, useAppSelector } from '../../redux'
+import React, { FC, FormEvent, useCallback, useMemo, useState } from 'react'
+import { useAppDispatch } from '../../redux'
 import { addGroupToCategory, Category } from '../../redux/categories'
-import { selectIsFileOpen } from '../../redux/database'
 import { addGroup, ProjectGroup, updateGroup } from '../../redux/groups'
 import { createId } from '../../utils/customNanoId'
-import { Layout } from '../app/Layout'
 import { useCategoryFromGroup } from '../categories/useCategoryFromGroup'
 import { useOrderedCategories } from '../categories/useOrderedCategories'
 import { ColorInput } from '../ui/ColorInput'
@@ -21,8 +19,7 @@ import { Input } from '../ui/Input'
 import { PageContent } from '../ui/PageContent'
 import { Select } from '../ui/Select'
 import { Textarea } from '../ui/Textarea'
-import { ToolbarContainer } from '../ui/ToolbarContainer'
-import { GroupList } from './GroupList'
+import { ToolbarContainer, ToolbarItem } from '../ui/ToolbarContainer'
 
 interface Props {
   init?: ProjectGroup | null
@@ -31,22 +28,21 @@ interface Props {
 export const GroupEditForm: FC<Props> = ({ init = null }) => {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
-  const isFileOpen = useAppSelector(selectIsFileOpen)
   const { orderedCategories } = useOrderedCategories()
   const { categoryId: categoryIdFromGroup } = useCategoryFromGroup(init)
 
-  const [groupName, setGroupName] = useState(init?.name ?? '')
+  const [name, setName] = useState(init?.name ?? '')
   const [color, setColor] = useState(init?.color ?? '')
   const [categoryId, setCategoryId] = useState<Category['id'] | null>(
     categoryIdFromGroup,
   )
   const [notes, setNotes] = useState(init?.notes ?? '')
 
-  const isValid = useMemo<boolean>(() => {
-    if (groupName.trim() === '') return false
+  const isFormValid = useMemo<boolean>(() => {
+    if (name.trim() === '') return false
     if (!color.match(/^#[0-9a-fA-F]{3,6}$/)) return false
     return true
-  }, [color, groupName])
+  }, [color, name])
 
   const isEditForm = useMemo(() => init !== null, [init])
 
@@ -58,118 +54,128 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
   }, [orderedCategories])
 
   const pageTitle = useMemo(() => {
-    const name = groupName !== '' ? groupName : '[kein Name]'
+    const groupName = name !== '' ? name : '[kein Name]'
+
     return isEditForm
-      ? `${name} ${t('groups:editForm.edit.titleHint')}`
-      : `${name} ${t('groups:editForm.create.titleHint')}`
-  }, [groupName, isEditForm, t])
+      ? `${groupName} ${t('groups:editForm.edit.titleHint')}`
+      : `${groupName} ${t('groups:editForm.create.titleHint')}`
+  }, [name, isEditForm, t])
 
-  function createGroup() {
-    const newGroup: ProjectGroup = {
-      id: createId(),
-      name: groupName,
-      color,
-      notes,
-      projects: [],
-    }
+  const createGroup = useCallback(() => {
+    const id = createId()
 
-    dispatch(addGroup(newGroup))
+    dispatch(addGroup({ id, name, color, notes, projects: [] }))
 
     if (categoryId !== null) {
-      dispatch(
-        addGroupToCategory({ categoryId: categoryId, groupId: newGroup.id }),
-      )
+      dispatch(addGroupToCategory({ categoryId: categoryId, groupId: id }))
     }
 
-    router.push(`/groups/${newGroup.id}`)
-  }
+    router.push({
+      pathname: '/groups/[groupId]',
+      query: { groupId: id },
+    })
+  }, [categoryId, color, dispatch, name, notes])
 
-  function editGroup() {
+  const editGroup = useCallback(() => {
     if (init === null) return
 
-    const updatedGroup: ProjectGroup = {
-      id: init.id,
-      name: groupName,
-      color,
-      notes,
-      projects: init.projects,
+    dispatch(
+      updateGroup({
+        id: init.id,
+        changes: { name, color, notes, projects: init.projects },
+      }),
+    )
+
+    if (categoryId !== null) {
+      dispatch(addGroupToCategory({ groupId: init.id, categoryId }))
     }
 
-    updateGroup(updatedGroup, categoryId)
+    router.push({ pathname: '/groups/[groupId]', query: { groupId: init.id } })
+  }, [categoryId, color, dispatch, name, init, notes])
 
-    router.push(`/groups/${updatedGroup.id}`)
-  }
+  const saveGroup = useCallback(() => {
+    if (isEditForm) {
+      editGroup()
+    } else {
+      createGroup()
+    }
+  }, [createGroup, editGroup, isEditForm])
 
-  function handleSubmit(event: FormEvent) {
-    event.preventDefault()
-    isEditForm ? editGroup() : createGroup()
-  }
-
-  function handleCancel() {
+  const cancel = useCallback(() => {
     if (init !== null) {
-      router.push(`/groups/${init.id}`)
+      router.push({
+        pathname: '/groups/[groupId]',
+        query: { groupId: init.id },
+      })
       return
     }
 
     router.push(`/`)
+  }, [init])
+
+  const toolbarItems = useMemo<ToolbarItem[]>(
+    () => [
+      {
+        type: 'button',
+        buttonType: 'primary',
+        label: t('buttons.save'),
+        icon: <SaveIcon />,
+        disabled: !isFormValid,
+        action: saveGroup,
+      },
+      {
+        type: 'button',
+        buttonType: 'default',
+        label: t('buttons.cancel'),
+        icon: <XIcon />,
+        action: cancel,
+      },
+    ],
+    [cancel, isFormValid, saveGroup, t],
+  )
+
+  function handleSubmit(event: FormEvent) {
+    event.preventDefault()
+    saveGroup()
   }
 
   return (
-    <Layout left={isFileOpen ? <GroupList /> : null}>
-      <ToolbarContainer
-        toolbarItems={[
-          {
-            type: 'button',
-            buttonType: 'primary',
-            label: t('buttons.save'),
-            icon: <SaveIcon />,
-            action: isEditForm ? editGroup : createGroup,
-          },
-          {
-            type: 'button',
-            buttonType: 'default',
-            label: t('buttons.cancel'),
-            icon: <XIcon />,
-            action: handleCancel,
-          },
-        ]}
+    <ToolbarContainer toolbarItems={toolbarItems}>
+      <PageContent
+        title={pageTitle}
+        titleIcon={isEditForm ? <FolderIcon /> : <FolderAddIcon />}
+        titleIconColor={color}
       >
-        <PageContent
-          title={pageTitle}
-          titleIcon={isEditForm ? <FolderIcon /> : <FolderAddIcon />}
-          titleIconColor={color}
-        >
-          <Form onSubmit={handleSubmit}>
-            <Input
-              label={t('groups:editForm.labels.name')}
-              onChange={setGroupName}
-              value={groupName}
-            />
+        <Form onSubmit={handleSubmit}>
+          <Input
+            label={t('groups:editForm.labels.name')}
+            onChange={setName}
+            value={name}
+          />
 
-            <ColorInput
-              label={t('groups:editForm.labels.color')}
-              value={color}
-              onChange={setColor}
-            />
+          <ColorInput
+            label={t('groups:editForm.labels.color')}
+            value={color}
+            onChange={setColor}
+          />
 
-            <Select
-              items={[
-                { value: '', label: '[ ohne Kategorie ]' },
-                ...categorySelectItems,
-              ]}
-              label={t('groups:editForm.labels.category')}
-              value={categoryId}
-              onChange={setCategoryId}
-            />
+          <Select
+            items={[
+              { value: '', label: '[ ohne Kategorie ]' },
+              ...categorySelectItems,
+            ]}
+            label={t('groups:editForm.labels.category')}
+            value={categoryId}
+            onChange={setCategoryId}
+          />
 
-            <Textarea
-              label={t('groups:editForm.labels.notes')}
-              value={notes}
-              onChange={setNotes}
-            />
-          </Form>
-        </PageContent>
-      </ToolbarContainer>
-    </Layout>
+          <Textarea
+            label={t('groups:editForm.labels.notes')}
+            value={notes}
+            onChange={setNotes}
+          />
+        </Form>
+      </PageContent>
+    </ToolbarContainer>
   )
 }

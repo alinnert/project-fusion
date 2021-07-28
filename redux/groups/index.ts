@@ -2,9 +2,10 @@ import {
   createEntityAdapter,
   createSelector,
   createSlice,
+  PayloadAction,
 } from '@reduxjs/toolkit'
-import { AppState, store } from '..'
-import { addGroupToCategory, Category } from '../categories'
+import { AppState } from '..'
+import { removeElementsFromArray } from '../../utils/array'
 import { closeDatabase, setDatabase } from '../database'
 import { Project } from '../projects'
 
@@ -24,8 +25,27 @@ const slice = createSlice({
   reducers: {
     addGroup: adapter.addOne,
     setGroup: adapter.setOne,
+    updateGroup: adapter.updateOne,
     removeGroup: adapter.removeOne,
     setGroups: adapter.setAll,
+
+    addProjectToGroup(
+      state,
+      action: PayloadAction<{
+        groupId: ProjectGroup['id']
+        projectId: Project['id']
+      }>,
+    ) {
+      const { projectId, groupId } = action.payload
+
+      // Remove project from all groups before adding it to the intended one.
+      for (const group of Object.values(state.entities)) {
+        if (group === undefined) continue
+        removeElementsFromArray(group.projects, projectId)
+      }
+
+      state.entities[groupId]?.projects.push(projectId)
+    },
   },
   extraReducers(builder) {
     builder.addCase(setDatabase, (state, { payload }) => {
@@ -40,19 +60,15 @@ const slice = createSlice({
 
 export const {
   reducer: groupsReducer,
-  actions: { addGroup, setGroup, removeGroup, setGroups },
+  actions: {
+    addGroup,
+    setGroup,
+    updateGroup,
+    removeGroup,
+    setGroups,
+    addProjectToGroup,
+  },
 } = slice
-
-export function updateGroup(
-  group: ProjectGroup,
-  categoryId: Category['id'] | null,
-): void {
-  store.dispatch(setGroup(group))
-  if (categoryId === null) return
-  store.dispatch(
-    addGroupToCategory({ groupId: group.id, categoryId: categoryId }),
-  )
-}
 
 export const selectGroupIdsWithoutCategory = createSelector(
   [(state: AppState) => state.categories.entities, (state) => state.groups.ids],

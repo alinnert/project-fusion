@@ -8,7 +8,7 @@ import {
   useMemo,
 } from 'react'
 import { capitalize } from '../../utils/capitalize'
-import { matchBool } from '../../utils/match'
+import { matchBoolToString } from '../../utils/match'
 import { Heroicon } from './Heroicon'
 
 export type ButtonType =
@@ -42,7 +42,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
 
     const boxBaseClasses = classNames(
       'flex items-center',
-      matchBool(hasChildren, 'px-3', 'px-2'),
+      matchBoolToString(hasChildren, 'px-3', 'px-2'),
       'py-2 rounded',
     )
 
@@ -136,12 +136,12 @@ export const Button: FC<PropsWithChildren<Props>> = ({
       case 'default':
       case 'primary':
       case 'delete':
-        return matchBool(hasChildren, 'mr-2')
+        return matchBoolToString(hasChildren, 'mr-2')
 
       case 'header':
       case 'header-open':
       case 'header-current':
-        return matchBool(hasChildren, 'mr-1')
+        return matchBoolToString(hasChildren, 'mr-1')
     }
   }, [buttonType, hasChildren])
 
@@ -155,7 +155,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
         ) : null}
         <div
           className={classNames(
-            matchBool(icon !== undefined && hasChildren, 'mr-1'),
+            matchBoolToString(icon !== undefined && hasChildren, 'mr-1'),
           )}
         >
           {typeof children === 'string' ? capitalize(children) : children}

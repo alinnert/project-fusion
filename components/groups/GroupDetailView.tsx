@@ -32,7 +32,7 @@ export const GroupDetailView: FC<Props> = ({}) => {
     if (groupId === null) return
     const groupName = group?.name
     if (groupName === undefined) return
-    
+
     openConfirmDeleteDialog({
       title: t('groups:deleteDialog.title'),
       message: t('groups:deleteDialog.message', { group: groupName }),

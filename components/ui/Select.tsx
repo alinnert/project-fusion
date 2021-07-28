@@ -6,7 +6,7 @@ import {
 } from '@heroicons/react/solid'
 import classNames from 'classnames'
 import React, { FC, useMemo, useState } from 'react'
-import { matchBool } from '../../utils/match'
+import { matchBoolToString } from '../../utils/match'
 import { FormItem } from './FormItem'
 import { Heroicon } from './Heroicon'
 
@@ -90,8 +90,8 @@ export const Select: FC<Props> = ({
                         'flex items-center',
                         'px-2 py-1',
                         'rounded',
-                        matchBool(active, 'bg-gradient-brand'),
-                        matchBool(active, 'text-white'),
+                        matchBoolToString(active, 'bg-gradient-brand'),
+                        matchBoolToString(active, 'text-white'),
                       )}
                     >
                       <div className="w-8 flex-0 flex justify-center">
@@ -106,7 +106,7 @@ export const Select: FC<Props> = ({
                       <div
                         className={classNames(
                           'flex-1',
-                          matchBool(selected, 'font-semibold'),
+                          matchBoolToString(selected, 'font-semibold'),
                         )}
                       >
                         {item.label}

@@ -1,10 +1,11 @@
 import { InboxIcon } from '@heroicons/react/outline'
 import { PlusIcon } from '@heroicons/react/solid'
 import { useTranslation } from 'next-i18next'
-import React, { FC, ReactNode, useMemo } from 'react'
+import { useRouter } from 'next/router'
+import React, { FC, ReactNode, useCallback, useMemo } from 'react'
 import { Project } from '../../redux/projects'
 import { EmptyText } from '../ui/EmptyText'
-import { ToolbarContainer } from '../ui/ToolbarContainer'
+import { ToolbarContainer, ToolbarItem } from '../ui/ToolbarContainer'
 import { ProjectListItem } from './ProjectListItem'
 
 type ArchivedString = 'open' | 'archived'
@@ -15,6 +16,7 @@ interface Props {
 
 export const ProjectList: FC<Props> = ({ projects }) => {
   const { t } = useTranslation()
+  const router = useRouter()
 
   const groupedProjects = useMemo<Record<ArchivedString, Project[]>>(() => {
     const groups: Record<ArchivedString, Project[]> = {
@@ -47,17 +49,30 @@ export const ProjectList: FC<Props> = ({ projects }) => {
     )
   }
 
+  const createProject = useCallback(() => {
+    const groupId = router.query.groupId
+    if (groupId === undefined) return
+
+    router.push({
+      pathname: '/groups/[groupId]/new_project',
+      query: { groupId },
+    })
+  }, [router])
+
+  const toolbarItems = useMemo<ToolbarItem[]>(
+    () => [
+      {
+        type: 'button',
+        label: t('projects:terms.project'),
+        icon: <PlusIcon />,
+        action: createProject,
+      },
+    ],
+    [createProject, t],
+  )
+
   return (
-    <ToolbarContainer
-      toolbarItems={[
-        {
-          type: 'button',
-          label: t('projects:terms.project'),
-          icon: <PlusIcon />,
-          action() {},
-        },
-      ]}
-    >
+    <ToolbarContainer toolbarItems={toolbarItems}>
       {projects.length === 0 ? (
         <EmptyText
           icon={<InboxIcon />}

@@ -24,6 +24,23 @@
       "unarchiveProject": "Move to active projects"
     }
   },
+  "editForm": {
+    "create": {
+      "pageTitle": "Create project",
+      "titleHint": "(create)"
+    },
+    "edit": {
+      "pageTitle": "Edit project",
+      "titleHint": "(edit)"
+    },
+    "labels": {
+      "name": "Project name",
+      "projectNumber": "Project number",
+      "notes": "Notes (Supports Markdown)",
+      "important": "Favorite",
+      "archived": "Archived"
+    }
+  },
   "favorites": {
     "noFavorites": {
       "title": "There are no favorites",

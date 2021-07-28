@@ -24,6 +24,23 @@
       "unarchiveProject": "Zu aktive Projekte"
     }
   },
+  "editForm": {
+    "create": {
+      "pageTitle": "Projekt anlegen",
+      "titleHint": "(anlegen)"
+    },
+    "edit": {
+      "pageTitle": "Projekt bearbeiten",
+      "titleHint": "(bearbeiten)"
+    },
+    "labels": {
+      "name": "Projektname",
+      "projectNumber": "Projektnummer",
+      "notes": "Notizen (Unterstützt Markdown)",
+      "important": "Favorit",
+      "archived": "Archiviert"
+    }
+  },
   "favorites": {
     "noFavorites": {
       "title": "Keine Favoriten vorhanden",

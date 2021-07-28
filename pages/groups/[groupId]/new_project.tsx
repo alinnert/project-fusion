@@ -1,12 +1,11 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
+import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import React, { ReactElement } from 'react'
 import { Layout } from '../../../components/app/Layout'
 import { GroupDetailView } from '../../../components/groups/GroupDetailView'
 import { GroupList } from '../../../components/groups/GroupList'
-import { useGroupFromRoute } from '../../../components/groups/useGroupFromRoute'
-import { ProjectList } from '../../../components/projects/ProjectList'
-import { useProjectsFromGroup } from '../../../components/projects/useProjectsFromGroup'
+import { ProjectEditForm } from '../../../components/projects/ProjectEditForm'
 import { useAppSelector } from '../../../redux'
 import { selectIsFileOpen } from '../../../redux/database'
 import { getPageTitle } from '../../../utils/getPageTitle'
@@ -21,22 +20,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths: [], fallback: 'blocking' }
 }
 
-export default function GroupById(): ReactElement | null {
-  const isFileOpen = useAppSelector(selectIsFileOpen)
-  const { group } = useGroupFromRoute()
-  const groupProjects = useProjectsFromGroup(group)
+export default function NewProject(): ReactElement | null {
+  const { t } = useTranslation()
 
   return (
     <>
       <Head>
-        <title>{getPageTitle(`${group?.name ?? '---'}`)}</title>
+        <title>{getPageTitle(t('projects:editForm.create.pageTitle'))}</title>
       </Head>
 
-      <Layout
-        left={<GroupList />}
-        right={<ProjectList projects={groupProjects} />}
-      >
-        {isFileOpen ? <GroupDetailView /> : null}
+      <Layout left={<GroupList />} right={<ProjectEditForm />}>
+        <GroupDetailView />
       </Layout>
     </>
   )

@@ -11,10 +11,12 @@ import {
 import classNames from 'classnames'
 import marked from 'marked'
 import { useTranslation } from 'next-i18next'
+import { useRouter } from 'next/router'
 import React, { FC, useCallback, useMemo } from 'react'
 import { useAppDispatch } from '../../redux'
 import { Project, removeProject, updateProject } from '../../redux/projects'
-import { matchBool } from '../../utils/match'
+import { matchBoolToString } from '../../utils/match'
+import { useGroupFromRoute } from '../groups/useGroupFromRoute'
 import { DropdownMenu, MenuItem } from '../ui/DropdownMenu'
 import { useConfirmDialog } from '../ui/useConfirmDialog'
 
@@ -30,6 +32,8 @@ export const ProjectListItem: FC<Props> = ({
 }) => {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
+  const router = useRouter()
+  const { groupId } = useGroupFromRoute()
   const { dialog: confirmDeleteDialog, openDialog: openConfirmDeleteDialog } =
     useConfirmDialog({
       onConfirm() {
@@ -38,8 +42,11 @@ export const ProjectListItem: FC<Props> = ({
     })
 
   const handleEdit = useCallback(() => {
-    console.warn('not yet implemented')
-  }, [])
+    router.push({
+      pathname: '/groups/[groupId]/projects/[projectId]/edit',
+      query: { groupId, projectId: id }
+    })
+  }, [groupId, id, router])
 
   const handleAddToFavorites = useCallback(() => {
     dispatch(updateProject({ id, changes: { important: true } }))
@@ -124,14 +131,14 @@ export const ProjectListItem: FC<Props> = ({
   const textClasses = useMemo(() => {
     return classNames(
       'select-text',
-      matchBool(
+      matchBoolToString(
         important,
-        matchBool(
+        matchBoolToString(
           archived,
           'text-amber-500 italic line-through',
           'text-amber-800',
         ),
-        matchBool(
+        matchBoolToString(
           archived,
           'text-neutral-400 italic line-through',
           'text-neutral-800',
@@ -154,10 +161,10 @@ export const ProjectListItem: FC<Props> = ({
         className={classNames(
           'px-4 py-2 mb-2 last:mb-0',
           'rounded-md shadow',
-          matchBool(
+          matchBoolToString(
             important,
-            matchBool(archived, 'bg-amber-100/40', 'bg-amber-100'),
-            matchBool(archived, 'bg-neutral-100/40', 'bg-neutral-100'),
+            matchBoolToString(archived, 'bg-amber-100/40', 'bg-amber-100'),
+            matchBoolToString(archived, 'bg-neutral-100/40', 'bg-neutral-100'),
           ),
         )}
       >
@@ -165,7 +172,7 @@ export const ProjectListItem: FC<Props> = ({
           className={classNames(
             'flex',
             'text-lg',
-            matchBool(important, 'font-semibold text-amber-800'),
+            matchBoolToString(important, 'font-semibold text-amber-800'),
           )}
         >
           <div className={classNames('flex-1 pr-4', textClasses)}>{name}</div>

@@ -5,14 +5,13 @@ import { ProjectGroup } from '../../redux/groups'
 
 export function useGroupFromRoute() {
   const router = useRouter()
+  const groups = useAppSelector((state) => state.groups.entities)
   const { groupId: groupIdValue } = router.query
 
   const groupId = useMemo(() => {
     if (groupIdValue === undefined) return null
     return Array.isArray(groupIdValue) ? groupIdValue[0] : groupIdValue
   }, [groupIdValue])
-
-  const groups = useAppSelector((state) => state.groups.entities)
 
   const group = useMemo<ProjectGroup | null>(() => {
     if (groupId === null) return null

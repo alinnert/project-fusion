@@ -17,7 +17,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
 export default function Favorites(): ReactElement | null {
   const { t } = useTranslation()
-  const filename = useAppSelector((state) => state.database.filename)
 
   return (
     <>
@@ -26,7 +25,7 @@ export default function Favorites(): ReactElement | null {
       </Head>
 
       <Layout
-        left={filename !== null ? <GroupList currentId="/favorites" /> : null}
+        left={<GroupList currentId="/favorites" />}
       >
         <EmptyText
           title={t('projects:favorites.noFavorites.title')}

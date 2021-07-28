@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import { FC, MouseEvent, PropsWithChildren, ReactElement } from 'react'
-import { matchBool } from '../../utils/match'
+import { matchBoolToString } from '../../utils/match'
 import { Heroicon } from './Heroicon'
 
 interface Props {
@@ -38,7 +38,7 @@ export const LinkListItem: FC<PropsWithChildren<Props>> = ({
             'flex-0 self-center',
             'p-1 mr-4',
             'rounded',
-            matchBool(current && icon !== null, 'bg-white text-black'),
+            matchBoolToString(current && icon !== null, 'bg-white text-black'),
           )}
           style={{ color: iconColor }}
         >

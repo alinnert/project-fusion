@@ -35,7 +35,7 @@ export default function Home(): ReactElement | null {
         <title>{getPageTitle()}</title>
       </Head>
 
-      <Layout left={isFileOpen ? <GroupList /> : null}>
+      <Layout left={<GroupList />}>
         {isFileOpen ? (
           <EmptyText
             title={t('welcome:fileOpen.title')}

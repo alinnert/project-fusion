@@ -3,6 +3,7 @@ import {
   createSlice,
   PayloadAction,
 } from '@reduxjs/toolkit'
+import { removeElementsFromArray } from '../../utils/array'
 import { closeDatabase, setDatabase } from '../database'
 import { ProjectGroup } from '../groups'
 
@@ -31,23 +32,22 @@ const slice = createSlice({
         groupId: ProjectGroup['id']
       }>,
     ) {
+      const { categoryId, groupId } = action.payload
+
+      // Remove group from all categories before adding it to the intended one.
       for (const category of Object.values(state.entities)) {
-        if (!category?.groups.includes(action.payload.groupId)) continue
-        category.groups.splice(
-          category.groups.indexOf(action.payload.groupId),
-          1,
-        )
+        if (category === undefined) continue
+        removeElementsFromArray(category.groups, groupId)
       }
 
-      state.entities[action.payload.categoryId]?.groups.push(
-        action.payload.groupId,
-      )
+      state.entities[categoryId]?.groups.push(groupId)
     },
   },
   extraReducers(builder) {
     builder.addCase(setDatabase, (state, { payload }) => {
       adapter.setAll(state, payload.database.categories)
     })
+
     builder.addCase(closeDatabase, (state) => {
       adapter.removeAll(state)
     })
