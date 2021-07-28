@@ -82,7 +82,11 @@ export default function Info(): ReactElement | null {
               <li>
                 <a href="https://github.com/ai/nanoid">nanoid</a>
               </li>
-              <li>Native File System API</li>
+              <li>
+                <a href="https://web.dev/file-system-access">
+                  File System Access API
+                </a>
+              </li>
             </ul>
           </div>
         </PageContent>
