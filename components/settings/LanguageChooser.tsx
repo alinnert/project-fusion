@@ -24,10 +24,7 @@ export const LanguageChooser: FC<Props> = ({}) => {
         label: language.nativeLanguage,
         icon: isCurrentLanguage ? <CheckIcon /> : <PlaceholderIcon />,
         action() {
-          router.push({
-            pathname: router.asPath,
-            query: { locale: languageKey },
-          })
+          router.push(router.asPath, undefined, { locale: languageKey })
         },
       }
     })
