@@ -44,7 +44,7 @@ export const ProjectListItem: FC<Props> = ({
   const handleEdit = useCallback(() => {
     router.push({
       pathname: '/groups/[groupId]/projects/[projectId]/edit',
-      query: { groupId, projectId: id }
+      query: { groupId, projectId: id },
     })
   }, [groupId, id, router])
 
@@ -131,12 +131,13 @@ export const ProjectListItem: FC<Props> = ({
   const textClasses = useMemo(() => {
     return classNames(
       'select-text',
+      'font-semibold',
       matchBoolToString(
         important,
         matchBoolToString(
           archived,
-          'text-amber-500 italic line-through',
-          'text-amber-800',
+          'text-important-500 italic line-through',
+          'text-important-800',
         ),
         matchBoolToString(
           archived,
@@ -160,21 +161,32 @@ export const ProjectListItem: FC<Props> = ({
         key={id}
         className={classNames(
           'px-4 py-2 mb-2 last:mb-0',
-          'rounded-md shadow',
+          'rounded-md border',
           matchBoolToString(
             important,
-            matchBoolToString(archived, 'bg-amber-100/40', 'bg-amber-100'),
-            matchBoolToString(archived, 'bg-neutral-100/40', 'bg-neutral-100'),
+            matchBoolToString(
+              archived,
+              'border-important-200',
+              'border-important-500',
+            ),
+            matchBoolToString(
+              archived,
+              'border-neutral-200',
+              'border-neutral-400',
+            ),
+          ),
+          matchBoolToString(
+            important,
+            matchBoolToString(
+              archived,
+              'bg-important-100/40',
+              'bg-important-100',
+            ),
+            matchBoolToString(archived, 'bg-neutral-50', 'bg-neutral-100'),
           ),
         )}
       >
-        <div
-          className={classNames(
-            'flex',
-            'text-lg',
-            matchBoolToString(important, 'font-semibold text-amber-800'),
-          )}
-        >
+        <div className={classNames('flex text-lg')}>
           <div className={classNames('flex-1 pr-4', textClasses)}>{name}</div>
 
           {projectNumber !== undefined ? (
@@ -184,6 +196,7 @@ export const ProjectListItem: FC<Props> = ({
           <div className="ml-2">
             <DropdownMenu
               buttonType="flat"
+              buttonSize="small"
               items={menuItems}
               icon={<DotsHorizontalIcon />}
               align="right"

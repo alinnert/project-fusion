@@ -16,10 +16,10 @@ export const PageContent: FC<PropsWithChildren<Props>> = ({
 }) => {
   return (
     <div className="p-4 w-full h-full overflow-y-auto">
-      <div className="font-semibold text-3xl mb-6 flex items-center">
+      <div className="text-2xl font-semibold mb-4 flex items-center">
         {titleIcon !== undefined ? (
-          <div className={classNames('flex-0 mr-4')}>
-            <Heroicon icon={titleIcon} color={titleIconColor} scale={2} />
+          <div className={classNames('flex-0 mr-2')}>
+            <Heroicon icon={titleIcon} color={titleIconColor} scale={1.5} />
           </div>
         ) : null}
         <div className="flex-1 select-text">{title}</div>

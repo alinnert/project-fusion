@@ -27,7 +27,7 @@ export const LinkListItem: FC<PropsWithChildren<Props>> = ({
         'flex items-center',
         'p-1 rounded-md',
         'hover:bg-neutral-200 active:bg-neutral-300 current:bg-gradient-brand',
-        'font-semibold current:text-white',
+        'current:text-white',
         { current },
       )}
       onClick={handleClick}

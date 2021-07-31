@@ -7,7 +7,6 @@ export async function openDatabaseFielWithHandle(
   fileHandle: FileSystemFileHandle,
 ): Promise<void> {
   const queryPermissionResult = await asyncTry(() =>
-    // @ts-expect-error
     fileHandle.queryPermission({ mode: 'readwrite' }),
   )
   if (queryPermissionResult.caught) {
@@ -21,7 +20,6 @@ export async function openDatabaseFielWithHandle(
 
   if (queryPermissionResult.value === 'prompt') {
     const requestPermissionResult = await asyncTry(() =>
-      // @ts-expect-error
       fileHandle.requestPermission({ mode: 'readwrite' }),
     )
     if (requestPermissionResult.caught) {

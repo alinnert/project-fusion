@@ -21,7 +21,18 @@ export default class AppDocument extends Document {
         <Head>
           <meta name="theme-color" content="#0369A1" />
           <link rel="manifest" href="/projectfusion.webmanifest" />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin="anonymous"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Source+Sans+Pro:ital,wght@0,400;0,600;1,400&display=swap"
+            rel="stylesheet"
+          />
         </Head>
+
         <body className="select-none">
           <Main />
           <NextScript />

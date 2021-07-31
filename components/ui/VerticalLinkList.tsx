@@ -1,7 +1,8 @@
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
-import { Fragment, MouseEvent, ReactElement } from 'react'
+import React, { Fragment, MouseEvent, ReactElement } from 'react'
 import { LinkListItem } from './LinkListItem'
+import { TextDivider } from './TextDivider'
 
 export interface LinkCategory {
   id: string
@@ -63,21 +64,16 @@ export function VerticalLinkList({
 
       {items
         // Nur Kategorien anzeigen, denen auch Gruppen zugeordnet sind.
-        .filter(([category, links]) => links.length > 0)
+        .filter(([_category, links]) => links.length > 0)
         .map(([category, links]) => (
           <Fragment key={category.id}>
-            <div
-              className={classNames(
-                'flex items-center gap-x-1',
-                'mt-6 first:mt-0 mb-1',
-              )}
-            >
-              <div className={classNames('w-1 h-px bg-neutral-300')} />
-              <div className="text-sm font-semibold text-brand-600">
-                {category.name}
-              </div>
-              <div className="flex-1 h-px bg-neutral-300" />
-            </div>
+            <TextDivider
+              label={category.name}
+              size="small"
+              color="brand"
+              className="mt-6 mb-1"
+            />
+
             <div className="flex flex-col gap-y-1">
               {links.map((group) => createLinkListItem(group))}
             </div>

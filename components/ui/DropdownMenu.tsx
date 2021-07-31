@@ -8,7 +8,7 @@ import React, {
   useMemo,
 } from 'react'
 import { defaultMatch, matchString, matchUnion } from '../../utils/match'
-import { Button, ButtonType } from './Button'
+import { Button, ButtonSize, ButtonType } from './Button'
 import { DropdownMenuItem } from './DropdownMenuItem'
 
 export interface MenuItem {
@@ -21,6 +21,7 @@ interface Props {
   icon?: ReactElement
   items: MenuItem[]
   buttonType: ButtonType
+  buttonSize?: ButtonSize
   align?: 'left' | 'right'
 }
 
@@ -29,6 +30,7 @@ export const DropdownMenu: FC<PropsWithChildren<Props>> = ({
   icon,
   items,
   buttonType,
+  buttonSize,
   align = 'left',
 }) => {
   const openButtonType = useMemo<ButtonType>(() => {
@@ -48,6 +50,7 @@ export const DropdownMenu: FC<PropsWithChildren<Props>> = ({
               <Button
                 icon={icon}
                 buttonType={open ? openButtonType : buttonType}
+                buttonSize={buttonSize}
               >
                 {children}
               </Button>

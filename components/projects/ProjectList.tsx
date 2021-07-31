@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import React, { FC, ReactNode, useCallback, useMemo } from 'react'
 import { Project } from '../../redux/projects'
 import { EmptyText } from '../ui/EmptyText'
+import { TextDivider } from '../ui/TextDivider'
 import { ToolbarContainer, ToolbarItem } from '../ui/ToolbarContainer'
 import { ProjectListItem } from './ProjectListItem'
 
@@ -40,7 +41,7 @@ export const ProjectList: FC<Props> = ({ projects }) => {
 
     return (
       <div className="mb-8">
-        <div className="font-semibold mb-2 px-4">{title}</div>
+        <TextDivider label={title} color="brand" className="mb-4" />
 
         {groupedProjects[groupName].map((project) => (
           <ProjectListItem key={project.id} {...project} />

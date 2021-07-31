@@ -8,7 +8,7 @@ import {
   useMemo,
 } from 'react'
 import { capitalize } from '../../utils/capitalize'
-import { matchBoolToString } from '../../utils/match'
+import { defaultMatch, matchBoolToString, matchUnion } from '../../utils/match'
 import { Heroicon } from './Heroicon'
 
 export type ButtonType =
@@ -21,10 +21,13 @@ export type ButtonType =
   | 'header-open'
   | 'header-current'
 
+export type ButtonSize = 'normal' | 'small'
+
 interface Props
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
   icon?: ReactElement
   buttonType?: ButtonType
+  buttonSize?: ButtonSize
   className?: string
 }
 
@@ -32,6 +35,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
   children,
   icon,
   buttonType = 'default',
+  buttonSize = 'normal',
   className,
   ...buttonProps
 }) => {
@@ -43,7 +47,12 @@ export const Button: FC<PropsWithChildren<Props>> = ({
     const boxBaseClasses = classNames(
       'flex items-center',
       matchBoolToString(hasChildren, 'px-3', 'px-2'),
-      'py-2 rounded',
+      matchUnion(buttonSize, {
+        [defaultMatch]: 'py-2',
+        normal: 'py-2',
+        small: 'py-1',
+      }),
+      'rounded',
     )
 
     const darkTextClasses = classNames(
@@ -126,7 +135,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           'text-brand-800',
         )
     }
-  }, [buttonType, hasChildren])
+  }, [buttonSize, buttonType, hasChildren])
 
   const iconContainerClasses = useMemo(() => {
     switch (buttonType) {
@@ -141,7 +150,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
       case 'header':
       case 'header-open':
       case 'header-current':
-        return matchBoolToString(hasChildren, 'mr-1')
+        return matchBoolToString(hasChildren, 'mr-2')
     }
   }, [buttonType, hasChildren])
 

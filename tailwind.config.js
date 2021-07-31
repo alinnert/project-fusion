@@ -5,23 +5,31 @@ module.exports = {
   mode: 'jit',
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
+
   theme: {
+    fontFamily: {
+      sans: ['Source Sans Pro'],
+      mono: ['IBM Plex Mono'],
+    },
+
     extend: {
       colors: {
-        ...colors,
+        transparent: colors.transparent,
+        black: colors.black,
+        white: colors.white,
         brand: colors.sky,
         accent: colors.cyan,
+        important: colors.amber,
         danger: colors.rose,
         neutral: colors.blueGray,
       },
     },
   },
-  variants: {
-    extend: {},
-  },
+
   plugins: [
     require('@tailwindcss/typography'),
     require('@tailwindcss/forms'),
+
     plugin(({ addVariant, e }) => {
       addVariant('enabled', ({ modifySelectors, separator }) => {
         modifySelectors(
