@@ -35,10 +35,9 @@ export const TextDivider: FC<Props> = ({
       <div className={classNames(lineClasses)} />
       <div
         className={classNames(
-          matchUnion(size, {
-            normal: 'font-base',
-            small: 'font-sm',
-            [defaultMatch]: 'font-base',
+            normal: 'text-md',
+            small: 'text-sm',
+            [defaultMatch]: 'text-base',
           }),
           'font-semibold tracking-wide',
           matchUnion(color, {
