@@ -7,7 +7,11 @@ import React, {
   ReactElement,
   useMemo,
 } from 'react'
-import { defaultMatch, matchString, matchUnion } from '../../utils/match'
+import {
+  defaultMatch,
+  matchStringToString,
+  matchUnionToUnion,
+} from '../../utils/match'
 import { Button, ButtonSize, ButtonType } from './Button'
 import { DropdownMenuItem } from './DropdownMenuItem'
 
@@ -34,10 +38,10 @@ export const DropdownMenu: FC<PropsWithChildren<Props>> = ({
   align = 'left',
 }) => {
   const openButtonType = useMemo<ButtonType>(() => {
-    return matchUnion<ButtonType, ButtonType>(buttonType, {
+    return matchUnionToUnion<ButtonType, ButtonType>(buttonType, {
+      [defaultMatch]: 'default',
       flat: 'flat-open',
       header: 'header-open',
-      [defaultMatch]: buttonType,
     })
   }, [buttonType])
 
@@ -60,7 +64,7 @@ export const DropdownMenu: FC<PropsWithChildren<Props>> = ({
           <Menu.Items
             className={classNames(
               'absolute z-50 w-max',
-              matchString(align, {
+              matchStringToString(align, {
                 left: 'left-0',
                 right: 'right-0',
                 [defaultMatch]: 'left-0',

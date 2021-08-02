@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import { Children, cloneElement, FC, isValidElement, ReactElement } from 'react'
-import { defaultMatch, matchString } from '../../utils/match'
+import { defaultMatch, matchStringToString } from '../../utils/match'
 
 interface Props {
   icon: ReactElement<{ className: string }>
@@ -16,7 +16,7 @@ export const Heroicon: FC<Props> = ({ icon, color, scale = 1 }) => {
         return cloneElement(child, {
           className: classNames(
             child.props.className,
-            matchString(scale, {
+            matchStringToString(scale, {
               1: 'w-5 h-5',
               1.5: 'w-7 h-7',
               2: 'w-10 h-10',

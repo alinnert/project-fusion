@@ -8,7 +8,7 @@ import {
   useMemo,
 } from 'react'
 import { capitalize } from '../../utils/capitalize'
-import { defaultMatch, matchBoolToString, matchUnion } from '../../utils/match'
+import { defaultMatch, matchBoolToString, matchUnionToString } from '../../utils/match'
 import { Heroicon } from './Heroicon'
 
 export type ButtonType =
@@ -47,8 +47,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
     const boxBaseClasses = classNames(
       'flex items-center',
       matchBoolToString(hasChildren, 'px-3', 'px-2'),
-      matchUnion(buttonSize, {
-        [defaultMatch]: 'py-2',
+      matchUnionToString(buttonSize, {
         normal: 'py-2',
         small: 'py-1',
       }),

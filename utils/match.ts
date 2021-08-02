@@ -4,32 +4,29 @@ interface DefaultMatch<T> {
   [defaultMatch]: T
 }
 
-export function matchString<T extends string | number>(
+export const matchStringToString = <T extends string | number>(
   value: T,
   choices: Record<T, string> & DefaultMatch<string>,
-): string {
-  return choices[value] ?? choices[defaultMatch]
-}
+): string => choices[value] ?? choices[defaultMatch]
 
-export function matchUnion<T extends string | number, V extends string>(
+export const matchUnionToString = <T extends string | number>(
+  value: T,
+  choices: Record<T, string>,
+): string => choices[value] ?? ''
+
+export const matchUnionToUnion = <T extends string | number, V extends string>(
   value: T,
   choices: Partial<Record<T, V>> & DefaultMatch<V>,
-): V {
-  return choices[value] ?? choices[defaultMatch]
-}
+): V => choices[value] ?? choices[defaultMatch]
 
-export function matchBoolToString(
+export const matchBoolToString = (
   value: boolean,
   whenTrue: string,
   whenFalse?: string,
-): string {
-  return value ? whenTrue : whenFalse ?? ''
-}
+): string => (value ? whenTrue : whenFalse ?? '')
 
-export function matchBool<T>(
+export const matchBool = <T>(
   value: boolean,
   whenTrue: T,
   whenFalse?: T,
-): T | null {
-  return value ? whenTrue : whenFalse ?? null
-}
+): T | null => (value ? whenTrue : whenFalse ?? null)

@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import { FC, useMemo } from 'react'
-import { defaultMatch, matchUnion } from '../../utils/match'
+import { defaultMatch, matchUnionToString } from '../../utils/match'
 
 export type TextDividerColor = 'neutral' | 'brand'
 
@@ -22,10 +22,9 @@ export const TextDivider: FC<Props> = ({
   const lineClasses = useMemo(() => {
     return classNames(
       'h-px bg-black/20',
-      matchUnion(size, {
+      matchUnionToString(size, {
         normal: 'w-4',
         small: 'w-1',
-        [defaultMatch]: 'w-4',
       }),
     )
   }, [size])
@@ -35,15 +34,14 @@ export const TextDivider: FC<Props> = ({
       <div className={classNames(lineClasses)} />
       <div
         className={classNames(
+          matchUnionToString(size, {
             normal: 'text-md',
             small: 'text-sm',
-            [defaultMatch]: 'text-base',
           }),
           'font-semibold tracking-wide',
-          matchUnion(color, {
+          matchUnionToString(color, {
             neutral: 'text-neutral-600',
             brand: 'text-brand-600',
-            [defaultMatch]: 'text-neutral-600',
           }),
         )}
       >
