@@ -21,8 +21,8 @@ export const Input: FC<Props> = ({
   ...inputProps
 }) => {
   const inputClasses = useMemo(() => {
-    const boxClasses = 'w-60 p-2 rounded box-border'
-    const textClasses = 'text-sm'
+    const boxClasses = 'w-60 px-2 py-1 rounded box-border'
+    const textClasses = ''
 
     switch (inputType) {
       default:

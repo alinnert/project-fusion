@@ -146,7 +146,7 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
 
   return (
     <ToolbarContainer toolbarItems={toolbarItems}>
-      <PageContent title={pageTitle}>
+      <PageContent title={pageTitle} centered={true}>
         <Form onSubmit={handleSubmit}>
           <Input
             label={t('projects:editForm.labels.name')}

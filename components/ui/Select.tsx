@@ -55,7 +55,7 @@ export const Select: FC<Props> = ({
             <Listbox.Button
               className={classNames(
                 'relative text-left',
-                'p-2',
+                'px-2 py-1',
                 'w-full',
                 'rounded',
                 'border border-neutral-600',

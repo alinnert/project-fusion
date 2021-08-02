@@ -145,6 +145,7 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
         title={pageTitle}
         titleIcon={isEditForm ? <FolderIcon /> : <FolderAddIcon />}
         titleIconColor={color}
+        centered={true}
       >
         <Form onSubmit={handleSubmit}>
           <Input

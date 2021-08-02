@@ -67,6 +67,7 @@ export const GroupDetailView: FC<Props> = ({}) => {
         title={group.name}
         titleIcon={<FolderIcon />}
         titleIconColor={group.color}
+        centered={true}
       >
         <Markdown text={group.notes} />
       </PageContent>

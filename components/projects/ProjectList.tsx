@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import React, { FC, ReactNode, useCallback, useMemo } from 'react'
 import { Project } from '../../redux/projects'
 import { EmptyText } from '../ui/EmptyText'
+import { PageContent } from '../ui/PageContent'
 import { TextDivider } from '../ui/TextDivider'
 import { ToolbarContainer, ToolbarItem } from '../ui/ToolbarContainer'
 import { ProjectListItem } from './ProjectListItem'
@@ -86,17 +87,19 @@ export const ProjectList: FC<Props> = ({ projects }) => {
           ))}
         </EmptyText>
       ) : (
-        <div className="px-2 py-4 text-lg">
-          {getGroupedItems(
-            'open',
-            t('projects:list.itemGroups.activeProjects'),
-          )}
+        <PageContent centered={true}>
+          <div className="px-2 py-4 text-lg">
+            {getGroupedItems(
+              'open',
+              t('projects:list.itemGroups.activeProjects'),
+            )}
 
-          {getGroupedItems(
-            'archived',
-            t('projects:list.itemGroups.archivedProjects'),
-          )}
-        </div>
+            {getGroupedItems(
+              'archived',
+              t('projects:list.itemGroups.archivedProjects'),
+            )}
+          </div>
+        </PageContent>
       )}
     </ToolbarContainer>
   )
