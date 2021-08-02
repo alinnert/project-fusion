@@ -11,12 +11,10 @@
   },
   "editForm": {
     "create": {
-      "pageTitle": "Create group",
-      "titleHint": "(create)"
+      "pageTitle": "Create group"
     },
     "edit": {
-      "pageTitle": "Edit group",
-      "titleHint": "(edit)"
+      "pageTitle": "Edit group"
     },
     "labels": {
       "name": "Group name",

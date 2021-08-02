@@ -44,8 +44,8 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
     const projectName = name !== '' ? name : '[kein Name]'
 
     return isEditForm
-      ? `${projectName} ${t('projects:editForm.edit.titleHint')}`
-      : `${projectName} ${t('projects:editForm.create.titleHint')}`
+      ? `${t('projects:editForm.edit.pageTitle')}: ${projectName}`
+      : `${t('projects:editForm.create.pageTitle')}: ${projectName}`
   }, [isEditForm, name, t])
 
   const createProject = useCallback(() => {
@@ -149,7 +149,7 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
       <PageContent title={pageTitle} centered={true}>
         <Form onSubmit={handleSubmit}>
           <Input
-            label={t('projects:editForm.labels.name')}
+            label={`${t('projects:editForm.labels.name')} *`}
             value={name}
             onChange={setName}
           />

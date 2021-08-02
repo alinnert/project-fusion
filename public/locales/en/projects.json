@@ -26,12 +26,10 @@
   },
   "editForm": {
     "create": {
-      "pageTitle": "Create project",
-      "titleHint": "(create)"
+      "pageTitle": "Create project"
     },
     "edit": {
-      "pageTitle": "Edit project",
-      "titleHint": "(edit)"
+      "pageTitle": "Edit project"
     },
     "labels": {
       "name": "Project name",

@@ -57,8 +57,8 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
     const groupName = name !== '' ? name : '[kein Name]'
 
     return isEditForm
-      ? `${groupName} ${t('groups:editForm.edit.titleHint')}`
-      : `${groupName} ${t('groups:editForm.create.titleHint')}`
+      ? `${t('groups:editForm.edit.pageTitle')}: ${groupName}`
+      : `${t('groups:editForm.create.pageTitle')}: ${groupName}`
   }, [name, isEditForm, t])
 
   const createGroup = useCallback(() => {
@@ -149,7 +149,7 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
       >
         <Form onSubmit={handleSubmit}>
           <Input
-            label={t('groups:editForm.labels.name')}
+            label={`${t('groups:editForm.labels.name')} *`}
             onChange={setName}
             value={name}
           />

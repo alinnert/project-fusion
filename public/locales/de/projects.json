@@ -26,12 +26,10 @@
   },
   "editForm": {
     "create": {
-      "pageTitle": "Projekt anlegen",
-      "titleHint": "(anlegen)"
+      "pageTitle": "Projekt anlegen"
     },
     "edit": {
-      "pageTitle": "Projekt bearbeiten",
-      "titleHint": "(bearbeiten)"
+      "pageTitle": "Projekt bearbeiten"
     },
     "labels": {
       "name": "Projektname",
