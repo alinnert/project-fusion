@@ -1,19 +1,18 @@
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/solid'
 import { useTranslation } from 'next-i18next'
-import React, { FC, FormEvent, useState } from 'react'
+import React, { FC, useState } from 'react'
 import { useAppDispatch } from '../../redux'
 import {
   addCategory,
   Category,
   removeCategory,
-  updateCategory,
+  updateCategory
 } from '../../redux/categories'
 import { swapCategories } from '../../redux/settings'
 import { createId } from '../../utils/customNanoId'
 import { useOrderedCategories } from '../categories/useOrderedCategories'
 import { Button } from '../ui/Button'
 import { Headline } from '../ui/Headline'
-import { Input } from '../ui/Input'
 import { PageContent } from '../ui/PageContent'
 import { SortableList, SwapDirection } from '../ui/SortableList'
 import { useTextDialog } from '../ui/useTextDialog'

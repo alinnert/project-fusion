@@ -6,7 +6,7 @@ interface Props {
   currentId: string
 }
 
-export const SettingsCategoryList: FC<Props> = ({ currentId }) => {
+export const SettingsPagesList: FC<Props> = ({ currentId }) => {
   const { settingsItems } = useSettings()
 
   return (

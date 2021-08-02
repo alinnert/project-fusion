@@ -4,7 +4,7 @@ import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import React, { ReactElement } from 'react'
 import { Layout } from '../../components/app/Layout'
-import { SettingsCategoryList } from '../../components/settings/SettingsCategoryList'
+import { SettingsPagesList } from '../../components/settings/SettingsPagesList'
 import { EmptyText } from '../../components/ui/EmptyText'
 import { getPageTitle } from '../../utils/getPageTitle'
 import { getServerSideTranslations } from '../../utils/getServerSideTranslations'
@@ -23,7 +23,7 @@ export default function Config(): ReactElement | null {
         <title>{getPageTitle(t('settings:index.title'))}</title>
       </Head>
 
-      <Layout left={<SettingsCategoryList currentId="" />}>
+      <Layout left={<SettingsPagesList currentId="" />}>
         <EmptyText title={t('settings:index.title')} icon={<CogIcon />}>
           {t('settings:index.body')}
         </EmptyText>

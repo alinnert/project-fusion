@@ -4,7 +4,7 @@ import Head from 'next/head'
 import React, { ReactElement } from 'react'
 import { Layout } from '../../components/app/Layout'
 import { CategorySettings } from '../../components/settings/CategorySettings'
-import { SettingsCategoryList } from '../../components/settings/SettingsCategoryList'
+import { SettingsPagesList } from '../../components/settings/SettingsPagesList'
 import { useSettings } from '../../components/settings/useSettings'
 import { getPageTitle } from '../../utils/getPageTitle'
 import { getServerSideTranslations } from '../../utils/getServerSideTranslations'
@@ -30,7 +30,7 @@ export default function Categories(): ReactElement | null {
 
       <Layout
         left={
-          <SettingsCategoryList currentId={databaseSettings.categories.id} />
+          <SettingsPagesList currentId={databaseSettings.categories.id} />
         }
       >
         <CategorySettings />

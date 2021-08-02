@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import React, { ReactElement } from 'react'
 import { Layout } from '../../components/app/Layout'
-import { SettingsCategoryList } from '../../components/settings/SettingsCategoryList'
+import { SettingsPagesList } from '../../components/settings/SettingsPagesList'
 import { PageContent } from '../../components/ui/PageContent'
 import { getPageTitle } from '../../utils/getPageTitle'
 import { getServerSideTranslations } from '../../utils/getServerSideTranslations'
@@ -22,7 +22,7 @@ export default function Links(): ReactElement | null {
         <title>{getPageTitle(t('settings:links.title'))}</title>
       </Head>
 
-      <Layout left={<SettingsCategoryList currentId="links" />}>
+      <Layout left={<SettingsPagesList currentId="links" />}>
         <PageContent title={t('settings:links.title')}>
           {t('settings:links.description')}
         </PageContent>
