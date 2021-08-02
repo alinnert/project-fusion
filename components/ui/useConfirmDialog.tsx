@@ -45,6 +45,7 @@ export function useConfirmDialog({ onConfirm, onCancel }: Options): Result {
 
   const handleConfirm = useCallback(() => {
     onConfirm()
+    setIsModalOpen(false)
   }, [onConfirm])
 
   const handleClose = useCallback(() => {

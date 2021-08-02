@@ -28,7 +28,7 @@ export const DropdownMenuItem: FC<Props> = ({
       onClick={handleItemClick}
       className={classNames(
         'flex items-center',
-        'py-2 pl-2 pr-12 rounded',
+        'py-1 pl-1 pr-12 rounded',
         matchBoolToString(
           isActive,
           'bg-gradient-brand text-white',
@@ -38,7 +38,7 @@ export const DropdownMenuItem: FC<Props> = ({
       )}
     >
       {icon !== undefined ? (
-        <div className="mr-3">
+        <div className="mr-2">
           <Heroicon icon={icon} />
         </div>
       ) : null}

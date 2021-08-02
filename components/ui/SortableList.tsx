@@ -32,7 +32,7 @@ export const SortableList: FC<Props> = ({
   }
 
   return (
-    <div className="">
+    <>
       <div className="flex items-center gap-x-2 mb-4">
         <Button
           icon={<ArrowUpIcon />}
@@ -54,13 +54,20 @@ export const SortableList: FC<Props> = ({
         ) : null}
       </div>
 
-      <div className="flex flex-col gap-y-1">
+      <div
+        className={classNames(
+          'flex flex-col gap-y-1',
+          'p-1 rounded-md',
+          'max-h-[50vh] overflow-y-auto',
+          'border border-neutral-300',
+        )}
+      >
         {ids.map((id) => (
           <div
             key={id}
             onClick={() => onSelectedIdChange(id)}
             className={classNames(
-              'p-2',
+              'px-3 py-1',
               'rounded',
               matchBoolToString(
                 selectedId === id,
@@ -73,6 +80,6 @@ export const SortableList: FC<Props> = ({
           </div>
         ))}
       </div>
-    </div>
+    </>
   )
 }

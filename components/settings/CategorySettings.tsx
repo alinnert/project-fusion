@@ -6,7 +6,7 @@ import {
   addCategory,
   Category,
   removeCategory,
-  updateCategory
+  updateCategory,
 } from '../../redux/categories'
 import { swapCategories } from '../../redux/settings'
 import { createId } from '../../utils/customNanoId'
@@ -15,6 +15,7 @@ import { Button } from '../ui/Button'
 import { Headline } from '../ui/Headline'
 import { PageContent } from '../ui/PageContent'
 import { SortableList, SwapDirection } from '../ui/SortableList'
+import { useConfirmDialog } from '../ui/useConfirmDialog'
 import { useTextDialog } from '../ui/useTextDialog'
 
 interface Props {}
@@ -24,6 +25,24 @@ export const CategorySettings: FC<Props> = ({}) => {
   const [selectedId, setSelectedId] = useState<Category['id'] | null>(null)
   const dispatch = useAppDispatch()
   const { categories, orderedCategoryIds } = useOrderedCategories()
+
+  const { dialog: deleteDialog, openDialog: openDeleteDialog } =
+    useConfirmDialog({
+      onConfirm() {
+        if (selectedId === null) return
+        const previousIndex = orderedCategoryIds.indexOf(selectedId)
+        dispatch(removeCategory(selectedId))
+
+        const newSelectedId =
+          orderedCategoryIds.length === 1
+            ? null
+            : previousIndex === orderedCategoryIds.length - 1
+            ? orderedCategoryIds[orderedCategoryIds.length - 2]
+            : orderedCategoryIds[previousIndex + 1]
+
+        setSelectedId(newSelectedId)
+      },
+    })
 
   const { dialog: addDialog, openDialog: openAddDialog } = useTextDialog({
     onConfirm(name) {
@@ -43,7 +62,7 @@ export const CategorySettings: FC<Props> = ({}) => {
     dispatch(swapCategories({ categoryId, direction }))
   }
 
-  function handleAdd2() {
+  function handleAdd() {
     openAddDialog({
       title: t('settings:categories.createDialog.title'),
       inputLabel: t('settings:categories.createDialog.inputLabel'),
@@ -53,18 +72,14 @@ export const CategorySettings: FC<Props> = ({}) => {
   }
 
   function handleDelete() {
-    if (selectedId === null) return
-    const previousIndex = orderedCategoryIds.indexOf(selectedId)
-    dispatch(removeCategory(selectedId))
-
-    const newSelectedId =
-      orderedCategoryIds.length === 1
-        ? null
-        : previousIndex === orderedCategoryIds.length - 1
-        ? orderedCategoryIds[orderedCategoryIds.length - 2]
-        : orderedCategoryIds[previousIndex + 1]
-
-    setSelectedId(newSelectedId)
+    openDeleteDialog({
+      title: t('settings:categories.deleteDialog.title'),
+      message: t('settings:categories.deleteDialog.message', {
+        category: 'hOI',
+      }),
+      confirmButtonLabel: t('buttons.delete'),
+      confirmButtonType: 'delete',
+    })
   }
 
   function handleRename() {
@@ -83,9 +98,10 @@ export const CategorySettings: FC<Props> = ({}) => {
   }
 
   return (
-    <PageContent title={t('settings:categories.title')}>
+    <PageContent title={t('settings:categories.title')} centered={true}>
       {addDialog}
       {renameDialog}
+      {deleteDialog}
 
       <div className="mb-4">
         <p>{t('settings:categories.description')}</p>
@@ -105,7 +121,7 @@ export const CategorySettings: FC<Props> = ({}) => {
                 <Button
                   buttonType="default"
                   icon={<PlusIcon />}
-                  onClick={handleAdd2}
+                  onClick={handleAdd}
                 >
                   {t('buttons.new')}
                 </Button>

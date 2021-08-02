@@ -24,7 +24,7 @@ export default function Info(): ReactElement | null {
       </Head>
 
       <Layout>
-        <PageContent title={t('info:title')}>
+        <PageContent title={t('info:title')} centered={true}>
           <div className="prose prose-brand select-text">
             <Image src={LogoPicture} alt="ProjectFusion Logo" />
 

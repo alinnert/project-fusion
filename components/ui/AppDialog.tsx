@@ -29,7 +29,7 @@ export const AppDialog: FC<Props> = ({
         className={classNames(
           'fixed inset-0 z-40',
           'bg-white/80',
-          'backdrop-blur-sm',
+          'backdrop-blur',
         )}
       />
 

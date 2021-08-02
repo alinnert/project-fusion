@@ -23,6 +23,10 @@
     "renameDialog": {
       "title": "\"{{category}}\" umbenennen",
       "inputLabel": "Neuer Name"
+    },
+    "deleteDialog": {
+      "title": "Kategorie löschen?",
+      "message": "Soll die Kategorie \"{{category}}\" gelöscht werden?"
     }
   },
   "links": {
