@@ -71,17 +71,6 @@ export const CategorySettings: FC<Props> = ({}) => {
     })
   }
 
-  function handleDelete() {
-    openDeleteDialog({
-      title: t('settings:categories.deleteDialog.title'),
-      message: t('settings:categories.deleteDialog.message', {
-        category: 'hOI',
-      }),
-      confirmButtonLabel: t('buttons.delete'),
-      confirmButtonType: 'delete',
-    })
-  }
-
   function handleRename() {
     if (selectedId === null) return
     const category = categories[selectedId]
@@ -94,6 +83,21 @@ export const CategorySettings: FC<Props> = ({}) => {
       inputLabel: t('settings:categories.renameDialog.inputLabel'),
       primaryButtonLabel: t('buttons.rename'),
       value: category.name,
+    })
+  }
+
+  function handleDelete() {
+    if (selectedId === null) return
+    const category = categories[selectedId]
+    if (category === undefined) return
+
+    openDeleteDialog({
+      title: t('settings:categories.deleteDialog.title'),
+      message: t('settings:categories.deleteDialog.message', {
+        category: category.name,
+      }),
+      confirmButtonLabel: t('buttons.delete'),
+      confirmButtonType: 'delete',
     })
   }
 
