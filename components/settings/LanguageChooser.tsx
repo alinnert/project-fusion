@@ -3,7 +3,8 @@ import { useRouter } from 'next/router'
 import React, { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { languages } from '../../utils/languages'
-import { DropdownMenu, MenuItem } from '../ui/DropdownMenu'
+import { DropdownMenu } from '../ui/DropdownMenu'
+import { DropdownMenuItem } from '../ui/DropdownMenuItem'
 import { PlaceholderIcon } from '../ui/PlaceholderIcon'
 
 interface Props {}
@@ -14,7 +15,7 @@ export const LanguageChooser: FC<Props> = ({}) => {
 
   const currentLanguageKey = useMemo(() => i18n.language, [i18n.language])
 
-  const menuItems = useMemo<Array<MenuItem>>(() => {
+  const menuItems = useMemo<Array<DropdownMenuItem>>(() => {
     if (currentLanguageKey === null) return []
 
     return Object.entries(languages).map(([languageKey, language]) => {

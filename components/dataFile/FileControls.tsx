@@ -12,7 +12,8 @@ import { selectIsFileOpen } from '../../redux/database'
 import { closeDatabaseFile } from '../../redux/database/closeDatabaseFile'
 import { createDatabaseFile } from '../../redux/database/createDatabaseFile'
 import { openDatabaseFile } from '../../redux/database/openDatabaseFile'
-import { DropdownMenu, MenuItem } from '../ui/DropdownMenu'
+import { DropdownMenu } from '../ui/DropdownMenu'
+import { DropdownMenuItem } from '../ui/DropdownMenuItem'
 
 interface Props {}
 
@@ -23,7 +24,7 @@ export const FileControls: FC<Props> = ({}) => {
   const isFileOpen = useAppSelector(selectIsFileOpen)
 
   const menuItems = useMemo(() => {
-    const createItem: MenuItem = {
+    const createItem: DropdownMenuItem = {
       label: t('header.menu.database.items.create'),
       icon: <DocumentAddIcon />,
       action() {
@@ -32,7 +33,7 @@ export const FileControls: FC<Props> = ({}) => {
       },
     }
 
-    const openItem: MenuItem = {
+    const openItem: DropdownMenuItem = {
       label: t('header.menu.database.items.open'),
       icon: <FolderIcon className="h-5 w-5" />,
       action() {
@@ -41,7 +42,7 @@ export const FileControls: FC<Props> = ({}) => {
       },
     }
 
-    const closeItem: MenuItem = {
+    const closeItem: DropdownMenuItem = {
       label: t('header.menu.database.items.close'),
       action() {
         closeDatabaseFile()
