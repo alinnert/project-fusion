@@ -8,7 +8,6 @@ import { ViewAreaTabs } from '../dataFile/ViewAreaTabs'
 import { LanguageChooser } from '../settings/LanguageChooser'
 import { HeaderSearch } from '../ui/HeaderSearch'
 import { Separator } from '../ui/HeaderSeparator'
-import { Logo } from '../ui/Logo'
 
 interface Props {
   left?: ReactNode
@@ -43,7 +42,6 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
         <div
           className={classNames('row-start-1 col-start-1', 'flex items-center')}
         >
-          <Logo />
           <FileControls />
           <Separator type="header" />
           <ViewAreaTabs />
