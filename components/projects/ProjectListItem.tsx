@@ -159,39 +159,32 @@ export const ProjectListItem: FC<Props> = ({
     return marked(notes)
   }, [notes])
 
+  const projectItemClasses = useMemo(() => {
+    return classNames(
+      'px-4 py-2 mb-2 last:mb-0',
+      'rounded-md border',
+      matchBoolToString(
+        important,
+        matchBoolToString(
+          archived,
+          'border-important-200',
+          'border-important-300',
+        ),
+        matchBoolToString(archived, 'border-neutral-200', 'border-neutral-300'),
+      ),
+      matchBoolToString(
+        important,
+        matchBoolToString(archived, 'bg-important-100/40', 'bg-important-100'),
+        matchBoolToString(archived, 'bg-neutral-50', 'bg-neutral-100'),
+      ),
+    )
+  }, [archived, important])
+
   return (
     <>
       {confirmDeleteDialog}
 
-      <div
-        key={id}
-        className={classNames(
-          'px-4 py-2 mb-2 last:mb-0',
-          'rounded-md border',
-          matchBoolToString(
-            important,
-            matchBoolToString(
-              archived,
-              'border-important-200',
-              'border-important-500',
-            ),
-            matchBoolToString(
-              archived,
-              'border-neutral-200',
-              'border-neutral-400',
-            ),
-          ),
-          matchBoolToString(
-            important,
-            matchBoolToString(
-              archived,
-              'bg-important-100/40',
-              'bg-important-100',
-            ),
-            matchBoolToString(archived, 'bg-neutral-50', 'bg-neutral-100'),
-          ),
-        )}
-      >
+      <div key={id} className={projectItemClasses}>
         <div className={classNames('flex text-lg')}>
           <div className={classNames('flex-1 pr-4', textClasses)}>{name}</div>
 
