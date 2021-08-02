@@ -28,15 +28,19 @@ export const PageContent: FC<PropsWithChildren<Props>> = ({
         'px-4 h-full overflow-y-auto',
       )}
     >
-      <div className="text-2xl font-semibold mb-4 flex items-center">
-        {titleIcon !== undefined ? (
-          <div className={classNames('flex-0 mr-2')}>
-            <Heroicon icon={titleIcon} color={titleIconColor} scale={1.5} />
-          </div>
-        ) : null}
-        <div className="flex-1 select-text">{title}</div>
-      </div>
-      <div>{children}</div>
+      {title !== undefined ? (
+        <div className="text-2xl font-semibold mb-4 flex items-center">
+          {titleIcon !== undefined ? (
+            <div className={classNames('flex-0 mr-2')}>
+              <Heroicon icon={titleIcon} color={titleIconColor} scale={1.5} />
+            </div>
+          ) : null}
+
+          <div className="flex-1 select-text">{title}</div>
+        </div>
+      ) : null}
+
+      {children}
     </div>
   )
 }

@@ -72,7 +72,7 @@ export const SortableList: FC<Props> = ({
               matchBoolToString(
                 selectedId === id,
                 'bg-gradient-brand text-white',
-                'hover:bg-neutral-200',
+                'hover:bg-neutral-200 active:bg-neutral-300',
               ),
             )}
           >
