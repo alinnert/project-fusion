@@ -35,23 +35,25 @@ export default function Home(): ReactElement | null {
         <title>{getPageTitle()}</title>
       </Head>
 
-      <Layout left={<GroupList />}>
-        {isFileOpen ? (
+      {isFileOpen ? (
+        <Layout left={<GroupList />}>
           <EmptyText
             title={t('welcome:fileOpen.title')}
             icon={<DatabaseIcon />}
           >
             {t('welcome:fileOpen.body')}
           </EmptyText>
-        ) : (
+        </Layout>
+      ) : (
+        <Layout>
           <EmptyText
             title={t('welcome:noFileOpen.title')}
             icon={<SparklesIcon />}
           >
             {t('welcome:noFileOpen.body')}
           </EmptyText>
-        )}
-      </Layout>
+        </Layout>
+      )}
     </>
   )
 }

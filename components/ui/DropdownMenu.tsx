@@ -15,15 +15,9 @@ import {
 import { Button, ButtonSize, ButtonType } from './Button'
 import { DropdownMenuItem } from './DropdownMenuItem'
 
-export interface MenuItem {
-  label: string
-  icon?: ReactElement
-  action?: () => void
-}
-
 interface Props {
   icon?: ReactElement
-  items: MenuItem[]
+  items: DropdownMenuItem[]
   buttonType: ButtonType
   buttonSize?: ButtonSize
   align?: 'left' | 'right'

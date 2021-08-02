@@ -3,26 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  /* @font-face {
-    font-family: 'Inter var';
-    font-style: normal;
-    font-weight: 100 900;
-    font-display: swap;
-    src: url('/fonts/Inter-roman.var.woff2') format('woff2');
-    font-named-instance: 'Regular';
-  }
-
-  @font-face {
-    font-family: 'Inter var';
-    font-style: italic;
-    font-weight: 100 900;
-    font-display: swap;
-    src: url('/fonts/Inter-italic.var.woff2') format('woff2');
-    font-named-instance: 'Italic';
-  } */
-}
-
-@layer base {
   button,
   [role='button'] {
     cursor: default;
@@ -32,6 +12,10 @@
 @layer components {
   .bg-gradient-brand {
     @apply bg-gradient-to-r from-brand-700 to-accent-600;
+  }
+
+  .bg-gradient-danger {
+    @apply bg-gradient-to-r from-danger-700 to-dangerAccent-500;
   }
 
   .bg-blur {

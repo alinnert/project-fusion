@@ -22,6 +22,7 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
 }) => {
   const isFileOpen = useAppSelector(selectIsFileOpen)
   const showRightPanel = useMemo(() => (right ?? null) !== null, [right])
+  const showLeftPanel = useMemo(() => (left ?? null) !== null, [left])
 
   return (
     <div
@@ -62,20 +63,23 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
         </div>
       </div>
 
-      <div
-        className={classNames(
-          'row-start-2 col-start-1 overflow-hidden',
-          'bg-neutral-50',
-          'border-r border-neutral-300',
-        )}
-      >
-        {left}
-      </div>
+      {showLeftPanel ? (
+        <div
+          className={classNames(
+            'row-start-2 col-start-1 overflow-hidden',
+            'bg-neutral-50',
+            'border-r border-neutral-300',
+          )}
+        >
+          {left}
+        </div>
+      ) : null}
 
       <div
         className={classNames(
-          'row-start-2 col-start-2 overflow-hidden',
-          matchBoolToString(!showRightPanel, 'col-span-2'),
+          'row-start-2 overflow-hidden',
+          matchBoolToString(showLeftPanel, 'col-start-2', 'col-start-1'),
+          matchBoolToString(showRightPanel, 'col-end-3', 'col-end-4'),
         )}
       >
         {children}

@@ -21,6 +21,7 @@ module.exports = {
         accent: colors.cyan,
         important: colors.amber,
         danger: colors.rose,
+        dangerAccent: colors.red,
         neutral: colors.blueGray,
       },
     },

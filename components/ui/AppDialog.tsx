@@ -37,7 +37,7 @@ export const AppDialog: FC<Props> = ({
         className={classNames(
           'relative z-50',
           'grid grid-cols-1 grid-rows-[auto,auto]',
-          'min-w-[400px]',
+          'w-[500px] max-w-[90vw]',
           'border border-neutral-200',
           'bg-white rounded-lg shadow-2xl',
         )}

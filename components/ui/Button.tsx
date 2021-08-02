@@ -164,6 +164,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
         ) : null}
         <div
           className={classNames(
+            'text-left leading-tight',
             matchBoolToString(icon !== undefined && hasChildren, 'mr-1'),
           )}
         >

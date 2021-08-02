@@ -17,7 +17,8 @@ import { useAppDispatch } from '../../redux'
 import { Project, removeProject, updateProject } from '../../redux/projects'
 import { matchBoolToString } from '../../utils/match'
 import { useGroupFromRoute } from '../groups/useGroupFromRoute'
-import { DropdownMenu, MenuItem } from '../ui/DropdownMenu'
+import { DropdownMenu } from '../ui/DropdownMenu'
+import { DropdownMenuItem } from '../ui/DropdownMenuItem'
 import { useConfirmDialog } from '../ui/useConfirmDialog'
 
 interface Props extends Project {}
@@ -77,8 +78,8 @@ export const ProjectListItem: FC<Props> = ({
     })
   }, [name, openConfirmDeleteDialog, t])
 
-  const menuItems = useMemo<Array<MenuItem>>(() => {
-    const items: Array<MenuItem> = [
+  const menuItems = useMemo<Array<DropdownMenuItem>>(() => {
+    const items: Array<DropdownMenuItem> = [
       { label: t('buttons.edit'), icon: <PencilIcon />, action: handleEdit },
 
       important
@@ -111,7 +112,12 @@ export const ProjectListItem: FC<Props> = ({
         action: handleDuplicate,
       },
 
-      { label: t('buttons.delete'), icon: <TrashIcon />, action: handleDelete },
+      {
+        label: t('buttons.delete'),
+        icon: <TrashIcon />,
+        type: 'delete',
+        action: handleDelete,
+      },
     ]
 
     return items

@@ -1,26 +1,29 @@
 import { ArrowSmRightIcon } from '@heroicons/react/solid'
 import classNames from 'classnames'
 import React, { FC, ReactElement, useMemo } from 'react'
-import { matchBoolToString } from '../../utils/match'
+import { matchBoolToString, matchUnionToString } from '../../utils/match'
 import { Heroicon } from './Heroicon'
 
-interface Props {
-  isActive: boolean
+export type DropdownMenuItemType = 'default' | 'delete'
+
+export interface DropdownMenuItem {
   label: string
   icon?: ReactElement
+  type?: DropdownMenuItemType
   action?: () => void
+}
+
+interface Props extends DropdownMenuItem {
+  isActive: boolean
 }
 
 export const DropdownMenuItem: FC<Props> = ({
   isActive,
   label,
   icon,
+  type = 'default',
   action,
 }) => {
-  const replacedLabel = useMemo(() => {
-    return label.includes('->') ? label.split('->') : label
-  }, [label])
-
   const handleItemClick = () => action?.()
 
   return (
@@ -29,12 +32,19 @@ export const DropdownMenuItem: FC<Props> = ({
       className={classNames(
         'flex items-center',
         'py-1 pl-1 pr-12 rounded',
-        matchBoolToString(
-          isActive,
-          'bg-gradient-brand text-white',
-          'text-neutral-700',
-        ),
-        'active:hover:bg-brand-700',
+
+        matchUnionToString(type, {
+          default: matchBoolToString(
+            isActive,
+            'bg-gradient-brand text-white',
+            'text-neutral-700',
+          ),
+          delete: matchBoolToString(
+            isActive,
+            'bg-gradient-danger text-white',
+            'text-danger-800',
+          ),
+        }),
       )}
     >
       {icon !== undefined ? (
@@ -43,19 +53,7 @@ export const DropdownMenuItem: FC<Props> = ({
         </div>
       ) : null}
 
-      <div className="text-sm font-semibold">
-        {Array.isArray(replacedLabel) ? (
-          <div className="flex">
-            {replacedLabel[0]}
-            <div className="mx-1">
-              <Heroicon icon={<ArrowSmRightIcon />} />
-            </div>
-            {replacedLabel[1]}
-          </div>
-        ) : (
-          replacedLabel
-        )}
-      </div>
+      <div className="text-sm font-semibold">{label}</div>
     </div>
   )
 }

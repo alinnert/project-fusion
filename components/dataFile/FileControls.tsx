@@ -72,7 +72,7 @@ export const FileControls: FC<Props> = ({}) => {
   return (
     <DropdownMenu icon={<DatabaseIcon />} items={menuItems} buttonType="header">
       {t('header.menu.database.label')}:{' '}
-      <span className="text-white">{filename}</span>
+      <span className="text-white whitespace-nowrap">{filename}</span>
     </DropdownMenu>
   )
 }
