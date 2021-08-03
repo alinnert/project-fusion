@@ -88,7 +88,7 @@ export const ProjectList: FC<Props> = ({ projects }) => {
         </EmptyText>
       ) : (
         <PageContent centered={true}>
-          <div className="px-2 py-4 text-lg">
+          <div className="text-lg">
             {getGroupedItems(
               'open',
               t('projects:list.itemGroups.activeProjects'),
