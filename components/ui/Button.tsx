@@ -45,7 +45,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
     const fontBaseClasses = 'text-sm font-semibold'
 
     const boxBaseClasses = classNames(
-      'flex items-center',
+      'flex gap-x-2 items-center',
       matchBoolToString(hasChildren, 'px-2', 'px-1'),
       matchUnionToString(buttonSize, { normal: 'py-1', small: 'py-1' }),
       'rounded',
@@ -136,20 +136,18 @@ export const Button: FC<PropsWithChildren<Props>> = ({
   return (
     <div className={classNames(className)}>
       <button className={buttonClasses} {...buttonProps}>
-        {icon !== undefined ? (
-          <div className="mr-2">
-            <Heroicon icon={icon} />
+        {icon !== undefined ? <Heroicon icon={icon} /> : null}
+
+        {hasChildren ? (
+          <div
+            className={classNames(
+              'text-left leading-tight',
+              matchBoolToString(icon !== undefined && hasChildren, 'mr-1'),
+            )}
+          >
+            {typeof children === 'string' ? capitalize(children) : children}
           </div>
         ) : null}
-
-        <div
-          className={classNames(
-            'text-left leading-tight',
-            matchBoolToString(icon !== undefined && hasChildren, 'mr-1'),
-          )}
-        >
-          {typeof children === 'string' ? capitalize(children) : children}
-        </div>
       </button>
     </div>
   )

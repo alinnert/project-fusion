@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import React, { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { languages } from '../../utils/languages'
+import { tailwindConfig, useBreakpoint } from '../../utils/tailwindConfig'
 import { DropdownMenu } from '../ui/DropdownMenu'
 import { DropdownMenuItem } from '../ui/DropdownMenuItem'
 import { PlaceholderIcon } from '../ui/PlaceholderIcon'
@@ -12,6 +13,7 @@ interface Props {}
 export const LanguageChooser: FC<Props> = ({}) => {
   const { t, i18n } = useTranslation()
   const router = useRouter()
+  const isXlScreen = useBreakpoint(tailwindConfig.theme.screens?.xl)
 
   const currentLanguageKey = useMemo(() => i18n.language, [i18n.language])
 
@@ -38,11 +40,11 @@ export const LanguageChooser: FC<Props> = ({}) => {
       buttonType="header"
       align="right"
     >
-      <span className="hidden xl:inline">
-        {currentLanguageKey === 'en'
+      {isXlScreen
+        ? currentLanguageKey === 'en'
           ? t('language')
-          : `${t('terms.language')} (Language)`}
-      </span>
+          : `${t('terms.language')} (Language)`
+        : null}
     </DropdownMenu>
   )
 }

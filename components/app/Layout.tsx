@@ -48,10 +48,7 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
         </div>
 
         <div
-          className={classNames(
-            'row-start-1 col-start-2',
-            'flex items-center gap-x-2',
-          )}
+          className={classNames('row-start-1 col-start-2', 'flex items-center')}
         >
           {isFileOpen ? (
             <>
