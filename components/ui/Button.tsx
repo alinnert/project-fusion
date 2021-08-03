@@ -121,8 +121,6 @@ export const Button: FC<PropsWithChildren<Props>> = ({
         )
 
       case 'header-open':
-        return classNames(fontBaseClasses, boxBaseClasses, 'bg-black/40')
-
       case 'header-current':
         return classNames(
           boxBaseClasses,

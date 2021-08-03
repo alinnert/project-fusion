@@ -9,6 +9,7 @@ import React, {
 } from 'react'
 import {
   defaultMatch,
+  matchBoolToString,
   matchStringToString,
   matchUnionToUnion,
 } from '../../utils/match'
@@ -21,6 +22,7 @@ interface Props {
   buttonType: ButtonType
   buttonSize?: ButtonSize
   align?: 'left' | 'right'
+  secondaryLabel?: string
 }
 
 export const DropdownMenu: FC<PropsWithChildren<Props>> = ({
@@ -30,6 +32,7 @@ export const DropdownMenu: FC<PropsWithChildren<Props>> = ({
   buttonType,
   buttonSize,
   align = 'left',
+  secondaryLabel,
 }) => {
   const openButtonType = useMemo<ButtonType>(() => {
     return matchUnionToUnion<ButtonType, ButtonType>(buttonType, {
@@ -50,7 +53,25 @@ export const DropdownMenu: FC<PropsWithChildren<Props>> = ({
                 buttonType={open ? openButtonType : buttonType}
                 buttonSize={buttonSize}
               >
-                {children}
+                <div className="flex items-center gap-x-3">
+                  {children}
+
+                  {secondaryLabel !== undefined ? (
+                    <>
+                      <div
+                        className={classNames(
+                          matchBoolToString(
+                            open,
+                            'text-brand-600',
+                            'text-white',
+                          ),
+                        )}
+                      >
+                        {secondaryLabel}
+                      </div>
+                    </>
+                  ) : null}
+                </div>
               </Button>
             </div>
           </Menu.Button>

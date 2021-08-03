@@ -39,11 +39,14 @@ export const LanguageChooser: FC<Props> = ({}) => {
       items={menuItems}
       buttonType="header"
       align="right"
+      secondaryLabel={
+        languages[currentLanguageKey as keyof typeof languages].nativeLanguage
+      }
     >
       {isXlScreen
         ? currentLanguageKey === 'en'
           ? t('language')
-          : `${t('terms.language')} (Language)`
+          : `${t('terms.language')}/Language`
         : null}
     </DropdownMenu>
   )

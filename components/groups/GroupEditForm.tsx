@@ -54,7 +54,7 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
   }, [orderedCategories])
 
   const pageTitle = useMemo(() => {
-    const groupName = name !== '' ? name : '[kein Name]'
+    const groupName = name !== '' ? name : '-'
 
     return isEditForm
       ? `${t('groups:editForm.edit.pageTitle')}: ${groupName}`
@@ -162,11 +162,12 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
 
           <Select
             items={[
-              { value: '', label: '[ ohne Kategorie ]' },
+              { value: '', label: t('groups:list.noCategory') },
               ...categorySelectItems,
             ]}
             label={t('groups:editForm.labels.category')}
             value={categoryId}
+            noValue={{ value: '', label: t('groups:list.noCategory') }}
             onChange={setCategoryId}
           />
 

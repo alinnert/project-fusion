@@ -26,14 +26,19 @@ export default function Info(): ReactElement | null {
       <Layout>
         <PageContent title={t('info:title')} centered={true}>
           <div className="prose prose-brand select-text">
-            <Image src={LogoPicture} alt="ProjectFusion Logo" />
-
             <p>
               <i>
                 {t('info:version')} 0.0.0.42
                 if-you-use-this-in-production-kittens-will-die-pre-alpha
               </i>
             </p>
+
+            <Image
+              src={LogoPicture}
+              alt="ProjectFusion Logo"
+              width="64"
+              height="64"
+            />
 
             <p>
               {t('info:sourceCode')}:{' '}

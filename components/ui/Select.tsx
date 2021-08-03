@@ -15,10 +15,16 @@ export interface SelectItem {
   label: string
 }
 
+interface SelectNoValue {
+  value: string
+  label: string
+}
+
 interface Props {
   items: SelectItem[]
   value: string | null
   label?: string
+  noValue: SelectNoValue
   className?: string
   onChange?: (value: string | null) => void
 }
@@ -27,6 +33,7 @@ export const Select: FC<Props> = ({
   items,
   value,
   label,
+  noValue,
   className,
   onChange,
 }) => {
@@ -36,15 +43,23 @@ export const Select: FC<Props> = ({
 
   const displayValue = useMemo(() => {
     return (
-      items.find((item) => item.value === selectedItem)?.label ??
-      '- nichts ausgewählt -'
+      items.find((item) => item.value === selectedItem)?.label ?? noValue.label
     )
-  }, [items, selectedItem])
+  }, [items, noValue.label, selectedItem])
 
   function handleChange(value: string): void {
     const nullableValue = value === '' ? null : value
     setSelectedItem(nullableValue)
     onChange?.(nullableValue)
+  }
+
+  interface IsSelectedItemsParams {
+    selected: boolean
+    value: string
+  }
+
+  function isSelectedItem({ selected, value }: IsSelectedItemsParams): boolean {
+    return selected || (value === '' && selectedItem === null)
   }
 
   return (
@@ -95,10 +110,19 @@ export const Select: FC<Props> = ({
                       )}
                     >
                       <div className="w-8 flex-0 flex justify-center">
-                        {selected ? (
+                        {isSelectedItem({ selected, value: item.value }) ? (
                           <Heroicon
-                            icon={<CheckIcon />}
-                            color={active ? 'white' : 'black'}
+                            icon={
+                              <CheckIcon
+                                className={classNames(
+                                  matchBoolToString(
+                                    active,
+                                    'text-white',
+                                    'text-brand-700',
+                                  ),
+                                )}
+                              />
+                            }
                           />
                         ) : null}
                       </div>
@@ -106,7 +130,17 @@ export const Select: FC<Props> = ({
                       <div
                         className={classNames(
                           'flex-1',
-                          matchBoolToString(selected, 'font-semibold'),
+                          matchBoolToString(
+                            isSelectedItem({ selected, value: item.value }),
+                            classNames(
+                              'font-semibold',
+                              matchBoolToString(
+                                active,
+                                'text-white',
+                                'text-brand-700',
+                              ),
+                            ),
+                          ),
                         )}
                       >
                         {item.label}

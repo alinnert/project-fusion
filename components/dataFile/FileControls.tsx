@@ -12,6 +12,7 @@ import { selectIsFileOpen } from '../../redux/database'
 import { closeDatabaseFile } from '../../redux/database/closeDatabaseFile'
 import { createDatabaseFile } from '../../redux/database/createDatabaseFile'
 import { openDatabaseFile } from '../../redux/database/openDatabaseFile'
+import { tailwindConfig, useBreakpoint } from '../../utils/tailwindConfig'
 import { DropdownMenu } from '../ui/DropdownMenu'
 import { DropdownMenuItem } from '../ui/DropdownMenuItem'
 
@@ -20,6 +21,7 @@ interface Props {}
 export const FileControls: FC<Props> = ({}) => {
   const { t } = useTranslation()
   const router = useRouter()
+  const isXlScreen = useBreakpoint(tailwindConfig.theme.screens?.xl)
   const filename = useAppSelector((state) => state.database.filename)
   const isFileOpen = useAppSelector(selectIsFileOpen)
 
@@ -71,9 +73,13 @@ export const FileControls: FC<Props> = ({}) => {
   }
 
   return (
-    <DropdownMenu icon={<DatabaseIcon />} items={menuItems} buttonType="header">
-      {t('header.menu.database.label')}:{' '}
-      <span className="text-white whitespace-nowrap">{filename}</span>
+    <DropdownMenu
+      icon={<DatabaseIcon />}
+      items={menuItems}
+      buttonType="header"
+      secondaryLabel={filename ?? undefined}
+    >
+      {isXlScreen || !isFileOpen ? t('header.menu.database.label') : null}
     </DropdownMenu>
   )
 }

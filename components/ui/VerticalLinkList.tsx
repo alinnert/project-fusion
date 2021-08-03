@@ -71,7 +71,7 @@ export function VerticalLinkList({
               label={category.name}
               size="small"
               color="brand"
-              className="mt-6 mb-1"
+              className="not-first:mt-6 mb-1"
             />
 
             <div className="flex flex-col gap-y-1">
