@@ -45,10 +45,6 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
           <FileControls />
           <Separator type="header" />
           <ViewAreaTabs />
-
-          <div className="ml-auto">
-            <LanguageChooser />
-          </div>
         </div>
 
         <div
@@ -57,7 +53,14 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
             'flex items-center gap-x-2',
           )}
         >
-          {isFileOpen ? <HeaderSearch /> : null}
+          {isFileOpen ? (
+            <>
+              <HeaderSearch />
+              <Separator type="header" />
+            </>
+          ) : null}
+
+          <LanguageChooser />
         </div>
       </div>
 

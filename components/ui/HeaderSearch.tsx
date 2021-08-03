@@ -7,8 +7,8 @@ import { Input } from './Input'
 interface Props {}
 
 export const HeaderSearch: FC<Props> = ({}) => {
-  const {t } = useTranslation()
-  
+  const { t } = useTranslation()
+
   return (
     <>
       <Input
@@ -16,8 +16,9 @@ export const HeaderSearch: FC<Props> = ({}) => {
         inputType="header"
         className="ml-2"
       />
+
       <Button buttonType="header" icon={<SearchIcon />}>
-        {t('header.search.button')}
+        <span className="hidden xl:inline">{t('header.search.button')}</span>
       </Button>
     </>
   )

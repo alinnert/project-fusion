@@ -8,11 +8,7 @@ import {
   useMemo,
 } from 'react'
 import { capitalize } from '../../utils/capitalize'
-import {
-  defaultMatch,
-  matchBoolToString,
-  matchUnionToString,
-} from '../../utils/match'
+import { matchBoolToString, matchUnionToString } from '../../utils/match'
 import { Heroicon } from './Heroicon'
 
 export type ButtonType =
@@ -137,31 +133,15 @@ export const Button: FC<PropsWithChildren<Props>> = ({
     }
   }, [buttonSize, buttonType, hasChildren])
 
-  const iconContainerClasses = useMemo(() => {
-    switch (buttonType) {
-      default:
-      case 'flat':
-      case 'flat-open':
-      case 'default':
-      case 'primary':
-      case 'delete':
-        return matchBoolToString(hasChildren, 'mr-2')
-
-      case 'header':
-      case 'header-open':
-      case 'header-current':
-        return matchBoolToString(hasChildren, 'mr-2')
-    }
-  }, [buttonType, hasChildren])
-
   return (
     <div className={classNames(className)}>
       <button className={buttonClasses} {...buttonProps}>
         {icon !== undefined ? (
-          <div className={iconContainerClasses}>
+          <div className="mr-2">
             <Heroicon icon={icon} />
           </div>
         ) : null}
+
         <div
           className={classNames(
             'text-left leading-tight',

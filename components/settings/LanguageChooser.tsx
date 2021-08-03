@@ -38,9 +38,11 @@ export const LanguageChooser: FC<Props> = ({}) => {
       buttonType="header"
       align="right"
     >
-      {currentLanguageKey === 'en'
-        ? t('language')
-        : `${t('terms.language')} (language)`}
+      <span className="hidden xl:inline">
+        {currentLanguageKey === 'en'
+          ? t('language')
+          : `${t('terms.language')} (Language)`}
+      </span>
     </DropdownMenu>
   )
 }
