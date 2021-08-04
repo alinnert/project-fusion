@@ -14,7 +14,20 @@ import {
   matchUnionToUnion,
 } from '../../utils/match'
 import { Button, ButtonSize, ButtonType } from './Button'
-import { DropdownMenuItem } from './DropdownMenuItem'
+import {
+  DropdownMenuButton,
+  DropdownMenuItemButton,
+} from './DropdownMenuButton'
+import {
+  DropdownMenuItemSeparator,
+  DropdownMenuSeparator,
+} from './DropdownMenuSeparator'
+
+export type DropdownMenuItemButtonType = 'default' | 'delete'
+
+export type DropdownMenuItem =
+  | DropdownMenuItemButton
+  | DropdownMenuItemSeparator
 
 interface Props {
   icon?: ReactElement
@@ -91,15 +104,19 @@ export const DropdownMenu: FC<PropsWithChildren<Props>> = ({
               'text-black',
             )}
           >
-            {items.map((item, index) => (
-              <Menu.Item key={index}>
-                {({ active }) => (
-                  <div>
-                    <DropdownMenuItem isActive={active} {...item} />
-                  </div>
-                )}
-              </Menu.Item>
-            ))}
+            {items.map((item, index) =>
+              item.type === 'separator' ? (
+                <DropdownMenuSeparator key={index} />
+              ) : (
+                <Menu.Item key={index}>
+                  {({ active }) => (
+                    <div>
+                      <DropdownMenuButton isActive={active} item={item} />
+                    </div>
+                  )}
+                </Menu.Item>
+              ),
+            )}
           </Menu.Items>
         </>
       )}

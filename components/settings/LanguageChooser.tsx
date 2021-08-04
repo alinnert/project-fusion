@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { languages } from '../../utils/languages'
 import { tailwindConfig, useBreakpoint } from '../../utils/tailwindConfig'
 import { DropdownMenu } from '../ui/DropdownMenu'
-import { DropdownMenuItem } from '../ui/DropdownMenuItem'
+import { DropdownMenuItemButton } from '../ui/DropdownMenuButton'
 import { PlaceholderIcon } from '../ui/PlaceholderIcon'
 
 interface Props {}
@@ -17,20 +17,23 @@ export const LanguageChooser: FC<Props> = ({}) => {
 
   const currentLanguageKey = useMemo(() => i18n.language, [i18n.language])
 
-  const menuItems = useMemo<Array<DropdownMenuItem>>(() => {
+  const menuItems = useMemo<Array<DropdownMenuItemButton>>(() => {
     if (currentLanguageKey === null) return []
 
-    return Object.entries(languages).map(([languageKey, language]) => {
-      const isCurrentLanguage = currentLanguageKey === languageKey
+    return Object.entries(languages).map(
+      ([languageKey, language]): DropdownMenuItemButton => {
+        const isCurrentLanguage = currentLanguageKey === languageKey
 
-      return {
-        label: language.nativeLanguage,
-        icon: isCurrentLanguage ? <CheckIcon /> : <PlaceholderIcon />,
-        action() {
-          router.push(router.asPath, undefined, { locale: languageKey })
-        },
-      }
-    })
+        return {
+          type: 'button',
+          label: language.nativeLanguage,
+          icon: isCurrentLanguage ? <CheckIcon /> : <PlaceholderIcon />,
+          action() {
+            router.push(router.asPath, undefined, { locale: languageKey })
+          },
+        }
+      },
+    )
   }, [currentLanguageKey, router])
 
   return (

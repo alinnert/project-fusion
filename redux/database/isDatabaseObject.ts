@@ -24,8 +24,16 @@ export function isDatabaseObject(value: unknown): value is Database {
   }
 
   if (
-    typeof (shapedValue.settings as { bookingUrl?: unknown }).bookingUrl !==
-    'string'
+    typeof (shapedValue.settings as { primaryProjectLink?: unknown })
+      .primaryProjectLink !== 'object'
+  ) {
+    return false
+  }
+
+  if (
+    !Array.isArray(
+      (shapedValue.settings as { projectLinks?: unknown }).projectLinks,
+    )
   ) {
     return false
   }

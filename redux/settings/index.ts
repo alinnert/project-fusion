@@ -3,13 +3,19 @@ import { swapArrayElements } from '../../utils/array'
 import { addCategory, Category, removeCategory } from '../categories'
 import { closeDatabase, setDatabase } from '../database'
 
+export interface CustomLink {
+  label: string
+  url: string
+}
+
 export interface Settings {
   categoryOrder: Array<Category['id']>
-  bookingUrl: string
+  primaryProjectLink: CustomLink | null
+  projectLinks: CustomLink[]
 }
 
 function getInitialState(): Settings {
-  return { bookingUrl: '', categoryOrder: [] }
+  return { categoryOrder: [], primaryProjectLink: null, projectLinks: [] }
 }
 
 const slice = createSlice({

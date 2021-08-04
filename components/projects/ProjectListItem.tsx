@@ -2,8 +2,9 @@ import {
   ArchiveIcon,
   ChevronDoubleDownIcon,
   DocumentDuplicateIcon,
-  DotsHorizontalIcon,
+  DotsVerticalIcon,
   InboxIcon,
+  LinkIcon,
   PencilIcon,
   StarIcon,
   TrashIcon,
@@ -17,8 +18,8 @@ import { useAppDispatch } from '../../redux'
 import { Project, removeProject, updateProject } from '../../redux/projects'
 import { matchBoolToString } from '../../utils/match'
 import { useGroupFromRoute } from '../groups/useGroupFromRoute'
-import { DropdownMenu } from '../ui/DropdownMenu'
-import { DropdownMenuItem } from '../ui/DropdownMenuItem'
+import { Button } from '../ui/Button'
+import { DropdownMenu, DropdownMenuItem } from '../ui/DropdownMenu'
 import { useConfirmDialog } from '../ui/useConfirmDialog'
 
 interface Props extends Project {}
@@ -78,17 +79,24 @@ export const ProjectListItem: FC<Props> = ({
     })
   }, [name, openConfirmDeleteDialog, t])
 
-  const menuItems = useMemo<Array<DropdownMenuItem>>(() => {
-    const items: Array<DropdownMenuItem> = [
-      { label: t('buttons.edit'), icon: <PencilIcon />, action: handleEdit },
+  const menuItems = useMemo<DropdownMenuItem[]>(() => {
+    const items: DropdownMenuItem[] = [
+      {
+        type: 'button',
+        label: t('buttons.edit'),
+        icon: <PencilIcon />,
+        action: handleEdit,
+      },
 
       important
         ? {
+            type: 'button',
             label: t('projects:item.actions.removeFromFavorites'),
             icon: <ChevronDoubleDownIcon />,
             action: handleRemoveFromFavorites,
           }
         : {
+            type: 'button',
             label: t('projects:item.actions.addToFavorites'),
             icon: <StarIcon />,
             action: handleAddToFavorites,
@@ -96,17 +104,20 @@ export const ProjectListItem: FC<Props> = ({
 
       archived
         ? {
+            type: 'button',
             label: t('projects:item.actions.unarchiveProject'),
             icon: <InboxIcon />,
             action: handleRestoreFromArchive,
           }
         : {
+            type: 'button',
             label: t('projects:item.actions.archiveProject'),
             icon: <ArchiveIcon />,
             action: handleAddToArchive,
           },
 
       {
+        type: 'button',
         label: t('buttons.duplicate'),
         icon: <DocumentDuplicateIcon />,
         action: handleDuplicate,
@@ -115,10 +126,17 @@ export const ProjectListItem: FC<Props> = ({
       {
         label: t('buttons.delete'),
         icon: <TrashIcon />,
-        type: 'delete',
+        type: 'button',
+        buttonType: 'delete',
         action: handleDelete,
       },
     ]
+
+    const customLinks: DropdownMenuItem[] = []
+
+    if (customLinks.length > 0) {
+      items.push({ type: 'separator' }, ...customLinks)
+    }
 
     return items
   }, [
@@ -161,7 +179,7 @@ export const ProjectListItem: FC<Props> = ({
 
   const projectItemClasses = useMemo(() => {
     return classNames(
-      'px-4 py-2 mb-2 last:mb-0',
+      'p-2 mb-2 last:mb-0',
       'rounded-md border',
       matchBoolToString(
         important,
@@ -185,27 +203,31 @@ export const ProjectListItem: FC<Props> = ({
       {confirmDeleteDialog}
 
       <div key={id} className={projectItemClasses}>
-        <div className={classNames('flex text-lg')}>
-          <div className={classNames('flex-1 pr-4', textClasses)}>{name}</div>
+        <div className={classNames('flex items-center gap-x-1 text-lg')}>
+          <div className={classNames('flex-1', textClasses)}>{name}</div>
 
           {projectNumber !== undefined ? (
-            <div className={textClasses}>{projectNumber}</div>
+            <div className={classNames('flex-0 mr-4', textClasses)}>
+              {projectNumber}
+            </div>
           ) : null}
 
-          <div className="ml-2">
-            <DropdownMenu
-              buttonType="flat"
-              buttonSize="small"
-              items={menuItems}
-              icon={<DotsHorizontalIcon />}
-              align="right"
-            />
-          </div>
+          <Button buttonType="flat" buttonSize="small" icon={<LinkIcon />}>
+            Buchen
+          </Button>
+
+          <DropdownMenu
+            buttonType="flat"
+            buttonSize="small"
+            items={menuItems}
+            icon={<DotsVerticalIcon />}
+            align="right"
+          />
         </div>
 
         {notes.trim() !== '' ? (
           <div
-            className="prose prose-brand select-text text-base mt-2"
+            className="prose prose-brand select-text text-base mt-4"
             dangerouslySetInnerHTML={{ __html: parsedNotes }}
           />
         ) : null}

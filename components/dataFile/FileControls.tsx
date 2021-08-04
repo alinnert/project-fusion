@@ -14,7 +14,7 @@ import { createDatabaseFile } from '../../redux/database/createDatabaseFile'
 import { openDatabaseFile } from '../../redux/database/openDatabaseFile'
 import { tailwindConfig, useBreakpoint } from '../../utils/tailwindConfig'
 import { DropdownMenu } from '../ui/DropdownMenu'
-import { DropdownMenuItem } from '../ui/DropdownMenuItem'
+import { DropdownMenuItemButton } from '../ui/DropdownMenuButton'
 
 interface Props {}
 
@@ -26,7 +26,8 @@ export const FileControls: FC<Props> = ({}) => {
   const isFileOpen = useAppSelector(selectIsFileOpen)
 
   const menuItems = useMemo(() => {
-    const createItem: DropdownMenuItem = {
+    const createItem: DropdownMenuItemButton = {
+      type: 'button',
       label: t('header.menu.database.items.create'),
       icon: <DocumentAddIcon />,
       action() {
@@ -35,7 +36,8 @@ export const FileControls: FC<Props> = ({}) => {
       },
     }
 
-    const openItem: DropdownMenuItem = {
+    const openItem: DropdownMenuItemButton = {
+      type: 'button',
       label: t('header.menu.database.items.open'),
       icon: <FolderIcon className="h-5 w-5" />,
       action() {
@@ -44,7 +46,8 @@ export const FileControls: FC<Props> = ({}) => {
       },
     }
 
-    const closeItem: DropdownMenuItem = {
+    const closeItem: DropdownMenuItemButton = {
+      type: 'button',
       label: t('header.menu.database.items.close'),
       action() {
         closeDatabaseFile()
