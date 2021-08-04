@@ -23,7 +23,7 @@ export default function Links(): ReactElement | null {
       </Head>
 
       <Layout left={<SettingsPagesList currentId="links" />}>
-        <PageContent title={t('settings:links.title')}>
+        <PageContent title={t('settings:links.title')} centered={true}>
           {t('settings:links.description')}
         </PageContent>
       </Layout>

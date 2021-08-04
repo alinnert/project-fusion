@@ -53,25 +53,27 @@ export const DropdownMenu: FC<PropsWithChildren<Props>> = ({
                 buttonType={open ? openButtonType : buttonType}
                 buttonSize={buttonSize}
               >
-                <div className="flex items-center gap-x-3">
-                  {children}
+                {children !== undefined || secondaryLabel !== undefined ? (
+                  <div className="flex items-center gap-x-3">
+                    {children}
 
-                  {secondaryLabel !== undefined ? (
-                    <>
-                      <div
-                        className={classNames(
-                          matchBoolToString(
-                            open,
-                            'text-brand-600',
-                            'text-white',
-                          ),
-                        )}
-                      >
-                        {secondaryLabel}
-                      </div>
-                    </>
-                  ) : null}
-                </div>
+                    {secondaryLabel !== undefined ? (
+                      <>
+                        <div
+                          className={classNames(
+                            matchBoolToString(
+                              open,
+                              'text-brand-600',
+                              'text-white',
+                            ),
+                          )}
+                        >
+                          {secondaryLabel}
+                        </div>
+                      </>
+                    ) : null}
+                  </div>
+                ) : null}
               </Button>
             </div>
           </Menu.Button>

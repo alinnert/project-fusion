@@ -77,6 +77,7 @@ export const Select: FC<Props> = ({
               )}
             >
               <div>{displayValue}</div>
+
               <div
                 className={classNames(
                   'absolute right-0 top-0 bottom-0',
