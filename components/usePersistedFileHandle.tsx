@@ -9,7 +9,6 @@ export function usePersistedFileHandle() {
 
   useEffect(() => {
     async function run() {
-      console.log('hi from wrapped app');
       const fileHandleResult = await asyncTry(() => get<FileSystemFileHandle>('fileHandle')
       );
       if (fileHandleResult.caught)
