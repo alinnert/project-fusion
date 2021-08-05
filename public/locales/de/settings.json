@@ -31,6 +31,14 @@
   },
   "links": {
     "title": "Links",
-    "description": "Hier ist es so leer..."
+    "description": "Hier können eigene Links für verschiedene Einsatzzwecke hinterlegt werden.",
+    "projectLinks": {
+      "title": "Projekt-Links",
+      "description": "Hier definierte Links werden bei einzelnen Projekten angezeigt. Der primäre Link wird separat neben dem \"...\"-Menü angezeigt. Mit \"{projectNumber}\" kann die Projektnummer in der URL platziert werden.",
+      "primaryLink": {
+        "labelLabel": "Button-Text",
+        "urlLabel": "URL"
+      }
+    }
   }
 }

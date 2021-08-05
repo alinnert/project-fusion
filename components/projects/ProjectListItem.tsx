@@ -14,7 +14,7 @@ import marked from 'marked'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import React, { FC, useCallback, useMemo } from 'react'
-import { useAppDispatch } from '../../redux'
+import { useAppDispatch, useAppSelector } from '../../redux'
 import { Project, removeProject, updateProject } from '../../redux/projects'
 import { matchBoolToString } from '../../utils/match'
 import { useGroupFromRoute } from '../groups/useGroupFromRoute'
@@ -42,6 +42,10 @@ export const ProjectListItem: FC<Props> = ({
         dispatch(removeProject(id))
       },
     })
+
+  const primaryProjectLink = useAppSelector(
+    (state) => state.settings.primaryProjectLink,
+  )
 
   const handleEdit = useCallback(() => {
     router.push({
@@ -198,6 +202,15 @@ export const ProjectListItem: FC<Props> = ({
     )
   }, [archived, important])
 
+  function handlePrimaryProjectLinkClick(): void {
+    if (primaryProjectLink === null) return
+    const url = primaryProjectLink.url.replaceAll(
+      '{projectNumber}',
+      projectNumber,
+    )
+    globalThis.open(url, '_blank')
+  }
+
   return (
     <>
       {confirmDeleteDialog}
@@ -212,9 +225,16 @@ export const ProjectListItem: FC<Props> = ({
             </div>
           ) : null}
 
-          <Button buttonType="flat" buttonSize="small" icon={<LinkIcon />}>
-            Buchen
-          </Button>
+          {primaryProjectLink !== null ? (
+            <Button
+              type="flat"
+              size="small"
+              icon={<LinkIcon />}
+              onClick={handlePrimaryProjectLinkClick}
+            >
+              {primaryProjectLink.label}
+            </Button>
+          ) : null}
 
           <DropdownMenu
             buttonType="flat"

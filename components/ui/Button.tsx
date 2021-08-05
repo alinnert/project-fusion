@@ -23,21 +23,29 @@ export type ButtonType =
 
 export type ButtonSize = 'normal' | 'small'
 
+type ExtractedButtonProps = 'onClick' | 'disabled'
+
 interface Props
-  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
+  extends Pick<ButtonHTMLAttributes<HTMLButtonElement>, ExtractedButtonProps> {
   icon?: ReactElement
-  buttonType?: ButtonType
-  buttonSize?: ButtonSize
+  type?: ButtonType
+  size?: ButtonSize
   className?: string
+  buttonProps?: Omit<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    ExtractedButtonProps
+  >
 }
 
 export const Button: FC<PropsWithChildren<Props>> = ({
   children,
   icon,
-  buttonType = 'default',
-  buttonSize = 'normal',
+  type = 'default',
+  size = 'normal',
   className,
-  ...buttonProps
+  disabled,
+  onClick,
+  buttonProps,
 }) => {
   const hasChildren = useMemo(() => Children.count(children) > 0, [children])
 
@@ -47,7 +55,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
     const boxBaseClasses = classNames(
       'flex gap-x-2 items-center',
       matchBoolToString(hasChildren, 'px-2', 'px-1'),
-      matchUnionToString(buttonSize, { normal: 'py-1', small: 'py-1' }),
+      matchUnionToString(size, { normal: 'py-1', small: 'py-1' }),
       'rounded',
     )
 
@@ -61,7 +69,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
     const lightTextClasses = 'text-white disabled:text-white/40'
     const shadowClasses = ''
 
-    switch (buttonType) {
+    switch (type) {
       default:
       case 'default':
         return classNames(
@@ -129,24 +137,27 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           'text-brand-800',
         )
     }
-  }, [buttonSize, buttonType, hasChildren])
+  }, [size, type, hasChildren])
 
   return (
-    <div className={classNames(className)}>
-      <button className={buttonClasses} {...buttonProps}>
-        {icon !== undefined ? <Heroicon icon={icon} /> : null}
+    <button
+      className={classNames(buttonClasses, className)}
+      disabled={disabled}
+      onClick={onClick}
+      {...buttonProps}
+    >
+      {icon !== undefined ? <Heroicon icon={icon} /> : null}
 
-        {hasChildren ? (
-          <div
-            className={classNames(
-              'text-left leading-tight',
-              matchBoolToString(icon !== undefined && hasChildren, 'mr-1'),
-            )}
-          >
-            {typeof children === 'string' ? capitalize(children) : children}
-          </div>
-        ) : null}
-      </button>
-    </div>
+      {hasChildren ? (
+        <div
+          className={classNames(
+            'text-left leading-tight',
+            matchBoolToString(icon !== undefined && hasChildren, 'mr-1'),
+          )}
+        >
+          {typeof children === 'string' ? capitalize(children) : children}
+        </div>
+      ) : null}
+    </button>
   )
 }

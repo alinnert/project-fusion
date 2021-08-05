@@ -23,6 +23,10 @@ const slice = createSlice({
   initialState: getInitialState(),
 
   reducers: {
+    setPrimaryProjectLink(state, action: PayloadAction<CustomLink | null>) {
+      state.primaryProjectLink = action.payload
+    },
+
     swapCategories(
       state,
       action: PayloadAction<{
@@ -57,5 +61,5 @@ const slice = createSlice({
 
 export const {
   reducer: settingsReducer,
-  actions: { swapCategories },
+  actions: { setPrimaryProjectLink, swapCategories },
 } = slice

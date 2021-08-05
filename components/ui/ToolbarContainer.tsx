@@ -53,7 +53,7 @@ export const ToolbarContainer: FC<PropsWithChildren<Props>> = ({
               <Button
                 key={index}
                 icon={item.icon}
-                buttonType={item.buttonType ?? 'default'}
+                type={item.buttonType ?? 'default'}
                 disabled={item.disabled}
                 onClick={item.action}
               >
@@ -65,7 +65,7 @@ export const ToolbarContainer: FC<PropsWithChildren<Props>> = ({
                   <div>
                     <Button
                       icon={item.icon}
-                      buttonType={item.buttonType ?? 'default'}
+                      type={item.buttonType ?? 'default'}
                       disabled={item.disabled}
                     >
                       {item.label}

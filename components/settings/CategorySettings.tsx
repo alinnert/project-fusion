@@ -123,7 +123,7 @@ export const CategorySettings: FC<Props> = ({}) => {
             additionalButtons={
               <>
                 <Button
-                  buttonType="default"
+                  type="default"
                   icon={<PlusIcon />}
                   onClick={handleAdd}
                 >
@@ -131,18 +131,18 @@ export const CategorySettings: FC<Props> = ({}) => {
                 </Button>
 
                 <Button
-                  disabled={selectedId === null}
-                  buttonType="default"
+                  type="default"
                   icon={<PencilIcon />}
+                  disabled={selectedId === null}
                   onClick={handleRename}
                 >
                   {t('buttons.rename')}
                 </Button>
 
                 <Button
-                  disabled={selectedId === null}
-                  buttonType="delete"
+                  type="delete"
                   icon={<TrashIcon />}
+                  disabled={selectedId === null}
                   onClick={handleDelete}
                 >
                   {t('buttons.delete')}

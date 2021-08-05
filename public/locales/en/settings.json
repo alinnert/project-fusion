@@ -27,6 +27,14 @@
   },
   "links": {
     "title": "Links",
-    "description": "It's so empty here..."
+    "description": "Here you can specify custom links for different use cases.",
+    "projectLinks": {
+      "title": "Project links",
+      "description": "Custom links defined here are related to a single project. The primary link will be displayed separately next to the \"...\" menu. Use \"{projectNumber}\" to use the project number in your URL.",
+      "primaryLink": {
+        "labelLabel": "Button label",
+        "urlLabel": "URL"
+      }
+    }
   }
 }

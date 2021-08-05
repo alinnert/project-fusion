@@ -18,7 +18,7 @@ export const HeaderSearch: FC<Props> = ({}) => {
         inputType="header"
       />
 
-      <Button buttonType="header" icon={<SearchIcon />}>
+      <Button type="header" icon={<SearchIcon />}>
         {isXlScreen ? <span>{t('header.search.button')}</span> : null}
       </Button>
     </div>

@@ -30,7 +30,7 @@ export const HeaderTabs: FC<Props> = ({ tabs }) => {
       {tabs.map((tab) => (
         <div key={tab.href} onClick={() => handleItemClick(tab)}>
           <Button
-            buttonType={isCurrent(tab) ? 'header-current' : 'header'}
+            type={isCurrent(tab) ? 'header-current' : 'header'}
             icon={tab.icon}
           >
             {tab.label}

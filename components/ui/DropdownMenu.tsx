@@ -63,8 +63,8 @@ export const DropdownMenu: FC<PropsWithChildren<Props>> = ({
             <div>
               <Button
                 icon={icon}
-                buttonType={open ? openButtonType : buttonType}
-                buttonSize={buttonSize}
+                type={open ? openButtonType : buttonType}
+                size={buttonSize}
               >
                 {children !== undefined || secondaryLabel !== undefined ? (
                   <div className="flex items-center gap-x-3">

@@ -61,7 +61,7 @@ export function useConfirmDialog({ onConfirm, onCancel }: Options): Result {
         onClose={handleClose}
         footer={
           <>
-            <Button onClick={handleConfirm} buttonType={confirmButtonType}>
+            <Button onClick={handleConfirm} type={confirmButtonType}>
               {confirmButtonLabel}
             </Button>
             <Button onClick={handleClose}>{cancelButtonLabel}</Button>
