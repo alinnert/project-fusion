@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import React, { Fragment, MouseEvent, ReactElement } from 'react'
 import { LinkListItem } from './LinkListItem'
@@ -69,7 +68,6 @@ export function VerticalLinkList({
           <Fragment key={category.id}>
             <TextDivider
               label={category.name}
-              size="small"
               color="brand"
               className="not-first:mt-6 mb-1"
             />
