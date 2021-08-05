@@ -33,7 +33,11 @@
       "description": "Custom links defined here are related to a single project. The primary link will be displayed separately next to the \"...\" menu. Use \"{projectNumber}\" to use the project number in your URL.",
       "primaryLink": {
         "labelLabel": "Button label",
-        "urlLabel": "URL"
+        "urlLabel": "URL",
+        "deleteDialog": {
+          "title": "Delete primary project link?",
+          "body": "Do you want to delete the primary project link?"
+        }
       }
     }
   }

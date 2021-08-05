@@ -170,7 +170,7 @@ export const ProjectListItem: FC<Props> = ({
         matchBoolToString(
           archived,
           'text-neutral-400 italic line-through',
-          'text-neutral-800',
+          'text-neutral-600',
         ),
       ),
     )
@@ -216,7 +216,7 @@ export const ProjectListItem: FC<Props> = ({
       {confirmDeleteDialog}
 
       <div key={id} className={projectItemClasses}>
-        <div className={classNames('flex items-center gap-x-1 text-lg')}>
+        <div className={classNames('flex items-center gap-x-1 text-base')}>
           <div className={classNames('flex-1', textClasses)}>{name}</div>
 
           {projectNumber !== undefined ? (

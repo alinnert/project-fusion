@@ -111,52 +111,46 @@ export const CategorySettings: FC<Props> = ({}) => {
         <p>{t('settings:categories.description')}</p>
       </div>
 
-      <div>
-        <Headline>{t('settings:categories.manageCategories')}</Headline>
+      <Headline>{t('settings:categories.manageCategories')}</Headline>
 
-        <div className="flex flex-col">
-          <SortableList
-            ids={orderedCategoryIds}
-            selectedId={selectedId}
-            onSelectedIdChange={setSelectedId}
-            onSwap={handleSwap}
-            additionalButtons={
-              <>
-                <Button
-                  type="default"
-                  icon={<PlusIcon />}
-                  onClick={handleAdd}
-                >
-                  {t('buttons.new')}
-                </Button>
+      <div className="flex flex-col">
+        <SortableList
+          ids={orderedCategoryIds}
+          selectedId={selectedId}
+          onSelectedIdChange={setSelectedId}
+          onSwap={handleSwap}
+          additionalButtons={
+            <>
+              <Button type="default" icon={<PlusIcon />} onClick={handleAdd}>
+                {t('buttons.new')}
+              </Button>
 
-                <Button
-                  type="default"
-                  icon={<PencilIcon />}
-                  disabled={selectedId === null}
-                  onClick={handleRename}
-                >
-                  {t('buttons.rename')}
-                </Button>
+              <Button
+                type="default"
+                icon={<PencilIcon />}
+                disabled={selectedId === null}
+                onClick={handleRename}
+              >
+                {t('buttons.rename')}
+              </Button>
 
-                <Button
-                  type="delete"
-                  icon={<TrashIcon />}
-                  disabled={selectedId === null}
-                  onClick={handleDelete}
-                >
-                  {t('buttons.delete')}
-                </Button>
-              </>
-            }
-          >
-            {(id) => (
-              <div className="flex">
-                <div className="flex-1">{categories[id]?.name}</div>
-              </div>
-            )}
-          </SortableList>
-        </div>
+              <Button
+                type="delete"
+                icon={<TrashIcon />}
+                disabled={selectedId === null}
+                onClick={handleDelete}
+              >
+                {t('buttons.delete')}
+              </Button>
+            </>
+          }
+        >
+          {(id) => (
+            <div className="flex">
+              <div className="flex-1">{categories[id]?.name}</div>
+            </div>
+          )}
+        </SortableList>
       </div>
     </PageContent>
   )

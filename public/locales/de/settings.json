@@ -37,7 +37,11 @@
       "description": "Hier definierte Links werden bei einzelnen Projekten angezeigt. Der primäre Link wird separat neben dem \"...\"-Menü angezeigt. Mit \"{projectNumber}\" kann die Projektnummer in der URL platziert werden.",
       "primaryLink": {
         "labelLabel": "Button-Text",
-        "urlLabel": "URL"
+        "urlLabel": "URL",
+        "deleteDialog": {
+          "title": "Primären Projekt-Link löschen?",
+          "body": "Soll der primäre Projekt-Link gelöscht werden?"
+        }
       }
     }
   }

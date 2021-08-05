@@ -1,4 +1,4 @@
-import { SaveIcon } from '@heroicons/react/solid'
+import { SaveIcon, TrashIcon } from '@heroicons/react/solid'
 import { GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
@@ -9,6 +9,7 @@ import { Button } from '../../components/ui/Button'
 import { Headline } from '../../components/ui/Headline'
 import { Input } from '../../components/ui/Input'
 import { PageContent } from '../../components/ui/PageContent'
+import { useConfirmDialog } from '../../components/ui/useConfirmDialog'
 import { useAppDispatch, useAppSelector } from '../../redux'
 import { setPrimaryProjectLink } from '../../redux/settings'
 import { getPageTitle } from '../../utils/getPageTitle'
@@ -33,6 +34,17 @@ export default function Links(): ReactElement | null {
   const [primaryProjectLinkUrl, setPrimaryProjectLinkUrl] = useState(
     primaryProjectLink?.url ?? '',
   )
+
+  const {
+    dialog: confirmDeletePrimaryProjectLinkDialog,
+    openDialog: openConfirmDeletePrimaryProjectLinkDialog,
+  } = useConfirmDialog({
+    onConfirm() {
+      dispatch(setPrimaryProjectLink(null))
+      setPrimaryProjectLinkLabel('')
+      setPrimaryProjectLinkUrl('')
+    },
+  })
 
   const primaryProjectLinkIsValid = useMemo(() => {
     const trimmedLabel = primaryProjectLinkLabel.trim()
@@ -82,11 +94,23 @@ export default function Links(): ReactElement | null {
     }
   }
 
+  function handlePrimaryLinkDelete(): void {
+    if (primaryProjectLink === null) return
+    openConfirmDeletePrimaryProjectLinkDialog({
+      title: t('settings:links.projectLinks.primaryLink.deleteDialog.title'),
+      message: t('settings:links.projectLinks.primaryLink.deleteDialog.body'),
+      confirmButtonLabel: t('buttons.delete'),
+      confirmButtonType: 'delete',
+    })
+  }
+
   return (
     <>
       <Head>
         <title>{getPageTitle(t('settings:links.title'))}</title>
       </Head>
+
+      {confirmDeletePrimaryProjectLinkDialog}
 
       <Layout left={<SettingsPagesList currentId="links" />}>
         <PageContent title={t('settings:links.title')} centered={true}>
@@ -110,14 +134,22 @@ export default function Links(): ReactElement | null {
               />
             </div>
 
-            <div>
+            <div className="flex items-center gap-x-2">
               <Button
                 type="primary"
-                className="flex-0"
                 icon={<SaveIcon />}
                 disabled={!primaryProjectLinkIsValid}
               >
                 {t('buttons.save')}
+              </Button>
+
+              <Button
+                type="delete"
+                icon={<TrashIcon />}
+                onClick={handlePrimaryLinkDelete}
+                buttonProps={{ type: 'button' }}
+              >
+                {t('buttons.delete')}
               </Button>
             </div>
           </form>
