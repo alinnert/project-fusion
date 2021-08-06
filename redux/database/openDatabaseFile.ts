@@ -6,7 +6,7 @@ import {
 } from '.'
 import { store } from '..'
 import { asyncTry } from '../../utils/tryCatch'
-import { setFileHandle } from './fileHandleStorage'
+import { setFileHandle } from './currentFileStorage'
 import { filePickerOptions, getDataFromFileHandle } from './filePicker'
 import { addFileToRecentFiles } from './recentFilesStorage'
 

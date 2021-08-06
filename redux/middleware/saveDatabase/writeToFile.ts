@@ -1,9 +1,10 @@
 import { get } from 'idb-keyval'
 import { asyncTry } from '../../../utils/tryCatch'
+import { currentFileStorageKey } from '../../database/currentFileStorage'
 
 export async function writeToFile(content: string): Promise<void> {
   const getHandleResult = await asyncTry(() =>
-    get<FileSystemFileHandle>('fileHandle'),
+    get<FileSystemFileHandle>(currentFileStorageKey),
   )
   if (getHandleResult.caught) {
     console.error(getHandleResult.error)

@@ -1,6 +1,7 @@
 import { get } from 'idb-keyval'
 import { useEffect } from 'react'
 import { useAppDispatch } from '../redux'
+import { currentFileStorageKey } from '../redux/database/currentFileStorage'
 import { openDatabaseFielWithHandle } from '../redux/database/openDatabaseFileWithHandle'
 import { asyncTry } from '../utils/tryCatch'
 
@@ -10,7 +11,7 @@ export function usePersistedFileHandle() {
   useEffect(() => {
     async function run() {
       const fileHandleResult = await asyncTry(() =>
-        get<FileSystemFileHandle>('fileHandle'),
+        get<FileSystemFileHandle>(currentFileStorageKey),
       )
       if (fileHandleResult.caught) return
       if (fileHandleResult.value === undefined) return

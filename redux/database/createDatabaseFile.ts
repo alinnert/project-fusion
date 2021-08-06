@@ -7,8 +7,9 @@ import {
 } from '.'
 import { store } from '..'
 import { asyncTry } from '../../utils/tryCatch'
-import { setFileHandle } from './fileHandleStorage'
+import { setFileHandle } from './currentFileStorage'
 import { filePickerOptions } from './filePicker'
+import { addFileToRecentFiles } from './recentFilesStorage'
 
 export async function createDatabaseFile(): Promise<void> {
   store.dispatch(startLoading())
@@ -26,6 +27,13 @@ export async function createDatabaseFile(): Promise<void> {
   const persistHandleResult = await asyncTry(() => setFileHandle(fileHandle))
   if (persistHandleResult.caught) {
     console.error(persistHandleResult.error)
+  }
+
+  const addToRecentFilesResult = await asyncTry(() =>
+    addFileToRecentFiles(fileHandle),
+  )
+  if (addToRecentFilesResult.caught) {
+    console.error(addToRecentFilesResult.error)
   }
 
   const writableResult = await asyncTry(() => fileHandle.createWritable())

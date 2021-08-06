@@ -77,8 +77,6 @@ export default function Links(): ReactElement | null {
     event.preventDefault()
     if (!primaryProjectLinkIsValid) return
 
-    console.log('blub')
-
     if (
       primaryProjectLinkLabel.trim() === '' &&
       primaryProjectLinkUrl.trim() === ''

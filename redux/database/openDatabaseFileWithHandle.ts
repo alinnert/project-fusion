@@ -1,7 +1,9 @@
 import { setDatabase, SetDatabaseActionPayload, setOpenDatabaseError } from '.'
 import { store } from '..'
 import { asyncTry } from '../../utils/tryCatch'
+import { setFileHandle } from './currentFileStorage'
 import { getDataFromFileHandle } from './filePicker'
+import { addFileToRecentFiles } from './recentFilesStorage'
 
 export async function openDatabaseFielWithHandle(
   fileHandle: FileSystemFileHandle,
@@ -32,6 +34,18 @@ export async function openDatabaseFielWithHandle(
       store.dispatch(setOpenDatabaseError('permission denied'))
       return
     }
+  }
+
+  const persistHandleResult = await asyncTry(() => setFileHandle(fileHandle))
+  if (persistHandleResult.caught) {
+    console.error(persistHandleResult.error)
+  }
+
+  const addToRecentFilesResult = await asyncTry(() =>
+    addFileToRecentFiles(fileHandle),
+  )
+  if (addToRecentFilesResult.caught) {
+    console.error(addToRecentFilesResult.error)
   }
 
   const fileDataResult = await asyncTry(() => getDataFromFileHandle(fileHandle))

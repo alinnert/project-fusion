@@ -1,7 +1,7 @@
 import { closeDatabase } from '.'
 import { store } from '..'
 import { asyncTry } from '../../utils/tryCatch'
-import { removeFileHandle } from './fileHandleStorage'
+import { removeFileHandle } from './currentFileStorage'
 
 export async function closeDatabaseFile() {
   const removeHandleResult = await asyncTry(() => removeFileHandle())

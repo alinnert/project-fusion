@@ -1,19 +1,19 @@
 import { del, get, set } from 'idb-keyval'
 
-const storageKey = 'currentFile'
+export const currentFileStorageKey = 'currentFile'
 
 export async function setFileHandle(
   fileHandle: FileSystemFileHandle,
 ): Promise<void> {
-  set(storageKey, fileHandle)
+  set(currentFileStorageKey, fileHandle)
 }
 
 export async function getFileHandle(): Promise<
   FileSystemFileHandle | undefined
 > {
-  return get<FileSystemFileHandle>(storageKey)
+  return get<FileSystemFileHandle>(currentFileStorageKey)
 }
 
 export async function removeFileHandle(): Promise<void> {
-  del(storageKey)
+  del(currentFileStorageKey)
 }

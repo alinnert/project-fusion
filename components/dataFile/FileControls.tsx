@@ -12,6 +12,7 @@ import { selectIsFileOpen } from '../../redux/database'
 import { closeDatabaseFile } from '../../redux/database/closeDatabaseFile'
 import { createDatabaseFile } from '../../redux/database/createDatabaseFile'
 import { openDatabaseFile } from '../../redux/database/openDatabaseFile'
+import { openDatabaseFielWithHandle } from '../../redux/database/openDatabaseFileWithHandle'
 import {
   clearRecentFiles,
   getRecentFiles,
@@ -44,7 +45,7 @@ export const FileControls: FC<Props> = ({}) => {
       recentFiles.map<DropdownMenuItem>((fileHandle) => ({
         type: 'button',
         label: fileHandle.name,
-        action() {},
+        action: () => openDatabaseFielWithHandle(fileHandle),
         icon: <DatabaseIcon />,
       })),
     [recentFiles],

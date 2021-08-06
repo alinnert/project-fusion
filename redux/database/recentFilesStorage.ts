@@ -16,12 +16,19 @@ export async function addFileToRecentFiles(
   fileHandle: FileSystemFileHandle,
 ): Promise<void> {
   asyncTry(() =>
-    update<FileSystemFileHandle[]>(storageKey, (value) => {
-      if (value?.some((handle) => handle.isSameEntry(fileHandle))) {
-        return value
+    update<FileSystemFileHandle[]>(storageKey, (recentFilesFromDb) => {
+      if (
+        recentFilesFromDb?.some((handle) => {
+          console.log(`check ${handle.name} and ${fileHandle.name}`)
+          return handle.isSameEntry(fileHandle)
+        })
+      ) {
+        console.log('does already exist')
+        return recentFilesFromDb
       }
 
-      return [...(value ?? []), fileHandle]
+      console.log('should be added')
+      return [...(recentFilesFromDb ?? []), fileHandle]
     }),
   )
 }
