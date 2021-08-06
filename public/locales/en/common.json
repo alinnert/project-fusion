@@ -21,7 +21,8 @@
         "items": {
           "create": "Create",
           "open": "Open",
-          "close": "Close"
+          "close": "Close",
+          "clearRecent": "Clear list of recent files"
         }
       }
     },

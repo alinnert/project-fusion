@@ -1,4 +1,3 @@
-import { set } from 'idb-keyval'
 import {
   setDatabase,
   SetDatabaseActionPayload,
@@ -7,7 +6,9 @@ import {
 } from '.'
 import { store } from '..'
 import { asyncTry } from '../../utils/tryCatch'
+import { setFileHandle } from './fileHandleStorage'
 import { filePickerOptions, getDataFromFileHandle } from './filePicker'
+import { addFileToRecentFiles } from './recentFilesStorage'
 
 export async function openDatabaseFile(): Promise<void> {
   store.dispatch(startLoading())
@@ -22,11 +23,16 @@ export async function openDatabaseFile(): Promise<void> {
 
   const [fileHandle] = filePickerResult.value
 
-  const persistHandleResult = await asyncTry(() =>
-    set('fileHandle', fileHandle),
-  )
+  const persistHandleResult = await asyncTry(() => setFileHandle(fileHandle))
   if (persistHandleResult.caught) {
     console.error(persistHandleResult.error)
+  }
+
+  const addToRecentFilesResult = await asyncTry(() =>
+    addFileToRecentFiles(fileHandle),
+  )
+  if (addToRecentFilesResult.caught) {
+    console.error(addToRecentFilesResult.error)
   }
 
   const fileDataResult = await asyncTry(() => getDataFromFileHandle(fileHandle))

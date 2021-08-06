@@ -21,7 +21,8 @@
         "items": {
           "create": "Erstellen",
           "open": "Öffnen",
-          "close": "Schließen"
+          "close": "Schließen",
+          "clearRecent": "Liste zuletzt verwendeter Dateien leeren"
         }
       }
     },

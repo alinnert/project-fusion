@@ -1,4 +1,3 @@
-import { set } from 'idb-keyval'
 import {
   getEmptyDatabase,
   setDatabase,
@@ -8,6 +7,7 @@ import {
 } from '.'
 import { store } from '..'
 import { asyncTry } from '../../utils/tryCatch'
+import { setFileHandle } from './fileHandleStorage'
 import { filePickerOptions } from './filePicker'
 
 export async function createDatabaseFile(): Promise<void> {
@@ -23,9 +23,7 @@ export async function createDatabaseFile(): Promise<void> {
 
   const { value: fileHandle } = fileHandleResult
 
-  const persistHandleResult = await asyncTry(() =>
-    set('fileHandle', fileHandle),
-  )
+  const persistHandleResult = await asyncTry(() => setFileHandle(fileHandle))
   if (persistHandleResult.caught) {
     console.error(persistHandleResult.error)
   }

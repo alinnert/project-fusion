@@ -7,5 +7,5 @@ export interface DropdownMenuItemSeparator {
 interface Props {}
 
 export const DropdownMenuSeparator: FC<Props> = ({}) => {
-  return <div className="mx-2 my-1 h-px bg-neutral-300" />
+  return <div className="mx-2 my-1 h-px bg-neutral-400" />
 }
