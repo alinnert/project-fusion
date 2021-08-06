@@ -21,12 +21,20 @@ export function useRedirects() {
   }, [router.pathname])
 
   const redirectTarget = useMemo<RedirectTarget | null>(() => {
+    // If user has no file open but tries to access a page
+    // that requires a file to be open.
     if (!isFileOpen && !pageAvailableWithoutOpenFile) {
       return { path: '/', replace: true }
     }
 
+    // If the user just opened a file or tries to load the index page
+    // Redirect to a default page.
+    if (isFileOpen && router.pathname === '/') {
+      return { path: '/favorites', replace: true }
+    }
+
     return null
-  }, [isFileOpen, pageAvailableWithoutOpenFile])
+  }, [isFileOpen, pageAvailableWithoutOpenFile, router.pathname])
 
   useEffect(() => {
     if (redirectTarget === null) return
