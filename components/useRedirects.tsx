@@ -14,21 +14,18 @@ export function useRedirects() {
 
   const pageAvailableWithoutOpenFile = useMemo(() => {
     const pathnamesAvailableWithoutOpenFile: string[] = ['/', '/info']
-
-    console.log(router.pathname)
-
     return pathnamesAvailableWithoutOpenFile.includes(router.pathname)
   }, [router.pathname])
 
   const redirectTarget = useMemo<RedirectTarget | null>(() => {
-    // If user has no file open but tries to access a page
-    // that requires a file to be open.
+    // If no file is open:
+    // Redirect: (path that requires file to be open) => /
     if (!isFileOpen && !pageAvailableWithoutOpenFile) {
       return { path: '/', replace: true }
     }
 
-    // If the user just opened a file or tries to load the index page
-    // Redirect to a default page.
+    // If file is open:
+    // Redirect: / => /favorites
     if (isFileOpen && router.pathname === '/') {
       return { path: '/favorites', replace: true }
     }
