@@ -36,8 +36,8 @@ export const ViewAreaTabs: FC<Props> = ({}) => {
 
     const startItem: TabItem = {
       label: t('header.tabs.home'),
-      href: '/',
       icon: <HomeIcon />,
+      href: '/',
       current: router.pathname === '/',
     }
 
@@ -50,9 +50,5 @@ export const ViewAreaTabs: FC<Props> = ({}) => {
     return isFileOpen ? [dataItem, configItem, infoItem] : [startItem, infoItem]
   }, [isFileOpen, router.pathname, t])
 
-  return (
-    <div>
-      <HeaderTabs tabs={tabs} />
-    </div>
-  )
+  return <HeaderTabs tabs={tabs} />
 }
