@@ -32,7 +32,6 @@ export const FileControls: FC<Props> = ({}) => {
       icon: <DocumentAddIcon />,
       action() {
         createDatabaseFile()
-        router.push('/')
       },
     }
 
@@ -42,7 +41,6 @@ export const FileControls: FC<Props> = ({}) => {
       icon: <FolderIcon className="h-5 w-5" />,
       action() {
         openDatabaseFile()
-        router.push('/')
       },
     }
 
@@ -51,7 +49,6 @@ export const FileControls: FC<Props> = ({}) => {
       label: t('header.menu.database.items.close'),
       action() {
         closeDatabaseFile()
-        router.push('/')
       },
       icon: <XIcon />,
     }

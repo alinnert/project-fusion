@@ -59,10 +59,7 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
 
     dispatch(addProjectToGroup({ groupId, projectId: id }))
 
-    router.push({
-      pathname: '/groups/[groupId]',
-      query: { groupId: groupId },
-    })
+    router.push({ pathname: '/groups/[groupId]', query: { groupId: groupId } })
   }, [
     archived,
     groupId,
@@ -113,10 +110,7 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
     const groupId = router.query.groupId
     if (groupId === undefined) return
 
-    router.push({
-      pathname: '/groups/[groupId]',
-      query: { groupId },
-    })
+    router.push({ pathname: '/groups/[groupId]', query: { groupId } })
   }, [router])
 
   const toolbarItems = useMemo<ToolbarItem[]>(

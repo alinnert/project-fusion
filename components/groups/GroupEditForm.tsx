@@ -70,10 +70,7 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
       dispatch(addGroupToCategory({ categoryId: categoryId, groupId: id }))
     }
 
-    router.push({
-      pathname: '/groups/[groupId]',
-      query: { groupId: id },
-    })
+    router.push({ pathname: '/groups/[groupId]', query: { groupId: id } })
   }, [categoryId, color, dispatch, name, notes])
 
   const editGroup = useCallback(() => {

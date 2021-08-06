@@ -22,7 +22,6 @@ export const GroupDetailView: FC<Props> = ({}) => {
       onConfirm() {
         if (groupId === null) return
         dispatch(removeGroup(groupId))
-        router.push('/favorites')
       },
     })
 
