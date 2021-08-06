@@ -22,7 +22,7 @@ export function getEmptyDatabase(): Database {
     categories: {},
     groups: {},
     projects: {},
-    settings: { bookingUrl: '', categoryOrder: [] },
+    settings: { categoryOrder: [], primaryProjectLink: null, projectLinks: [] },
   }
 }
 
