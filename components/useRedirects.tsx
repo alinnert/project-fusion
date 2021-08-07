@@ -1,7 +1,9 @@
 import { useRouter } from 'next/router'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useAppSelector } from '../redux'
 import { selectIsFileOpen } from '../redux/database'
+import { hasCurrentFileHandle } from '../redux/database/currentFileStorage'
+import { useAsyncEffect } from '../utils/useAsyncEffect'
 
 interface RedirectTarget {
   path: string
@@ -11,6 +13,19 @@ interface RedirectTarget {
 export function useRedirects() {
   const router = useRouter()
   const isFileOpen = useAppSelector(selectIsFileOpen)
+  const [hasCurrentFile, setHasCurrentFile] = useState<boolean>(true)
+
+  useAsyncEffect(() => {
+
+  })
+
+  useEffect(() => {
+    async function run() {
+      const result = await hasCurrentFileHandle()
+      setHasCurrentFile(result)
+    }
+    run()
+  }, [])
 
   const pageAvailableWithoutOpenFile = useMemo(() => {
     const pathnamesAvailableWithoutOpenFile: string[] = ['/', '/info']
@@ -20,7 +35,7 @@ export function useRedirects() {
   const redirectTarget = useMemo<RedirectTarget | null>(() => {
     // If no file is open:
     // Redirect: (path that requires file to be open) => /
-    if (!isFileOpen && !pageAvailableWithoutOpenFile) {
+    if (!hasCurrentFile && !pageAvailableWithoutOpenFile) {
       return { path: '/', replace: true }
     }
 
@@ -31,7 +46,12 @@ export function useRedirects() {
     }
 
     return null
-  }, [isFileOpen, pageAvailableWithoutOpenFile, router.pathname])
+  }, [
+    hasCurrentFile,
+    isFileOpen,
+    pageAvailableWithoutOpenFile,
+    router.pathname,
+  ])
 
   useEffect(() => {
     if (redirectTarget === null) return

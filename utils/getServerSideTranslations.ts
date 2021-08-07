@@ -14,6 +14,7 @@ export async function getServerSideTranslations(locale?: string): Promise<{}> {
     'groups',
     'projects',
     'settings',
+    'search',
   ]
 
   return locale !== undefined

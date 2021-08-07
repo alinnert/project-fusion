@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import React, { ChangeEvent, FC, InputHTMLAttributes, useMemo } from 'react'
+import { matchUnionToString } from '../../utils/match'
 import { FormItem } from './FormItem'
 
 interface Props
@@ -21,30 +22,44 @@ export const Input: FC<Props> = ({
   ...inputProps
 }) => {
   const inputClasses = useMemo(() => {
-    const boxClasses = 'w-60 px-2 py-1 rounded box-border'
-    const textClasses = ''
+    const boxClasses = classNames(
+      'box-border',
+      matchUnionToString(inputType, {
+        default: 'w-auto px-2 py-1 rounded',
+        header: 'w-60 px-2 py-[2px] rounded',
+      }),
+    )
 
-    switch (inputType) {
-      default:
-      case 'default':
-        return classNames(
-          boxClasses,
-          textClasses,
-          'w-auto',
-          'border border-neutral-600',
-          'text-neutral-800',
-        )
-      case 'header':
-        return classNames(
-          boxClasses,
-          textClasses,
-          'bg-white/40 hover:bg-white/50 focus:bg-white',
+    const borderClasses = classNames(
+      matchUnionToString(inputType, {
+        default: 'border border-neutral-600',
+        header: 'border-white/60 hover:border-white/30 focus:border-white',
+      }),
+    )
+
+    const backgroundClasses = classNames(
+      matchUnionToString(inputType, {
+        default: '',
+        header: classNames(
+          'bg-white/0 hover:bg-white/30 focus:bg-white',
+          'bg-clip-padding',
+        ),
+      }),
+    )
+
+    const textClasses = classNames(
+      matchUnionToString(inputType, {
+        default: 'text-neutral-800',
+        header: classNames(
+          'text-sm font-semibold',
+          'text-white focus:text-black',
           'placeholder-white/80',
           'hover:placeholder-white focus:placeholder-black/50',
-          'border-none',
-          'text-white focus:text-black',
-        )
-    }
+        ),
+      }),
+    )
+
+    return classNames(boxClasses, borderClasses, backgroundClasses, textClasses)
   }, [inputType])
 
   return (

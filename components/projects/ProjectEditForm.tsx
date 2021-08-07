@@ -134,14 +134,10 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
     [cancel, isFormValid, saveProject, t],
   )
 
-  function handleSubmit(event: FormEvent): void {
-    event.preventDefault()
-  }
-
   return (
     <ToolbarContainer toolbarItems={toolbarItems}>
       <PageContent title={pageTitle} centered={true}>
-        <Form onSubmit={handleSubmit}>
+        <Form type="page">
           <Input
             label={`${t('projects:editForm.labels.name')} *`}
             value={name}

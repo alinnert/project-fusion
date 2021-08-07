@@ -66,7 +66,7 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
           className={classNames(
             'row-start-2 col-start-1 overflow-hidden',
             'bg-neutral-50',
-            'border-r border-neutral-300',
+            'border-r border-neutral-200',
           )}
         >
           {left}
@@ -87,7 +87,7 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
         <div
           className={classNames(
             'row-start-2 col-start-3 overflow-hidden',
-            'border-l border-neutral-300',
+            'border-l border-neutral-200',
           )}
         >
           {right}

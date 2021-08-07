@@ -14,8 +14,16 @@
     @apply bg-gradient-to-r from-brand-700 to-accent-600;
   }
 
+  .bg-gradient-brand-active {
+    @apply bg-gradient-to-r from-brand-900 to-accent-700;
+  }
+
   .bg-gradient-danger {
     @apply bg-gradient-to-r from-danger-700 to-dangerAccent-500;
+  }
+
+  .bg-gradient-danger-active {
+    @apply bg-gradient-to-r from-danger-900 to-dangerAccent-700;
   }
 
   .bg-blur {

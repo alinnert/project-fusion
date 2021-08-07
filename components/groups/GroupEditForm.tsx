@@ -6,7 +6,7 @@ import {
 } from '@heroicons/react/solid'
 import { useTranslation } from 'next-i18next'
 import router from 'next/router'
-import React, { FC, FormEvent, useCallback, useMemo, useState } from 'react'
+import React, { FC, useCallback, useMemo, useState } from 'react'
 import { useAppDispatch } from '../../redux'
 import { addGroupToCategory, Category } from '../../redux/categories'
 import { addGroup, ProjectGroup, updateGroup } from '../../redux/groups'
@@ -131,8 +131,7 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
     [cancel, isFormValid, saveGroup, t],
   )
 
-  function handleSubmit(event: FormEvent) {
-    event.preventDefault()
+  function handleSubmit() {
     saveGroup()
   }
 
@@ -144,7 +143,7 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
         titleIconColor={color}
         centered={true}
       >
-        <Form onSubmit={handleSubmit}>
+        <Form type="page" onSubmit={handleSubmit}>
           <Input
             label={`${t('groups:editForm.labels.name')} *`}
             onChange={setName}

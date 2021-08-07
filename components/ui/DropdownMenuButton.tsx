@@ -35,15 +35,21 @@ export const DropdownMenuButton: FC<Props> = ({ isActive, item }) => {
           'py-1 pl-1 pr-12 rounded',
 
           matchUnionToString(buttonType, {
-            default: matchBoolToString(
-              isActive,
-              'bg-gradient-brand text-white',
-              'text-neutral-700',
+            default: classNames(
+              'active:bg-gradient-brand-active active:text-white',
+              matchBoolToString(
+                isActive,
+                'bg-gradient-brand text-white',
+                'text-neutral-700',
+              ),
             ),
-            delete: matchBoolToString(
-              isActive,
-              'bg-gradient-danger text-white',
-              'text-danger-800',
+            delete: classNames(
+              'active:bg-gradient-danger-active active:text-white',
+              matchBoolToString(
+                isActive,
+                'bg-gradient-danger text-white',
+                'text-danger-800',
+              ),
             ),
           }),
         )}

@@ -44,8 +44,7 @@ export const ToolbarContainer: FC<PropsWithChildren<Props>> = ({
           className={classNames(
             'flex gap-x-2',
             'p-2',
-            'bg-neutral-50',
-            'border-b border-neutral-300',
+            'bg-neutral-200',
           )}
         >
           {toolbarItems.map((item, index) =>

@@ -60,10 +60,12 @@ export function useTextDialog({ onConfirm }: Options): Result {
         onClose={handleClose}
         footer={
           <>
-            <Button type="primary" onClick={handleConfirm}>
+            <Button type="primary" onClick={handleConfirm} size="big">
               {primaryButtonLabel}
             </Button>
-            <Button onClick={handleClose}>{t('buttons.cancel')}</Button>
+            <Button onClick={handleClose} size="big">
+              {t('buttons.cancel')}
+            </Button>
           </>
         }
       >

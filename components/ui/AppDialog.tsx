@@ -54,7 +54,7 @@ export const AppDialog: FC<Props> = ({
           <div
             className={classNames(
               'flex justify-end gap-x-2',
-              'p-4 rounded-b-lg',
+              'p-2 rounded-b-lg',
               'bg-neutral-100',
               'border-t border-neutral-200',
             )}
