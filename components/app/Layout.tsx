@@ -3,8 +3,8 @@ import React, { FC, PropsWithChildren, ReactNode, useMemo } from 'react'
 import { useAppSelector } from '../../redux'
 import { selectIsFileOpen } from '../../redux/database'
 import { matchBoolToString } from '../../utils/match'
-import { FileControls } from '../dataFile/FileControls'
-import { ViewAreaTabs } from '../dataFile/ViewAreaTabs'
+import { DatabaseMenu } from '../dataFile/DatabaseMenu'
+import { ViewAreaTabs } from './ViewAreaTabs'
 import { LanguageChooser } from '../settings/LanguageChooser'
 import { HeaderSearch } from '../ui/HeaderSearch'
 import { Separator } from '../ui/HeaderSeparator'
@@ -42,7 +42,7 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
         <div
           className={classNames('row-start-1 col-start-1', 'flex items-center')}
         >
-          <FileControls />
+          <DatabaseMenu />
           <Separator type="header" />
           <ViewAreaTabs />
         </div>

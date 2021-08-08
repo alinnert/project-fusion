@@ -1,12 +1,14 @@
 import { get } from 'idb-keyval'
 import { useEffect } from 'react'
-import { useAppDispatch } from '../redux'
-import { currentFileStorageKey } from '../redux/database/currentFileStorage'
-import { openDatabaseFielWithHandle } from '../redux/database/openDatabaseFileWithHandle'
-import { asyncTry } from '../utils/tryCatch'
+import { useAppDispatch } from '../../redux'
+import { currentFileStorageKey } from '../../redux/database/currentFileStorage'
+import { asyncTry } from '../../utils/tryCatch'
+import { useOpenDatabaseWithFileHandle } from '../dataFile/useOpenDatabaseWithFilehandle'
 
 export function usePersistedFileHandle() {
   const dispatch = useAppDispatch()
+
+  const openDatabaseWithFileHandle = useOpenDatabaseWithFileHandle()
 
   useEffect(() => {
     async function run() {
@@ -15,10 +17,11 @@ export function usePersistedFileHandle() {
       )
       if (fileHandleResult.caught) return
       if (fileHandleResult.value === undefined) return
+
       const fileHandle = fileHandleResult.value
-      openDatabaseFielWithHandle(fileHandle)
+      openDatabaseWithFileHandle(fileHandle)
     }
 
     run()
-  }, [dispatch])
+  }, [dispatch, openDatabaseWithFileHandle])
 }

@@ -1,9 +1,8 @@
 import { useRouter } from 'next/router'
 import { useEffect, useMemo, useState } from 'react'
-import { useAppSelector } from '../redux'
-import { selectIsFileOpen } from '../redux/database'
-import { hasCurrentFileHandle } from '../redux/database/currentFileStorage'
-import { useAsyncEffect } from '../utils/useAsyncEffect'
+import { useAppSelector } from '../../redux'
+import { selectIsFileOpen } from '../../redux/database'
+import { hasCurrentFileHandle } from '../../redux/database/currentFileStorage'
 
 interface RedirectTarget {
   path: string
@@ -14,10 +13,6 @@ export function useRedirects() {
   const router = useRouter()
   const isFileOpen = useAppSelector(selectIsFileOpen)
   const [hasCurrentFile, setHasCurrentFile] = useState<boolean>(true)
-
-  useAsyncEffect(() => {
-
-  })
 
   useEffect(() => {
     async function run() {

@@ -6,6 +6,7 @@ import { groupsReducer } from './groups'
 import { saveDatabaseMiddleware } from './middleware/saveDatabase'
 import { projectsReducer } from './projects'
 import { settingsReducer } from './settings'
+import { recentFilesReducer } from './recentFiles'
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     groups: groupsReducer,
     projects: projectsReducer,
     settings: settingsReducer,
+    recentFiles: recentFilesReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(saveDatabaseMiddleware),

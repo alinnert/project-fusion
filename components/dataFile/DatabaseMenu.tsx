@@ -6,49 +6,43 @@ import {
   XIcon,
 } from '@heroicons/react/solid'
 import { useTranslation } from 'next-i18next'
-import React, { FC, useEffect, useMemo, useState } from 'react'
+import React, { FC, useMemo } from 'react'
 import { useAppSelector } from '../../redux'
 import { selectIsFileOpen } from '../../redux/database'
-import { closeDatabaseFile } from '../../redux/database/closeDatabaseFile'
-import { createDatabaseFile } from '../../redux/database/createDatabaseFile'
-import { openDatabaseFile } from '../../redux/database/openDatabaseFile'
-import { openDatabaseFielWithHandle } from '../../redux/database/openDatabaseFileWithHandle'
-import {
-  clearRecentFiles,
-  getRecentFiles,
-} from '../../redux/database/recentFilesStorage'
+import { clearRecentFiles } from '../../redux/database/recentFilesStorage'
+import { selectRecentFiles } from '../../redux/recentFiles'
 import { tailwindConfig, useBreakpoint } from '../../utils/tailwindConfig'
-import { asyncTry } from '../../utils/tryCatch'
 import { DropdownMenu, DropdownMenuItem } from '../ui/DropdownMenu'
 import { DropdownMenuItemButton } from '../ui/DropdownMenuButton'
+import { useCloseDatabase } from './useCloseDatabase'
+import { useCreateDatabase } from './useCreateDatabase'
+import { useOpenDatabase } from './useOpenDatabase'
+import { useOpenDatabaseWithFileHandle } from './useOpenDatabaseWithFilehandle'
 
 interface Props {}
 
-export const FileControls: FC<Props> = ({}) => {
+export const DatabaseMenu: FC<Props> = ({}) => {
   const { t } = useTranslation()
+
   const isXlScreen = useBreakpoint(tailwindConfig.theme.screens?.xl)
   const filename = useAppSelector((state) => state.database.filename)
   const isFileOpen = useAppSelector(selectIsFileOpen)
+  const recentFiles = useAppSelector(selectRecentFiles)
 
-  const [recentFiles, setRecentFiles] = useState<FileSystemFileHandle[]>([])
-
-  useEffect(() => {
-    async function run() {
-      const files = await asyncTry(() => getRecentFiles())
-      setRecentFiles(files.caught ? [] : files.value)
-    }
-    run()
-  }, [])
+  const createDatabase = useCreateDatabase()
+  const openDatabase = useOpenDatabase()
+  const openDatabaseWithFileHandle = useOpenDatabaseWithFileHandle()
+  const closeDatabase = useCloseDatabase()
 
   const recentFilesMenuItems = useMemo<DropdownMenuItem[]>(
     () =>
-      recentFiles.map<DropdownMenuItem>((fileHandle) => ({
+      recentFiles.map<DropdownMenuItem>(({ fileHandle }) => ({
         type: 'button',
         label: fileHandle.name,
-        action: () => openDatabaseFielWithHandle(fileHandle),
+        action: () => openDatabaseWithFileHandle(fileHandle),
         icon: <DatabaseIcon />,
       })),
-    [recentFiles],
+    [openDatabaseWithFileHandle, recentFiles],
   )
 
   const menuItems = useMemo(() => {
@@ -56,21 +50,21 @@ export const FileControls: FC<Props> = ({}) => {
       type: 'button',
       label: t('header.menu.database.items.create'),
       icon: <DocumentAddIcon />,
-      action: createDatabaseFile,
+      action: createDatabase,
     }
 
     const openItem: DropdownMenuItemButton = {
       type: 'button',
       label: t('header.menu.database.items.open'),
       icon: <FolderIcon className="h-5 w-5" />,
-      action: openDatabaseFile,
+      action: openDatabase,
     }
 
     const closeItem: DropdownMenuItemButton = {
       type: 'button',
       label: t('header.menu.database.items.close'),
       icon: <XIcon />,
-      action: closeDatabaseFile,
+      action: closeDatabase,
     }
 
     const clearRecentFilesItem: DropdownMenuItemButton = {
@@ -81,22 +75,23 @@ export const FileControls: FC<Props> = ({}) => {
       action: clearRecentFiles,
     }
 
-    const recentFilesItemsBatch: DropdownMenuItem[] =
-      recentFilesMenuItems.length > 0
-        ? [
-            { type: 'separator' },
-            ...recentFilesMenuItems,
-            { type: 'separator' },
-            clearRecentFilesItem,
-          ]
-        : []
+    const recentFilesItemsBatch: DropdownMenuItem[] = []
+    // const recentFilesItemsBatch: DropdownMenuItem[] =
+    //   recentFilesMenuItems.length > 0
+    //     ? [
+    //         { type: 'separator' },
+    //         ...recentFilesMenuItems,
+    //         { type: 'separator' },
+    //         clearRecentFilesItem,
+    //       ]
+    //     : []
 
     if (isFileOpen) {
       return [createItem, openItem, closeItem, ...recentFilesItemsBatch]
     }
 
     return [createItem, openItem, ...recentFilesItemsBatch]
-  }, [isFileOpen, recentFilesMenuItems, t])
+  }, [closeDatabase, createDatabase, isFileOpen, openDatabase, t])
 
   if (!isFileOpen) {
     return (
