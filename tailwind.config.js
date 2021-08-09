@@ -9,7 +9,6 @@ module.exports = {
 
   theme: {
     fontFamily: {
-      sans: ['Source Sans Pro'],
       mono: ['IBM Plex Mono'],
     },
 

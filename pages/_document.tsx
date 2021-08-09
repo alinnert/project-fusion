@@ -28,7 +28,7 @@ export default class AppDocument extends Document {
             crossOrigin="anonymous"
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Source+Sans+Pro:ital,wght@0,400;0,600;1,400&display=swap"
+            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap"
             rel="stylesheet"
           />
         </Head>
