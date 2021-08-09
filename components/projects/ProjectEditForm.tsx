@@ -138,17 +138,19 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
     <ToolbarContainer toolbarItems={toolbarItems}>
       <PageContent title={pageTitle} centered={true}>
         <Form type="page">
-          <Input
-            label={`${t('projects:editForm.labels.name')} *`}
-            value={name}
-            onChange={setName}
-          />
+          <div className="grid grid-cols-[3fr,1fr] gap-x-4">
+            <Input
+              label={`${t('projects:editForm.labels.name')} *`}
+              value={name}
+              onChange={setName}
+            />
 
-          <Input
-            label={t('projects:editForm.labels.projectNumber')}
-            value={projectNumber}
-            onChange={setProjectNumber}
-          />
+            <Input
+              label={t('projects:editForm.labels.projectNumber')}
+              value={projectNumber}
+              onChange={setProjectNumber}
+            />
+          </div>
 
           <Checkbox
             label={t('projects:editForm.labels.important')}
