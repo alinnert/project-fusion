@@ -7,6 +7,7 @@ import { selectIsFileOpen } from '../../redux/database'
 import { selectGroupsWithoutCategory } from '../../redux/groups'
 import { capitalize } from '../../utils/capitalize'
 import { resolveIds } from '../../utils/resolveIds'
+import { sortByProperty } from '../../utils/sortByProperty'
 import { useOrderedCategories } from '../categories/useOrderedCategories'
 import { ToolbarContainer } from '../ui/ToolbarContainer'
 import {
@@ -44,10 +45,9 @@ export const GroupList: FC<Props> = ({ currentId }) => {
     const categorizedGroups: CategorizedLinkItems = orderedCategories.map(
       (category) => {
         const categoryGroups = resolveIds(category.groups, groups)
-        const categoryLinkItems: LinkItem[] = categoryGroups.map((group) => ({
-          ...group,
-          iconColor: group.color,
-        }))
+        const categoryLinkItems = categoryGroups
+          .map((group): LinkItem => ({ ...group, iconColor: group.color }))
+          .sort(sortByProperty<LinkItem>('name'))
 
         return [category, categoryLinkItems]
       },
