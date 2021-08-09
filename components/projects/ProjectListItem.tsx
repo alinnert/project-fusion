@@ -159,17 +159,17 @@ export const ProjectListItem: FC<Props> = ({
   const textClasses = useMemo(() => {
     return classNames(
       'select-text',
-      'font-semibold',
+      'text-base font-semibold',
       matchBoolToString(
         important,
         matchBoolToString(
           archived,
-          'text-important-500 italic line-through',
+          'text-important-800/60 italic line-through',
           'text-important-800',
         ),
         matchBoolToString(
           archived,
-          'text-neutral-400 italic line-through',
+          'text-neutral-600/60 italic line-through',
           'text-neutral-600',
         ),
       ),
@@ -247,7 +247,10 @@ export const ProjectListItem: FC<Props> = ({
 
         {notes.trim() !== '' ? (
           <div
-            className="prose prose-brand select-text text-base mt-4"
+            className={classNames(
+              'prose prose-brand select-text text-base mt-4',
+              matchBoolToString(archived, 'opacity-60'),
+            )}
             dangerouslySetInnerHTML={{ __html: parsedNotes }}
           />
         ) : null}
