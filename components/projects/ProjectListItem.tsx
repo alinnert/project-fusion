@@ -17,9 +17,11 @@ import React, { FC, useCallback, useMemo } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux'
 import { Project, removeProject, updateProject } from '../../redux/projects'
 import { matchBoolToString } from '../../utils/match'
+import { tailwindConfig } from '../../utils/tailwindConfig'
 import { useGroupFromRoute } from '../groups/useGroupFromRoute'
 import { Button } from '../ui/Button'
 import { DropdownMenu, DropdownMenuItem } from '../ui/DropdownMenu'
+import { Heroicon } from '../ui/Heroicon'
 import { useConfirmDialog } from '../ui/useConfirmDialog'
 
 interface Props extends Project {}
@@ -217,6 +219,14 @@ export const ProjectListItem: FC<Props> = ({
 
       <div key={id} className={projectItemClasses}>
         <div className={classNames('flex items-center gap-x-1 text-base')}>
+          {important ? (
+            <Heroicon
+              // @ts-expect-error
+              color={tailwindConfig.theme.colors?.important['600']}
+              icon={<StarIcon />}
+            />
+          ) : null}
+
           <div className={classNames('flex-1', textClasses)}>{name}</div>
 
           {projectNumber !== undefined ? (
