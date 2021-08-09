@@ -25,6 +25,18 @@ module.exports = {
         dangerAccent: colors.red,
         neutral: colors.blueGray,
       },
+
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            'ul > li > input[type=checkbox]:first-child:last-child': {
+              marginTop: 0,
+              marginBottom: 0,
+              marginRight: theme('spacing.4'),
+            },
+          },
+        },
+      }),
     },
   },
 
