@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import { useAppDispatch } from '../../redux'
 import {
   setDatabase,
@@ -16,7 +17,7 @@ import { asyncTry } from '../../utils/tryCatch'
 export function useOpenDatabase(): () => Promise<void> {
   const dispatch = useAppDispatch()
 
-  return async () => {
+  const openDatabase = useCallback(async () => {
     dispatch(startLoading())
 
     const filePickerResult = await asyncTry(() =>
@@ -55,5 +56,7 @@ export function useOpenDatabase(): () => Promise<void> {
     }
 
     dispatch(setDatabase(payload))
-  }
+  }, [dispatch])
+
+  return openDatabase
 }

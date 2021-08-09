@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import { useAppDispatch } from '../../redux'
 import {
   setDatabase,
@@ -14,59 +15,66 @@ export function useOpenDatabaseWithFileHandle(): (
 ) => Promise<void> {
   const dispatch = useAppDispatch()
 
-  return async (fileHandle: FileSystemFileHandle) => {
-    const queryPermissionResult = await asyncTry(() =>
-      fileHandle.queryPermission({ mode: 'readwrite' }),
-    )
-    if (queryPermissionResult.caught) {
-      dispatch(setOpenDatabaseError(queryPermissionResult.error.message))
-      return
-    }
-    if (queryPermissionResult.value === 'denied') {
-      dispatch(setOpenDatabaseError('permission denied'))
-      return
-    }
-
-    if (queryPermissionResult.value === 'prompt') {
-      const requestPermissionResult = await asyncTry(() =>
-        fileHandle.requestPermission({ mode: 'readwrite' }),
+  const openDatabaseWithFileHandle = useCallback(
+    async (fileHandle: FileSystemFileHandle) => {
+      const queryPermissionResult = await asyncTry(() =>
+        fileHandle.queryPermission({ mode: 'readwrite' }),
       )
-      if (requestPermissionResult.caught) {
-        dispatch(setOpenDatabaseError(requestPermissionResult.error.message))
+      if (queryPermissionResult.caught) {
+        dispatch(setOpenDatabaseError(queryPermissionResult.error.message))
         return
       }
-      if (requestPermissionResult.value === 'denied') {
+      if (queryPermissionResult.value === 'denied') {
         dispatch(setOpenDatabaseError('permission denied'))
         return
       }
-    }
 
-    const persistHandleResult = await asyncTry(() => setFileHandle(fileHandle))
-    if (persistHandleResult.caught) {
-      console.error(persistHandleResult.error)
-    }
+      if (queryPermissionResult.value === 'prompt') {
+        const requestPermissionResult = await asyncTry(() =>
+          fileHandle.requestPermission({ mode: 'readwrite' }),
+        )
+        if (requestPermissionResult.caught) {
+          dispatch(setOpenDatabaseError(requestPermissionResult.error.message))
+          return
+        }
+        if (requestPermissionResult.value === 'denied') {
+          dispatch(setOpenDatabaseError('permission denied'))
+          return
+        }
+      }
 
-    const addToRecentFilesResult = await asyncTry(() =>
-      addFileToRecentFiles(fileHandle),
-    )
-    if (addToRecentFilesResult.caught) {
-      console.error(addToRecentFilesResult.error)
-    }
+      const persistHandleResult = await asyncTry(() =>
+        setFileHandle(fileHandle),
+      )
+      if (persistHandleResult.caught) {
+        console.error(persistHandleResult.error)
+      }
 
-    const fileDataResult = await asyncTry(() =>
-      getDataFromFileHandle(fileHandle),
-    )
-    if (fileDataResult.caught) {
-      dispatch(setOpenDatabaseError(fileDataResult.error.message))
-      return
-    }
+      const addToRecentFilesResult = await asyncTry(() =>
+        addFileToRecentFiles(fileHandle),
+      )
+      if (addToRecentFilesResult.caught) {
+        console.error(addToRecentFilesResult.error)
+      }
 
-    const database = fileDataResult.value
-    const result: SetDatabaseActionPayload = {
-      filename: fileHandle.name,
-      database,
-    }
+      const fileDataResult = await asyncTry(() =>
+        getDataFromFileHandle(fileHandle),
+      )
+      if (fileDataResult.caught) {
+        dispatch(setOpenDatabaseError(fileDataResult.error.message))
+        return
+      }
 
-    dispatch(setDatabase(result))
-  }
+      const database = fileDataResult.value
+      const result: SetDatabaseActionPayload = {
+        filename: fileHandle.name,
+        database,
+      }
+
+      dispatch(setDatabase(result))
+    },
+    [dispatch],
+  )
+
+  return openDatabaseWithFileHandle
 }
