@@ -1,4 +1,4 @@
-import { FolderIcon, PlusIcon, StarIcon } from '@heroicons/react/solid'
+import { CogIcon, FolderIcon, PlusIcon, StarIcon } from '@heroicons/react/solid'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import React, { FC, useMemo } from 'react'
@@ -70,6 +70,10 @@ export const GroupList: FC<Props> = ({ currentId }) => {
     router.push('/new_group')
   }
 
+  function handleManageCategoriesButtonClick() {
+    router.push('/config/categories')
+  }
+
   if (!isFileOpen) {
     return null
   }
@@ -79,9 +83,15 @@ export const GroupList: FC<Props> = ({ currentId }) => {
       toolbarItems={[
         {
           type: 'button',
-          label: t('groups:terms.group'),
+          label: t('groups:list.toolbar.addGroup'),
           icon: <PlusIcon />,
           action: handleAddGroupButtonClick,
+        },
+        {
+          type: 'button',
+          label: t('groups:list.toolbar.manageCategories'),
+          icon: <CogIcon />,
+          action: handleManageCategoriesButtonClick,
         },
       ]}
     >

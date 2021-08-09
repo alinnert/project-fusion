@@ -26,7 +26,7 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
   return (
     <div
       className={classNames(
-        'grid grid-cols-[300px,1fr,1fr] grid-rows-[auto,1fr]',
+        'grid grid-cols-[360px,1fr,1fr] grid-rows-[auto,1fr]',
         'fixed inset-0',
       )}
     >

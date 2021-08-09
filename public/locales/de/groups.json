@@ -4,6 +4,10 @@
     "favorites": "Favoriten"
   },
   "list": {
+    "toolbar": {
+      "addGroup": "Gruppe",
+      "manageCategories": "Kategorien"
+    },
     "noCategory": "Ohne Kategorie",
     "specialItems": {
       "favorites": "Favoriten"
