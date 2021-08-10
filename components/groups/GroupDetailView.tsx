@@ -1,4 +1,5 @@
-import { FolderIcon, PencilIcon, TrashIcon } from '@heroicons/react/solid'
+import { FolderIcon } from '@heroicons/react/outline'
+import { PencilIcon, TrashIcon } from '@heroicons/react/solid'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import React, { FC } from 'react'
@@ -66,6 +67,7 @@ export const GroupDetailView: FC<Props> = ({}) => {
         title={group.name}
         titleIcon={<FolderIcon />}
         titleIconColor={group.color}
+        titleIconType="outline"
         centered={true}
       >
         <Markdown text={group.notes} />

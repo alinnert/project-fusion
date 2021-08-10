@@ -1,9 +1,5 @@
-import {
-  FolderAddIcon,
-  FolderIcon,
-  SaveIcon,
-  XIcon,
-} from '@heroicons/react/solid'
+import { FolderAddIcon, FolderIcon } from '@heroicons/react/outline'
+import { SaveIcon, XIcon } from '@heroicons/react/solid'
 import { useTranslation } from 'next-i18next'
 import router from 'next/router'
 import React, { FC, useCallback, useMemo, useState } from 'react'
@@ -141,6 +137,7 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
         title={pageTitle}
         titleIcon={isEditForm ? <FolderIcon /> : <FolderAddIcon />}
         titleIconColor={color}
+        titleIconType="outline"
         centered={true}
       >
         <Form type="page" onSubmit={handleSubmit}>

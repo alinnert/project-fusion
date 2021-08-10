@@ -1,6 +1,8 @@
+import { TagIcon } from '@heroicons/react/outline'
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/solid'
 import { useTranslation } from 'next-i18next'
 import React, { FC, useState } from 'react'
+import colors from 'tailwindcss/colors'
 import { useAppDispatch } from '../../redux'
 import {
   addCategory,
@@ -102,7 +104,13 @@ export const CategorySettings: FC<Props> = ({}) => {
   }
 
   return (
-    <PageContent title={t('settings:categories.title')} centered={true}>
+    <PageContent
+      title={t('settings:categories.title')}
+      centered={true}
+      titleIcon={<TagIcon />}
+      titleIconType="outline"
+      titleIconColor={colors.rose[700]}
+    >
       {addDialog}
       {renameDialog}
       {deleteDialog}

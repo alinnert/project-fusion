@@ -5,7 +5,7 @@
   },
   "list": {
     "toolbar": {
-      "addGroup": "Group",
+      "addGroup": "Add Group",
       "manageCategories": "Categories"
     },
     "noCategory": "No category",

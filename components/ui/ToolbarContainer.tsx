@@ -21,7 +21,11 @@ interface ToolbarPopover {
   panel: ReactElement
 }
 
-export type ToolbarItem = ToolbarButton | ToolbarPopover
+interface ToolbarExpander {
+  type: 'expander'
+}
+
+export type ToolbarItem = ToolbarButton | ToolbarPopover | ToolbarExpander
 
 interface Props {
   toolbarItems?: ToolbarItem[]
@@ -40,13 +44,7 @@ export const ToolbarContainer: FC<PropsWithChildren<Props>> = ({
       )}
     >
       {toolbarItems.length > 0 ? (
-        <div
-          className={classNames(
-            'flex gap-x-2',
-            'p-2',
-            'bg-neutral-200',
-          )}
-        >
+        <div className={classNames('flex gap-x-2', 'p-2', 'bg-neutral-200')}>
           {toolbarItems.map((item, index) =>
             item.type === 'button' ? (
               <Button
@@ -58,6 +56,8 @@ export const ToolbarContainer: FC<PropsWithChildren<Props>> = ({
               >
                 {item.label}
               </Button>
+            ) : item.type === 'expander' ? (
+              <div className="ml-auto" />
             ) : item.type === 'popover' ? (
               <Popover key={index} className="relative">
                 <Popover.Button disabled={item.disabled}>

@@ -1,8 +1,10 @@
+import { LinkIcon } from '@heroicons/react/outline'
 import { SaveIcon, TrashIcon } from '@heroicons/react/solid'
 import { GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import React, { FormEvent, ReactElement, useMemo, useState } from 'react'
+import colors from 'tailwindcss/colors'
 import { Layout } from '../../components/app/Layout'
 import { SettingsPagesList } from '../../components/settings/SettingsPagesList'
 import { Button } from '../../components/ui/Button'
@@ -111,7 +113,13 @@ export default function Links(): ReactElement | null {
       {confirmDeletePrimaryProjectLinkDialog}
 
       <Layout left={<SettingsPagesList currentId="links" />}>
-        <PageContent title={t('settings:links.title')} centered={true}>
+        <PageContent
+          title={t('settings:links.title')}
+          centered={true}
+          titleIcon={<LinkIcon />}
+          titleIconType="outline"
+          titleIconColor={colors.sky[700]}
+        >
           <p>{t('settings:links.description')}</p>
 
           <Headline>{t('settings:links.projectLinks.title')}</Headline>

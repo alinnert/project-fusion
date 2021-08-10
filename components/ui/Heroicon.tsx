@@ -1,14 +1,20 @@
 import classNames from 'classnames'
 import { Children, cloneElement, FC, isValidElement, ReactElement } from 'react'
-import { defaultMatch, matchStringToString } from '../../utils/match'
+import { matchUnionToString } from '../../utils/match'
 
 interface Props {
   icon: ReactElement<{ className: string }>
   color?: string
-  scale?: 1 | 1.5 | 2 | 3 | 4
+  scale?: 1 | 1.5 | 2 | 4
+  iconType?: 'solid' | 'outline'
 }
 
-export const Heroicon: FC<Props> = ({ icon, color, scale = 1 }) => {
+export const Heroicon: FC<Props> = ({
+  icon,
+  color,
+  scale = 1,
+  iconType = 'solid',
+}) => {
   return (
     <div style={{ color }}>
       {Children.map(icon, (child) => {
@@ -16,13 +22,23 @@ export const Heroicon: FC<Props> = ({ icon, color, scale = 1 }) => {
         return cloneElement(child, {
           className: classNames(
             child.props.className,
-            matchStringToString(scale, {
-              1: 'w-5 h-5',
-              1.5: 'w-7 h-7',
-              2: 'w-10 h-10',
-              3: 'w-16 h-16',
-              4: 'w-24 h-24',
-              [defaultMatch]: 'w-5 h-5'
+            matchUnionToString(scale, {
+              1: matchUnionToString(iconType, {
+                solid: 'w-[20px] h-[20px]',
+                outline: 'w-[24px] h-[24px]',
+              }),
+              1.5: matchUnionToString(iconType, {
+                solid: 'w-[30px] h-[30px]',
+                outline: 'w-[36px] h-[36px]',
+              }),
+              2: matchUnionToString(iconType, {
+                solid: 'w-[40px] h-[40px]',
+                outline: 'w-[48px] h-[48px]',
+              }),
+              4: matchUnionToString(iconType, {
+                solid: 'w-[80px] h-[80px]',
+                outline: 'w-[96px] h-[96px]',
+              }),
             }),
           ),
         })
