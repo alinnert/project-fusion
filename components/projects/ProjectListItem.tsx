@@ -73,8 +73,11 @@ export const ProjectListItem: FC<Props> = ({
   }, [dispatch, id])
 
   const handleDuplicate = useCallback(() => {
-    console.warn('not yet implemented')
-  }, [])
+    router.push({
+      pathname: `/groups/[groupId]/new-project`,
+      query: { groupId, from: id },
+    })
+  }, [groupId, id, router])
 
   const handleDelete = useCallback(() => {
     openConfirmDeleteDialog({

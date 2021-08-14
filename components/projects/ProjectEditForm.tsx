@@ -1,10 +1,15 @@
 import { SaveIcon, XIcon } from '@heroicons/react/solid'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
-import React, { FC, FormEvent, useCallback, useMemo, useState } from 'react'
+import React, { FC, useCallback, useDebugValue, useMemo, useState } from 'react'
 import { useAppDispatch } from '../../redux'
 import { addProjectToGroup } from '../../redux/groups'
-import { addProject, Project, updateProject } from '../../redux/projects'
+import {
+  addProject,
+  Project,
+  ProjectTemplate,
+  updateProject,
+} from '../../redux/projects'
 import { createId } from '../../utils/customNanoId'
 import { Checkbox } from '../ui/Checkbox'
 import { Form } from '../ui/Form'
@@ -14,10 +19,11 @@ import { Textarea } from '../ui/Textarea'
 import { ToolbarContainer, ToolbarItem } from '../ui/ToolbarContainer'
 
 interface Props {
-  init?: Project | null
+  init?: Project | ProjectTemplate | null
 }
 
 export const ProjectEditForm: FC<Props> = ({ init = null }) => {
+  useDebugValue(init === null ? 'new project' : init.name)
   const { t } = useTranslation()
   const router = useRouter()
   const dispatch = useAppDispatch()
@@ -38,15 +44,16 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
     return true
   }, [name])
 
-  const isEditForm = useMemo(() => init !== null, [init])
+  const isEditingExistingProject = useMemo(
+    () => init !== null && init.id !== undefined,
+    [init],
+  )
 
   const pageTitle = useMemo(() => {
-    const projectName = name !== '' ? name : '[kein Name]'
-
-    return isEditForm
-      ? `${t('projects:editForm.edit.pageTitle')}: ${projectName}`
-      : `${t('projects:editForm.create.pageTitle')}: ${projectName}`
-  }, [isEditForm, name, t])
+    return isEditingExistingProject
+      ? `${t('projects:editForm.edit.pageTitle')}: ${init?.name ?? '-'}`
+      : `${t('projects:editForm.create.pageTitle')}`
+  }, [init, isEditingExistingProject, t])
 
   const createProject = useCallback(() => {
     if (groupId === null) return
@@ -73,6 +80,7 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
 
   const editProject = useCallback(() => {
     if (init === null) return
+    if (init.id === undefined) return
 
     dispatch(
       updateProject({
@@ -99,12 +107,12 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
   ])
 
   const saveProject = useCallback(() => {
-    if (isEditForm) {
+    if (isEditingExistingProject) {
       editProject()
     } else {
       createProject()
     }
-  }, [createProject, editProject, isEditForm])
+  }, [createProject, editProject, isEditingExistingProject])
 
   const cancel = useCallback(() => {
     const groupId = router.query.groupId

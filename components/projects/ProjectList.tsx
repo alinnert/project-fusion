@@ -58,7 +58,7 @@ export const ProjectList: FC<Props> = ({ projects }) => {
     if (groupId === undefined) return
 
     router.push({
-      pathname: '/groups/[groupId]/new_project',
+      pathname: '/groups/[groupId]/new-project',
       query: { groupId },
     })
   }, [router])
