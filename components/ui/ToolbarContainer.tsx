@@ -57,7 +57,7 @@ export const ToolbarContainer: FC<PropsWithChildren<Props>> = ({
                 {item.label}
               </Button>
             ) : item.type === 'expander' ? (
-              <div className="ml-auto" />
+              <div className="ml-auto" key={index} />
             ) : item.type === 'popover' ? (
               <Popover key={index} className="relative">
                 <Popover.Button disabled={item.disabled}>
