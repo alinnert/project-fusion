@@ -1,13 +1,15 @@
 import classNames from 'classnames'
+import Image from 'next/image'
 import React, { FC, PropsWithChildren, ReactNode, useMemo } from 'react'
+import IconWhite from '../../public/icon-white.svg'
 import { useAppSelector } from '../../redux'
 import { selectIsFileOpen } from '../../redux/database'
 import { matchBoolToString } from '../../utils/match'
 import { DatabaseMenu } from '../dataFile/DatabaseMenu'
-import { ViewAreaTabs } from './ViewAreaTabs'
 import { LanguageChooser } from '../settings/LanguageChooser'
 import { HeaderSearch } from '../ui/HeaderSearch'
 import { Separator } from '../ui/HeaderSeparator'
+import { ViewAreaTabs } from './ViewAreaTabs'
 
 interface Props {
   left?: ReactNode
@@ -42,6 +44,9 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
         <div
           className={classNames('row-start-1 col-start-1', 'flex items-center')}
         >
+          <div className="ml-2 mr-4 leading-[0]">
+            <Image src={IconWhite} alt="" width="28" height="28" />
+          </div>
           <DatabaseMenu />
           <Separator type="header" />
           <ViewAreaTabs />

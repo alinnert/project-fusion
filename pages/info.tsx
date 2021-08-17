@@ -5,7 +5,7 @@ import Image from 'next/image'
 import React, { ReactElement } from 'react'
 import { Layout } from '../components/app/Layout'
 import { PageContent } from '../components/ui/PageContent'
-import LogoPicture from '../public/icon-128.png'
+import LogoPicture from '../public/icon.svg'
 import { getPageTitle } from '../utils/getPageTitle'
 import { getServerSideTranslations } from '../utils/getServerSideTranslations'
 
@@ -26,18 +26,16 @@ export default function Info(): ReactElement | null {
       <Layout>
         <PageContent title={t('info:title')} centered={true}>
           <div className="prose prose-brand select-text">
-            <p>
-              <i>
-                {t('info:version')} 0.0.0.42
-                if-you-use-this-in-production-kittens-will-die-pre-alpha
-              </i>
+            <p className="font-semibold">
+              {t('info:version')} 0.0.0.42
+              if-you-use-this-in-production-kittens-will-die-pre-alpha
             </p>
 
             <Image
               src={LogoPicture}
               alt="ProjectFusion Logo"
-              width="64"
-              height="64"
+              width="128"
+              height="128"
             />
 
             <p>
