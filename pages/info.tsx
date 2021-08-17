@@ -5,7 +5,7 @@ import Image from 'next/image'
 import React, { ReactElement } from 'react'
 import { Layout } from '../components/app/Layout'
 import { PageContent } from '../components/ui/PageContent'
-import LogoPicture from '../public/icon.svg'
+import LogoPicture from '../public/icon-gradient.svg'
 import { getPageTitle } from '../utils/getPageTitle'
 import { getServerSideTranslations } from '../utils/getServerSideTranslations'
 

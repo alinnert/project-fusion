@@ -47,6 +47,7 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
           <div className="ml-2 mr-4 leading-[0]">
             <Image src={IconWhite} alt="" width="28" height="28" />
           </div>
+
           <DatabaseMenu />
           <Separator type="header" />
           <ViewAreaTabs />
