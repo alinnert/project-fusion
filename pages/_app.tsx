@@ -1,5 +1,5 @@
 import { appWithTranslation } from 'next-i18next'
-import { AppProps } from 'next/dist/next-server/lib/router/router'
+import { AppProps } from 'next/app'
 import React from 'react'
 import { Provider } from 'react-redux'
 import { WrappedApp } from '../components/app/WrappedApp'
