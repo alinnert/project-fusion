@@ -28,6 +28,7 @@ type ExtractedButtonProps = 'onClick' | 'disabled'
 interface Props
   extends Pick<ButtonHTMLAttributes<HTMLButtonElement>, ExtractedButtonProps> {
   icon?: ReactElement
+  rightIcon?: ReactElement
   type?: ButtonType
   size?: ButtonSize
   className?: string
@@ -40,6 +41,7 @@ interface Props
 export const Button: FC<PropsWithChildren<Props>> = ({
   children,
   icon,
+  rightIcon,
   type = 'default',
   size = 'normal',
   className,
@@ -183,6 +185,10 @@ export const Button: FC<PropsWithChildren<Props>> = ({
         >
           {typeof children === 'string' ? capitalize(children) : children}
         </div>
+      ) : null}
+
+      {rightIcon !== undefined && hasChildren ? (
+        <Heroicon icon={rightIcon} />
       ) : null}
     </button>
   )
