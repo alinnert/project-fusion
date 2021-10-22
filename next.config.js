@@ -8,7 +8,7 @@ module.exports = withPWA({
     return config
   },
   i18n,
-  // pwa: {
-  //   dest: 'public'
-  // }
+  pwa: {
+    dest: 'public'
+  }
 })
