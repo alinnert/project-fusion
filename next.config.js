@@ -1,7 +1,7 @@
 const { i18n } = require('./next-i18next.config.js')
-// const withPWA = require('next-pwa')
+const withPWA = require('next-pwa')
 
-module.exports = {
+module.exports = withPWA({
   reactStrictMode: true,
   webpackDevMiddleware(config) {
     config.watchOptions = { ignored: ['.git/', '.next/', 'node_modules'] }
@@ -11,4 +11,4 @@ module.exports = {
   // pwa: {
   //   dest: 'public'
   // }
-}
+})
