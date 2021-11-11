@@ -1,5 +1,6 @@
-import { useTranslation } from 'next-i18next'
 import React, { ReactElement, useCallback, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { AppDialog } from './AppDialog'
 import { Button, ButtonType } from './Button'
 
@@ -24,7 +25,7 @@ interface Result {
 const confirmButtonDefaultType: ButtonType = 'primary'
 
 export function useConfirmDialog({ onConfirm, onCancel }: Options): Result {
-  const { t } = useTranslation()
+  const { t } = useTranslation(translationNamespaces)
   const [title, setTitle] = useState('')
   const [message, setMessage] = useState('')
   const [confirmButtonLabel, setConfirmButtonLabel] = useState('')

@@ -28,7 +28,11 @@ export function useOpenDatabase(): () => Promise<void> {
       return
     }
 
-    const [fileHandle] = filePickerResult.value
+    const fileHandle = filePickerResult.value[0]
+    if (fileHandle === undefined) {
+      dispatch(setOpenDatabaseError('No file handle returned.'))
+      return
+    }
 
     const persistHandleResult = await asyncTry(() => setFileHandle(fileHandle))
     if (persistHandleResult.caught) {

@@ -1,9 +1,8 @@
 import { LinkIcon } from '@heroicons/react/outline'
 import { SaveIcon, TrashIcon } from '@heroicons/react/solid'
-import { GetStaticProps } from 'next'
-import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import React, { FormEvent, ReactElement, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import colors from 'tailwindcss/colors'
 import { Layout } from '../../components/app/Layout'
 import { SettingsPagesList } from '../../components/settings/SettingsPagesList'
@@ -15,15 +14,10 @@ import { useConfirmDialog } from '../../components/ui/useConfirmDialog'
 import { useAppDispatch, useAppSelector } from '../../redux'
 import { setPrimaryProjectLink } from '../../redux/settings'
 import { getPageTitle } from '../../utils/getPageTitle'
-import { getServerSideTranslations } from '../../utils/getServerSideTranslations'
-
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const translations = await getServerSideTranslations(locale)
-  return { props: { ...translations } }
-}
+import { translationNamespaces } from '../../utils/i18next-namespaces'
 
 export default function Links(): ReactElement | null {
-  const { t } = useTranslation()
+  const { t } = useTranslation(translationNamespaces)
   const dispatch = useAppDispatch()
 
   const primaryProjectLink = useAppSelector(

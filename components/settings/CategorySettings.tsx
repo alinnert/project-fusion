@@ -1,17 +1,18 @@
 import { TagIcon } from '@heroicons/react/outline'
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/solid'
-import { useTranslation } from 'next-i18next'
 import React, { FC, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import colors from 'tailwindcss/colors'
 import { useAppDispatch } from '../../redux'
 import {
   addCategory,
   Category,
   removeCategory,
-  updateCategory,
+  updateCategory
 } from '../../redux/categories'
 import { swapCategories } from '../../redux/settings'
 import { createId } from '../../utils/customNanoId'
+import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { useOrderedCategories } from '../categories/useOrderedCategories'
 import { Button } from '../ui/Button'
 import { Headline } from '../ui/Headline'
@@ -23,7 +24,7 @@ import { useTextDialog } from '../ui/useTextDialog'
 interface Props {}
 
 export const CategorySettings: FC<Props> = ({}) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation(translationNamespaces)
   const [selectedId, setSelectedId] = useState<Category['id'] | null>(null)
   const dispatch = useAppDispatch()
   const { categories, orderedCategoryIds } = useOrderedCategories()
@@ -42,7 +43,7 @@ export const CategorySettings: FC<Props> = ({}) => {
             ? orderedCategoryIds[orderedCategoryIds.length - 2]
             : orderedCategoryIds[previousIndex + 1]
 
-        setSelectedId(newSelectedId)
+        setSelectedId(newSelectedId ?? null)
       },
     })
 

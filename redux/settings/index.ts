@@ -59,7 +59,6 @@ const slice = createSlice({
   },
 })
 
-export const {
-  reducer: settingsReducer,
-  actions: { setPrimaryProjectLink, swapCategories },
-} = slice
+export const settingsReducer = slice.reducer
+
+export const { setPrimaryProjectLink, swapCategories } = slice.actions

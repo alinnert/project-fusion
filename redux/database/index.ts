@@ -62,10 +62,14 @@ const slice = createSlice({
   },
 })
 
+export const databaseReducer = slice.reducer
+
 export const {
-  reducer: databaseReducer,
-  actions: { startLoading, setOpenDatabaseError, closeDatabase, setDatabase },
-} = slice
+  startLoading,
+  setOpenDatabaseError,
+  closeDatabase,
+  setDatabase,
+} = slice.actions
 
 export const selectIsFileOpen = createSelector(
   (state: AppState) => state.database.filename,

@@ -10,7 +10,9 @@ export function useGroupFromRoute() {
 
   const groupId = useMemo(() => {
     if (groupIdValue === undefined) return null
-    return Array.isArray(groupIdValue) ? groupIdValue[0] : groupIdValue
+    return (
+      (Array.isArray(groupIdValue) ? groupIdValue[0] : groupIdValue) ?? null
+    )
   }, [groupIdValue])
 
   const group = useMemo<ProjectGroup | null>(() => {

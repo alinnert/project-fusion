@@ -2,13 +2,14 @@ import {
   CogIcon,
   CollectionIcon,
   HomeIcon,
-  InformationCircleIcon,
+  InformationCircleIcon
 } from '@heroicons/react/solid'
-import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import React, { FC, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useAppSelector } from '../../redux'
 import { selectIsFileOpen } from '../../redux/database'
+import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { HeaderTabs, TabItem } from '../ui/HeaderTabs'
 
 interface Props {}
@@ -16,7 +17,7 @@ interface Props {}
 export const ViewAreaTabs: FC<Props> = ({}) => {
   const router = useRouter()
   const isFileOpen = useAppSelector(selectIsFileOpen)
-  const { t } = useTranslation()
+  const { t } = useTranslation(translationNamespaces)
 
   const tabs = useMemo<Array<TabItem>>(() => {
     const dataItem: TabItem = {

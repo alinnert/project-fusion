@@ -42,10 +42,9 @@ const slice = createSlice({
   },
 })
 
-export const {
-  reducer: recentFilesReducer,
-  actions: {},
-} = slice
+export const recentFilesReducer = slice.reducer
+
+// export const { } = slice.actions
 
 interface SelectRecentFilesItem {
   filename: string

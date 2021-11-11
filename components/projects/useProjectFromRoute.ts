@@ -9,13 +9,15 @@ export function useProjectFromRoute() {
 
   const projectId = useMemo(() => {
     if (projectIdValue === undefined) return null
-    return Array.isArray(projectIdValue) ? projectIdValue[0] : projectIdValue
+    return (
+      (Array.isArray(projectIdValue) ? projectIdValue[0] : projectIdValue) ??
+      null
+    )
   }, [projectIdValue])
 
   const project = useMemo(() => {
     if (projectId === null) return null
-    const project = projects[projectId]
-    return project ?? null
+    return projects[projectId] ?? null
   }, [projectId, projects])
 
   return { projectId, project }

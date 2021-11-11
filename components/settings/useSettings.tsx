@@ -1,11 +1,12 @@
 import { LinkIcon, TagIcon } from '@heroicons/react/solid'
-import { useTranslation } from 'next-i18next'
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import colors from 'tailwindcss/colors'
+import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { CategorizedLinkItems } from '../ui/VerticalLinkList'
 
 export function useSettings() {
-  const { t } = useTranslation()
+  const { t } = useTranslation(translationNamespaces)
 
   const databaseSettings = useMemo(() => {
     return {

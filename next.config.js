@@ -1,4 +1,4 @@
-const { i18n } = require('./next-i18next.config.js')
+// const { i18n } = require('./next-i18next.config.js')
 
 module.exports = {
   reactStrictMode: true,
@@ -6,5 +6,5 @@ module.exports = {
     config.watchOptions = { ignored: ['.git/', '.next/', 'node_modules'] }
     return config
   },
-  i18n,
+  // i18n,
 }

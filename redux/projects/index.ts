@@ -34,13 +34,7 @@ const slice = createSlice({
   },
 })
 
-export const {
-  reducer: projectsReducer,
-  actions: {
-    addProject,
-    setProject,
-    updateProject,
-    removeProject,
-    setProjects,
-  },
-} = slice
+export const projectsReducer = slice.reducer
+
+export const { addProject, updateProject, removeProject, setProjects } =
+  slice.actions

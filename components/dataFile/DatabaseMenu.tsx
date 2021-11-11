@@ -3,14 +3,15 @@ import {
   DocumentAddIcon,
   FolderIcon,
   TrashIcon,
-  XIcon,
+  XIcon
 } from '@heroicons/react/solid'
-import { useTranslation } from 'next-i18next'
 import React, { FC, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useAppSelector } from '../../redux'
 import { selectIsFileOpen } from '../../redux/database'
 import { clearRecentFiles } from '../../redux/database/recentFilesStorage'
 import { selectRecentFiles } from '../../redux/recentFiles'
+import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { tailwindConfig, useBreakpoint } from '../../utils/tailwindConfig'
 import { DropdownMenu, DropdownMenuItem } from '../ui/DropdownMenu'
 import { DropdownMenuItemButton } from '../ui/DropdownMenuButton'
@@ -22,7 +23,7 @@ import { useOpenDatabaseWithFileHandle } from './useOpenDatabaseWithFilehandle'
 interface Props {}
 
 export const DatabaseMenu: FC<Props> = ({}) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation(translationNamespaces)
 
   const isXlScreen = useBreakpoint(tailwindConfig.theme.screens?.xl)
   const filename = useAppSelector((state) => state.database.filename)

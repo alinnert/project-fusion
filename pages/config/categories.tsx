@@ -1,21 +1,15 @@
-import { GetStaticProps } from 'next'
-import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import React, { ReactElement } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Layout } from '../../components/app/Layout'
 import { CategorySettings } from '../../components/settings/CategorySettings'
 import { SettingsPagesList } from '../../components/settings/SettingsPagesList'
 import { useSettings } from '../../components/settings/useSettings'
 import { getPageTitle } from '../../utils/getPageTitle'
-import { getServerSideTranslations } from '../../utils/getServerSideTranslations'
-
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const translations = await getServerSideTranslations(locale)
-  return { props: { ...translations } }
-}
+import { translationNamespaces } from '../../utils/i18next-namespaces'
 
 export default function Categories(): ReactElement | null {
-  const { t } = useTranslation()
+  const { t } = useTranslation(translationNamespaces)
   const { databaseSettings } = useSettings()
 
   return (
@@ -29,9 +23,7 @@ export default function Categories(): ReactElement | null {
       </Head>
 
       <Layout
-        left={
-          <SettingsPagesList currentId={databaseSettings.categories.id} />
-        }
+        left={<SettingsPagesList currentId={databaseSettings.categories.id} />}
       >
         <CategorySettings />
       </Layout>

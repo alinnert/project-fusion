@@ -7,15 +7,16 @@ import {
   LinkIcon,
   PencilIcon,
   StarIcon,
-  TrashIcon,
+  TrashIcon
 } from '@heroicons/react/solid'
 import classNames from 'classnames'
 import marked from 'marked'
-import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import React, { FC, useCallback, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useAppDispatch, useAppSelector } from '../../redux'
 import { Project, removeProject, updateProject } from '../../redux/projects'
+import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { matchBoolToString } from '../../utils/match'
 import { tailwindConfig } from '../../utils/tailwindConfig'
 import { useGroupFromRoute } from '../groups/useGroupFromRoute'
@@ -34,7 +35,7 @@ export const ProjectListItem: FC<Props> = ({
   archived,
   notes,
 }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation(translationNamespaces)
   const dispatch = useAppDispatch()
   const router = useRouter()
   const { groupId } = useGroupFromRoute()

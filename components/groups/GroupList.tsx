@@ -2,15 +2,16 @@ import {
   FolderAddIcon,
   FolderIcon,
   StarIcon,
-  TagIcon,
+  TagIcon
 } from '@heroicons/react/solid'
-import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import React, { FC, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useAppSelector } from '../../redux'
 import { selectIsFileOpen } from '../../redux/database'
 import { selectGroupsWithoutCategory } from '../../redux/groups'
 import { capitalize } from '../../utils/capitalize'
+import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { resolveIds } from '../../utils/resolveIds'
 import { sortByProperty } from '../../utils/sortByProperty'
 import { useOrderedCategories } from '../categories/useOrderedCategories'
@@ -18,7 +19,7 @@ import { ToolbarContainer } from '../ui/ToolbarContainer'
 import {
   CategorizedLinkItems,
   LinkItem,
-  VerticalLinkList,
+  VerticalLinkList
 } from '../ui/VerticalLinkList'
 import { useGroupFromRoute } from './useGroupFromRoute'
 
@@ -27,7 +28,7 @@ interface Props {
 }
 
 export const GroupList: FC<Props> = ({ currentId }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation(translationNamespaces)
   const router = useRouter()
   const { orderedCategories } = useOrderedCategories()
   const isFileOpen = useAppSelector(selectIsFileOpen)

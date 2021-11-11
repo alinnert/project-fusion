@@ -1,5 +1,4 @@
 import { BanIcon } from '@heroicons/react/solid'
-import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import React, { ReactElement } from 'react'
 import { Layout } from '../../../components/app/Layout'
@@ -8,16 +7,6 @@ import { GroupList } from '../../../components/groups/GroupList'
 import { useGroupFromRoute } from '../../../components/groups/useGroupFromRoute'
 import { EmptyText } from '../../../components/ui/EmptyText'
 import { getPageTitle } from '../../../utils/getPageTitle'
-import { getServerSideTranslations } from '../../../utils/getServerSideTranslations'
-
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const translations = await getServerSideTranslations(locale)
-  return { props: { ...translations } }
-}
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  return { paths: [], fallback: 'blocking' }
-}
 
 export default function Page(): ReactElement | null {
   const { group, groupId } = useGroupFromRoute()

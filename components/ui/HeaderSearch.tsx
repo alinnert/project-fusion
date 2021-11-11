@@ -1,7 +1,8 @@
 import { SearchIcon } from '@heroicons/react/solid'
-import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
-import React, { FC, FormEvent, useState } from 'react'
+import React, { FC, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { tailwindConfig, useBreakpoint } from '../../utils/tailwindConfig'
 import { Button } from './Button'
 import { Form } from './Form'
@@ -10,7 +11,7 @@ import { Input } from './Input'
 interface Props {}
 
 export const HeaderSearch: FC<Props> = ({}) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation(translationNamespaces)
   const isXlScreen = useBreakpoint(tailwindConfig.theme.screens?.xl)
   const router = useRouter()
 

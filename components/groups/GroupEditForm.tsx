@@ -1,12 +1,13 @@
 import { FolderAddIcon, FolderIcon } from '@heroicons/react/outline'
 import { SaveIcon, XIcon } from '@heroicons/react/solid'
-import { useTranslation } from 'next-i18next'
 import router from 'next/router'
 import React, { FC, useCallback, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useAppDispatch } from '../../redux'
 import { addGroupToCategory, Category } from '../../redux/categories'
 import { addGroup, ProjectGroup, updateGroup } from '../../redux/groups'
 import { createId } from '../../utils/customNanoId'
+import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { useCategoryFromGroup } from '../categories/useCategoryFromGroup'
 import { useOrderedCategories } from '../categories/useOrderedCategories'
 import { ColorInput } from '../ui/ColorInput'
@@ -22,7 +23,7 @@ interface Props {
 }
 
 export const GroupEditForm: FC<Props> = ({ init = null }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation(translationNamespaces)
   const dispatch = useAppDispatch()
   const { orderedCategories } = useOrderedCategories()
   const { categoryId: categoryIdFromGroup } = useCategoryFromGroup(init)

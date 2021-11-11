@@ -1,10 +1,11 @@
 import { FolderIcon } from '@heroicons/react/outline'
 import { PencilIcon, TrashIcon } from '@heroicons/react/solid'
-import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import React, { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useAppDispatch } from '../../redux'
 import { removeGroup } from '../../redux/groups'
+import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { Markdown } from '../ui/Markdown'
 import { PageContent } from '../ui/PageContent'
 import { ToolbarContainer } from '../ui/ToolbarContainer'
@@ -14,7 +15,7 @@ import { useGroupFromRoute } from './useGroupFromRoute'
 interface Props {}
 
 export const GroupDetailView: FC<Props> = ({}) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation(translationNamespaces)
   const dispatch = useAppDispatch()
   const router = useRouter()
   const { groupId, group } = useGroupFromRoute()

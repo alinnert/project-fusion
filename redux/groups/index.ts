@@ -58,17 +58,16 @@ const slice = createSlice({
   },
 })
 
+export const groupsReducer = slice.reducer
+
 export const {
-  reducer: groupsReducer,
-  actions: {
-    addGroup,
-    setGroup,
-    updateGroup,
-    removeGroup,
-    setGroups,
-    addProjectToGroup,
-  },
-} = slice
+  addGroup,
+  setGroup,
+  updateGroup,
+  removeGroup,
+  setGroups,
+  addProjectToGroup,
+} = slice.actions
 
 export const selectGroupIdsWithoutCategory = createSelector(
   [(state: AppState) => state.categories.entities, (state) => state.groups.ids],

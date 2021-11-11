@@ -1,21 +1,13 @@
-import { GetStaticProps } from 'next'
-import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
-import Image from 'next/image'
 import React, { ReactElement } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Layout } from '../components/app/Layout'
 import { PageContent } from '../components/ui/PageContent'
-import LogoPicture from '../public/icon-128.png'
 import { getPageTitle } from '../utils/getPageTitle'
-import { getServerSideTranslations } from '../utils/getServerSideTranslations'
-
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const translations = await getServerSideTranslations(locale)
-  return { props: { ...translations } }
-}
+import { translationNamespaces } from '../utils/i18next-namespaces'
 
 export default function Info(): ReactElement | null {
-  const { t } = useTranslation()
+  const { t } = useTranslation(translationNamespaces)
 
   return (
     <>
@@ -33,8 +25,9 @@ export default function Info(): ReactElement | null {
               </i>
             </p>
 
-            <Image
-              src={LogoPicture}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/icon-128.png"
               alt="ProjectFusion Logo"
               width="64"
               height="64"

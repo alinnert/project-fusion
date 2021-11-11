@@ -54,14 +54,13 @@ const slice = createSlice({
   },
 })
 
+export const categoriesReducer = slice.reducer
+
 export const {
-  reducer: categoriesReducer,
-  actions: {
-    addCategory,
-    setCategory,
-    updateCategory,
-    removeCategory,
-    setCategories,
-    addGroupToCategory,
-  },
-} = slice
+  addCategory,
+  setCategory,
+  updateCategory,
+  removeCategory,
+  setCategories,
+  addGroupToCategory,
+} = slice.actions

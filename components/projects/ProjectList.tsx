@@ -1,9 +1,10 @@
 import { InboxIcon } from '@heroicons/react/outline'
 import { PlusIcon } from '@heroicons/react/solid'
-import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import React, { FC, ReactNode, useCallback, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Project } from '../../redux/projects'
+import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { EmptyText } from '../ui/EmptyText'
 import { Headline } from '../ui/Headline'
 import { PageContent } from '../ui/PageContent'
@@ -17,7 +18,7 @@ interface Props {
 }
 
 export const ProjectList: FC<Props> = ({ projects }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation(translationNamespaces)
   const router = useRouter()
 
   const groupedProjects = useMemo<Record<ArchivedString, Project[]>>(() => {

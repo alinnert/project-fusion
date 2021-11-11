@@ -1,11 +1,12 @@
 import { SaveIcon, XIcon } from '@heroicons/react/solid'
-import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
-import React, { FC, FormEvent, useCallback, useMemo, useState } from 'react'
+import React, { FC, useCallback, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useAppDispatch } from '../../redux'
 import { addProjectToGroup } from '../../redux/groups'
 import { addProject, Project, updateProject } from '../../redux/projects'
 import { createId } from '../../utils/customNanoId'
+import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { Checkbox } from '../ui/Checkbox'
 import { Form } from '../ui/Form'
 import { Input } from '../ui/Input'
@@ -18,7 +19,7 @@ interface Props {
 }
 
 export const ProjectEditForm: FC<Props> = ({ init = null }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation(translationNamespaces)
   const router = useRouter()
   const dispatch = useAppDispatch()
   const [name, setName] = useState(init?.name ?? '')
@@ -29,7 +30,7 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
 
   const groupId = useMemo<string | null>(() => {
     const groupIdValue = router.query.groupId
-    if (Array.isArray(groupIdValue)) return groupIdValue[0]
+    if (Array.isArray(groupIdValue)) return groupIdValue[0] ?? null
     return groupIdValue ?? null
   }, [router.query.groupId])
 
