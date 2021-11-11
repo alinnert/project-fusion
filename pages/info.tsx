@@ -18,19 +18,17 @@ export default function Info(): ReactElement | null {
       <Layout>
         <PageContent title={t('info:title')} centered={true}>
           <div className="prose prose-brand select-text">
-            <p>
-              <i>
-                {t('info:version')} 0.0.0.42
-                if-you-use-this-in-production-kittens-will-die-pre-alpha
-              </i>
+            <p className="font-semibold">
+              {t('info:version')} 0.0.0.42
+              if-you-use-this-in-production-kittens-will-die-pre-alpha
             </p>
 
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/icon-128.png"
+              src="/icon-gradient.svg"
               alt="ProjectFusion Logo"
-              width="64"
-              height="64"
+              width="128"
+              height="128"
             />
 
             <p>

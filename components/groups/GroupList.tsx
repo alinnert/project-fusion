@@ -1,25 +1,29 @@
 import {
+  DocumentIcon,
   FolderAddIcon,
   FolderIcon,
   StarIcon,
-  TagIcon
+  TagIcon,
 } from '@heroicons/react/solid'
+import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import React, { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useAppSelector } from '../../redux'
 import { selectIsFileOpen } from '../../redux/database'
-import { selectGroupsWithoutCategory } from '../../redux/groups'
+import { ProjectGroup, selectGroupsWithoutCategory } from '../../redux/groups'
 import { capitalize } from '../../utils/capitalize'
 import { translationNamespaces } from '../../utils/i18next-namespaces'
+import { matchBoolToString } from '../../utils/match'
 import { resolveIds } from '../../utils/resolveIds'
 import { sortByProperty } from '../../utils/sortByProperty'
 import { useOrderedCategories } from '../categories/useOrderedCategories'
+import { Heroicon } from '../ui/Heroicon'
 import { ToolbarContainer } from '../ui/ToolbarContainer'
 import {
   CategorizedLinkItems,
   LinkItem,
-  VerticalLinkList
+  VerticalLinkList,
 } from '../ui/VerticalLinkList'
 import { useGroupFromRoute } from './useGroupFromRoute'
 
@@ -30,11 +34,13 @@ interface Props {
 export const GroupList: FC<Props> = ({ currentId }) => {
   const { t } = useTranslation(translationNamespaces)
   const router = useRouter()
+  const { groupId } = useGroupFromRoute()
   const { orderedCategories } = useOrderedCategories()
+
   const isFileOpen = useAppSelector(selectIsFileOpen)
   const groups = useAppSelector((state) => state.groups.entities)
   const uncategorizedGroups = useAppSelector(selectGroupsWithoutCategory)
-  const { groupId } = useGroupFromRoute()
+  const projects = useAppSelector((state) => state.projects.entities)
 
   const prefixedItems = useMemo<LinkItem[]>(() => {
     return [
@@ -48,11 +54,60 @@ export const GroupList: FC<Props> = ({ currentId }) => {
   }, [t])
 
   const items = useMemo<CategorizedLinkItems>(() => {
+    const createLinkItem = (group: ProjectGroup): LinkItem => {
+      const projectItems = resolveIds(group.projects, projects)
+      const importantProjectsCount = projectItems.filter(
+        (project) => project.important,
+      ).length
+
+      return {
+        ...group,
+        iconColor: group.color,
+        secondaryLabel(isCurrent) {
+          return (
+            <div className="flex gap-x-2 items-center">
+              {importantProjectsCount > 0 ? (
+                <div
+                  className={classNames(
+                    'flex gap-x-1 items-center w-10',
+                    'text-xs font-semibold',
+                    matchBoolToString(
+                      isCurrent,
+                      'text-important-200',
+                      'text-important-600',
+                    ),
+                  )}
+                >
+                  <Heroicon icon={<StarIcon />} />
+                  {importantProjectsCount}
+                </div>
+              ) : null}
+
+              <div
+                className={classNames(
+                  'flex gap-x-1 items-center w-10',
+                  'text-xs font-semibold',
+                  matchBoolToString(
+                    isCurrent,
+                    'text-accent-50',
+                    'text-neutral-600',
+                  ),
+                )}
+              >
+                <Heroicon icon={<DocumentIcon />} />
+                {group.projects.length}
+              </div>
+            </div>
+          )
+        },
+      }
+    }
+
     const categorizedGroups: CategorizedLinkItems = orderedCategories.map(
       (category) => {
         const categoryGroups = resolveIds(category.groups, groups)
         const categoryLinkItems = categoryGroups
-          .map((group): LinkItem => ({ ...group, iconColor: group.color }))
+          .map(createLinkItem)
           .sort(sortByProperty<LinkItem>('name'))
 
         return [category, categoryLinkItems]
@@ -62,15 +117,12 @@ export const GroupList: FC<Props> = ({ currentId }) => {
     const groupsWithoutCategory: CategorizedLinkItems = [
       [
         { id: '', name: t('groups:list.noCategory') },
-        uncategorizedGroups.map((group) => ({
-          ...group,
-          iconColor: group.color,
-        })),
+        uncategorizedGroups.map(createLinkItem),
       ],
     ]
 
     return [...groupsWithoutCategory, ...categorizedGroups]
-  }, [orderedCategories, t, uncategorizedGroups, groups])
+  }, [orderedCategories, t, uncategorizedGroups, projects, groups])
 
   function handleAddGroupButtonClick() {
     router.push('/new_group')

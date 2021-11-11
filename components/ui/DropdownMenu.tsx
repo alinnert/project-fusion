@@ -1,4 +1,5 @@
 import { Menu } from '@headlessui/react'
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid'
 import classNames from 'classnames'
 import React, {
   FC,
@@ -63,6 +64,7 @@ export const DropdownMenu: FC<PropsWithChildren<Props>> = ({
             <div>
               <Button
                 icon={icon}
+                rightIcon={open ? <ChevronUpIcon /> : <ChevronDownIcon />}
                 type={open ? openButtonType : buttonType}
                 size={buttonSize}
               >

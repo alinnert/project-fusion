@@ -1,4 +1,4 @@
-import { AppProps } from 'next/dist/pages/_app'
+import { AppProps } from 'next/app'
 import React from 'react'
 import { Provider } from 'react-redux'
 import { WrappedApp } from '../components/app/WrappedApp'

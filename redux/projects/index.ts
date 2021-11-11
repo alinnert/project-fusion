@@ -1,6 +1,5 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 import { closeDatabase, setDatabase } from '../database'
-import { removeGroup } from '../groups'
 
 export interface Project {
   id: string
@@ -10,6 +9,8 @@ export interface Project {
   archived: boolean
   notes: string
 }
+
+export type ProjectTemplate = Partial<Pick<Project, 'id'>> & Omit<Project, 'id'>
 
 const adapter = createEntityAdapter<Project>()
 

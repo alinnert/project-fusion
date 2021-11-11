@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import React, { Fragment, MouseEvent, ReactElement } from 'react'
+import React, { Fragment, MouseEvent, ReactElement, ReactNode } from 'react'
 import { LinkListItem } from './LinkListItem'
 import { TextDivider } from './TextDivider'
 
@@ -13,6 +13,7 @@ export interface LinkItem {
   name: string
   icon?: ReactElement
   iconColor?: string
+  secondaryLabel?: (isCurrent: boolean) => ReactNode
 }
 
 export type CategorizedLinkItems = Array<[LinkCategory, LinkItem[]]>
@@ -44,15 +45,24 @@ export function VerticalLinkList({
   }
 
   function createLinkListItem(item: LinkItem) {
+    const isCurrent = item.id === currentId
+    const secondaryLabel = item.secondaryLabel?.(isCurrent)
+
     return (
       <LinkListItem
         key={item.id}
         icon={showIcons ? item.icon ?? defaultIcon : undefined}
         iconColor={item.iconColor}
         onClick={(event) => handleItemClick(item, event)}
-        current={item.id === currentId}
+        current={isCurrent}
       >
-        {item.name}
+        <div className="grid grid-cols-[1fr,auto] items-center">
+          <div>{item.name}</div>
+
+          {secondaryLabel !== null && secondaryLabel !== undefined ? (
+            <div className="mx-2">{secondaryLabel}</div>
+          ) : null}
+        </div>
       </LinkListItem>
     )
   }
