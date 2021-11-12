@@ -1,7 +1,5 @@
 import classNames from 'classnames'
-import Image from 'next/image'
 import React, { FC, PropsWithChildren, ReactNode, useMemo } from 'react'
-import IconWhite from '../../public/icon-white.svg'
 import { useAppSelector } from '../../redux'
 import { selectIsFileOpen } from '../../redux/database'
 import { matchBoolToString } from '../../utils/match'
@@ -45,7 +43,8 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
           className={classNames('row-start-1 col-start-1', 'flex items-center')}
         >
           <div className="ml-2 mr-4 leading-[0]">
-            <Image src={IconWhite} alt="" width="28" height="28" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/icon-white.svg" alt="" width="28" height="28" />
           </div>
 
           <DatabaseMenu />
