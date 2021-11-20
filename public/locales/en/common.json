@@ -36,5 +36,8 @@
       "inputPlaceholder": "Search / Go to project...",
       "button": "Search"
     }
+  },
+  "alerts": {
+    "apiRequirementsNotMet": "Unfortunately, your browser doesn't provide the necessary APIs to run this application. Currently, only up-to-date Chromium based browsers are supported."
   }
 }

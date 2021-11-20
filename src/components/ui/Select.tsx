@@ -57,7 +57,7 @@ export const Select: FC<Props> = ({
   }
 
   return (
-    <FormItem label={label} className={className}>
+    <FormItem label={label} className={classNames(className, 'mt-4')}>
       <Listbox value={selectedItem} onChange={handleChange}>
         {({ open }) => (
           <div className="relative">

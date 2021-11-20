@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import React, { FC, PropsWithChildren, ReactNode, useMemo } from 'react'
 import { useAppSelector } from '../../redux'
 import { selectIsFileOpen } from '../../redux/database'
+import { useFeatureCheck } from '../../utils/featureCheck'
 import { matchBoolToString } from '../../utils/match'
 import { DatabaseMenu } from '../dataFile/DatabaseMenu'
 import { HeaderSearch } from '../ui/HeaderSearch'
@@ -15,6 +16,8 @@ interface Props {
 
 export const AppLayout: FC<PropsWithChildren<Props>> = ({ children, left }) => {
   const isFileOpen = useAppSelector(selectIsFileOpen)
+  const featureOk = useFeatureCheck()
+
   const showLeftPanel = useMemo(() => (left ?? null) !== null, [left])
 
   return (
@@ -35,7 +38,7 @@ export const AppLayout: FC<PropsWithChildren<Props>> = ({ children, left }) => {
         >
           <div className={classNames('col-start-1', 'flex items-center')}>
             <AppLogo />
-            <DatabaseMenu />
+            {featureOk ? <DatabaseMenu /> : null}
           </div>
 
           <div className="col-start-2">

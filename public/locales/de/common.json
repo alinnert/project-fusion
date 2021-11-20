@@ -36,5 +36,8 @@
       "inputPlaceholder": "Suchen / Zu Projekt springen...",
       "button": "Suchen"
     }
+  },
+  "alerts": {
+    "apiRequirementsNotMet": "Dieser Browser unterstützt leider nicht die notwendigen APIs, um diese Anwendung verwenden zu können. Derzeit werden nur aktuelle Chromium-basierte Browser unterstützt."
   }
 }
