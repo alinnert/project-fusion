@@ -1,7 +1,5 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 
-interface Props {}
-
-export const PlaceholderIcon: FC<Props> = ({}) => {
+export const PlaceholderIcon: FC = ({}) => {
   return <div className="w-[20px] h-[20px]" />
 }

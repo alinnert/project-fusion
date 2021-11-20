@@ -1,5 +1,11 @@
 import classNames from 'classnames'
-import { Children, cloneElement, FC, isValidElement, ReactElement } from 'react'
+import React, {
+  Children,
+  cloneElement,
+  FC,
+  isValidElement,
+  ReactElement,
+} from 'react'
 import { matchUnionToString } from '../../utils/match'
 
 interface Props {

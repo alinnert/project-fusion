@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { FC } from 'react'
+import React, { FC } from 'react'
 import { defaultMatch, matchStringToString } from '../../utils/match'
 
 interface Props {

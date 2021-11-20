@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { FC, useMemo } from 'react'
+import React, { FC, useMemo } from 'react'
 import { matchUnionToString } from '../../utils/match'
 
 export type TextDividerColor = 'neutral' | 'brand'

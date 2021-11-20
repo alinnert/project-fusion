@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { FC, PropsWithChildren, useEffect, useRef } from 'react'
+import React, { FC, PropsWithChildren, useEffect, useRef } from 'react'
 import { createId } from '../../utils/customNanoId'
 import { matchBoolToString, matchUnionToString } from '../../utils/match'
 

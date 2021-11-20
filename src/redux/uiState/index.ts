@@ -14,6 +14,10 @@ const slice = createSlice({
   initialState: getInitialState(),
 
   reducers: {
+    resetUiState() {
+      return getInitialState()
+    },
+
     setCurrentGroupId(
       state,
       action: PayloadAction<UiSettings['currentGroupId']>,
@@ -32,4 +36,5 @@ const slice = createSlice({
 
 export const uiStateReducer = slice.reducer
 
-export const { setCurrentGroupId, setCurrentConfigId } = slice.actions
+export const { resetUiState, setCurrentGroupId, setCurrentConfigId } =
+  slice.actions

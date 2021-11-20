@@ -1,11 +1,9 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 
 export interface DropdownMenuItemSeparator {
   type: 'separator'
 }
 
-interface Props {}
-
-export const DropdownMenuSeparator: FC<Props> = ({}) => {
+export const DropdownMenuSeparator: FC = ({}) => {
   return <div className="mx-2 my-1 h-px bg-neutral-400" />
 }

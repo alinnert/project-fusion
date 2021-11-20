@@ -65,7 +65,7 @@ export const AppTabs: FC = ({}) => {
     return isFileOpen
       ? [dataItem, configItem, infoItem]
       : [startItem, configItem, infoItem]
-  }, [isFileOpen, location.pathname, t])
+  }, [configHref, groupHref, isFileOpen, location.pathname, t])
 
   return <HeaderTabs tabs={tabs} />
 }

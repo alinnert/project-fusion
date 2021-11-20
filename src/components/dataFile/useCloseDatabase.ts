@@ -1,6 +1,7 @@
 import { useAppDispatch } from '../../redux'
 import { closeDatabase } from '../../redux/database'
 import { removeFileHandle } from '../../redux/database/currentFileStorage'
+import { resetUiState, setCurrentConfigId } from '../../redux/uiState'
 import { asyncTry } from '../../utils/tryCatch'
 
 export function useCloseDatabase(): () => Promise<void> {
@@ -13,5 +14,6 @@ export function useCloseDatabase(): () => Promise<void> {
     }
 
     dispatch(closeDatabase())
+    dispatch(resetUiState())
   }
 }
