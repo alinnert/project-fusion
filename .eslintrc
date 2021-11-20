@@ -1,3 +1,12 @@
 {
-  "extends": ["next", "next/core-web-vitals"]
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "jsx": true
+  },
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended"
+  ],
+  "plugins": ["@typescript-eslint"]
 }

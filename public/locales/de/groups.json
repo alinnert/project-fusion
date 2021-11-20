@@ -13,6 +13,10 @@
       "favorites": "Favoriten"
     }
   },
+  "empty": {
+    "title": "Keine Gruppe gefunden",
+    "body": "Für die angegebene ID wurde keine Gruppe gefunden"
+  },
   "editForm": {
     "create": {
       "pageTitle": "Gruppe anlegen"

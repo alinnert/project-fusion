@@ -1,10 +1,12 @@
-const colors = require('tailwindcss/colors')
-const plugin = require('tailwindcss/plugin')
+import formsPlugin from '@tailwindcss/forms'
+import typographyPlugin from '@tailwindcss/typography'
+import colors from 'tailwindcss/colors'
+import plugin from 'tailwindcss/plugin'
 
 /** @type { import('tailwindcss/tailwind-config').TailwindConfig } */
-module.exports = {
+const config = {
   mode: 'jit',
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  purge: ['./src/**/*.{js,ts,jsx,tsx}', 'index.html'],
   darkMode: false, // or 'media' or 'class'
 
   theme: {
@@ -40,8 +42,8 @@ module.exports = {
   },
 
   plugins: [
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/forms'),
+    typographyPlugin,
+    formsPlugin,
 
     plugin(({ addVariant, e }) => {
       addVariant('not-first', ({ modifySelectors, separator }) => {
@@ -66,3 +68,5 @@ module.exports = {
     }),
   ],
 }
+
+export default config

@@ -3,6 +3,9 @@
     "project": "project",
     "project_plural": "projects"
   },
+  "buttons": {
+    "new": "Create project"
+  },
   "list": {
     "itemGroups": {
       "activeProjects": "Active projects",

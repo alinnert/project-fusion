@@ -1,5 +1,11 @@
 {
   "navigation": {
+    "application": {
+      "label": "Anwendung",
+      "items": {
+        "interface": "Oberfläche"
+      }
+    },
     "database": {
       "label": "Datenbank",
       "items": {
@@ -11,6 +17,10 @@
   "index": {
     "title": "Einstellungen",
     "body": "Hier kannst du die Einstellungen für die aktuelle Datenbank ändern."
+  },
+  "interface": {
+    "title": "Oberfläche",
+    "description": "Hier finden sich allgemeine Einstellungen zur Anwendung."
   },
   "categories": {
     "title": "Kategorien",

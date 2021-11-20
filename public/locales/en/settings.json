@@ -1,5 +1,11 @@
 {
   "navigation": {
+    "application": {
+      "label": "Application",
+      "items": {
+        "interface": "interface"
+      }
+    },
     "database": {
       "label": "Database",
       "items": {
@@ -12,9 +18,13 @@
     "title": "Settings",
     "body": "Change the settings for the currently opened database."
   },
+  "interface": {
+    "title": "Interface",
+    "description": "Change general application settings."
+  },
   "categories": {
     "title": "Categories",
-    "description": "Here you can manage your categories. You can use categories to categorize project groups.",
+    "description": "Manage categories. You can use categories to categorize project groups.",
     "manageCategories": "Manage categories",
     "createDialog": {
       "title": "Create new category",
@@ -27,7 +37,7 @@
   },
   "links": {
     "title": "Links",
-    "description": "Here you can specify custom links for different use cases.",
+    "description": "Specify custom links for different use cases.",
     "projectLinks": {
       "title": "Project links",
       "description": "Custom links defined here are related to a single project. The primary link will be displayed separately next to the \"...\" menu. Use \"{projectNumber}\" to use the project number in your URL.",
