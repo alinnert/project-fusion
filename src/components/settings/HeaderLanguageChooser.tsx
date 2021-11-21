@@ -41,8 +41,8 @@ export const HeaderLanguageChooser: FC = ({}) => {
       }
     >
       {currentLanguageKey === 'en'
-        ? t('language')
-        : `${t('terms.language')}/Language`}
+        ? t('common:language')
+        : `${t('common:terms.language')}/Language`}
     </DropdownMenu>
   )
 }

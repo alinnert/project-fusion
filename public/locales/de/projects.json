@@ -4,18 +4,18 @@
     "project_plural": "Projekte"
   },
   "buttons": {
-    "new": "$t(terms.project)"
+    "new": "$t(projects:terms.project)"
   },
   "list": {
     "itemGroups": {
-      "activeProjects": "Aktive $t(terms.project_plural)",
-      "archivedProjects": "Archivierte $t(terms.project_plural)"
+      "activeProjects": "Aktive $t(projects:terms.project_plural)",
+      "archivedProjects": "Archivierte $t(projects:terms.project_plural)"
     },
     "noProjects": {
-      "title": "Keine $t(terms.project_plural) vorhanden",
+      "title": "Keine $t(projects:terms.project_plural) vorhanden",
       "body": [
-        "Es gibt derzeit keine $t(terms.project_plural) in dieser $t(groups:terms.group).",
-        "Du kannst ein neues $t(terms.project) mit dem Button [+ $t(terms.project)] oben anlegen."
+        "Es gibt derzeit keine $t(projects:terms.project_plural) in dieser $t(groups:terms.group).",
+        "Du kannst ein neues $t(projects:terms.project) mit dem Button [+ $t(projects:terms.project)] oben anlegen."
       ]
     }
   },
@@ -24,15 +24,15 @@
       "addToFavorites": "Zu Favoriten",
       "removeFromFavorites": "Aus Favoriten entfernen",
       "archiveProject": "Archivieren",
-      "unarchiveProject": "Zu aktive $t(terms.project_plural)"
+      "unarchiveProject": "Zu aktive $t(projects:terms.project_plural)"
     }
   },
   "editForm": {
     "create": {
-      "pageTitle": "$t(terms.project) anlegen"
+      "pageTitle": "$t(projects:terms.project) anlegen"
     },
     "edit": {
-      "pageTitle": "$t(terms.project) bearbeiten"
+      "pageTitle": "$t(projects:terms.project) bearbeiten"
     },
     "labels": {
       "name": "Name",
@@ -45,11 +45,11 @@
   "favorites": {
     "noFavorites": {
       "title": "Keine Favoriten vorhanden",
-      "body": "Hier erscheinen alle $t(terms.project_plural), die als Favorit markiert wurden."
+      "body": "Hier erscheinen alle $t(projects:terms.project_plural), die als Favorit markiert wurden."
     }
   },
   "deleteDialog": {
-    "title": "$t(terms.project) löschen?",
-    "message": "Soll das $t(terms.project) \"{{project}}\" gelöscht werden?"
+    "title": "$t(projects:terms.project) löschen?",
+    "message": "Soll das $t(projects:terms.project) \"{{project}}\" gelöscht werden?"
   }
 }

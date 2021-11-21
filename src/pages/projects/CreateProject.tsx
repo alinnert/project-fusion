@@ -6,7 +6,7 @@ import { ProjectTemplate } from '../../redux/projects'
 
 export const CreateProject: FC = () => {
   const [searchParams] = useSearchParams()
-  const from = useMemo(() => searchParams.get('from'), [searchParams])
+  const from = useMemo(() => searchParams.get('common:from'), [searchParams])
 
   const projectTemplate = useAppSelector((state): ProjectTemplate | null => {
     if (from === null) return null

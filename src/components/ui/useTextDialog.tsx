@@ -65,7 +65,7 @@ export function useTextDialog({ onConfirm }: Options): Result {
               {primaryButtonLabel}
             </Button>
             <Button onClick={handleClose} size="big">
-              {t('buttons.cancel')}
+              {t('common:buttons.cancel')}
             </Button>
           </>
         }

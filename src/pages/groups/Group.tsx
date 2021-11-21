@@ -70,7 +70,7 @@ export const Group: FC = () => {
         toolbarItems={[
           {
             type: 'button',
-            label: t('buttons.edit'),
+            label: t('common:buttons.edit'),
             icon: <PencilIcon />,
             action() {
               navigate(`/groups/${groupId}/edit`)
@@ -79,7 +79,7 @@ export const Group: FC = () => {
           {
             type: 'button',
             buttonType: 'delete',
-            label: t('buttons.delete'),
+            label: t('common:buttons.delete'),
             icon: <TrashIcon />,
             action: handleDelete,
           },

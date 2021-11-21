@@ -40,28 +40,28 @@ export const DatabaseMenu: FC = () => {
   const menuItems = useMemo(() => {
     const createItem: DropdownMenuItemButton = {
       type: 'button',
-      label: t('header.menu.database.items.create'),
+      label: t('common:header.menu.database.items.create'),
       icon: <DocumentAddIcon />,
       action: createDatabase,
     }
 
     const openItem: DropdownMenuItemButton = {
       type: 'button',
-      label: t('header.menu.database.items.open'),
+      label: t('common:header.menu.database.items.open'),
       icon: <FolderIcon className="h-5 w-5" />,
       action: openDatabase,
     }
 
     const closeItem: DropdownMenuItemButton = {
       type: 'button',
-      label: t('header.menu.database.items.close'),
+      label: t('common:header.menu.database.items.close'),
       icon: <XIcon />,
       action: closeDatabase,
     }
 
     // const clearRecentFilesItem: DropdownMenuItemButton = {
     //   type: 'button',
-    //   label: t('header.menu.database.items.clearRecent'),
+    //   label: t('common:header.menu.database.items.clearRecent'),
     //   icon: <TrashIcon />,
     //   buttonType: 'delete',
     //   action: clearRecentFiles,
@@ -92,7 +92,7 @@ export const DatabaseMenu: FC = () => {
         items={menuItems}
         buttonType="header"
       >
-        {t('header.menu.database.label')}
+        {t('common:header.menu.database.label')}
       </DropdownMenu>
     )
   }
@@ -104,7 +104,7 @@ export const DatabaseMenu: FC = () => {
       buttonType="header"
       secondaryLabel={filename ?? undefined}
     >
-      {t('header.menu.database.label')}
+      {t('common:header.menu.database.label')}
     </DropdownMenu>
   )
 }

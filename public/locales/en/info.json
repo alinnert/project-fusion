@@ -1,5 +1,5 @@
 {
-  "title": "About $t(terms.appName)",
+  "title": "About $t(common:terms.appName)",
   "version": "Version",
   "sourceCode": "Source code",
   "usedTechnology": {

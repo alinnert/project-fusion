@@ -4,18 +4,18 @@
     "project_plural": "projects"
   },
   "buttons": {
-    "new": "Create $t(terms.project)"
+    "new": "Create $t(projects:terms.project)"
   },
   "list": {
     "itemGroups": {
-      "activeProjects": "Active $t(terms.project_plural)",
-      "archivedProjects": "Archived $t(terms.project_plural)"
+      "activeProjects": "Active $t(projects:terms.project_plural)",
+      "archivedProjects": "Archived $t(projects:terms.project_plural)"
     },
     "noProjects": {
       "title": "No projects",
       "body": [
-        "There are no $t(terms.project_plural) in this $t(groups:terms.group).",
-        "Press the [+ $t(buttons.new)] button above to create a new $t(terms.project)."
+        "There are no $t(projects:terms.project_plural) in this $t(groups:terms.group).",
+        "Press the [+ $t(projects:buttons.new)] button above to create a new $t(projects:terms.project)."
       ]
     }
   },
@@ -24,15 +24,15 @@
       "addToFavorites": "Add to favorites",
       "removeFromFavorites": "Remove from favorites",
       "archiveProject": "Archive",
-      "unarchiveProject": "Move to active $t(terms.project_plural)"
+      "unarchiveProject": "Move to active $t(projects:terms.project_plural)"
     }
   },
   "editForm": {
     "create": {
-      "pageTitle": "Create $t(terms.project)"
+      "pageTitle": "Create $t(projects:terms.project)"
     },
     "edit": {
-      "pageTitle": "Edit $t(terms.project)"
+      "pageTitle": "Edit $t(projects:terms.project)"
     },
     "labels": {
       "name": "Name",
@@ -45,11 +45,11 @@
   "favorites": {
     "noFavorites": {
       "title": "There are no favorites",
-      "body": "All $t(terms.project_plural) marked as favorite will be listed here."
+      "body": "All $t(projects:terms.project_plural) marked as favorite will be listed here."
     }
   },
   "deleteDialog": {
-    "title": "Delete $t(terms.project)?",
-    "message": "Do you want to delete the $t(terms.project) \"{{project}}\"?"
+    "title": "Delete $t(projects:terms.project)?",
+    "message": "Do you want to delete the $t(projects:terms.project) \"{{project}}\"?"
   }
 }

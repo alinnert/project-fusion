@@ -5,7 +5,7 @@ export const Search: FC = () => {
   const [searchParams] = useSearchParams()
 
   const searchTerm = useMemo((): string => {
-    const searchTerm = searchParams.get('searchTerm')
+    const searchTerm = searchParams.get('common:searchTerm')
     return (Array.isArray(searchTerm) ? searchTerm[0] : searchTerm) ?? ''
   }, [searchParams])
 

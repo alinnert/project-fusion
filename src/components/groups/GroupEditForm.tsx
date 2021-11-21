@@ -110,7 +110,7 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
       {
         type: 'button',
         buttonType: 'primary',
-        label: t('buttons.save'),
+        label: t('common:buttons.save'),
         icon: <SaveIcon />,
         disabled: !isFormValid,
         action: saveGroup,
@@ -118,7 +118,7 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
       {
         type: 'button',
         buttonType: 'default',
-        label: t('buttons.cancel'),
+        label: t('common:buttons.cancel'),
         icon: <XIcon />,
         action: cancel,
       },

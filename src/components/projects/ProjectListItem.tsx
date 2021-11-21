@@ -75,7 +75,7 @@ export const ProjectListItem: FC<Project> = ({
     openConfirmDeleteDialog({
       title: t('projects:deleteDialog.title'),
       message: t('projects:deleteDialog.message', { project: name }),
-      confirmButtonLabel: t('buttons.delete'),
+      confirmButtonLabel: t('common:buttons.delete'),
       confirmButtonType: 'delete',
     })
   }, [name, openConfirmDeleteDialog, t])
@@ -84,7 +84,7 @@ export const ProjectListItem: FC<Project> = ({
     const items: DropdownMenuItem[] = [
       {
         type: 'button',
-        label: t('buttons.edit'),
+        label: t('common:buttons.edit'),
         icon: <PencilIcon />,
         action: handleEdit,
       },
@@ -119,13 +119,13 @@ export const ProjectListItem: FC<Project> = ({
 
       {
         type: 'button',
-        label: t('buttons.duplicate'),
+        label: t('common:buttons.duplicate'),
         icon: <DocumentDuplicateIcon />,
         action: handleDuplicate,
       },
 
       {
-        label: t('buttons.delete'),
+        label: t('common:buttons.delete'),
         icon: <TrashIcon />,
         type: 'button',
         buttonType: 'delete',

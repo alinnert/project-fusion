@@ -21,7 +21,7 @@ export const HeaderSearch: FC = ({}) => {
   return (
     <Form type="inline" onSubmit={handleSearch}>
       <Input
-        placeholder={t('header.search.inputPlaceholder')}
+        placeholder={t('common:header.search.inputPlaceholder')}
         inputType="header"
         value={searchTerm}
         onChange={setSearchTerm}

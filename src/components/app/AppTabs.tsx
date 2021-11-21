@@ -37,27 +37,27 @@ export const AppTabs: FC = ({}) => {
 
   const tabs = useMemo<Array<TabItem>>(() => {
     const dataItem: TabItem = {
-      label: t('header.tabs.data'),
+      label: t('common:header.tabs.data'),
       icon: <CollectionIcon />,
       href: groupHref,
       current: location.pathname.startsWith('/groups'),
     }
 
     const configItem: TabItem = {
-      label: t('header.tabs.config'),
+      label: t('common:header.tabs.config'),
       icon: <CogIcon />,
       href: configHref,
     }
 
     const startItem: TabItem = {
-      label: t('header.tabs.home'),
+      label: t('common:header.tabs.home'),
       icon: <HomeIcon />,
       href: '/',
       current: location.pathname === '/',
     }
 
     const infoItem: TabItem = {
-      label: t('header.tabs.info'),
+      label: t('common:header.tabs.info'),
       icon: <InformationCircleIcon />,
       href: '/info',
     }

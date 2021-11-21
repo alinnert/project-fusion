@@ -38,9 +38,11 @@ export function useConfirmDialog({ onConfirm, onCancel }: Options): Result {
   function openDialog(options: OpenDialogOptions): void {
     setTitle(options.title)
     setMessage(options.message)
-    setConfirmButtonLabel(options.confirmButtonLabel ?? t('buttons.ok'))
+    setConfirmButtonLabel(options.confirmButtonLabel ?? t('common:buttons.ok'))
     setConfirmButtonType(options.confirmButtonType ?? confirmButtonDefaultType)
-    setCancelButtonLabel(options.cancelButtonLabel ?? t('buttons.cancel'))
+    setCancelButtonLabel(
+      options.cancelButtonLabel ?? t('common:buttons.cancel'),
+    )
     setIsModalOpen(true)
   }
 

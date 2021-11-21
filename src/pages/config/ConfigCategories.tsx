@@ -71,7 +71,7 @@ export const ConfigCategories: FC = () => {
       title: t('settings:categories.createDialog.title'),
       inputLabel: t('settings:categories.createDialog.inputLabel'),
       value: '',
-      primaryButtonLabel: t('buttons.create'),
+      primaryButtonLabel: t('common:buttons.create'),
     })
   }
 
@@ -85,7 +85,7 @@ export const ConfigCategories: FC = () => {
         category: category.name,
       }),
       inputLabel: t('settings:categories.renameDialog.inputLabel'),
-      primaryButtonLabel: t('buttons.rename'),
+      primaryButtonLabel: t('common:buttons.rename'),
       value: category.name,
     })
   }
@@ -100,7 +100,7 @@ export const ConfigCategories: FC = () => {
       message: t('settings:categories.deleteDialog.message', {
         category: category.name,
       }),
-      confirmButtonLabel: t('buttons.delete'),
+      confirmButtonLabel: t('common:buttons.delete'),
       confirmButtonType: 'delete',
     })
   }
@@ -132,7 +132,7 @@ export const ConfigCategories: FC = () => {
           additionalButtons={
             <>
               <Button type="default" icon={<PlusIcon />} onClick={handleAdd}>
-                {t('buttons.new')}
+                {t('common:buttons.new')}
               </Button>
 
               <Button
@@ -141,7 +141,7 @@ export const ConfigCategories: FC = () => {
                 disabled={selectedId === null}
                 onClick={handleRename}
               >
-                {t('buttons.rename')}
+                {t('common:buttons.rename')}
               </Button>
 
               <Button
@@ -150,7 +150,7 @@ export const ConfigCategories: FC = () => {
                 disabled={selectedId === null}
                 onClick={handleDelete}
               >
-                {t('buttons.delete')}
+                {t('common:buttons.delete')}
               </Button>
             </>
           }

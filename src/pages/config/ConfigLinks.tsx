@@ -92,7 +92,7 @@ export const ConfigLinks: FC = () => {
     openConfirmDeletePrimaryProjectLinkDialog({
       title: t('settings:links.projectLinks.primaryLink.deleteDialog.title'),
       message: t('settings:links.projectLinks.primaryLink.deleteDialog.body'),
-      confirmButtonLabel: t('buttons.delete'),
+      confirmButtonLabel: t('common:buttons.delete'),
       confirmButtonType: 'delete',
     })
   }
@@ -134,7 +134,7 @@ export const ConfigLinks: FC = () => {
               icon={<SaveIcon />}
               disabled={!primaryProjectLinkIsValid}
             >
-              {t('buttons.save')}
+              {t('common:buttons.save')}
             </Button>
 
             <Button
@@ -143,7 +143,7 @@ export const ConfigLinks: FC = () => {
               onClick={handlePrimaryLinkDelete}
               buttonProps={{ type: 'button' }}
             >
-              {t('buttons.delete')}
+              {t('common:buttons.delete')}
             </Button>
           </div>
         </form>
