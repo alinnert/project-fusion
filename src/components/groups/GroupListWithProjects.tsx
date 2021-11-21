@@ -1,7 +1,7 @@
 import { StarIcon } from '@heroicons/react/outline'
 import { FolderIcon } from '@heroicons/react/solid'
 import classNames from 'classnames'
-import React, { FC, useMemo } from 'react'
+import React, { FC, ReactElement, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ProjectGroup } from '../../redux/groups'
 import { Project } from '../../redux/projects'
@@ -13,10 +13,15 @@ import { PageContent } from '../ui/PageContent'
 
 interface Props {
   groups: ProjectGroup[]
+  emptyPlaceholder?: ReactElement
   showProject?: (project: Project, group: ProjectGroup) => boolean
 }
 
-export const GroupListWithProjects: FC<Props> = ({ groups, showProject }) => {
+export const GroupListWithProjects: FC<Props> = ({
+  groups,
+  emptyPlaceholder = null,
+  showProject,
+}) => {
   const { t } = useTranslation(translationNamespaces)
 
   const getProjectsFromGroup = useGetProjectsFromGroup()
@@ -34,6 +39,10 @@ export const GroupListWithProjects: FC<Props> = ({ groups, showProject }) => {
 
     return map
   }, [getProjectsFromGroup, groups, showProject])
+
+  if (filteredGroups.size === 0) {
+    return emptyPlaceholder
+  }
 
   return (
     <PageContent
