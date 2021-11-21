@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { Route, Routes } from 'react-router-dom'
+import { App } from './components/app/App'
 import { useRedirects } from './components/app/useRedirects'
 import { ConfigCategories } from './pages/config/ConfigCategories'
 import { ConfigInterface } from './pages/config/ConfigInterface'
@@ -22,29 +23,31 @@ export const AppRoutes: FC = () => {
 
   return (
     <Routes>
-      <Route element={<SimpleLayout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="info" element={<Info />} />
-        <Route path="search" element={<Search />} />
-        <Route path="*" element={<div>Custom not found page</div>} />
-      </Route>
-
-      <Route path="groups" element={<DataLayout />}>
-        <Route path="favorites" element={<Favorites />} />
-        <Route path="create" element={<CreateGroup />} />
-
-        <Route path=":groupId">
-          <Route index element={<Group />} />
-          <Route path="edit" element={<EditGroup />} />
-          <Route path="new-project" element={<CreateProject />} />
-          <Route path="projects/:projectId/edit" element={<EditProject />} />
+      <Route element={<App />}>
+        <Route element={<SimpleLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="info" element={<Info />} />
+          <Route path="search" element={<Search />} />
+          <Route path="*" element={<div>Custom not found page</div>} />
         </Route>
-      </Route>
 
-      <Route path="config" element={<ConfigLayout />}>
-        <Route path="interface" element={<ConfigInterface />} />
-        <Route path="categories" element={<ConfigCategories />} />
-        <Route path="links" element={<ConfigLinks />} />
+        <Route path="groups" element={<DataLayout />}>
+          <Route path="favorites" element={<Favorites />} />
+          <Route path="create" element={<CreateGroup />} />
+
+          <Route path=":groupId">
+            <Route index element={<Group />} />
+            <Route path="edit" element={<EditGroup />} />
+            <Route path="new-project" element={<CreateProject />} />
+            <Route path="projects/:projectId/edit" element={<EditProject />} />
+          </Route>
+        </Route>
+
+        <Route path="config" element={<ConfigLayout />}>
+          <Route path="interface" element={<ConfigInterface />} />
+          <Route path="categories" element={<ConfigCategories />} />
+          <Route path="links" element={<ConfigLinks />} />
+        </Route>
       </Route>
     </Routes>
   )
