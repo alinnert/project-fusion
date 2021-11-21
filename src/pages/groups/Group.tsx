@@ -22,13 +22,17 @@ import { ToolbarContainer } from '../../components/ui/ToolbarContainer'
 import { useConfirmDialog } from '../../components/ui/useConfirmDialog'
 import { useAppDispatch } from '../../redux'
 import { removeGroup } from '../../redux/groups'
+import { useGlobalKeyDown } from '../../utils/events'
 import { translationNamespaces } from '../../utils/i18next-namespaces'
+import { useCtrlOrCmd } from '../../utils/keyboard'
 
 export const Group: FC = () => {
   const { t } = useTranslation(translationNamespaces)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const params = useParams()
+
+  const ctrlOrCmd = useCtrlOrCmd()
 
   const { groupId, group } = useGroupFromRoute()
   const projects = useProjectsFromGroup(group)
@@ -41,12 +45,20 @@ export const Group: FC = () => {
       },
     })
 
-  if (group === null) {
-    return (
-      <EmptyText icon={<FolderIcon />} title={t('groups:empty.title')}>
-        {t('groups:empty.body')}
-      </EmptyText>
-    )
+  useGlobalKeyDown((event) => {
+    if (ctrlOrCmd(event) && event.key === 'e') {
+      event.preventDefault()
+      editGroup()
+    }
+
+    if (ctrlOrCmd(event) && event.key === 'n') {
+      event.preventDefault()
+      createProject()
+    }
+  })
+
+  function editGroup(): void {
+    navigate(`/groups/${groupId}/edit`)
   }
 
   function handleDelete(): void {
@@ -62,6 +74,21 @@ export const Group: FC = () => {
     })
   }
 
+  function createProject(): void {
+    const { groupId } = params
+    if (groupId === undefined) return
+
+    navigate(`/groups/${groupId}/new-project`)
+  }
+
+  if (group === null) {
+    return (
+      <EmptyText icon={<FolderIcon />} title={t('groups:empty.title')}>
+        {t('groups:empty.body')}
+      </EmptyText>
+    )
+  }
+
   return (
     <>
       {confirmDeleteDialog}
@@ -72,9 +99,7 @@ export const Group: FC = () => {
             type: 'button',
             label: t('common:buttons.edit'),
             icon: <PencilIcon />,
-            action() {
-              navigate(`/groups/${groupId}/edit`)
-            },
+            action: editGroup,
           },
           {
             type: 'button',
@@ -90,12 +115,7 @@ export const Group: FC = () => {
             type: 'button',
             label: t('projects:buttons.new'),
             icon: <PlusIcon />,
-            action() {
-              const { groupId } = params
-              if (groupId === undefined) return
-
-              navigate(`/groups/${groupId}/new-project`)
-            },
+            action: createProject,
           },
         ]}
       >

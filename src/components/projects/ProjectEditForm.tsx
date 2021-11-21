@@ -1,5 +1,5 @@
 import { FolderIcon, SaveIcon, XIcon } from '@heroicons/react/solid'
-import React, { FC, useCallback, useDebugValue, useMemo, useState } from 'react'
+import React, { FC, FormEvent, useCallback, useDebugValue, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router'
 import { useAppDispatch, useAppSelector } from '../../redux'
@@ -11,7 +11,9 @@ import {
   updateProject,
 } from '../../redux/projects'
 import { createId } from '../../utils/customNanoId'
+import { useGlobalKeyDown } from '../../utils/events'
 import { translationNamespaces } from '../../utils/i18next-namespaces'
+import { useCtrlOrCmd } from '../../utils/keyboard'
 import { Checkbox } from '../ui/Checkbox'
 import { Form } from '../ui/Form'
 import { Heroicon } from '../ui/Heroicon'
@@ -25,12 +27,12 @@ interface Props {
 }
 
 export const ProjectEditForm: FC<Props> = ({ init = null }) => {
-  useDebugValue(init === null ? 'new project' : init.name)
-
   const { t } = useTranslation(translationNamespaces)
   const params = useParams()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+
+  const ctrlOrCmd = useCtrlOrCmd()
 
   const [name, setName] = useState(init?.name ?? '')
   const [projectNumber, setProjectNumber] = useState(init?.projectNumber ?? '')
@@ -154,6 +156,18 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
     [cancel, isFormValid, saveProject, t],
   )
 
+  useGlobalKeyDown((event) => {
+    if (ctrlOrCmd(event) && event.key === 's') {
+      event.preventDefault()
+      saveProject()
+    }
+  })
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>): void {
+    event.preventDefault()
+    saveProject()
+  }
+
   return (
     <ToolbarContainer toolbarItems={toolbarItems}>
       <PageContent title={pageTitle} centered={true}>
@@ -164,7 +178,7 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
           {isEditingExistingProject ? init?.name ?? '-' : null}
         </div>
 
-        <Form type="page" submitOnCtrlEnter>
+        <Form type="page" onSubmit={handleSubmit} submitOnCtrlEnter>
           <div className="grid grid-cols-[3fr,1fr] gap-x-4">
             <Input
               label={`${t('projects:editForm.labels.name')} *`}

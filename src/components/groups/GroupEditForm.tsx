@@ -7,7 +7,9 @@ import { useAppDispatch } from '../../redux'
 import { addGroupToCategory, Category } from '../../redux/categories'
 import { addGroup, ProjectGroup, updateGroup } from '../../redux/groups'
 import { createId } from '../../utils/customNanoId'
+import { useGlobalKeyDown } from '../../utils/events'
 import { translationNamespaces } from '../../utils/i18next-namespaces'
+import { useCtrlOrCmd } from '../../utils/keyboard'
 import { useCategoryFromGroup } from '../categories/useCategoryFromGroup'
 import { useOrderedCategories } from '../categories/useOrderedCategories'
 import { ColorInput } from '../ui/ColorInput'
@@ -28,6 +30,8 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
   const dispatch = useAppDispatch()
   const { orderedCategories } = useOrderedCategories()
   const { categoryId: categoryIdFromGroup } = useCategoryFromGroup(init)
+
+  const ctrlOrCmd = useCtrlOrCmd()
 
   const [name, setName] = useState(init?.name ?? '')
   const [color, setColor] = useState(init?.color ?? '')
@@ -125,6 +129,13 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
     ],
     [cancel, isFormValid, saveGroup, t],
   )
+
+  useGlobalKeyDown((event) => {
+    if (ctrlOrCmd(event) && event.key === 's') {
+      event.preventDefault()
+      saveGroup()
+    }
+  })
 
   function handleSubmit() {
     saveGroup()

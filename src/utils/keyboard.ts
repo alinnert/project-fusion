@@ -1,6 +1,8 @@
-import { KeyboardEvent } from 'react'
+import { KeyboardEvent as ReactKeyboardEvent } from 'react'
 
-export function useCtrlOrCmd(): (event: KeyboardEvent) => boolean {
+export function useCtrlOrCmd(): (
+  event: KeyboardEvent | ReactKeyboardEvent,
+) => boolean {
   return (event) => {
     // @ts-expect-error This api is very new. No types are available yet.
     const platform = navigator.userAgentData?.platform ?? navigator.platform
