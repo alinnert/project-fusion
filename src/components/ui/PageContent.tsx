@@ -40,7 +40,7 @@ export const PageContent: FC<PropsWithChildren<Props>> = ({
               </div>
             ) : null}
 
-            <div className="flex-1 select-text">{title}</div>
+            <h2 className="flex-1 select-text">{title}</h2>
           </div>
         ) : null}
 

@@ -28,8 +28,10 @@ export const Info: FC = () => {
           </a>
         </p>
 
+        <h3>{t('info:usedTechnology.title')}</h3>
+
         <p>
-          <strong>{t('info:usedTechnology')}</strong>
+          <strong>{t('info:usedTechnology.base')}</strong>
         </p>
 
         <ul>
@@ -40,7 +42,10 @@ export const Info: FC = () => {
             <a href="https://reactjs.org">React</a>
           </li>
           <li>
-            <a href="https://nextjs.org">Next.js</a>
+            <a href="https://vitejs.dev">Vite</a>
+          </li>
+          <li>
+            <a href="https://reactrouter.com/">React Router</a>
           </li>
           <li>
             <a href="https://redux-toolkit.js.org">Redux Toolkit</a>
@@ -48,11 +53,21 @@ export const Info: FC = () => {
           <li>
             <a href="https://tailwindcss.com">Tailwind CSS</a>
           </li>
-          <li>
-            <a href="https://headlessui.dev">Headless UI</a>
-          </li>
+        </ul>
+
+        <p>
+          <strong>{t('info:usedTechnology.libs')}</strong>
+        </p>
+
+        <ul>
           <li>
             <a href="https://heroicons.com">Heroicons</a>
+          </li>
+          <li>
+            <a href="https://www.i18next.com">i18next</a>
+          </li>
+          <li>
+            <a href="https://headlessui.dev">Headless UI</a>
           </li>
           <li>
             <a href="https://github.com/JedWatson/classnames">classnames</a>
@@ -66,6 +81,13 @@ export const Info: FC = () => {
           <li>
             <a href="https://github.com/ai/nanoid">nanoid</a>
           </li>
+        </ul>
+
+        <p>
+          <strong>{t('info:usedTechnology.apis')}</strong>
+        </p>
+
+        <ul>
           <li>
             <a href="https://web.dev/file-system-access">
               File System Access API

@@ -2,5 +2,10 @@
   "title": "About $t(terms.appName)",
   "version": "Version",
   "sourceCode": "Source code",
-  "usedTechnology": "Used technologies and libraries"
+  "usedTechnology": {
+    "title": "Credits",
+    "base": "Base",
+    "libs": "Libraries",
+    "apis": "APIs"
+  }
 }
