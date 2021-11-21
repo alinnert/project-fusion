@@ -7,7 +7,6 @@ import {
 import classNames from 'classnames'
 import React, { FC, useMemo, useState } from 'react'
 import { matchBoolToString } from '../../utils/match'
-import { FormItem } from './FormItem'
 import { Heroicon } from './Heroicon'
 
 export interface SelectItem {
@@ -57,10 +56,14 @@ export const Select: FC<Props> = ({
   }
 
   return (
-    <FormItem label={label} className={classNames(className, 'mt-4')}>
+    <div className={classNames(className, 'mt-4')}>
       <Listbox value={selectedItem} onChange={handleChange}>
         {({ open }) => (
           <div className="relative">
+            <Listbox.Label className="font-semibold text-sm">
+              {label}
+            </Listbox.Label>
+
             <Listbox.Button
               className={classNames(
                 'relative text-left',
@@ -148,6 +151,6 @@ export const Select: FC<Props> = ({
           </div>
         )}
       </Listbox>
-    </FormItem>
+    </div>
   )
 }
