@@ -5,14 +5,25 @@ import { Project } from '../../redux/projects'
 import { resolveIds } from '../../utils/resolveIds'
 import { defaultProjectSorting } from './defaultProjectSorting'
 
-export function useProjectsFromGroup(group: ProjectGroup | null): Project[] {
+export function useGetProjectsFromGroup(): (
+  group: ProjectGroup | null,
+) => Project[] {
   const projects = useAppSelector((state) => state.projects.entities)
 
-  const groupProjects = useMemo<Project[]>(() => {
+  return (group) => {
     if (group === null) return []
     const currentProjects = resolveIds(group.projects, projects)
     return currentProjects.sort(defaultProjectSorting)
-  }, [group, projects])
+  }
+}
+
+export function useProjectsFromGroup(group: ProjectGroup | null): Project[] {
+  const getProjectsFromGroup = useGetProjectsFromGroup()
+
+  const groupProjects = useMemo<Project[]>(
+    () => getProjectsFromGroup(group),
+    [getProjectsFromGroup, group],
+  )
 
   return groupProjects
 }

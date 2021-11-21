@@ -32,7 +32,7 @@ export const AppRoutes: FC = () => {
         </Route>
 
         <Route path="groups" element={<DataLayout />}>
-          <Route path="favorites" element={<Favorites />} />
+          <Route path="_favorites" element={<Favorites />} />
           <Route path="create" element={<CreateGroup />} />
 
           <Route path=":groupId">

@@ -7,6 +7,7 @@ interface Props {
   title?: string
   titleIcon?: ReactElement
   titleIconColor?: string
+  titleIconClassName?: string
   titleIconType?: 'solid' | 'outline'
   centered?: boolean
 }
@@ -16,6 +17,7 @@ export const PageContent: FC<PropsWithChildren<Props>> = ({
   title,
   titleIcon,
   titleIconColor,
+  titleIconClassName,
   titleIconType = 'solid',
   centered = false,
 }) => {
@@ -30,7 +32,7 @@ export const PageContent: FC<PropsWithChildren<Props>> = ({
         {title !== undefined ? (
           <div className="text-2xl font-semibold mb-4 flex items-end">
             {titleIcon !== undefined ? (
-              <div className={classNames('flex-0 mr-2')}>
+              <div className={classNames('flex-0 mr-2', titleIconClassName)}>
                 <Heroicon
                   icon={titleIcon}
                   color={titleIconColor}
