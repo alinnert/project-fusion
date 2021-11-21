@@ -1,4 +1,4 @@
-import { SparklesIcon } from '@heroicons/react/outline'
+import { LightBulbIcon } from '@heroicons/react/outline'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LanguageSelect } from '../components/settings/LanguageSelect'
@@ -13,7 +13,7 @@ export const Home: FC = () => {
   const featureOk = useFeatureCheck()
 
   return (
-    <EmptyText title={t('welcome:noFileOpen.title')} icon={<SparklesIcon />}>
+    <EmptyText title={t('welcome:noFileOpen.title')} icon={<LightBulbIcon />}>
       <p>{t('welcome:noFileOpen.body')}</p>
 
       {!featureOk ? (
