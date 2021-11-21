@@ -139,7 +139,7 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
         titleIconType="outline"
         centered={true}
       >
-        <Form type="page" onSubmit={handleSubmit}>
+        <Form type="page" onSubmit={handleSubmit} submitOnCtrlEnter>
           <Input
             label={`${t('groups:editForm.labels.name')} *`}
             onChange={setName}

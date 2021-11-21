@@ -164,7 +164,7 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
           {isEditingExistingProject ? init?.name ?? '-' : null}
         </div>
 
-        <Form type="page">
+        <Form type="page" submitOnCtrlEnter>
           <div className="grid grid-cols-[3fr,1fr] gap-x-4">
             <Input
               label={`${t('projects:editForm.labels.name')} *`}

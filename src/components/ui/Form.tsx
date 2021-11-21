@@ -1,6 +1,6 @@
 import classNames from 'classnames'
-import React from 'react'
-import { FC, FormEvent, FormHTMLAttributes } from 'react'
+import React, { FC, FormEvent, FormHTMLAttributes, KeyboardEvent } from 'react'
+import { useCtrlOrCmd } from '../../utils/keyboard'
 import { matchUnionToString } from '../../utils/match'
 
 export type FormType = 'unstyled' | 'page' | 'inline'
@@ -12,7 +12,10 @@ interface Props {
     FormHTMLAttributes<HTMLFormElement>,
     'className' | 'onSubmit'
   >
-  onSubmit?: (event: FormEvent) => void
+  submitOnCtrlEnter?: boolean
+  onSubmit?: (
+    event: FormEvent<HTMLFormElement> | KeyboardEvent<HTMLFormElement>,
+  ) => void
 }
 
 export const Form: FC<Props> = ({
@@ -20,16 +23,25 @@ export const Form: FC<Props> = ({
   className,
   type = 'unstyled',
   formProps,
+  submitOnCtrlEnter = false,
   onSubmit,
 }) => {
-  function handleSubmit(event: FormEvent) {
+  const ctrlOrCmd = useCtrlOrCmd()
+  
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     onSubmit?.(event)
   }
 
+  function handleKeyDown(event: KeyboardEvent<HTMLFormElement>): void {
+    if (ctrlOrCmd(event) && event.key === 'Enter') {
+      if (!submitOnCtrlEnter) return
+      onSubmit?.(event)
+    }
+  }
+
   return (
     <form
-      onSubmit={handleSubmit}
       className={classNames(
         matchUnionToString(type, {
           unstyled: '',
@@ -38,6 +50,8 @@ export const Form: FC<Props> = ({
         }),
         className,
       )}
+      onSubmit={handleSubmit}
+      onKeyDown={handleKeyDown}
       {...formProps}
     >
       {children}
