@@ -7,7 +7,7 @@ import {
   LinkIcon,
   PencilIcon,
   StarIcon,
-  TrashIcon,
+  TrashIcon
 } from '@heroicons/react/solid'
 import classNames from 'classnames'
 import { marked } from 'marked'
@@ -18,7 +18,6 @@ import { useAppDispatch, useAppSelector } from '../../redux'
 import { Project, removeProject, updateProject } from '../../redux/projects'
 import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { matchBoolToString } from '../../utils/match'
-import { tailwindConfig } from '../../utils/tailwindConfig'
 import { useGroupFromRoute } from '../groups/useGroupFromRoute'
 import { Button } from '../ui/Button'
 import { DropdownMenu, DropdownMenuItem } from '../ui/DropdownMenu'
@@ -207,12 +206,7 @@ export const ProjectListItem: FC<Project> = ({
       <div key={id} className={projectItemClasses}>
         <div className={classNames('flex items-center gap-x-1 text-base')}>
           {important ? (
-            <Heroicon
-              // @ts-expect-error Types for custom config values
-              // are not supported
-              color={tailwindConfig.theme.colors?.important['600']}
-              icon={<StarIcon />}
-            />
+            <Heroicon className="text-important-600" icon={<StarIcon />} />
           ) : null}
 
           <div className={classNames('flex-1', textClasses)}>{name}</div>

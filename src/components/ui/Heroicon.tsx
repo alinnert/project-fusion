@@ -13,6 +13,7 @@ interface Props {
   color?: string
   scale?: 1 | 1.5 | 2 | 4
   iconType?: 'solid' | 'outline'
+  className?: string
 }
 
 export const Heroicon: FC<Props> = ({
@@ -20,9 +21,10 @@ export const Heroicon: FC<Props> = ({
   color,
   scale = 1,
   iconType = 'solid',
+  className,
 }) => {
   return (
-    <div style={{ color }}>
+    <div className={className} style={{ color }}>
       {Children.map(icon, (child) => {
         if (!isValidElement(child)) return null
         return cloneElement(child, {

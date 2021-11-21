@@ -1,7 +1,8 @@
-import formsPlugin from '@tailwindcss/forms'
-import typographyPlugin from '@tailwindcss/typography'
-import colors from 'tailwindcss/colors'
-import plugin from 'tailwindcss/plugin'
+/* eslint-disable @typescript-eslint/no-var-requires */
+const formsPlugin = require('@tailwindcss/forms')
+const typographyPlugin = require('@tailwindcss/typography')
+const colors = require('tailwindcss/colors')
+const plugin = require('tailwindcss/plugin')
 
 /** @type { import('tailwindcss/tailwind-config').TailwindConfig } */
 const config = {
@@ -69,4 +70,4 @@ const config = {
   ],
 }
 
-export default config
+module.exports = config
