@@ -4,18 +4,18 @@
     "project_plural": "projects"
   },
   "buttons": {
-    "new": "Create project"
+    "new": "Create $t(terms.project)"
   },
   "list": {
     "itemGroups": {
-      "activeProjects": "Active projects",
-      "archivedProjects": "Archived projects"
+      "activeProjects": "Active $t(terms.project_plural)",
+      "archivedProjects": "Archived $t(terms.project_plural)"
     },
     "noProjects": {
       "title": "No projects",
       "body": [
         "There are no $t(terms.project_plural) in this $t(groups:terms.group).",
-        "Press the [+ $t(terms.project)] button above to create a new $t(terms.project)."
+        "Press the [+ $t(buttons.new)] button above to create a new $t(terms.project)."
       ]
     }
   },
@@ -24,20 +24,20 @@
       "addToFavorites": "Add to favorites",
       "removeFromFavorites": "Remove from favorites",
       "archiveProject": "Archive",
-      "unarchiveProject": "Move to active projects"
+      "unarchiveProject": "Move to active $t(terms.project_plural)"
     }
   },
   "editForm": {
     "create": {
-      "pageTitle": "Create project"
+      "pageTitle": "Create $t(terms.project)"
     },
     "edit": {
-      "pageTitle": "Edit project"
+      "pageTitle": "Edit $t(terms.project)"
     },
     "labels": {
-      "name": "Project name",
+      "name": "Name",
       "projectNumber": "Project number",
-      "notes": "Notes (Supports Markdown)",
+      "notes": "Notes (Markdown)",
       "important": "Favorite",
       "archived": "Archived"
     }
@@ -45,11 +45,11 @@
   "favorites": {
     "noFavorites": {
       "title": "There are no favorites",
-      "body": "All projects marked as favorite will be listed here."
+      "body": "All $t(terms.project_plural) marked as favorite will be listed here."
     }
   },
   "deleteDialog": {
-    "title": "Delete project?",
-    "message": "Do you want to delete the project \"{{project}}\"?"
+    "title": "Delete $t(terms.project)?",
+    "message": "Do you want to delete the $t(terms.project) \"{{project}}\"?"
   }
 }

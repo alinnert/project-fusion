@@ -4,15 +4,15 @@
     "project_plural": "Projekte"
   },
   "buttons": {
-    "new": "Projekt"
+    "new": "$t(terms.project)"
   },
   "list": {
     "itemGroups": {
-      "activeProjects": "Aktive Projekte",
-      "archivedProjects": "Archivierte Projekte"
+      "activeProjects": "Aktive $t(terms.project_plural)",
+      "archivedProjects": "Archivierte $t(terms.project_plural)"
     },
     "noProjects": {
-      "title": "Keine Projekte vorhanden",
+      "title": "Keine $t(terms.project_plural) vorhanden",
       "body": [
         "Es gibt derzeit keine $t(terms.project_plural) in dieser $t(groups:terms.group).",
         "Du kannst ein neues $t(terms.project) mit dem Button [+ $t(terms.project)] oben anlegen."
@@ -24,20 +24,20 @@
       "addToFavorites": "Zu Favoriten",
       "removeFromFavorites": "Aus Favoriten entfernen",
       "archiveProject": "Archivieren",
-      "unarchiveProject": "Zu aktive Projekte"
+      "unarchiveProject": "Zu aktive $t(terms.project_plural)"
     }
   },
   "editForm": {
     "create": {
-      "pageTitle": "Projekt anlegen"
+      "pageTitle": "$t(terms.project) anlegen"
     },
     "edit": {
-      "pageTitle": "Projekt bearbeiten"
+      "pageTitle": "$t(terms.project) bearbeiten"
     },
     "labels": {
-      "name": "Projektname",
+      "name": "Name",
       "projectNumber": "Projektnummer",
-      "notes": "Notizen (Unterstützt Markdown)",
+      "notes": "Notizen (Markdown)",
       "important": "Favorit",
       "archived": "Archiviert"
     }
@@ -45,11 +45,11 @@
   "favorites": {
     "noFavorites": {
       "title": "Keine Favoriten vorhanden",
-      "body": "Hier erscheinen alle Projekte, die als Favorit markiert wurden."
+      "body": "Hier erscheinen alle $t(terms.project_plural), die als Favorit markiert wurden."
     }
   },
   "deleteDialog": {
-    "title": "Projekt löschen?",
-    "message": "Soll das Projekt \"{{project}}\" gelöscht werden?"
+    "title": "$t(terms.project) löschen?",
+    "message": "Soll das $t(terms.project) \"{{project}}\" gelöscht werden?"
   }
 }
