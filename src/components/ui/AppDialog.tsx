@@ -16,7 +16,7 @@ export const AppDialog: FC<Props> = ({
   onClose,
   children,
 }) => {
-  return (
+  return open ? (
     <Dialog
       className={classNames(
         'fixed inset-0 z-50',
@@ -64,5 +64,5 @@ export const AppDialog: FC<Props> = ({
         ) : null}
       </div>
     </Dialog>
-  )
+  ) : null
 }
