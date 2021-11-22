@@ -1,7 +1,9 @@
 {
   "terms": {
     "appName": "ProjectFusion",
-    "language": "Sprache"
+    "language": "Sprache",
+    "ascending": "aufsteigend",
+    "descending": "absteigend"
   },
   "buttons": {
     "save": "Speichern",
@@ -12,7 +14,8 @@
     "rename": "Umbenennen",
     "create": "Anlegen",
     "ok": "OK",
-    "duplicate": "Duplizieren"
+    "duplicate": "Duplizieren",
+    "sort": "Sortieren"
   },
   "header": {
     "menu": {

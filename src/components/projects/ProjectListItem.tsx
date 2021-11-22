@@ -7,7 +7,7 @@ import {
   LinkIcon,
   PencilIcon,
   StarIcon,
-  TrashIcon
+  TrashIcon,
 } from '@heroicons/react/solid'
 import classNames from 'classnames'
 import { marked } from 'marked'
@@ -17,12 +17,12 @@ import { useNavigate } from 'react-router'
 import { useAppDispatch, useAppSelector } from '../../redux'
 import { Project, removeProject, updateProject } from '../../redux/projects'
 import { translationNamespaces } from '../../utils/i18next-namespaces'
-import { matchBoolToString } from '../../utils/match'
+import { mapBooleanToString } from '../../utils/map'
 import { useGroupFromRoute } from '../groups/useGroupFromRoute'
-import { Button } from '../ui/Button'
-import { DropdownMenu, DropdownMenuItem } from '../ui/DropdownMenu'
+import { useConfirmDialog } from '../ui/dialogs/useConfirmDialog'
+import { DropdownMenu, DropdownMenuItem } from '../ui/dropdownMenu/DropdownMenu'
+import { Button } from '../ui/forms/Button'
 import { Heroicon } from '../ui/Heroicon'
-import { useConfirmDialog } from '../ui/useConfirmDialog'
 
 export const ProjectListItem: FC<Project> = ({
   id,
@@ -157,14 +157,14 @@ export const ProjectListItem: FC<Project> = ({
     return classNames(
       'select-text',
       'text-lg font-semibold',
-      matchBoolToString(
+      mapBooleanToString(
         important,
-        matchBoolToString(
+        mapBooleanToString(
           archived,
           'text-important-800/60 italic line-through',
           'text-important-800',
         ),
-        matchBoolToString(
+        mapBooleanToString(
           archived,
           'text-neutral-600/60 italic line-through',
           'text-neutral-600',
@@ -182,10 +182,10 @@ export const ProjectListItem: FC<Project> = ({
     return classNames(
       'p-4 mb-4 last:mb-0',
       'rounded-md shadow-md',
-      matchBoolToString(
+      mapBooleanToString(
         important,
-        matchBoolToString(archived, 'bg-important-100/40', 'bg-important-100'),
-        matchBoolToString(archived, 'bg-neutral-50', 'bg-neutral-50'),
+        mapBooleanToString(archived, 'bg-important-100/40', 'bg-important-100'),
+        mapBooleanToString(archived, 'bg-neutral-50', 'bg-neutral-50'),
       ),
     )
   }, [archived, important])
@@ -241,7 +241,7 @@ export const ProjectListItem: FC<Project> = ({
           <div
             className={classNames(
               'prose prose-brand select-text text-base mt-4',
-              matchBoolToString(archived, 'opacity-60'),
+              mapBooleanToString(archived, 'opacity-60'),
             )}
             dangerouslySetInnerHTML={{ __html: parsedNotes }}
           />

@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import React, { FC, PropsWithChildren } from 'react'
-import { matchBoolToString } from '../../utils/match'
+import { mapBooleanToString } from '../../utils/map'
 
 interface Props {
   dimmed?: boolean
@@ -16,7 +16,7 @@ export const Headline: FC<PropsWithChildren<Props>> = ({
     <div
       className={classNames(
         'grid items-center gap-x-2',
-        matchBoolToString(
+        mapBooleanToString(
           center,
           'grid-cols-[1fr,auto,1fr]',
           'grid-cols-[auto,1fr]',
@@ -28,7 +28,7 @@ export const Headline: FC<PropsWithChildren<Props>> = ({
       <div
         className={classNames(
           'text-lg',
-          matchBoolToString(
+          mapBooleanToString(
             dimmed,
             'text-neutral-500',
             'text-brand-700 font-semibold',

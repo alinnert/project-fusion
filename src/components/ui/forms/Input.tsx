@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import React, { ChangeEvent, FC, InputHTMLAttributes, useMemo } from 'react'
-import { matchUnionToString } from '../../utils/match'
+import { mapUnionToString } from '../../../utils/map'
 import { FormItem } from './FormItem'
 
 interface Props
@@ -24,21 +24,21 @@ export const Input: FC<Props> = ({
   const inputClasses = useMemo(() => {
     const boxClasses = classNames(
       'box-border',
-      matchUnionToString(inputType, {
+      mapUnionToString(inputType, {
         default: 'w-auto px-2 py-1 rounded',
         header: 'w-60 px-2 py-[2px] rounded',
       }),
     )
 
     const borderClasses = classNames(
-      matchUnionToString(inputType, {
+      mapUnionToString(inputType, {
         default: 'border border-neutral-600',
         header: 'border-white/60 hover:border-white/30 focus:border-white',
       }),
     )
 
     const backgroundClasses = classNames(
-      matchUnionToString(inputType, {
+      mapUnionToString(inputType, {
         default: '',
         header: classNames(
           'bg-white/0 hover:bg-white/30 focus:bg-white',
@@ -48,7 +48,7 @@ export const Input: FC<Props> = ({
     )
 
     const textClasses = classNames(
-      matchUnionToString(inputType, {
+      mapUnionToString(inputType, {
         default: 'text-neutral-800',
         header: classNames(
           'text-sm font-semibold',

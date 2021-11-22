@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import React, { FC, PropsWithChildren, ReactElement } from 'react'
-import { matchBoolToString } from '../../utils/match'
+import { mapBooleanToString } from '../../utils/map'
 import { Heroicon } from './Heroicon'
 
 interface Props {
@@ -26,7 +26,7 @@ export const PageContent: FC<PropsWithChildren<Props>> = ({
       <div
         className={classNames(
           'py-8',
-          matchBoolToString(centered, 'w-[600px] max-w-full mx-auto', 'w-full'),
+          mapBooleanToString(centered, 'w-[600px] max-w-full mx-auto', 'w-full'),
         )}
       >
         {title !== undefined ? (

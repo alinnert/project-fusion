@@ -4,7 +4,10 @@
     "project_plural": "projects"
   },
   "buttons": {
-    "new": "Create $t(projects:terms.project)"
+    "new": "Create $t(projects:terms.project)",
+    "sortMenu": {
+      "sortImportantOnTop": "Show favorites before other projects"
+    }
   },
   "list": {
     "itemGroups": {
@@ -18,6 +21,13 @@
         "Press the [+ $t(projects:buttons.new)] button above to create a new $t(projects:terms.project)."
       ]
     }
+  },
+  "labels": {
+    "name": "Name",
+    "projectNumber": "Project number",
+    "notes": "Notes (Markdown)",
+    "important": "Favorite",
+    "archived": "Archived"
   },
   "item": {
     "actions": {
@@ -33,13 +43,6 @@
     },
     "edit": {
       "pageTitle": "Edit $t(projects:terms.project)"
-    },
-    "labels": {
-      "name": "Name",
-      "projectNumber": "Project number",
-      "notes": "Notes (Markdown)",
-      "important": "Favorite",
-      "archived": "Archived"
     }
   },
   "favorites": {

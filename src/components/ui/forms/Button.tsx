@@ -7,12 +7,13 @@ import React, {
   ReactElement,
   useMemo,
 } from 'react'
-import { capitalize } from '../../utils/capitalize'
-import { matchBoolToString, matchUnionToString } from '../../utils/match'
-import { Heroicon } from './Heroicon'
+import { capitalize } from '../../../utils/capitalize'
+import { mapBooleanToString, mapUnionToString } from '../../../utils/map'
+import { Heroicon } from '../Heroicon'
 
 export type ButtonType =
   | 'default'
+  | 'default-open'
   | 'primary'
   | 'delete'
   | 'flat'
@@ -56,16 +57,16 @@ export const Button: FC<PropsWithChildren<Props>> = ({
 
     const boxBaseClasses = classNames(
       'flex gap-x-2 items-center',
-      matchBoolToString(
+      mapBooleanToString(
         hasChildren,
-        matchUnionToString(size, {
+        mapUnionToString(size, {
           big: 'px-3',
           normal: 'px-2',
           small: 'px-2',
         }),
         'px-1',
       ),
-      matchUnionToString(size, {
+      mapUnionToString(size, {
         big: 'py-2',
         normal: 'py-1',
         small: 'py-1',
@@ -108,6 +109,16 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           'bg-transparent',
           'hover:enabled:bg-neutral-300',
           'active:enabled:bg-neutral-400',
+        )
+
+      case 'default-open':
+        return classNames(
+          fontBaseClasses,
+          boxBaseClasses,
+          shadowClasses,
+          'border border-transparent',
+          'bg-neutral-600',
+          'text-white'
         )
 
       case 'primary':
@@ -180,7 +191,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
         <div
           className={classNames(
             'text-left leading-tight',
-            matchBoolToString(icon !== undefined && hasChildren, 'mr-1'),
+            mapBooleanToString(icon !== undefined && hasChildren, 'mr-1'),
           )}
         >
           {typeof children === 'string' ? capitalize(children) : children}

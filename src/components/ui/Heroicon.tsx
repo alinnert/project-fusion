@@ -6,7 +6,7 @@ import React, {
   isValidElement,
   ReactElement,
 } from 'react'
-import { matchUnionToString } from '../../utils/match'
+import { mapUnionToString } from '../../utils/map'
 
 interface Props {
   icon: ReactElement<{ className: string }>
@@ -30,20 +30,20 @@ export const Heroicon: FC<Props> = ({
         return cloneElement(child, {
           className: classNames(
             child.props.className,
-            matchUnionToString(scale, {
-              1: matchUnionToString(iconType, {
+            mapUnionToString(scale, {
+              1: mapUnionToString(iconType, {
                 solid: 'w-[20px] h-[20px]',
                 outline: 'w-[24px] h-[24px]',
               }),
-              1.5: matchUnionToString(iconType, {
+              1.5: mapUnionToString(iconType, {
                 solid: 'w-[30px] h-[30px]',
                 outline: 'w-[36px] h-[36px]',
               }),
-              2: matchUnionToString(iconType, {
+              2: mapUnionToString(iconType, {
                 solid: 'w-[40px] h-[40px]',
                 outline: 'w-[48px] h-[48px]',
               }),
-              4: matchUnionToString(iconType, {
+              4: mapUnionToString(iconType, {
                 solid: 'w-[80px] h-[80px]',
                 outline: 'w-[96px] h-[96px]',
               }),

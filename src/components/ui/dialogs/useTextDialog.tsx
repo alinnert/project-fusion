@@ -1,9 +1,9 @@
 import React, { ReactElement, useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { translationNamespaces } from '../../utils/i18next-namespaces'
+import { translationNamespaces } from '../../../utils/i18next-namespaces'
+import { Button } from '../forms/Button'
+import { Input } from '../forms/Input'
 import { AppDialog } from './AppDialog'
-import { Button } from './Button'
-import { Input } from './Input'
 
 interface OpenDialogOptions {
   title: string

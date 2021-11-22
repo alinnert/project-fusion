@@ -15,13 +15,13 @@ import { ProjectGroup, selectGroupsWithoutCategory } from '../../redux/groups'
 import { setCurrentGroupId } from '../../redux/uiState'
 import { capitalize } from '../../utils/capitalize'
 import { translationNamespaces } from '../../utils/i18next-namespaces'
-import { matchBoolToString } from '../../utils/match'
+import { mapBooleanToString } from '../../utils/map'
 import { resolveIds } from '../../utils/resolveIds'
 import { sortByProperty } from '../../utils/sortByProperty'
 import { useOrderedCategories } from '../categories/useOrderedCategories'
 import { Heroicon } from '../ui/Heroicon'
 import { CategorizedLinkItems, LinkItem, LinkList } from '../ui/LinkList'
-import { ToolbarContainer } from '../ui/ToolbarContainer'
+import { ToolbarContainer } from '../ui/toolbar/ToolbarContainer'
 import { useGroupFromRoute } from './useGroupFromRoute'
 
 export const specialGroupIds = {
@@ -71,7 +71,7 @@ export const GroupList: FC = () => {
                   className={classNames(
                     'flex gap-x-1 items-center w-10',
                     'text-xs font-semibold',
-                    matchBoolToString(
+                    mapBooleanToString(
                       isCurrent,
                       'text-important-200',
                       'text-important-600',
@@ -87,7 +87,7 @@ export const GroupList: FC = () => {
                 className={classNames(
                   'flex gap-x-1 items-center w-10',
                   'text-xs font-semibold',
-                  matchBoolToString(
+                  mapBooleanToString(
                     isCurrent,
                     'text-accent-50',
                     'text-neutral-600',

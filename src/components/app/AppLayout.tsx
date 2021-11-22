@@ -3,9 +3,9 @@ import React, { FC, PropsWithChildren, ReactNode, useMemo } from 'react'
 import { useAppSelector } from '../../redux'
 import { selectIsFileOpen } from '../../redux/database'
 import { useFeatureCheck } from '../../utils/featureCheck'
-import { matchBoolToString } from '../../utils/match'
+import { mapBooleanToString } from '../../utils/map'
 import { DatabaseMenu } from '../dataFile/DatabaseMenu'
-import { HeaderSearch } from '../ui/HeaderSearch'
+import { HeaderSearch } from '../ui/header/HeaderSearch'
 import { AppLogo } from './AppLogo'
 import { AppTabs } from './AppTabs'
 
@@ -71,7 +71,7 @@ export const AppLayout: FC<PropsWithChildren<Props>> = ({ children, left }) => {
       <div
         className={classNames(
           'row-start-2 overflow-hidden',
-          matchBoolToString(showLeftPanel, 'col-start-2', 'col-start-1'),
+          mapBooleanToString(showLeftPanel, 'col-start-2', 'col-start-1'),
           'col-end-3',
         )}
       >

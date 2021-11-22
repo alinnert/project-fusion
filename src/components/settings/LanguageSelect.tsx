@@ -2,7 +2,7 @@ import React, { FC, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { languages } from '../../utils/languages'
-import { Select, SelectItem } from '../ui/Select'
+import { Select, SelectItem } from '../ui/forms/Select'
 
 export const LanguageSelect: FC = ({}) => {
   const { t, i18n } = useTranslation(translationNamespaces)

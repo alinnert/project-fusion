@@ -12,13 +12,13 @@ import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { useCtrlOrCmd } from '../../utils/keyboard'
 import { useCategoryFromGroup } from '../categories/useCategoryFromGroup'
 import { useOrderedCategories } from '../categories/useOrderedCategories'
-import { ColorInput } from '../ui/ColorInput'
-import { Form } from '../ui/Form'
-import { Input } from '../ui/Input'
+import { ColorInput } from '../ui/forms/ColorInput'
+import { Form } from '../ui/forms/Form'
+import { Input } from '../ui/forms/Input'
+import { Select } from '../ui/forms/Select'
+import { Textarea } from '../ui/forms/Textarea'
 import { PageContent } from '../ui/PageContent'
-import { Select } from '../ui/Select'
-import { Textarea } from '../ui/Textarea'
-import { ToolbarContainer, ToolbarItem } from '../ui/ToolbarContainer'
+import { ToolbarContainer, ToolbarItem } from '../ui/toolbar/ToolbarContainer'
 
 interface Props {
   init?: ProjectGroup | null
@@ -152,13 +152,13 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
       >
         <Form type="page" onSubmit={handleSubmit} submitOnCtrlEnter>
           <Input
-            label={`${t('groups:editForm.labels.name')} *`}
+            label={`${t('groups:labels.name')} *`}
             onChange={setName}
             value={name}
           />
 
           <ColorInput
-            label={t('groups:editForm.labels.color')}
+            label={t('groups:labels.color')}
             value={color}
             onChange={setColor}
           />
@@ -168,14 +168,14 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
               { value: '', label: t('groups:list.noCategory') },
               ...categorySelectItems,
             ]}
-            label={t('groups:editForm.labels.category')}
+            label={t('groups:labels.category')}
             value={categoryId}
             nullValue={{ value: '', label: t('groups:list.noCategory') }}
             onChange={setCategoryId}
           />
 
           <Textarea
-            label={t('groups:editForm.labels.notes')}
+            label={t('groups:labels.notes')}
             value={notes}
             onChange={setNotes}
           />

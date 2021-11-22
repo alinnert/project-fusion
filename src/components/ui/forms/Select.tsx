@@ -6,8 +6,8 @@ import {
 } from '@heroicons/react/solid'
 import classNames from 'classnames'
 import React, { FC, useMemo, useState } from 'react'
-import { matchBoolToString } from '../../utils/match'
-import { Heroicon } from './Heroicon'
+import { mapBooleanToString } from '../../../utils/map'
+import { Heroicon } from '../Heroicon'
 
 export interface SelectItem {
   value: string
@@ -103,8 +103,8 @@ export const Select: FC<Props> = ({
                         'flex items-center',
                         'px-2 py-1',
                         'rounded',
-                        matchBoolToString(active, 'bg-gradient-brand'),
-                        matchBoolToString(active, 'text-white'),
+                        mapBooleanToString(active, 'bg-gradient-brand'),
+                        mapBooleanToString(active, 'text-white'),
                       )}
                     >
                       <div className="w-8 flex-0 flex justify-center">
@@ -113,7 +113,7 @@ export const Select: FC<Props> = ({
                             icon={
                               <CheckIcon
                                 className={classNames(
-                                  matchBoolToString(
+                                  mapBooleanToString(
                                     active,
                                     'text-white',
                                     'text-brand-700',
@@ -128,11 +128,11 @@ export const Select: FC<Props> = ({
                       <div
                         className={classNames(
                           'flex-1',
-                          matchBoolToString(
+                          mapBooleanToString(
                             isSelected(selected, item.value),
                             classNames(
                               'font-semibold',
-                              matchBoolToString(
+                              mapBooleanToString(
                                 active,
                                 'text-white',
                                 'text-brand-700',

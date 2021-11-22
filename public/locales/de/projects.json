@@ -4,7 +4,10 @@
     "project_plural": "Projekte"
   },
   "buttons": {
-    "new": "$t(projects:terms.project)"
+    "new": "$t(projects:terms.project)",
+    "sortMenu": {
+      "sortImportantOnTop": "Favoriten vor anderen Projekten anzeigen"
+    }
   },
   "list": {
     "itemGroups": {
@@ -18,6 +21,13 @@
         "Du kannst ein neues $t(projects:terms.project) mit dem Button [+ $t(projects:terms.project)] oben anlegen."
       ]
     }
+  },
+  "labels": {
+    "name": "Name",
+    "id": "Projektnummer",
+    "notes": "Notizen (Markdown)",
+    "important": "Favorit",
+    "archived": "Archiviert"
   },
   "item": {
     "actions": {
@@ -33,13 +43,6 @@
     },
     "edit": {
       "pageTitle": "$t(projects:terms.project) bearbeiten"
-    },
-    "labels": {
-      "name": "Name",
-      "projectNumber": "Projektnummer",
-      "notes": "Notizen (Markdown)",
-      "important": "Favorit",
-      "archived": "Archiviert"
     }
   },
   "favorites": {

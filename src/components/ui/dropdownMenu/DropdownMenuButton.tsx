@@ -1,15 +1,16 @@
 import classNames from 'classnames'
 import React, { FC, ReactElement } from 'react'
-import { matchBoolToString, matchUnionToString } from '../../utils/match'
+import { mapBooleanToString, mapUnionToString } from '../../../utils/map'
+import { Heroicon } from '../Heroicon'
+import { PlaceholderIcon } from '../PlaceholderIcon'
 import { DropdownMenuItem, DropdownMenuItemButtonType } from './DropdownMenu'
-import { Heroicon } from './Heroicon'
-import { PlaceholderIcon } from './PlaceholderIcon'
 
 export interface DropdownMenuItemButton {
   type: 'button'
   label: string
   icon?: ReactElement
   buttonType?: DropdownMenuItemButtonType
+  checked?: boolean
   action?: () => void
 }
 
@@ -34,10 +35,10 @@ export const DropdownMenuButton: FC<Props> = ({ isActive, item }) => {
           'flex items-center',
           'py-1 pl-1 pr-12 rounded',
 
-          matchUnionToString(buttonType, {
+          mapUnionToString(buttonType, {
             default: classNames(
               'active:bg-gradient-brand-active active:text-white',
-              matchBoolToString(
+              mapBooleanToString(
                 isActive,
                 'bg-gradient-brand text-white',
                 'text-neutral-700',
@@ -45,7 +46,7 @@ export const DropdownMenuButton: FC<Props> = ({ isActive, item }) => {
             ),
             delete: classNames(
               'active:bg-gradient-danger-active active:text-white',
-              matchBoolToString(
+              mapBooleanToString(
                 isActive,
                 'bg-gradient-danger text-white',
                 'text-danger-800',

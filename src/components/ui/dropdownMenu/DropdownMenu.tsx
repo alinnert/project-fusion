@@ -10,11 +10,11 @@ import React, {
 } from 'react'
 import {
   defaultMatch,
-  matchBoolToString,
-  matchStringToString,
-  matchUnionToUnion,
-} from '../../utils/match'
-import { Button, ButtonSize, ButtonType } from './Button'
+  mapBooleanToString,
+  mapStringToString,
+  mapUnionToUnion,
+} from '../../../utils/map'
+import { Button, ButtonSize, ButtonType } from '../forms/Button'
 import {
   DropdownMenuButton,
   DropdownMenuItemButton,
@@ -49,8 +49,9 @@ export const DropdownMenu: FC<PropsWithChildren<Props>> = ({
   secondaryLabel,
 }) => {
   const openButtonType = useMemo<ButtonType>(() => {
-    return matchUnionToUnion<ButtonType, ButtonType>(buttonType, {
+    return mapUnionToUnion<ButtonType, ButtonType>(buttonType, {
       [defaultMatch]: 'default',
+      default: 'default-open',
       flat: 'flat-open',
       header: 'header-open',
     })
@@ -76,7 +77,7 @@ export const DropdownMenu: FC<PropsWithChildren<Props>> = ({
                       <>
                         <div
                           className={classNames(
-                            matchBoolToString(
+                            mapBooleanToString(
                               open,
                               'text-brand-600',
                               'text-white',
@@ -96,7 +97,7 @@ export const DropdownMenu: FC<PropsWithChildren<Props>> = ({
           <Menu.Items
             className={classNames(
               'absolute z-50 w-max',
-              matchStringToString(align, {
+              mapStringToString(align, {
                 left: 'left-0',
                 right: 'right-0',
                 [defaultMatch]: 'left-0',

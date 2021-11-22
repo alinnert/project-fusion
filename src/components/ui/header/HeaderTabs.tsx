@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react'
 import { useLocation, useNavigate } from 'react-router'
-import { Button } from './Button'
+import { Button } from '../forms/Button'
 
 export interface TabItem {
   label: string

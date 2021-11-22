@@ -4,12 +4,15 @@ import React, { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useOrderedCategories } from '../../components/categories/useOrderedCategories'
 import { useSettings } from '../../components/settings/useSettings'
-import { Button } from '../../components/ui/Button'
+import { useConfirmDialog } from '../../components/ui/dialogs/useConfirmDialog'
+import { useTextDialog } from '../../components/ui/dialogs/useTextDialog'
+import { Button } from '../../components/ui/forms/Button'
+import {
+  SortableList,
+  SwapDirection,
+} from '../../components/ui/forms/SortableList'
 import { Headline } from '../../components/ui/Headline'
 import { PageContent } from '../../components/ui/PageContent'
-import { SortableList, SwapDirection } from '../../components/ui/SortableList'
-import { useConfirmDialog } from '../../components/ui/useConfirmDialog'
-import { useTextDialog } from '../../components/ui/useTextDialog'
 import { useAppDispatch } from '../../redux'
 import {
   addCategory,

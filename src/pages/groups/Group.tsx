@@ -8,18 +8,21 @@ import {
   PlusIcon,
   TrashIcon,
 } from '@heroicons/react/solid'
-import React, { FC } from 'react'
+import React, { FC, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router'
 import colors from 'tailwindcss/colors'
 import { useGroupFromRoute } from '../../components/groups/useGroupFromRoute'
 import { ProjectList } from '../../components/projects/ProjectList'
 import { useProjectsFromGroup } from '../../components/projects/useProjectsFromGroup'
+import { useConfirmDialog } from '../../components/ui/dialogs/useConfirmDialog'
 import { EmptyText } from '../../components/ui/EmptyText'
 import { Markdown } from '../../components/ui/Markdown'
 import { PageContent } from '../../components/ui/PageContent'
-import { ToolbarContainer } from '../../components/ui/ToolbarContainer'
-import { useConfirmDialog } from '../../components/ui/useConfirmDialog'
+import {
+  ToolbarContainer,
+  ToolbarItem,
+} from '../../components/ui/toolbar/ToolbarContainer'
 import { useAppDispatch } from '../../redux'
 import { removeGroup } from '../../redux/groups'
 import { useGlobalKeyDown } from '../../utils/events'
@@ -57,11 +60,11 @@ export const Group: FC = () => {
     }
   })
 
-  function editGroup(): void {
+  const editGroup = useCallback((): void => {
     navigate(`/groups/${groupId}/edit`)
-  }
+  }, [groupId, navigate])
 
-  function handleDelete(): void {
+  const handleDelete = useCallback((): void => {
     if (groupId === null) return
     const groupName = group?.name
     if (groupName === undefined) return
@@ -72,14 +75,83 @@ export const Group: FC = () => {
       confirmButtonLabel: t('groups:deleteDialog.confirmButton'),
       confirmButtonType: 'delete',
     })
-  }
+  }, [group?.name, groupId, openConfirmDeleteDialog, t])
 
-  function createProject(): void {
+  const createProject = useCallback((): void => {
     const { groupId } = params
     if (groupId === undefined) return
 
     navigate(`/groups/${groupId}/new-project`)
-  }
+  }, [navigate, params])
+
+  const toolbarItems = useMemo<ToolbarItem[]>(() => {
+    return [
+      {
+        type: 'button',
+        label: t('common:buttons.edit'),
+        icon: <PencilIcon />,
+        action: editGroup,
+      },
+      {
+        type: 'button',
+        buttonType: 'delete',
+        label: t('common:buttons.delete'),
+        icon: <TrashIcon />,
+        action: handleDelete,
+      },
+      {
+        type: 'divider',
+      },
+      {
+        type: 'button',
+        label: t('projects:buttons.new'),
+        icon: <PlusIcon />,
+        action: createProject,
+      },
+      {
+        type: 'dropdown',
+        label: t('common:buttons.sort'),
+        visible: false,
+        items: [
+          {
+            type: 'button',
+            label: `${t('projects:labels.id')} (${t(
+              'common:terms.ascending',
+            )})`,
+            action() {
+              console.log('impwement me! pwetty pwease! /(°3°)/')
+            },
+          },
+          {
+            type: 'button',
+            label: `${t('projects:labels.id')} (${t(
+              'common:terms.descending',
+            )})`,
+            action() {
+              console.log('impwement me! pwetty pwease! /(°3°)/')
+            },
+          },
+          {
+            type: 'button',
+            label: t('projects:labels.name'),
+            action() {
+              console.log('implement me')
+            },
+          },
+          {
+            type: 'separator',
+          },
+          {
+            type: 'button',
+            label: t('projects:buttons.sortMenu.sortImportantOnTop'),
+            action() {
+              console.log('implement me')
+            },
+          },
+        ],
+      },
+    ]
+  }, [createProject, editGroup, handleDelete, t])
 
   if (group === null) {
     return (
@@ -93,32 +165,7 @@ export const Group: FC = () => {
     <>
       {confirmDeleteDialog}
 
-      <ToolbarContainer
-        toolbarItems={[
-          {
-            type: 'button',
-            label: t('common:buttons.edit'),
-            icon: <PencilIcon />,
-            action: editGroup,
-          },
-          {
-            type: 'button',
-            buttonType: 'delete',
-            label: t('common:buttons.delete'),
-            icon: <TrashIcon />,
-            action: handleDelete,
-          },
-          {
-            type: 'divider',
-          },
-          {
-            type: 'button',
-            label: t('projects:buttons.new'),
-            icon: <PlusIcon />,
-            action: createProject,
-          },
-        ]}
-      >
+      <ToolbarContainer toolbarItems={toolbarItems}>
         <PageContent
           title={group.name}
           titleIcon={<FolderIconOutline />}

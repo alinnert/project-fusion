@@ -11,7 +11,7 @@ import { useAppSelector } from '../../redux'
 import { selectIsFileOpen } from '../../redux/database'
 import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { specialGroupIds } from '../groups/GroupList'
-import { HeaderTabs, TabItem } from '../ui/HeaderTabs'
+import { HeaderTabs, TabItem } from '../ui/header/HeaderTabs'
 
 export const AppTabs: FC = ({}) => {
   const { t } = useTranslation(translationNamespaces)

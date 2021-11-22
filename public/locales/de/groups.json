@@ -17,18 +17,18 @@
     "title": "Keine Gruppe gefunden",
     "body": "Für die angegebene ID wurde keine Gruppe gefunden"
   },
+  "labels": {
+    "name": "Gruppenname",
+    "color": "Farbe",
+    "category": "Kategorie",
+    "notes": "Notizen (Unterstützt Markdown)"
+  },
   "editForm": {
     "create": {
       "pageTitle": "Gruppe anlegen"
     },
     "edit": {
       "pageTitle": "Gruppe bearbeiten"
-    },
-    "labels": {
-      "name": "Gruppenname",
-      "color": "Farbe",
-      "category": "Kategorie",
-      "notes": "Notizen (Unterstützt Markdown)"
     }
   },
   "deleteDialog": {

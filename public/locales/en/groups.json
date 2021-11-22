@@ -17,18 +17,18 @@
     "title": "No group found",
     "body": "No group found for the provided ID"
   },
+  "labels": {
+    "name": "Group name",
+    "color": "Color",
+    "category": "Category",
+    "notes": "Notes (supports Markdown)"
+  },
   "editForm": {
     "create": {
       "pageTitle": "Create group"
     },
     "edit": {
       "pageTitle": "Edit group"
-    },
-    "labels": {
-      "name": "Group name",
-      "color": "Color",
-      "category": "Category",
-      "notes": "Notes (supports Markdown)"
     }
   },
   "deleteDialog": {

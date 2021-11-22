@@ -1,5 +1,5 @@
 import { FolderIcon, SaveIcon, XIcon } from '@heroicons/react/solid'
-import React, { FC, FormEvent, useCallback, useDebugValue, useMemo, useState } from 'react'
+import React, { FC, FormEvent, useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router'
 import { useAppDispatch, useAppSelector } from '../../redux'
@@ -14,13 +14,13 @@ import { createId } from '../../utils/customNanoId'
 import { useGlobalKeyDown } from '../../utils/events'
 import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { useCtrlOrCmd } from '../../utils/keyboard'
-import { Checkbox } from '../ui/Checkbox'
-import { Form } from '../ui/Form'
+import { Checkbox } from '../ui/forms/Checkbox'
+import { Form } from '../ui/forms/Form'
+import { Input } from '../ui/forms/Input'
+import { Textarea } from '../ui/forms/Textarea'
 import { Heroicon } from '../ui/Heroicon'
-import { Input } from '../ui/Input'
 import { PageContent } from '../ui/PageContent'
-import { Textarea } from '../ui/Textarea'
-import { ToolbarContainer, ToolbarItem } from '../ui/ToolbarContainer'
+import { ToolbarContainer, ToolbarItem } from '../ui/toolbar/ToolbarContainer'
 
 interface Props {
   init?: Project | ProjectTemplate | null
@@ -181,13 +181,13 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
         <Form type="page" onSubmit={handleSubmit} submitOnCtrlEnter>
           <div className="grid grid-cols-[3fr,1fr] gap-x-4">
             <Input
-              label={`${t('projects:editForm.labels.name')} *`}
+              label={`${t('projects:labels.name')} *`}
               value={name}
               onChange={setName}
             />
 
             <Input
-              label={t('projects:editForm.labels.projectNumber')}
+              label={t('projects:labels.projectNumber')}
               value={projectNumber}
               onChange={setProjectNumber}
             />
@@ -195,20 +195,20 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
 
           <div className="grid grid-cols-3">
             <Checkbox
-              label={t('projects:editForm.labels.important')}
+              label={t('projects:labels.important')}
               value={important}
               onChange={setImportant}
             />
 
             <Checkbox
-              label={t('projects:editForm.labels.archived')}
+              label={t('projects:labels.archived')}
               value={archived}
               onChange={setArchived}
             />
           </div>
 
           <Textarea
-            label={t('projects:editForm.labels.notes')}
+            label={t('projects:labels.notes')}
             value={notes}
             onChange={setNotes}
           />

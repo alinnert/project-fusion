@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import React, { FC, useMemo } from 'react'
-import { matchUnionToString } from '../../utils/match'
+import { mapUnionToString } from '../../utils/map'
 
 export type TextDividerColor = 'neutral' | 'brand'
 
@@ -25,7 +25,7 @@ export const TextDivider: FC<Props> = ({
       <div
         className={classNames(
           'text-md font-semibold tracking-wide',
-          matchUnionToString(color, {
+          mapUnionToString(color, {
             neutral: 'text-neutral-600',
             brand: 'text-brand-600',
           }),

@@ -1,9 +1,9 @@
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/solid'
 import classNames from 'classnames'
 import React, { FC, ReactElement, ReactNode } from 'react'
-import { matchBoolToString } from '../../utils/match'
+import { mapBooleanToString } from '../../../utils/map'
+import { Separator } from '../header/HeaderSeparator'
 import { Button } from './Button'
-import { Separator } from './HeaderSeparator'
 
 export type SwapDirection = 'up' | 'down'
 
@@ -69,7 +69,7 @@ export const SortableList: FC<Props> = ({
             className={classNames(
               'px-3 py-1',
               'rounded',
-              matchBoolToString(
+              mapBooleanToString(
                 selectedId === id,
                 'bg-gradient-brand text-white',
                 'hover:bg-neutral-200 active:bg-neutral-300',

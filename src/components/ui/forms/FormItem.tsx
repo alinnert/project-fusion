@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import React, { FC, PropsWithChildren, useEffect, useRef } from 'react'
-import { createId } from '../../utils/customNanoId'
-import { matchBoolToString, matchUnionToString } from '../../utils/match'
+import { createId } from '../../../utils/customNanoId'
+import { mapBooleanToString, mapUnionToString } from '../../../utils/map'
 
 export type FormItemType = 'block' | 'inline'
 
@@ -27,7 +27,7 @@ export const FormItem: FC<PropsWithChildren<Props>> = ({
     <label
       className={classNames(
         'flex',
-        matchUnionToString(type, {
+        mapUnionToString(type, {
           block: 'flex-col',
           inline: 'flex-row gap-x-2 items-center',
         }),
@@ -38,8 +38,8 @@ export const FormItem: FC<PropsWithChildren<Props>> = ({
         <span
           className={classNames(
             'font-semibold text-sm',
-            matchBoolToString(type === 'block', 'mb-1'),
-            matchUnionToString(type, {
+            mapBooleanToString(type === 'block', 'mb-1'),
+            mapUnionToString(type, {
               block: 'flex-0 order-1',
               inline: 'flex-1 order-2',
             }),
@@ -52,7 +52,7 @@ export const FormItem: FC<PropsWithChildren<Props>> = ({
       <div
         className={classNames(
           'flex flex-col',
-          matchUnionToString(type, {
+          mapUnionToString(type, {
             block: 'flex-0 order-2',
             inline: 'flex-0 order-1',
           }),
