@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import React, { FC, MouseEvent, PropsWithChildren, ReactElement } from 'react'
-import { mapBooleanToString } from '../../utils/map'
 import { Heroicon } from './Heroicon'
 
 interface Props {
@@ -23,10 +22,11 @@ export const LinkListItem: FC<PropsWithChildren<Props>> = ({
 
   return (
     <div
+      style={{ backgroundColor: current ? iconColor : undefined }}
       className={classNames(
         'flex items-center',
         'p-1 rounded-md',
-        'hover:bg-neutral-200 active:bg-neutral-300 current:bg-gradient-brand',
+        'hover:bg-neutral-200 active:bg-neutral-300',
         'current:text-white',
         { current },
       )}
@@ -34,13 +34,8 @@ export const LinkListItem: FC<PropsWithChildren<Props>> = ({
     >
       {icon !== undefined ? (
         <div
-          className={classNames(
-            'flex-0 self-center',
-            'p-1 mr-4',
-            'rounded',
-            mapBooleanToString(current && icon !== null, 'bg-white text-black'),
-          )}
-          style={{ color: iconColor }}
+          className={classNames('flex-0 self-center', 'p-1 mr-4', 'rounded')}
+          style={{ color: current ? 'rgba(255, 255, 255, 0.95)' : iconColor }}
         >
           {icon !== null ? (
             <Heroicon icon={icon} />
