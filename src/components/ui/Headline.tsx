@@ -21,7 +21,7 @@ export const Headline: FC<PropsWithChildren<Props>> = ({
           'grid-cols-[1fr,auto,1fr]',
           'grid-cols-[auto,1fr]',
         ),
-        'not-first:mt-12 mb-6',
+        'not-first:mt-12 mb-4',
       )}
     >
       {center ? <div className="bg-neutral-300 h-px"></div> : null}

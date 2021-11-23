@@ -17,11 +17,7 @@ export const Search: FC = () => {
     [searchTerm],
   )
 
-  const groupEntities = useAppSelector((state) => state.groups.entities)
-
-  const groups = useMemo(() => {
-    return Object.values(groupEntities).filter(isDefined)
-  }, [groupEntities])
+  const groups = useAppSelector((state) => state.groups.entities)
 
   function showProject(project: Project): boolean {
     if (project.projectNumber === searchTerm) return true
@@ -32,7 +28,7 @@ export const Search: FC = () => {
 
   return (
     <GroupListWithProjects
-      title={t('search:terms.search')}
+      title={`${t('search:terms.search')}: "${searchTerm}"`}
       titleIcon={<SearchIcon />}
       titleIconClassName="text-brand-600"
       groups={groups}
