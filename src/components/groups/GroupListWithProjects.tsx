@@ -61,7 +61,9 @@ export const GroupListWithProjects: FC<Props> = ({
             className={classNames(
               'flex items-center',
               'text-lg font-semibold',
-              'mb-4',
+              'mb-4 p-2',
+              'bg-neutral-100 hover:bg-neutral-200 active:bg-neutral-300',
+              'rounded-md'
             )}
             onClick={() => navigate(`/groups/${group.id}`)}
           >

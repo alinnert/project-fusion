@@ -11,7 +11,7 @@
 
 @layer components {
   .bg-gradient-brand {
-    @apply bg-gradient-to-r from-brand-700 to-accent-600;
+    @apply bg-gradient-to-r from-brand-700 to-accent-500;
   }
 
   .bg-gradient-brand-active {

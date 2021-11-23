@@ -32,7 +32,7 @@ export const AppLayout: FC<PropsWithChildren<Props>> = ({ children, left }) => {
           className={classNames(
             'grid grid-cols-[1fr,auto,1fr]',
             'p-2',
-            'bg-brand-900',
+            'bg-brand-700',
             'text-white',
           )}
         >
@@ -60,8 +60,7 @@ export const AppLayout: FC<PropsWithChildren<Props>> = ({ children, left }) => {
         <div
           className={classNames(
             'row-start-2 col-start-1 overflow-hidden',
-            'bg-neutral-50',
-            'border-r border-neutral-200',
+            'bg-neutral-100',
           )}
         >
           {left}

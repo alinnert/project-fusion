@@ -161,13 +161,13 @@ export const ProjectListItem: FC<Project> = ({
         important,
         mapBooleanToString(
           archived,
-          'text-important-800/60 italic line-through',
-          'text-important-800',
+          'text-important-700/60 italic line-through',
+          'text-important-700',
         ),
         mapBooleanToString(
           archived,
-          'text-neutral-600/60 italic line-through',
-          'text-neutral-600',
+          'text-neutral-800/60 italic line-through',
+          'text-neutral-800',
         ),
       ),
     )
@@ -181,11 +181,11 @@ export const ProjectListItem: FC<Project> = ({
   const projectItemClasses = useMemo(() => {
     return classNames(
       'p-4 mb-4 last:mb-0',
-      'rounded-md shadow-md',
+      'rounded-md',
       mapBooleanToString(
         important,
         mapBooleanToString(archived, 'bg-important-100/40', 'bg-important-100'),
-        mapBooleanToString(archived, 'bg-neutral-50', 'bg-neutral-50'),
+        mapBooleanToString(archived, 'bg-neutral-100/40', 'bg-neutral-100'),
       ),
     )
   }, [archived, important])
