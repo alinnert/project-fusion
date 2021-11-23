@@ -1,7 +1,7 @@
 import { SearchIcon } from '@heroicons/react/solid'
 import React, { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { translationNamespaces } from '../../../utils/i18next-namespaces'
 import { Button } from '../forms/Button'
 import { Form } from '../forms/Form'
@@ -10,8 +10,9 @@ import { Input } from '../forms/Input'
 export const HeaderSearch: FC = ({}) => {
   const { t } = useTranslation(translationNamespaces)
   const navigate = useNavigate()
+  const { searchTerm: urlSearchTerm } = useParams()
 
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState<string>(urlSearchTerm ?? '')
 
   function handleSearch() {
     if (searchTerm.trim() === '') return

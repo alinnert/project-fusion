@@ -13,13 +13,13 @@ import { sortByProperty } from '../../utils/sortByProperty'
 export const Favorites: FC = () => {
   const { t } = useTranslation(translationNamespaces)
 
-  const groupDictionary = useAppSelector((state) => state.groups.entities)
+  const groupEntities = useAppSelector((state) => state.groups.entities)
 
   const groups = useMemo<ProjectGroup[]>(() => {
-    return Object.values(groupDictionary)
+    return Object.values(groupEntities)
       .filter(isDefined)
       .sort(sortByProperty('name'))
-  }, [groupDictionary])
+  }, [groupEntities])
 
   const showProject = useCallback((project: Project): boolean => {
     return project.important && !project.archived
@@ -27,6 +27,9 @@ export const Favorites: FC = () => {
 
   return (
     <GroupListWithProjects
+      title={t('groups:terms.favorites')}
+      titleIcon={<StarIcon />}
+      titleIconClassName="text-yellow-600"
       groups={groups}
       showProject={showProject}
       emptyPlaceholder={

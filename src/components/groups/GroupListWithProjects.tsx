@@ -1,11 +1,8 @@
-import { StarIcon } from '@heroicons/react/outline'
 import { FolderIcon } from '@heroicons/react/solid'
 import classNames from 'classnames'
 import React, { FC, ReactElement, useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
 import { ProjectGroup } from '../../redux/groups'
 import { Project } from '../../redux/projects'
-import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { ProjectListItem } from '../projects/ProjectListItem'
 import { useGetProjectsFromGroup } from '../projects/useProjectsFromGroup'
 import { Heroicon } from '../ui/Heroicon'
@@ -13,6 +10,9 @@ import { PageContent } from '../ui/PageContent'
 
 interface Props {
   groups: ProjectGroup[]
+  title?: string
+  titleIcon?: ReactElement
+  titleIconClassName?: string
   emptyPlaceholder?: ReactElement
   showProject?: (project: Project, group: ProjectGroup) => boolean
 }
@@ -20,10 +20,11 @@ interface Props {
 export const GroupListWithProjects: FC<Props> = ({
   groups,
   emptyPlaceholder = null,
+  title,
+  titleIcon,
+  titleIconClassName,
   showProject,
 }) => {
-  const { t } = useTranslation(translationNamespaces)
-
   const getProjectsFromGroup = useGetProjectsFromGroup()
 
   const filteredGroups = useMemo<Map<ProjectGroup, Project[]>>(() => {
@@ -46,10 +47,10 @@ export const GroupListWithProjects: FC<Props> = ({
 
   return (
     <PageContent
-      title={t('groups:terms.favorites')}
-      titleIcon={<StarIcon />}
+      title={title}
+      titleIcon={titleIcon}
       titleIconType="outline"
-      titleIconClassName="text-yellow-600"
+      titleIconClassName={titleIconClassName}
     >
       {Array.from(filteredGroups).map(([group, projects]) => (
         <div key={group.id} className="mt-8">
