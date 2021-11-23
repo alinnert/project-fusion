@@ -47,6 +47,7 @@ export const AppTabs: FC = ({}) => {
       label: t('common:header.tabs.config'),
       icon: <CogIcon />,
       href: configHref,
+      current: location.pathname.startsWith('/config')
     }
 
     const startItem: TabItem = {
