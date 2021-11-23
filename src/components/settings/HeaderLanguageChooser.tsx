@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { languages } from '../../utils/languages'
 import { DropdownMenu } from '../ui/dropdownMenu/DropdownMenu'
-import { DropdownMenuItemButton } from '../ui/DropdownMenuButton'
+import { DropdownMenuItemButton } from '../ui/dropdownMenu/DropdownMenuButton'
 import { PlaceholderIcon } from '../ui/PlaceholderIcon'
 
 export const HeaderLanguageChooser: FC = ({}) => {
