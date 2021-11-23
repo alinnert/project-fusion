@@ -1,6 +1,7 @@
 import { FolderIcon } from '@heroicons/react/solid'
 import classNames from 'classnames'
 import React, { FC, ReactElement, useMemo } from 'react'
+import { useNavigate } from 'react-router'
 import { ProjectGroup } from '../../redux/groups'
 import { Project } from '../../redux/projects'
 import { ProjectListItem } from '../projects/ProjectListItem'
@@ -25,6 +26,8 @@ export const GroupListWithProjects: FC<Props> = ({
   titleIconClassName,
   showProject,
 }) => {
+  const navigate = useNavigate()
+  
   const getProjectsFromGroup = useGetProjectsFromGroup()
 
   const filteredGroups = useMemo<Map<ProjectGroup, Project[]>>(() => {
@@ -60,6 +63,7 @@ export const GroupListWithProjects: FC<Props> = ({
               'text-lg font-semibold',
               'mb-4',
             )}
+            onClick={() => navigate(`/groups/${group.id}`)}
           >
             <Heroicon
               icon={<FolderIcon />}
