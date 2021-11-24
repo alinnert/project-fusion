@@ -60,7 +60,8 @@ export const AppLayout: FC<PropsWithChildren<Props>> = ({ children, left }) => {
         <div
           className={classNames(
             'row-start-2 col-start-1 overflow-hidden',
-            'bg-neutral-100',
+            'border-r border-neutral-200',
+            'bg-neutral-50',
           )}
         >
           {left}

@@ -22,13 +22,14 @@ export const SettingsPagesList: FC<Props> = ({ currentId }) => {
   }, [isFileOpen, settingsItems])
 
   function handleItemClick(item: LinkItem): void {
+    if (item.id === null) return
     dispatch(setCurrentConfigId(item.id))
   }
 
   return (
     <LinkList
       items={items}
-      urlPrefix="/config/"
+      urlPrefix="/config"
       showIcons
       currentId={currentId}
       onItemClick={handleItemClick}

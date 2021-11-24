@@ -2,7 +2,6 @@ import { useEffect, useMemo } from 'react'
 import { useLocation, useNavigate } from 'react-router'
 import { useAppSelector } from '../../redux'
 import { selectIsFileOpen } from '../../redux/database'
-import { specialGroupIds } from '../groups/GroupList'
 
 interface RedirectTarget {
   path: string
@@ -33,12 +32,12 @@ export function useRedirects() {
     }
 
     // If file is open:
-    // Redirect: / => /groups/_favorites
+    // Redirect: / => /groups
     if (
       isFileOpen &&
       (location.pathname === '/' || location.pathname === '/groups')
     ) {
-      return { path: `/groups/${specialGroupIds.favorites}`, replace: true }
+      return { path: `/groups`, replace: true }
     }
 
     return null

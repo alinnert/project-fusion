@@ -9,7 +9,7 @@ export interface LinkCategory {
 }
 
 export interface LinkItem {
-  id: string
+  id: string | null
   name: string
   icon?: ReactElement
   iconColor?: string
@@ -43,7 +43,7 @@ export function LinkList({
 
   function handleItemClick(item: LinkItem): void {
     onItemClick?.(item)
-    navigate(`${urlPrefix}${item.id}`)
+    navigate(item.id === null ? urlPrefix : `${urlPrefix}/${item.id}`)
   }
 
   function createLinkListItem(item: LinkItem): ReactElement {
@@ -70,7 +70,7 @@ export function LinkList({
   }
 
   return (
-    <div className="mx-2 my-2 flex flex-col gap-y-1">
+    <div className="my-2 px-2 flex flex-col gap-y-1">
       {prefixedItems.map((item) => createLinkListItem(item)) ?? null}
 
       {items

@@ -2,11 +2,12 @@ import {
   DocumentIcon,
   FolderAddIcon,
   FolderIcon,
+  HomeIcon,
   StarIcon,
   TagIcon,
 } from '@heroicons/react/solid'
 import classNames from 'classnames'
-import React, { FC, useEffect, useMemo } from 'react'
+import React, { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router'
 import { useAppDispatch, useAppSelector } from '../../redux'
@@ -23,10 +24,6 @@ import { Heroicon } from '../ui/Heroicon'
 import { CategorizedLinkItems, LinkItem, LinkList } from '../ui/LinkList'
 import { ToolbarContainer } from '../ui/toolbar/ToolbarContainer'
 import { useGroupFromRoute } from './useGroupFromRoute'
-
-export const specialGroupIds = {
-  favorites: '_favorites',
-}
 
 export const GroupList: FC = () => {
   const { t } = useTranslation(translationNamespaces)
@@ -45,10 +42,10 @@ export const GroupList: FC = () => {
   const prefixedItems = useMemo<LinkItem[]>(() => {
     return [
       {
-        id: specialGroupIds.favorites,
-        name: capitalize(t('groups:list.specialItems.favorites')),
-        icon: <StarIcon />,
-        iconColor: '#D97706',
+        id: null,
+        name: capitalize(t('groups:list.specialItems.dashboard')),
+        icon: <HomeIcon />,
+        iconColor: '#0369A1',
       },
     ]
   }, [t])
@@ -124,10 +121,8 @@ export const GroupList: FC = () => {
     return [...groupsWithoutCategory, ...categorizedGroups]
   }, [orderedCategories, t, uncategorizedGroups, projects, groups])
 
-  const currentId = useMemo(() => {
-    return location.pathname === `/groups/${specialGroupIds.favorites}`
-      ? specialGroupIds.favorites
-      : groupId
+  const currentId = useMemo<LinkItem['id']>(() => {
+    return location.pathname === `/groups` ? null : groupId
   }, [groupId, location.pathname])
 
   function handleAddGroupButtonClick() {
@@ -170,7 +165,7 @@ export const GroupList: FC = () => {
           prefixedItems={prefixedItems}
           showIcons={true}
           defaultIcon={<FolderIcon />}
-          urlPrefix="/groups/"
+          urlPrefix="/groups"
           currentId={currentId}
           onItemClick={handleItemClick}
         />

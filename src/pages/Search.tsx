@@ -30,7 +30,7 @@ export const Search: FC = () => {
     <GroupListWithProjects
       title={`${t('search:terms.search')}: "${searchTerm}"`}
       titleIcon={<SearchIcon />}
-      titleIconClassName="text-brand-600"
+      titleIconClassName="text-brand-700"
       groups={groups}
       showProject={showProject}
     />

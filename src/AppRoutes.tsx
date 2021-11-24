@@ -5,7 +5,7 @@ import { useRedirects } from './components/app/useRedirects'
 import { ConfigCategories } from './pages/config/ConfigCategories'
 import { ConfigInterface } from './pages/config/ConfigInterface'
 import { ConfigLinks } from './pages/config/ConfigLinks'
-import { Favorites } from './pages/favorites/Favorites'
+import { Dashboard } from './pages/favorites/Dashboard'
 import { CreateGroup } from './pages/groups/CreateGroup'
 import { EditGroup } from './pages/groups/EditGroup'
 import { Group } from './pages/groups/Group'
@@ -32,7 +32,7 @@ export const AppRoutes: FC = () => {
         </Route>
 
         <Route path="groups" element={<DataLayout />}>
-          <Route path="_favorites" element={<Favorites />} />
+          <Route index element={<Dashboard />} />
           <Route path="create" element={<CreateGroup />} />
 
           <Route path=":groupId">

@@ -33,7 +33,7 @@ export const DropdownMenuButton: FC<Props> = ({ isActive, item }) => {
         onClick={handleItemClick}
         className={classNames(
           'flex items-center',
-          'py-1 pl-1 pr-12 rounded',
+          'py-2 pl-2 pr-12 rounded',
 
           mapUnionToString(buttonType, {
             default: classNames(
@@ -55,7 +55,7 @@ export const DropdownMenuButton: FC<Props> = ({ isActive, item }) => {
           }),
         )}
       >
-        <div className="mr-2">
+        <div className="mr-3">
           {item.icon !== undefined ? (
             <Heroicon icon={item.icon} />
           ) : (

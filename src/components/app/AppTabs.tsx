@@ -10,7 +10,6 @@ import { useLocation } from 'react-router'
 import { useAppSelector } from '../../redux'
 import { selectIsFileOpen } from '../../redux/database'
 import { translationNamespaces } from '../../utils/i18next-namespaces'
-import { specialGroupIds } from '../groups/GroupList'
 import { HeaderTabs, TabItem } from '../ui/header/HeaderTabs'
 
 export const AppTabs: FC = ({}) => {
@@ -24,9 +23,7 @@ export const AppTabs: FC = ({}) => {
   )
 
   const groupHref = useMemo(() => {
-    return currentGroupId === null
-      ? `/groups/${specialGroupIds.favorites}`
-      : `/groups/${currentGroupId}`
+    return currentGroupId === null ? `/groups` : `/groups/${currentGroupId}`
   }, [currentGroupId])
 
   const configHref = useMemo(() => {
@@ -47,7 +44,7 @@ export const AppTabs: FC = ({}) => {
       label: t('common:header.tabs.config'),
       icon: <CogIcon />,
       href: configHref,
-      current: location.pathname.startsWith('/config')
+      current: location.pathname.startsWith('/config'),
     }
 
     const startItem: TabItem = {

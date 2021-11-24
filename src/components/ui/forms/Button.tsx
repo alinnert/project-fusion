@@ -56,19 +56,19 @@ export const Button: FC<PropsWithChildren<Props>> = ({
     const fontBaseClasses = 'text-sm font-semibold'
 
     const boxBaseClasses = classNames(
-      'flex gap-x-2 items-center',
+      'flex gap-x-3 items-center',
       mapBooleanToString(
         hasChildren,
         mapUnionToString(size, {
           big: 'px-3',
-          normal: 'px-2',
+          normal: 'px-3',
           small: 'px-2',
         }),
         'px-1',
       ),
       mapUnionToString(size, {
         big: 'py-2',
-        normal: 'py-1',
+        normal: 'py-2',
         small: 'py-1',
       }),
       'rounded',
