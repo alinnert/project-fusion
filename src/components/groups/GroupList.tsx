@@ -164,15 +164,17 @@ export const GroupList: FC = () => {
         },
       ]}
     >
-      <LinkList
-        items={items}
-        prefixedItems={prefixedItems}
-        showIcons={true}
-        defaultIcon={<FolderIcon />}
-        urlPrefix="/groups/"
-        currentId={currentId}
-        onItemClick={handleItemClick}
-      />
+      <div className="overflow-y-auto">
+        <LinkList
+          items={items}
+          prefixedItems={prefixedItems}
+          showIcons={true}
+          defaultIcon={<FolderIcon />}
+          urlPrefix="/groups/"
+          currentId={currentId}
+          onItemClick={handleItemClick}
+        />
+      </div>
     </ToolbarContainer>
   )
 }
