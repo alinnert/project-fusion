@@ -108,7 +108,7 @@ export const GroupListWithProjects: FC<Props> = ({
                       'text-lg font-semibold',
                       'hover:opacity-80 active:opacity-70',
                       'text-white',
-                      'mb-2 p-2',
+                      'mt-4 mb-2 p-2',
                       'rounded-md',
                     )}
                     onClick={() => navigate(`/groups/${group.id}`)}
