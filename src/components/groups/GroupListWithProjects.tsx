@@ -37,7 +37,14 @@ export const GroupListWithProjects: FC<Props> = ({
   const navigate = useNavigate()
 
   const getProjectsFromGroup = useGetProjectsFromGroup()
-  const categories = useAppSelector((state) => state.categories.entities)
+  const categoryEntities = useAppSelector((state) => state.categories.entities)
+  const categoryOrder = useAppSelector((state) => state.settings.categoryOrder)
+
+  const categories = useMemo(() => {
+    return categoryOrder
+      .map((categoryId) => categoryEntities[categoryId])
+      .filter(isDefined)
+  }, [categoryEntities, categoryOrder])
 
   const filteredGroups = useMemo<Record<ProjectGroup['id'], Project[]>>(() => {
     const result: Record<ProjectGroup['id'], Project[]> = {}
@@ -59,7 +66,7 @@ export const GroupListWithProjects: FC<Props> = ({
     const result: Record<Category['id'], ProjectGroup[]> = {}
     const filteredGroupIds = Object.keys(filteredGroups)
 
-    for (const category of Object.values(categories).filter(isDefined)) {
+    for (const category of categories) {
       const visibleGroupIds = category.groups.filter((groupId) =>
         filteredGroupIds.includes(groupId),
       )
@@ -94,7 +101,7 @@ export const GroupListWithProjects: FC<Props> = ({
         : Object.entries(filteredCategories).map(([categoryId, groups]) => (
             <div key={categoryId}>
               <TextDivider
-                label={categories[categoryId]?.name ?? '-'}
+                label={categoryEntities[categoryId]?.name ?? '-'}
                 color="brand"
                 className="mt-8 mb-4"
               />
