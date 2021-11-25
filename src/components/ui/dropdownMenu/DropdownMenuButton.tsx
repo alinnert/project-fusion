@@ -63,7 +63,7 @@ export const DropdownMenuButton: FC<Props> = ({ isActive, item }) => {
           )}
         </div>
 
-        <div className="text-sm font-semibold">{item.label}</div>
+        <div className="font-semibold leading-none">{item.label}</div>
       </div>
     )
   }

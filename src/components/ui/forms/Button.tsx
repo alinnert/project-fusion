@@ -53,7 +53,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
   const hasChildren = useMemo(() => Children.count(children) > 0, [children])
 
   const buttonClasses = useMemo<string>(() => {
-    const fontBaseClasses = 'text-sm font-semibold'
+    const fontBaseClasses = 'font-semibold leading-none'
 
     const boxBaseClasses = classNames(
       'flex gap-x-3 items-center',
