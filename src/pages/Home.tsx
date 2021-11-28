@@ -26,15 +26,20 @@ export const Home: FC = () => {
         <Alert>{t('common:alerts.apiRequirementsNotMet')}</Alert>
       ) : null}
 
-      <div className="flex justify-center gap-x-2">
-        <Button icon={<DocumentAddIcon />} onClick={handleCreateDatabaseClick}>
-          {t('common:header.menu.database.items.create')}
-        </Button>
+      {featureOk ? (
+        <div className="flex justify-center gap-x-2">
+          <Button
+            icon={<DocumentAddIcon />}
+            onClick={handleCreateDatabaseClick}
+          >
+            {t('common:header.menu.database.items.create')}
+          </Button>
 
-        <Button icon={<FolderIcon />} onClick={handleOpenDatabaseClick}>
-          {t('common:header.menu.database.items.open')}
-        </Button>
-      </div>
+          <Button icon={<FolderIcon />} onClick={handleOpenDatabaseClick}>
+            {t('common:header.menu.database.items.open')}
+          </Button>
+        </div>
+      ) : null}
 
       <LanguageSelect />
     </EmptyText>
