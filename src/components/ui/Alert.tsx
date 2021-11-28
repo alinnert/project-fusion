@@ -15,7 +15,7 @@ export const Alert: FC<Props> = ({ type = 'warn', children }) => {
       className={classNames(
         'flex items-center gap-x-4',
         'text-left',
-        'my-8 p-4',
+        'p-4',
         'rounded-md',
         mapUnionToString(type, {
           warn: classNames(

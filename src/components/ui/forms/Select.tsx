@@ -56,7 +56,7 @@ export const Select: FC<Props> = ({
   }
 
   return (
-    <div className={classNames(className, 'mt-4')}>
+    <div className={classNames(className, 'text-left')}>
       <Listbox value={selectedItem} onChange={handleChange}>
         {({ open }) => (
           <div className="relative">

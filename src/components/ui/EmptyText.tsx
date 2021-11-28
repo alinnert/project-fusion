@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import React, { FC, PropsWithChildren, ReactElement } from 'react'
 import { Heroicon } from './Heroicon'
 
@@ -26,7 +27,14 @@ export const EmptyText: FC<PropsWithChildren<Props>> = ({
           </div>
         ) : null}
 
-        <div className="text-lg text-gray-800 max-w-lg">{children}</div>
+        <div
+          className={classNames(
+            'text-lg text-gray-800 max-w-lg',
+            'flex flex-col gap-y-4',
+          )}
+        >
+          {children}
+        </div>
       </div>
     </div>
   )
