@@ -92,9 +92,9 @@ export const GroupListWithProjects: FC<Props> = ({
   return (
     <PageContent
       title={title}
-      titleIcon={titleIcon}
-      titleIconType="outline"
-      titleIconClassName={titleIconClassName}
+      icon={titleIcon}
+      iconType="outline"
+      iconClassName={titleIconClassName}
     >
       {isEmpty
         ? emptyPlaceholder

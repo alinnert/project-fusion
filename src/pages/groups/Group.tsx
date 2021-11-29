@@ -168,9 +168,9 @@ export const Group: FC = () => {
       <ToolbarContainer toolbarItems={toolbarItems}>
         <PageContent
           title={group.name}
-          titleIcon={<FolderIconOutline />}
-          titleIconColor={group.color}
-          titleIconType="outline"
+          icon={<FolderIconOutline />}
+          iconColor={group.color}
+          iconType="outline"
           centered
         >
           <Markdown text={group.notes} />
@@ -178,9 +178,9 @@ export const Group: FC = () => {
 
         <PageContent
           title={t('projects:terms.project_plural')}
-          titleIcon={<DocumentDuplicateIcon />}
-          titleIconColor={colors.gray[400]}
-          titleIconType="outline"
+          icon={<DocumentDuplicateIcon />}
+          iconColor={colors.gray[400]}
+          iconType="outline"
         >
           <ProjectList projects={projects} />
         </PageContent>

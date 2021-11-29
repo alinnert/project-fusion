@@ -1,18 +1,20 @@
 import classNames from 'classnames'
 import React from 'react'
 import { FC } from 'react'
+import icon from '../../../public/icon-gradient.svg?raw'
 
 export const AppSplashScreen: FC = () => {
   return (
     <div className="absolute inset-0 flex flex-col items-center justify-center">
-      <div className="w-24 animate-pulse">
-        <img src="/icon-gradient.svg" alt="ProjectFusion Logo" />
-      </div>
+      <div
+        className="w-[100px] h-[100px] animate-pulse"
+        dangerouslySetInnerHTML={{ __html: icon }}
+      />
       <p
         className={classNames(
           'mt-8',
-          'text-3xl font-semibold text-neutral-600',
-          'uppercase tracking-wider',
+          'text-3xl font-semibold text-neutral-500',
+          'uppercase tracking-widest',
         )}
       >
         Project Fusion

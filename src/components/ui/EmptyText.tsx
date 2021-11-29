@@ -5,16 +5,29 @@ import { Heroicon } from './Heroicon'
 interface Props {
   title?: string
   icon?: ReactElement
+  image?: {
+    src: string
+    alt: string
+    width?: string
+    height?: string
+  }
 }
 
 export const EmptyText: FC<PropsWithChildren<Props>> = ({
   children,
   title,
   icon,
+  image,
 }) => {
   return (
     <div className="h-full grid items-center justify-center px-12 py-4 overflow-y-auto">
       <div className="text-center">
+        {image !== undefined ? (
+          <div className="flex justify-center mb-8">
+            <img {...image} />
+          </div>
+        ) : null}
+
         {icon !== undefined ? (
           <div className="flex justify-center text-brand-200 mb-8">
             <Heroicon icon={icon} scale={4} />

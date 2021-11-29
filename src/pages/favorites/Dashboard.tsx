@@ -39,9 +39,9 @@ export const Dashboard: FC = () => {
     <ToolbarContainer toolbarItems={toolbarItems}>
       <PageContent
         title={t('groups:list.specialItems.dashboard')}
-        titleIcon={<HomeIcon />}
-        titleIconType="outline"
-        titleIconClassName="text-brand-700"
+        icon={<HomeIcon />}
+        iconType="outline"
+        iconClassName="text-brand-700"
         centered
       ></PageContent>
 

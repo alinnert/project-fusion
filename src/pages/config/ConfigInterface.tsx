@@ -14,9 +14,9 @@ export const ConfigInterface: FC = ({}) => {
   return (
     <PageContent
       title={t('settings:interface.title')}
-      titleIcon={<TemplateIcon />}
-      titleIconType="outline"
-      titleIconColor={applicationSettings.interface.iconColor}
+      icon={<TemplateIcon />}
+      iconType="outline"
+      iconColor={applicationSettings.interface.iconColor}
       centered
     >
       <p>{t('settings:interface.description')}</p>

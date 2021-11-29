@@ -19,7 +19,15 @@ export const Home: FC = () => {
   const handleOpenDatabaseClick = useOpenDatabase()
 
   return (
-    <EmptyText title={t('welcome:noFileOpen.title')} icon={<LightBulbIcon />}>
+    <EmptyText
+      image={{
+        src: '/icon-gradient.svg',
+        alt: 'Project Fusion Logo',
+        width: '100',
+        height: '100',
+      }}
+      title={t('welcome:noFileOpen.title')}
+    >
       <p>{t('welcome:noFileOpen.body')}</p>
 
       {!featureOk ? (

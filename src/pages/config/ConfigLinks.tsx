@@ -103,10 +103,10 @@ export const ConfigLinks: FC = () => {
 
       <PageContent
         title={t('settings:links.title')}
-        centered={true}
-        titleIcon={<LinkIcon />}
-        titleIconType="outline"
-        titleIconColor={databaseSettings.links.iconColor}
+        icon={<LinkIcon />}
+        iconType="outline"
+        iconColor={databaseSettings.links.iconColor}
+        centered
       >
         <p>{t('settings:links.description')}</p>
 

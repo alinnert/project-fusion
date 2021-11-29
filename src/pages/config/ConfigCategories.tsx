@@ -111,9 +111,9 @@ export const ConfigCategories: FC = () => {
   return (
     <PageContent
       title={t('settings:categories.title')}
-      titleIcon={<TagIcon />}
-      titleIconType="outline"
-      titleIconColor={databaseSettings.categories.iconColor}
+      icon={<TagIcon />}
+      iconType="outline"
+      iconColor={databaseSettings.categories.iconColor}
       centered
     >
       {addDialog}

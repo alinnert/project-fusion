@@ -5,20 +5,27 @@ import { Heroicon } from './Heroicon'
 
 interface Props {
   title?: string
-  titleIcon?: ReactElement
-  titleIconColor?: string
-  titleIconClassName?: string
-  titleIconType?: 'solid' | 'outline'
+  icon?: ReactElement
+  iconColor?: string
+  iconClassName?: string
+  iconType?: 'solid' | 'outline'
+  image?: {
+    src: string
+    alt: string
+    width?: string
+    height?: string
+  }
   centered?: boolean
 }
 
 export const PageContent: FC<PropsWithChildren<Props>> = ({
   children,
   title,
-  titleIcon,
-  titleIconColor,
-  titleIconClassName,
-  titleIconType = 'solid',
+  icon,
+  iconColor,
+  iconClassName,
+  iconType = 'solid',
+  image,
   centered = false,
 }) => {
   return (
@@ -26,18 +33,28 @@ export const PageContent: FC<PropsWithChildren<Props>> = ({
       <div
         className={classNames(
           'py-8',
-          mapBooleanToString(centered, 'w-[600px] max-w-full mx-auto', 'w-full'),
+          mapBooleanToString(
+            centered,
+            'w-[600px] max-w-full mx-auto',
+            'w-full',
+          ),
         )}
       >
+        {image !== undefined ? (
+          <div className="mb-4">
+            <img {...image} />
+          </div>
+        ) : null}
+
         {title !== undefined ? (
           <div className="text-2xl font-semibold mb-4 flex items-end">
-            {titleIcon !== undefined ? (
-              <div className={classNames('flex-0 mr-2', titleIconClassName)}>
+            {icon !== undefined ? (
+              <div className={classNames('flex-0 mr-2', iconClassName)}>
                 <Heroicon
-                  icon={titleIcon}
-                  color={titleIconColor}
+                  icon={icon}
+                  color={iconColor}
                   scale={2}
-                  iconType={titleIconType}
+                  iconType={iconType}
                 />
               </div>
             ) : null}

@@ -7,24 +7,28 @@ export const Info: FC = () => {
   const { t } = useTranslation(translationNamespaces)
 
   return (
-    <PageContent title={t('info:title')} centered={true}>
+    <PageContent
+      title={t('info:title')}
+      image={{
+        src: '/icon-gradient.svg',
+        alt: 'Project Fusion Logo',
+        width: '100',
+        height: '100',
+      }}
+      centered
+    >
       <div className="prose prose-brand select-text">
-        <p className="font-semibold">
-          {t('info:version')} 0.0.0.42
-          if-you-use-this-in-production-kittens-will-die-pre-alpha
-        </p>
-
-        <img
-          src="/icon-gradient.svg"
-          alt="ProjectFusion Logo"
-          width="128"
-          height="128"
-        />
-
         <p>
           {t('info:sourceCode')}:{' '}
           <a href="https://github.com/alinnert/project-fusion">
             github.com/alinnert/project-fusion
+          </a>
+        </p>
+
+        <p>
+          Issues:{' '}
+          <a href="https://github.com/alinnert/project-fusion/issues">
+            github.com/alinnert/project-fusion/issues
           </a>
         </p>
 

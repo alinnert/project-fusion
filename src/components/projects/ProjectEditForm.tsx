@@ -170,7 +170,7 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
 
   return (
     <ToolbarContainer toolbarItems={toolbarItems}>
-      <PageContent title={pageTitle} centered={true}>
+      <PageContent title={pageTitle} centered>
         <div className="text-xl mb-8 flex items-center gap-x-2">
           <Heroicon icon={<FolderIcon />} color={group?.color} scale={1.5} />
           {group?.name ?? '--'}

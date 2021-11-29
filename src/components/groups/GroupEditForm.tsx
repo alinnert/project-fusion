@@ -145,10 +145,10 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
     <ToolbarContainer toolbarItems={toolbarItems}>
       <PageContent
         title={pageTitle}
-        titleIcon={isEditForm ? <FolderIcon /> : <FolderAddIcon />}
-        titleIconColor={color}
-        titleIconType="outline"
-        centered={true}
+        icon={isEditForm ? <FolderIcon /> : <FolderAddIcon />}
+        iconColor={color}
+        iconType="outline"
+        centered
       >
         <Form type="page" onSubmit={handleSubmit} submitOnCtrlEnter>
           <Input
