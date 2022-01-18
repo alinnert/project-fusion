@@ -2,11 +2,13 @@ import { FolderIcon } from '@heroicons/react/solid'
 import { Dictionary } from '@reduxjs/toolkit'
 import classNames from 'classnames'
 import React, { FC, ReactElement, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router'
 import { useAppSelector } from '../../redux'
-import { Category } from '../../redux/categories'
-import { ProjectGroup } from '../../redux/groups'
+import { Category, NO_CATEGORY } from '../../redux/categories'
+import { ProjectGroup, selectGroupsWithoutCategory } from '../../redux/groups'
 import { Project } from '../../redux/projects'
+import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { isDefined } from '../../utils/isDefined'
 import { sortByProperty } from '../../utils/sortByProperty'
 import { ProjectListItem } from '../projects/ProjectListItem'
@@ -35,10 +37,12 @@ export const GroupListWithProjects: FC<Props> = ({
   showProject,
 }) => {
   const navigate = useNavigate()
+  const { t } = useTranslation(translationNamespaces)
 
   const getProjectsFromGroup = useGetProjectsFromGroup()
   const categoryEntities = useAppSelector((state) => state.categories.entities)
   const categoryOrder = useAppSelector((state) => state.settings.categoryOrder)
+  const groupsWithoutCategory = useAppSelector(selectGroupsWithoutCategory)
 
   const categories = useMemo(() => {
     return categoryOrder
@@ -60,11 +64,15 @@ export const GroupListWithProjects: FC<Props> = ({
     return result
   }, [getProjectsFromGroup, groups, showProject])
 
+  const filteredGroupIds = useMemo(
+    () => Object.keys(filteredGroups),
+    [filteredGroups],
+  )
+
   const filteredCategories = useMemo<
     Record<Category['id'], ProjectGroup[]>
   >(() => {
     const result: Record<Category['id'], ProjectGroup[]> = {}
-    const filteredGroupIds = Object.keys(filteredGroups)
 
     for (const category of categories) {
       const visibleGroupIds = category.groups.filter((groupId) =>
@@ -79,7 +87,27 @@ export const GroupListWithProjects: FC<Props> = ({
     }
 
     return result
-  }, [categories, filteredGroups, groups])
+  }, [categories, filteredGroupIds, groups])
+
+  const groupsWithoutCategories = useMemo(() => {
+    return groupsWithoutCategory
+      .filter(({ id }) => filteredGroupIds.includes(id))
+      .filter(isDefined)
+  }, [filteredGroupIds, groupsWithoutCategory])
+
+  const categoriesToDisplay = useMemo(() => {
+    if (groupsWithoutCategories.length > 0) {
+      return [
+        [NO_CATEGORY, groupsWithoutCategories] as [
+          typeof NO_CATEGORY,
+          ProjectGroup[],
+        ],
+        ...Object.entries(filteredCategories),
+      ]
+    }
+
+    return Object.entries(filteredCategories)
+  }, [filteredCategories, groupsWithoutCategories])
 
   const isEmpty = useMemo(() => {
     return Object.keys(filteredGroups).length === 0
@@ -98,10 +126,20 @@ export const GroupListWithProjects: FC<Props> = ({
     >
       {isEmpty
         ? emptyPlaceholder
-        : Object.entries(filteredCategories).map(([categoryId, groups]) => (
-            <div key={categoryId}>
+        : categoriesToDisplay.map(([categoryId, groups]) => (
+            <div
+              key={
+                typeof categoryId === 'symbol'
+                  ? categoryId.toString()
+                  : categoryId
+              }
+            >
               <TextDivider
-                label={categoryEntities[categoryId]?.name ?? '-'}
+                label={
+                  typeof categoryId === 'string'
+                    ? categoryEntities[categoryId]?.name ?? '-'
+                    : t('groups:list.noCategory')
+                }
                 color="brand"
                 className="mt-8 mb-4"
               />

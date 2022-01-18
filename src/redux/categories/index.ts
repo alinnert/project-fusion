@@ -13,6 +13,8 @@ export interface Category {
   groups: Array<ProjectGroup['id']>
 }
 
+export const NO_CATEGORY = Symbol('no category')
+
 const adapter = createEntityAdapter<Category>()
 
 const slice = createSlice({

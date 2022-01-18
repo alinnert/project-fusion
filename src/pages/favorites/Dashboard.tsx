@@ -7,7 +7,7 @@ import { EmptyText } from '../../components/ui/EmptyText'
 import { PageContent } from '../../components/ui/PageContent'
 import {
   ToolbarContainer,
-  ToolbarItem,
+  ToolbarItem
 } from '../../components/ui/toolbar/ToolbarContainer'
 import { useAppSelector } from '../../redux'
 import { Project } from '../../redux/projects'
