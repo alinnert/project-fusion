@@ -17,8 +17,8 @@ import { useNavigate } from 'react-router'
 import { useAppDispatch, useAppSelector } from '../../redux'
 import { Project, removeProject, updateProject } from '../../redux/projects'
 import { translationNamespaces } from '../../utils/i18next-namespaces'
+import { isDefined } from '../../utils/isDefined'
 import { mapBooleanToString } from '../../utils/map'
-import { useGroupFromRoute } from '../groups/useGroupFromRoute'
 import { useConfirmDialog } from '../ui/dialogs/useConfirmDialog'
 import { DropdownMenu, DropdownMenuItem } from '../ui/dropdownMenu/DropdownMenu'
 import { Button } from '../ui/forms/Button'
@@ -35,7 +35,7 @@ export const ProjectListItem: FC<Project> = ({
   const { t } = useTranslation(translationNamespaces)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const { groupId } = useGroupFromRoute()
+
   const { dialog: confirmDeleteDialog, openDialog: openConfirmDeleteDialog } =
     useConfirmDialog({
       onConfirm() {
@@ -47,9 +47,20 @@ export const ProjectListItem: FC<Project> = ({
     (state) => state.settings.primaryProjectLink,
   )
 
+  const groupEntities = useAppSelector((state) => state.groups.entities)
+
+  const group = useMemo(() => {
+    return (
+      Object.values(groupEntities)
+        .filter(isDefined)
+        .find((group) => group.projects.includes(id)) ?? null
+    )
+  }, [groupEntities, id])
+
   const handleEdit = useCallback(() => {
-    navigate(`/groups/${groupId}/projects/${id}/edit`)
-  }, [groupId, id, navigate])
+    if (group === null) return
+    navigate(`/groups/${group.id}/projects/${id}/edit`)
+  }, [group, id, navigate])
 
   const handleAddToFavorites = useCallback(() => {
     dispatch(updateProject({ id, changes: { important: true } }))
@@ -68,8 +79,9 @@ export const ProjectListItem: FC<Project> = ({
   }, [dispatch, id])
 
   const handleDuplicate = useCallback(() => {
-    navigate(`/groups/${groupId}/new-project`)
-  }, [groupId, navigate])
+    if (group === null) return
+    navigate(`/groups/${group.id}/new-project`)
+  }, [group, navigate])
 
   const handleDelete = useCallback(() => {
     openConfirmDeleteDialog({
