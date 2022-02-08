@@ -140,6 +140,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           fontBaseClasses,
           dangerTextClasses,
           shadowClasses,
+          'bg-white',
           'border border-danger-300',
           'hover:enabled:bg-gradient-danger hover:enabled:border-danger-800',
           'active:enabled:bg-gradient-danger-active',
