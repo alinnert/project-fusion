@@ -1,4 +1,5 @@
-import { FolderIcon, SaveIcon, XIcon } from '@heroicons/react/solid'
+import { CheckIcon } from '@heroicons/react/outline'
+import { FolderIcon, XIcon } from '@heroicons/react/solid'
 import React, { FC, FormEvent, useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router'
@@ -141,7 +142,7 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
         type: 'button',
         buttonType: 'primary',
         label: t('common:buttons.save'),
-        icon: <SaveIcon />,
+        icon: <CheckIcon />,
         disabled: !isFormValid,
         action: saveProject,
       },
@@ -169,8 +170,12 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
   }
 
   return (
-    <ToolbarContainer toolbarItems={toolbarItems}>
-      <PageContent title={pageTitle} centered>
+    <ToolbarContainer
+      title={pageTitle}
+      toolbarItems={toolbarItems}
+      toolbarPadding="lg"
+    >
+      <PageContent centered>
         <div className="text-xl mb-8 flex items-center gap-x-2">
           <Heroicon icon={<FolderIcon />} color={group?.color} scale={1.5} />
           {group?.name ?? '--'}

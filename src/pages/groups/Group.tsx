@@ -1,6 +1,6 @@
 import {
-  DocumentDuplicateIcon,
   FolderIcon as FolderIconOutline,
+  ViewListIcon,
 } from '@heroicons/react/outline'
 import {
   FolderIcon,
@@ -165,9 +165,12 @@ export const Group: FC = () => {
     <>
       {confirmDeleteDialog}
 
-      <ToolbarContainer toolbarItems={toolbarItems}>
+      <ToolbarContainer
+        title={group.name}
+        toolbarItems={toolbarItems}
+        toolbarPadding="lg"
+      >
         <PageContent
-          title={group.name}
           icon={<FolderIconOutline />}
           iconColor={group.color}
           iconType="outline"
@@ -178,7 +181,7 @@ export const Group: FC = () => {
 
         <PageContent
           title={t('projects:terms.project_plural')}
-          icon={<DocumentDuplicateIcon />}
+          icon={<ViewListIcon />}
           iconColor={colors.gray[400]}
           iconType="outline"
         >

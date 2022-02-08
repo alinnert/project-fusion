@@ -15,42 +15,62 @@ export type ToolbarItem = (
 ) & { visible?: boolean }
 
 interface Props {
+  title?: string
   toolbarItems?: ToolbarItem[]
+  toolbarPadding?: 'sm' | 'lg'
 }
 
 export const ToolbarContainer: FC<PropsWithChildren<Props>> = ({
   children,
+  title,
   toolbarItems = [],
+  toolbarPadding = 'sm',
 }) => {
   return (
     <div
       className={classNames(
-        'grid grid-rows-[auto,1fr]',
+        'grid grid-rows-[auto,auto,1fr]',
         'h-full',
         'overflow-hidden',
       )}
     >
-      {toolbarItems.length > 0 ? (
-        <div className={classNames('flex gap-x-2', 'p-2', 'bg-neutral-200')}>
-          {toolbarItems.map((item, index) =>
-            item.visible === false ? null : item.type === 'button' ? (
-              <ToolbarButton key={index} {...item} />
-            ) : item.type === 'popover' ? (
-              <ToolbarPopover key={index} {...item} />
-            ) : item.type === 'dropdown' ? (
-              <ToolbarDropdown key={index} {...item} />
-            ) : item.type === 'expander' ? (
-              <ToolbarExpander key={index} />
-            ) : item.type === 'divider' ? (
-              <ToolbarDivider key={index} />
-            ) : null,
+      {title !== undefined || toolbarItems.length > 0 ? (
+        <div
+          className={classNames(
+            'row-start-2 row-end-3',
+            'grid grid-cols-[1fr,auto] items-center',
+            'border-b',
+            {
+              'px-2': toolbarPadding === 'sm',
+              'px-8': toolbarPadding === 'lg',
+            },
           )}
+        >
+          {title !== undefined ? (
+            <div className="my-4 text-2xl font-semibold">{title}</div>
+          ) : null}
+
+          <div className={classNames('flex gap-x-4', 'py-2')}>
+            {toolbarItems.map((item, index) =>
+              item.visible === false ? null : item.type === 'button' ? (
+                <ToolbarButton key={index} {...item} />
+              ) : item.type === 'popover' ? (
+                <ToolbarPopover key={index} {...item} />
+              ) : item.type === 'dropdown' ? (
+                <ToolbarDropdown key={index} {...item} />
+              ) : item.type === 'expander' ? (
+                <ToolbarExpander key={index} />
+              ) : item.type === 'divider' ? (
+                <ToolbarDivider key={index} />
+              ) : null,
+            )}
+          </div>
         </div>
       ) : null}
 
       <div
         className={classNames(
-          'row-start-2 row-end-3 h-full overflow-hidden',
+          'row-start-3 row-end-4 h-full overflow-hidden',
           'grid grid-flow-col auto-cols-fr',
         )}
       >

@@ -1,5 +1,5 @@
 import { FolderAddIcon, FolderIcon } from '@heroicons/react/outline'
-import { SaveIcon, XIcon } from '@heroicons/react/solid'
+import { CheckIcon, XIcon } from '@heroicons/react/solid'
 import React, { FC, useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router'
@@ -56,12 +56,10 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
   }, [orderedCategories])
 
   const pageTitle = useMemo(() => {
-    const groupName = name !== '' ? name : '-'
-
     return isEditForm
-      ? `${t('groups:editForm.edit.pageTitle')}: ${groupName}`
-      : `${t('groups:editForm.create.pageTitle')}: ${groupName}`
-  }, [name, isEditForm, t])
+      ? t('groups:editForm.edit.pageTitle')
+      : t('groups:editForm.create.pageTitle')
+  }, [isEditForm, t])
 
   const createGroup = useCallback(() => {
     const id = createId()
@@ -115,7 +113,7 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
         type: 'button',
         buttonType: 'primary',
         label: t('common:buttons.save'),
-        icon: <SaveIcon />,
+        icon: <CheckIcon />,
         disabled: !isFormValid,
         action: saveGroup,
       },
@@ -142,9 +140,12 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
   }
 
   return (
-    <ToolbarContainer toolbarItems={toolbarItems}>
+    <ToolbarContainer
+      title={pageTitle}
+      toolbarItems={toolbarItems}
+      toolbarPadding="lg"
+    >
       <PageContent
-        title={pageTitle}
         icon={isEditForm ? <FolderIcon /> : <FolderAddIcon />}
         iconColor={color}
         iconType="outline"

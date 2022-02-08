@@ -35,9 +35,12 @@ export const Dashboard: FC = () => {
   }, [])
 
   return (
-    <ToolbarContainer toolbarItems={toolbarItems}>
+    <ToolbarContainer
+      title={t('groups:list.specialItems.dashboard')}
+      toolbarItems={toolbarItems}
+      toolbarPadding="lg"
+    >
       <PageContent
-        title={t('groups:list.specialItems.dashboard')}
         icon={<HomeIcon />}
         iconType="outline"
         iconClassName="text-brand-700"

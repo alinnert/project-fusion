@@ -53,7 +53,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
   const hasChildren = useMemo(() => Children.count(children) > 0, [children])
 
   const buttonClasses = useMemo<string>(() => {
-    const fontBaseClasses = 'font-semibold leading-none'
+    const fontBaseClasses = 'font-semibold text-sm leading-none'
 
     const boxBaseClasses = classNames(
       'flex gap-x-3 items-center',
@@ -95,7 +95,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
       'active:enabled:text-white',
     )
 
-    const shadowClasses = ''
+    const shadowClasses = 'shadow'
 
     switch (type) {
       default:
@@ -105,10 +105,10 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           boxBaseClasses,
           darkTextClasses,
           shadowClasses,
-          'border border-transparent',
-          'bg-transparent',
-          'hover:enabled:bg-neutral-300',
-          'active:enabled:bg-neutral-400',
+          'bg-white',
+          'border border-neutral-300',
+          'hover:enabled:bg-neutral-100 hover:enabled:border-neutral-400',
+          'active:enabled:bg-neutral-200 active:enabled:border-neutral-500',
         )
 
       case 'default-open':
@@ -118,7 +118,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           shadowClasses,
           'border border-transparent',
           'bg-neutral-600',
-          'text-white'
+          'text-white',
         )
 
       case 'primary':
@@ -127,9 +127,11 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           fontBaseClasses,
           primaryTextClasses,
           shadowClasses,
-          'border border-transparent',
-          'hover:enabled:bg-gradient-brand',
+          'bg-white',
+          'border border-brand-300',
+          'hover:enabled:bg-gradient-brand hover:enabled:border-brand-800',
           'active:enabled:bg-gradient-brand-active',
+          'active:enabled:border-brand-900',
         )
 
       case 'delete':
@@ -138,9 +140,10 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           fontBaseClasses,
           dangerTextClasses,
           shadowClasses,
-          'border border-transparent',
-          'hover:enabled:bg-gradient-danger',
+          'border border-danger-300',
+          'hover:enabled:bg-gradient-danger hover:enabled:border-danger-800',
           'active:enabled:bg-gradient-danger-active',
+          'active:enabled:border-danger-900',
         )
 
       case 'flat':

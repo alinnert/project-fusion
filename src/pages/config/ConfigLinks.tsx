@@ -1,5 +1,5 @@
 import { LinkIcon } from '@heroicons/react/outline'
-import { SaveIcon, TrashIcon } from '@heroicons/react/solid'
+import { CheckIcon, TrashIcon } from '@heroicons/react/solid'
 import React, { FC, FormEvent, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSettings } from '../../components/settings/useSettings'
@@ -131,7 +131,7 @@ export const ConfigLinks: FC = () => {
           <div className="flex items-center gap-x-2">
             <Button
               type="primary"
-              icon={<SaveIcon />}
+              icon={<CheckIcon />}
               disabled={!primaryProjectLinkIsValid}
             >
               {t('common:buttons.save')}

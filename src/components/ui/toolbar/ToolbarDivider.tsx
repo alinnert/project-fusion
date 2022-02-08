@@ -5,5 +5,5 @@ export interface ToolbarDividerItem {
 }
 
 export const ToolbarDivider: FC = () => {
-  return <div className="mx-1 h-1/2 self-center w-px bg-gray-400" />
+  return <div className="h-4 self-center w-px bg-gray-300" />
 }

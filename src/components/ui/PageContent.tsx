@@ -47,13 +47,13 @@ export const PageContent: FC<PropsWithChildren<Props>> = ({
         ) : null}
 
         {title !== undefined ? (
-          <div className="text-2xl font-semibold mb-4 flex items-end">
+          <div className="text-lg font-semibold mb-4 flex items-center">
             {icon !== undefined ? (
               <div className={classNames('flex-0 mr-2', iconClassName)}>
                 <Heroicon
                   icon={icon}
                   color={iconColor}
-                  scale={2}
+                  scale={1}
                   iconType={iconType}
                 />
               </div>
