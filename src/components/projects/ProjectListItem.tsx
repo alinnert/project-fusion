@@ -194,10 +194,19 @@ export const ProjectListItem: FC<Project> = ({
     return classNames(
       'p-4 mb-2 last:mb-0',
       'rounded-md',
+      'shadow',
       mapBooleanToString(
         important,
-        mapBooleanToString(archived, 'bg-important-100/40', 'bg-important-100'),
-        mapBooleanToString(archived, 'bg-neutral-100/40', 'bg-neutral-100'),
+        mapBooleanToString(
+          archived,
+          'bg-important-50/40 border border-important-200',
+          'bg-important-50 border border-important-300',
+        ),
+        mapBooleanToString(
+          archived,
+          'bg-white/40 border border-neutral-200',
+          'bg-white border border-neutral-300',
+        ),
       ),
     )
   }, [archived, important])

@@ -1,4 +1,5 @@
-import { HomeIcon, StarIcon } from '@heroicons/react/outline'
+import { StarIcon } from '@heroicons/react/outline'
+import { HomeIcon } from '@heroicons/react/solid'
 import React, { FC, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { GroupListWithProjects } from '../../components/groups/GroupListWithProjects'
@@ -37,15 +38,11 @@ export const Dashboard: FC = () => {
   return (
     <ToolbarContainer
       title={t('groups:list.specialItems.dashboard')}
+      icon={{ element: <HomeIcon />, className: 'text-brand-700' }}
       toolbarItems={toolbarItems}
       toolbarPadding="lg"
     >
-      <PageContent
-        icon={<HomeIcon />}
-        iconType="outline"
-        iconClassName="text-brand-700"
-        centered
-      ></PageContent>
+      <PageContent centered></PageContent>
 
       <GroupListWithProjects
         groups={groups}

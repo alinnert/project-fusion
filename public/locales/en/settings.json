@@ -20,7 +20,8 @@
   },
   "interface": {
     "title": "Interface",
-    "description": "Change general application settings."
+    "description": "Change general application settings.",
+    "commonSettings": "Common"
   },
   "categories": {
     "title": "Categories",

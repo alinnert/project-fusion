@@ -20,7 +20,8 @@
   },
   "interface": {
     "title": "Oberfläche",
-    "description": "Hier finden sich allgemeine Einstellungen zur Anwendung."
+    "description": "Hier finden sich allgemeine Einstellungen zur Anwendung.",
+    "commonSettings": "Allgemein"
   },
   "categories": {
     "title": "Kategorien",

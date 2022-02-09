@@ -146,6 +146,7 @@ export const GroupList: FC = () => {
       toolbarItems={[
         {
           type: 'button',
+          buttonType: 'flat',
           label: t('groups:list.toolbar.addGroup'),
           icon: <FolderAddIcon />,
           action: handleAddGroupButtonClick,
@@ -153,6 +154,7 @@ export const GroupList: FC = () => {
         { type: 'expander' },
         {
           type: 'button',
+          buttonType: 'flat',
           label: t('groups:list.toolbar.manageCategories'),
           icon: <TagIcon />,
           action: handleManageCategoriesButtonClick,

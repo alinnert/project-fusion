@@ -1,5 +1,6 @@
 import classNames from 'classnames'
-import React, { FC, PropsWithChildren } from 'react'
+import React, { FC, PropsWithChildren, ReactElement } from 'react'
+import { Heroicon } from '../Heroicon'
 import { ToolbarButton, ToolbarButtonItem } from './ToolbarButton'
 import { ToolbarDivider, ToolbarDividerItem } from './ToolbarDivider'
 import { ToolbarDropdown, ToolbarDropdownItem } from './ToolbarDropdown'
@@ -16,6 +17,11 @@ export type ToolbarItem = (
 
 interface Props {
   title?: string
+  icon?: {
+    element?: ReactElement
+    color?: string
+    className?: string
+  }
   toolbarItems?: ToolbarItem[]
   toolbarPadding?: 'sm' | 'lg'
 }
@@ -23,6 +29,7 @@ interface Props {
 export const ToolbarContainer: FC<PropsWithChildren<Props>> = ({
   children,
   title,
+  icon,
   toolbarItems = [],
   toolbarPadding = 'sm',
 }) => {
@@ -47,7 +54,15 @@ export const ToolbarContainer: FC<PropsWithChildren<Props>> = ({
           )}
         >
           {title !== undefined ? (
-            <div className="my-4 text-2xl font-semibold">{title}</div>
+            <div className='flex items-center'>
+              {icon !== undefined && icon.element !== undefined ? (
+                <div className={classNames('mr-2', icon.className)}>
+                  <Heroicon icon={icon.element} color={icon.color} scale={1} />
+                </div>
+              ) : null}
+
+              <div className="my-4 text-xl font-semibold">{title}</div>
+            </div>
           ) : null}
 
           <div className={classNames('flex gap-x-4', 'py-2')}>

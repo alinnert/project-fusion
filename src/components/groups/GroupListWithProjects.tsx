@@ -123,6 +123,7 @@ export const GroupListWithProjects: FC<Props> = ({
       icon={titleIcon}
       iconType="outline"
       iconClassName={titleIconClassName}
+      dimmed
     >
       {isEmpty
         ? emptyPlaceholder

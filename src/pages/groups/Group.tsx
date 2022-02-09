@@ -1,6 +1,6 @@
 import {
+  ClipboardListIcon,
   FolderIcon as FolderIconOutline,
-  ViewListIcon,
 } from '@heroicons/react/outline'
 import {
   FolderIcon,
@@ -167,6 +167,7 @@ export const Group: FC = () => {
 
       <ToolbarContainer
         title={group.name}
+        icon={{ element: <FolderIcon />, color: group.color }}
         toolbarItems={toolbarItems}
         toolbarPadding="lg"
       >
@@ -181,9 +182,10 @@ export const Group: FC = () => {
 
         <PageContent
           title={t('projects:terms.project_plural')}
-          icon={<ViewListIcon />}
-          iconColor={colors.gray[400]}
+          icon={<ClipboardListIcon />}
+          iconClassName="text-neutral-500"
           iconType="outline"
+          dimmed
         >
           <ProjectList projects={projects} />
         </PageContent>

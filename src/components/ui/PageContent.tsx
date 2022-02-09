@@ -16,6 +16,7 @@ interface Props {
     height?: string
   }
   centered?: boolean
+  dimmed?: boolean
 }
 
 export const PageContent: FC<PropsWithChildren<Props>> = ({
@@ -27,9 +28,18 @@ export const PageContent: FC<PropsWithChildren<Props>> = ({
   iconType = 'solid',
   image,
   centered = false,
+  dimmed = false,
 }) => {
   return (
-    <div className="px-8 h-full overflow-y-auto">
+    <div
+      className={classNames(
+        'px-8 h-full overflow-y-auto',
+        'border-l first:border-l-0 border-neutral-200',
+        {
+          'bg-neutral-50': dimmed,
+        },
+      )}
+    >
       <div
         className={classNames(
           'py-8',

@@ -8,6 +8,7 @@ import { Button } from '../../components/ui/forms/Button'
 import { Input } from '../../components/ui/forms/Input'
 import { Headline } from '../../components/ui/Headline'
 import { PageContent } from '../../components/ui/PageContent'
+import { ToolbarContainer } from '../../components/ui/toolbar/ToolbarContainer'
 import { useAppDispatch, useAppSelector } from '../../redux'
 import { setPrimaryProjectLink } from '../../redux/settings'
 import { translationNamespaces } from '../../utils/i18next-namespaces'
@@ -101,53 +102,51 @@ export const ConfigLinks: FC = () => {
     <>
       {confirmDeletePrimaryProjectLinkDialog}
 
-      <PageContent
+      <ToolbarContainer
         title={t('settings:links.title')}
-        icon={<LinkIcon />}
-        iconType="outline"
-        iconColor={databaseSettings.links.iconColor}
-        centered
+        icon={{
+          element: databaseSettings.links.icon,
+          color: databaseSettings.links.iconColor,
+        }}
+        toolbarPadding="lg"
       >
-        <p>{t('settings:links.description')}</p>
-
-        <Headline>{t('settings:links.projectLinks.title')}</Headline>
-
-        <p>{t('settings:links.projectLinks.description')}</p>
-
-        <form className="mt-4" onSubmit={handlePrimaryLinkSubmit}>
-          <div className="grid grid-cols-[1fr,2fr] gap-x-2 mb-2">
-            <Input
-              value={primaryProjectLinkLabel}
-              onChange={setPrimaryProjectLinkLabel}
-              label={t('settings:links.projectLinks.primaryLink.labelLabel')}
-            />
-            <Input
-              value={primaryProjectLinkUrl}
-              onChange={setPrimaryProjectLinkUrl}
-              label={t('settings:links.projectLinks.primaryLink.urlLabel')}
-            />
-          </div>
-
-          <div className="flex items-center gap-x-2">
-            <Button
-              type="primary"
-              icon={<CheckIcon />}
-              disabled={!primaryProjectLinkIsValid}
-            >
-              {t('common:buttons.save')}
-            </Button>
-
-            <Button
-              type="delete"
-              icon={<TrashIcon />}
-              onClick={handlePrimaryLinkDelete}
-              buttonProps={{ type: 'button' }}
-            >
-              {t('common:buttons.delete')}
-            </Button>
-          </div>
-        </form>
-      </PageContent>
+        <PageContent centered>
+          <p>{t('settings:links.description')}</p>
+          <Headline>{t('settings:links.projectLinks.title')}</Headline>
+          <p>{t('settings:links.projectLinks.description')}</p>
+          <form className="mt-4" onSubmit={handlePrimaryLinkSubmit}>
+            <div className="grid grid-cols-[1fr,2fr] gap-x-2 mb-2">
+              <Input
+                value={primaryProjectLinkLabel}
+                onChange={setPrimaryProjectLinkLabel}
+                label={t('settings:links.projectLinks.primaryLink.labelLabel')}
+              />
+              <Input
+                value={primaryProjectLinkUrl}
+                onChange={setPrimaryProjectLinkUrl}
+                label={t('settings:links.projectLinks.primaryLink.urlLabel')}
+              />
+            </div>
+            <div className="flex items-center gap-x-2">
+              <Button
+                type="primary"
+                icon={<CheckIcon />}
+                disabled={!primaryProjectLinkIsValid}
+              >
+                {t('common:buttons.save')}
+              </Button>
+              <Button
+                type="delete"
+                icon={<TrashIcon />}
+                onClick={handlePrimaryLinkDelete}
+                buttonProps={{ type: 'button' }}
+              >
+                {t('common:buttons.delete')}
+              </Button>
+            </div>
+          </form>
+        </PageContent>
+      </ToolbarContainer>
     </>
   )
 }

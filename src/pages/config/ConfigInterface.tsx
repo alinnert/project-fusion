@@ -1,9 +1,10 @@
-import { TemplateIcon } from '@heroicons/react/outline'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LanguageSelect } from '../../components/settings/LanguageSelect'
 import { useSettings } from '../../components/settings/useSettings'
+import { Headline } from '../../components/ui/Headline'
 import { PageContent } from '../../components/ui/PageContent'
+import { ToolbarContainer } from '../../components/ui/toolbar/ToolbarContainer'
 import { translationNamespaces } from '../../utils/i18next-namespaces'
 
 export const ConfigInterface: FC = ({}) => {
@@ -12,16 +13,19 @@ export const ConfigInterface: FC = ({}) => {
   const { applicationSettings } = useSettings()
 
   return (
-    <PageContent
+    <ToolbarContainer
       title={t('settings:interface.title')}
-      icon={<TemplateIcon />}
-      iconType="outline"
-      iconColor={applicationSettings.interface.iconColor}
-      centered
+      icon={{
+        element: applicationSettings.interface.icon,
+        color: applicationSettings.interface.iconColor,
+      }}
+      toolbarPadding="lg"
     >
-      <p>{t('settings:interface.description')}</p>
-
-      <LanguageSelect />
-    </PageContent>
+      <PageContent centered>
+        <p>{t('settings:interface.description')}</p>
+        <Headline>{t('settings:interface.commonSettings')}</Headline>
+        <LanguageSelect />
+      </PageContent>
+    </ToolbarContainer>
   )
 }

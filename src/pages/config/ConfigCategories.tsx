@@ -1,4 +1,3 @@
-import { TagIcon } from '@heroicons/react/outline'
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/solid'
 import React, { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -9,16 +8,17 @@ import { useTextDialog } from '../../components/ui/dialogs/useTextDialog'
 import { Button } from '../../components/ui/forms/Button'
 import {
   SortableList,
-  SwapDirection,
+  SwapDirection
 } from '../../components/ui/forms/SortableList'
 import { Headline } from '../../components/ui/Headline'
 import { PageContent } from '../../components/ui/PageContent'
+import { ToolbarContainer } from '../../components/ui/toolbar/ToolbarContainer'
 import { useAppDispatch } from '../../redux'
 import {
   addCategory,
   Category,
   removeCategory,
-  updateCategory,
+  updateCategory
 } from '../../redux/categories'
 import { swapCategories } from '../../redux/settings'
 import { createId } from '../../utils/customNanoId'
@@ -109,62 +109,71 @@ export const ConfigCategories: FC = () => {
   }
 
   return (
-    <PageContent
-      title={t('settings:categories.title')}
-      icon={<TagIcon />}
-      iconType="outline"
-      iconColor={databaseSettings.categories.iconColor}
-      centered
-    >
+    <>
       {addDialog}
       {renameDialog}
       {deleteDialog}
 
-      <div className="mb-4">
-        <p>{t('settings:categories.description')}</p>
-      </div>
+      <ToolbarContainer
+        title={t('settings:categories.title')}
+        icon={{
+          element: databaseSettings.categories.icon,
+          color: databaseSettings.categories.iconColor,
+        }}
+        toolbarPadding="lg"
+      >
+        <PageContent centered>
+          <div className="mb-4">
+            <p>{t('settings:categories.description')}</p>
+          </div>
 
-      <Headline>{t('settings:categories.manageCategories')}</Headline>
+          <Headline>{t('settings:categories.manageCategories')}</Headline>
 
-      <div className="flex flex-col">
-        <SortableList
-          ids={orderedCategoryIds}
-          selectedId={selectedId}
-          onSelectedIdChange={setSelectedId}
-          onSwap={handleSwap}
-          additionalButtons={
-            <>
-              <Button type="default" icon={<PlusIcon />} onClick={handleAdd}>
-                {t('common:buttons.new')}
-              </Button>
+          <div className="flex flex-col">
+            <SortableList
+              ids={orderedCategoryIds}
+              selectedId={selectedId}
+              onSelectedIdChange={setSelectedId}
+              onSwap={handleSwap}
+              additionalButtons={
+                <>
+                  <Button
+                    type="default"
+                    icon={<PlusIcon />}
+                    onClick={handleAdd}
+                  >
+                    {t('common:buttons.new')}
+                  </Button>
 
-              <Button
-                type="default"
-                icon={<PencilIcon />}
-                disabled={selectedId === null}
-                onClick={handleRename}
-              >
-                {t('common:buttons.rename')}
-              </Button>
+                  <Button
+                    type="default"
+                    icon={<PencilIcon />}
+                    disabled={selectedId === null}
+                    onClick={handleRename}
+                  >
+                    {t('common:buttons.rename')}
+                  </Button>
 
-              <Button
-                type="delete"
-                icon={<TrashIcon />}
-                disabled={selectedId === null}
-                onClick={handleDelete}
-              >
-                {t('common:buttons.delete')}
-              </Button>
-            </>
-          }
-        >
-          {(id) => (
-            <div className="flex">
-              <div className="flex-1">{categories[id]?.name}</div>
-            </div>
-          )}
-        </SortableList>
-      </div>
-    </PageContent>
+                  <Button
+                    type="delete"
+                    icon={<TrashIcon />}
+                    disabled={selectedId === null}
+                    onClick={handleDelete}
+                  >
+                    {t('common:buttons.delete')}
+                  </Button>
+                </>
+              }
+            >
+              {(id) => (
+                <div className="flex">
+                  <div className="flex-1">{categories[id]?.name}</div>
+                </div>
+              )}
+            </SortableList>
+          </div>
+        </PageContent>
+      </ToolbarContainer>
+    </>
   )
 }

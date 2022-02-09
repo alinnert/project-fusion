@@ -152,7 +152,10 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           boxBaseClasses,
           fontBaseClasses,
           darkTextClasses,
-          'hover:enabled:bg-black/10 active:enabled:bg-black/20',
+          'bg-white',
+          'hover:enabled:bg-neutral-100 active:enabled:bg-neutral-200',
+          'border border-neutral-200',
+          'hover:enabled:border-neutral-400 active:enabled:border-neutral-400',
         )
 
       case 'flat-open':
@@ -160,7 +163,8 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           boxBaseClasses,
           fontBaseClasses,
           darkTextClasses,
-          'bg-black/20',
+          'bg-neutral-300',
+          'border border-neutral-200',
         )
 
       case 'header':
