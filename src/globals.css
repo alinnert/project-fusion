@@ -29,7 +29,7 @@
   .bg-blur {
     @apply rounded-md border shadow-xl;
     @apply border-black border-opacity-10;
-    @apply bg-white bg-opacity-70;
-    @apply backdrop-filter backdrop-blur-lg;
+    @apply bg-white bg-opacity-80;
+    @apply backdrop-filter backdrop-blur-xl;
   }
 }

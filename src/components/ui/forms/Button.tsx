@@ -53,7 +53,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
   const hasChildren = useMemo(() => Children.count(children) > 0, [children])
 
   const buttonClasses = useMemo<string>(() => {
-    const fontBaseClasses = 'font-semibold text-sm leading-none'
+    const fontBaseClasses = 'text-base leading-none'
 
     const boxBaseClasses = classNames(
       'flex gap-x-3 items-center',
@@ -75,7 +75,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
     )
 
     const darkTextClasses = classNames(
-      'text-neutral-600',
+      'text-neutral-800',
       'disabled:text-neutral-600/40',
       'hover:enabled:text-neutral-900',
       'active:enabled:text-neutral-900',
@@ -171,6 +171,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
         return classNames(
           boxBaseClasses,
           fontBaseClasses,
+          'font-semibold',
           'hover:enabled:bg-black/20 active:enabled:bg-black/40',
           'text-white/80 disabled:text-white/40 hover:enabled:text-white',
         )
@@ -181,6 +182,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           boxBaseClasses,
           fontBaseClasses,
           'bg-white',
+          'font-semibold',
           'text-brand-800',
         )
     }
