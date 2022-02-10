@@ -7,7 +7,7 @@ import {
   LinkIcon,
   PencilIcon,
   StarIcon,
-  TrashIcon,
+  TrashIcon
 } from '@heroicons/react/solid'
 import classNames from 'classnames'
 import { marked } from 'marked'
@@ -195,21 +195,9 @@ export const ProjectListItem: FC<Project> = ({
       'p-4 mb-2 last:mb-0',
       'rounded-md',
       'shadow',
-      mapBooleanToString(
-        important,
-        mapBooleanToString(
-          archived,
-          'bg-important-50/40 border border-important-200',
-          'bg-important-50 border border-important-300',
-        ),
-        mapBooleanToString(
-          archived,
-          'bg-white/40 border border-neutral-200',
-          'bg-white border border-neutral-300',
-        ),
-      ),
+      'bg-white border border-neutral-300',
     )
-  }, [archived, important])
+  }, [])
 
   function handlePrimaryProjectLinkClick(): void {
     if (primaryProjectLink === null) return
