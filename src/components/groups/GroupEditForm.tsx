@@ -82,9 +82,7 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
       }),
     )
 
-    if (categoryId !== null) {
-      dispatch(addGroupToCategory({ groupId: init.id, categoryId }))
-    }
+    dispatch(addGroupToCategory({ groupId: init.id, categoryId }))
 
     navigate(`/groups/${init.id}`)
   }, [init, dispatch, name, color, notes, categoryId, navigate])

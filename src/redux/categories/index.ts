@@ -30,7 +30,7 @@ const slice = createSlice({
     addGroupToCategory(
       state,
       action: PayloadAction<{
-        categoryId: Category['id']
+        categoryId: Category['id'] | null
         groupId: ProjectGroup['id']
       }>,
     ) {
@@ -42,7 +42,9 @@ const slice = createSlice({
         removeElementsFromArray(category.groups, groupId)
       }
 
-      state.entities[categoryId]?.groups.push(groupId)
+      if (categoryId !== null) {
+        state.entities[categoryId]?.groups.push(groupId)
+      }
     },
   },
   extraReducers(builder) {
