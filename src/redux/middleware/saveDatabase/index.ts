@@ -1,6 +1,13 @@
 import { AnyAction, Middleware } from '@reduxjs/toolkit'
+import { debounce } from 'throttle-debounce'
 import { AppState } from '../..'
 import { writeToFile } from './writeToFile'
+
+const debouncedWriteToFile = debounce(1000, (fileContent) => {
+  writeToFile(fileContent)
+})
+
+let lastFileContent = ''
 
 export const saveDatabaseMiddleware: Middleware = ({ getState }) => {
   return (next) => (action: AnyAction) => {
@@ -14,8 +21,13 @@ export const saveDatabaseMiddleware: Middleware = ({ getState }) => {
         projects: state.projects.entities,
         settings: state.settings,
       }
+
       const fileContent = JSON.stringify(fileData)
-      writeToFile(fileContent)
+
+      if (fileContent !== lastFileContent) {
+        debouncedWriteToFile(fileContent)
+        lastFileContent = fileContent
+      }
     }
 
     return result

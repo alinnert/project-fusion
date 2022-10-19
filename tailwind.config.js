@@ -7,8 +7,7 @@ const plugin = require('tailwindcss/plugin')
 /** @type { import('tailwindcss/tailwind-config').TailwindConfig } */
 const config = {
   mode: 'jit',
-  purge: ['./src/**/*.{js,ts,jsx,tsx}', 'index.html'],
-  darkMode: false, // or 'media' or 'class'
+  content: ['./src/**/*.{js,ts,jsx,tsx}', 'index.html'],
 
   theme: {
     fontFamily: {

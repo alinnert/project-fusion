@@ -22,6 +22,7 @@ const slice = createSlice({
     setProject: adapter.setOne,
     updateProject: adapter.updateOne,
     removeProject: adapter.removeOne,
+    removeProjects: adapter.removeMany,
     setProjects: adapter.setAll,
   },
   extraReducers(builder) {
@@ -37,5 +38,10 @@ const slice = createSlice({
 
 export const projectsReducer = slice.reducer
 
-export const { addProject, updateProject, removeProject, setProjects } =
-  slice.actions
+export const {
+  addProject,
+  updateProject,
+  removeProject,
+  removeProjects,
+  setProjects,
+} = slice.actions

@@ -101,7 +101,7 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
       return
     }
 
-    navigate(`/`)
+    navigate('/groups')
   }, [init, navigate])
 
   const toolbarItems = useMemo<ToolbarItem[]>(
