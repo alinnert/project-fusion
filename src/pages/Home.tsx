@@ -1,5 +1,4 @@
-import { LightBulbIcon } from '@heroicons/react/outline'
-import { DocumentAddIcon, FolderIcon } from '@heroicons/react/solid'
+import { DocumentPlusIcon, FolderIcon } from '@heroicons/react/20/solid'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCreateDatabase } from '../components/dataFile/useCreateDatabase'
@@ -37,7 +36,7 @@ export const Home: FC = () => {
       {featureOk ? (
         <div className="flex justify-center gap-x-2">
           <Button
-            icon={<DocumentAddIcon />}
+            icon={<DocumentPlusIcon />}
             onClick={handleCreateDatabaseClick}
           >
             {t('common:header.menu.database.items.create')}

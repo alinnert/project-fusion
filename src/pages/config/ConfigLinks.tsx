@@ -1,5 +1,4 @@
-import { LinkIcon } from '@heroicons/react/outline'
-import { CheckIcon, TrashIcon } from '@heroicons/react/solid'
+import { CheckIcon, TrashIcon } from '@heroicons/react/20/solid'
 import React, { FC, FormEvent, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSettings } from '../../components/settings/useSettings'

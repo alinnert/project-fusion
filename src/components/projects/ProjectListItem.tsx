@@ -1,14 +1,14 @@
 import {
-  ArchiveIcon,
+  ArchiveBoxIcon,
   ChevronDoubleDownIcon,
   DocumentDuplicateIcon,
-  DotsVerticalIcon,
+  EllipsisVerticalIcon,
   InboxIcon,
   LinkIcon,
   PencilIcon,
   StarIcon,
-  TrashIcon
-} from '@heroicons/react/solid'
+  TrashIcon,
+} from '@heroicons/react/20/solid'
 import classNames from 'classnames'
 import { marked } from 'marked'
 import React, { FC, useCallback, useMemo } from 'react'
@@ -125,7 +125,7 @@ export const ProjectListItem: FC<Project> = ({
         : {
             type: 'button',
             label: t('projects:item.actions.archiveProject'),
-            icon: <ArchiveIcon />,
+            icon: <ArchiveBoxIcon />,
             action: handleAddToArchive,
           },
 
@@ -241,7 +241,7 @@ export const ProjectListItem: FC<Project> = ({
             buttonType="flat"
             buttonSize="small"
             items={menuItems}
-            icon={<DotsVerticalIcon />}
+            icon={<EllipsisVerticalIcon />}
             align="right"
           />
         </div>

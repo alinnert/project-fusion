@@ -1,4 +1,4 @@
-import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/solid'
+import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/20/solid'
 import React, { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useOrderedCategories } from '../../components/categories/useOrderedCategories'

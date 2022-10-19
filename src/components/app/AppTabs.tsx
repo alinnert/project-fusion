@@ -1,9 +1,9 @@
 import {
-  CogIcon,
-  CollectionIcon,
+  Cog6ToothIcon,
   HomeIcon,
   InformationCircleIcon,
-} from '@heroicons/react/solid'
+  RectangleStackIcon,
+} from '@heroicons/react/20/solid'
 import React, { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router'
@@ -35,14 +35,14 @@ export const AppTabs: FC = ({}) => {
   const tabs = useMemo<Array<TabItem>>(() => {
     const dataItem: TabItem = {
       label: t('common:header.tabs.data'),
-      icon: <CollectionIcon />,
+      icon: <RectangleStackIcon />,
       href: groupHref,
       current: location.pathname.startsWith('/groups'),
     }
 
     const configItem: TabItem = {
       label: t('common:header.tabs.config'),
-      icon: <CogIcon />,
+      icon: <Cog6ToothIcon />,
       href: configHref,
       current: location.pathname.startsWith('/config'),
     }

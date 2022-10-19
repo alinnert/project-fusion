@@ -1,5 +1,11 @@
 import classNames from 'classnames'
-import React, { FC, FormEvent, FormHTMLAttributes, KeyboardEvent } from 'react'
+import React, {
+  FC,
+  FormEvent,
+  FormHTMLAttributes,
+  KeyboardEvent,
+  PropsWithChildren,
+} from 'react'
 import { useCtrlOrCmd } from '../../../utils/keyboard'
 import { mapUnionToString } from '../../../utils/map'
 
@@ -18,7 +24,7 @@ interface Props {
   ) => void
 }
 
-export const Form: FC<Props> = ({
+export const Form: FC<PropsWithChildren<Props>> = ({
   children,
   className,
   type = 'unstyled',

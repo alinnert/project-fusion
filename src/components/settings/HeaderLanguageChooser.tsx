@@ -1,4 +1,4 @@
-import { CheckIcon, TranslateIcon } from '@heroicons/react/solid'
+import { CheckIcon, LanguageIcon } from '@heroicons/react/20/solid'
 import React, { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { translationNamespaces } from '../../utils/i18next-namespaces'
@@ -32,7 +32,7 @@ export const HeaderLanguageChooser: FC = ({}) => {
 
   return (
     <DropdownMenu
-      icon={<TranslateIcon />}
+      icon={<LanguageIcon />}
       items={menuItems}
       buttonType="header"
       align="right"

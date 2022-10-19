@@ -1,11 +1,11 @@
 import {
   DocumentIcon,
-  FolderAddIcon,
   FolderIcon,
+  FolderPlusIcon,
   HomeIcon,
   StarIcon,
   TagIcon,
-} from '@heroicons/react/solid'
+} from '@heroicons/react/20/solid'
 import classNames from 'classnames'
 import React, { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -148,7 +148,7 @@ export const GroupList: FC = () => {
           type: 'button',
           buttonType: 'flat',
           label: t('groups:list.toolbar.addGroup'),
-          icon: <FolderAddIcon />,
+          icon: <FolderPlusIcon />,
           action: handleAddGroupButtonClick,
         },
         { type: 'expander' },

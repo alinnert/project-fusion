@@ -1,4 +1,4 @@
-import { SearchIcon } from '@heroicons/react/outline'
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import React, { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
@@ -6,7 +6,6 @@ import { GroupListWithProjects } from '../components/groups/GroupListWithProject
 import { useAppSelector } from '../redux'
 import { Project } from '../redux/projects'
 import { translationNamespaces } from '../utils/i18next-namespaces'
-import { isDefined } from '../utils/isDefined'
 
 export const Search: FC = () => {
   const { t } = useTranslation(translationNamespaces)
@@ -29,7 +28,7 @@ export const Search: FC = () => {
   return (
     <GroupListWithProjects
       title={`${t('search:terms.search')}: "${searchTerm}"`}
-      titleIcon={<SearchIcon />}
+      titleIcon={<MagnifyingGlassIcon />}
       titleIconClassName="text-brand-700"
       groups={groups}
       showProject={showProject}

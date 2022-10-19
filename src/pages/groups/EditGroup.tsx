@@ -1,4 +1,4 @@
-import { FolderIcon } from '@heroicons/react/solid'
+import { FolderIcon } from '@heroicons/react/20/solid'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { GroupEditForm } from '../../components/groups/GroupEditForm'

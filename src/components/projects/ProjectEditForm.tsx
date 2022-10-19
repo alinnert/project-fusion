@@ -1,5 +1,5 @@
-import { CheckIcon } from '@heroicons/react/outline'
-import { FolderIcon, XIcon } from '@heroicons/react/solid'
+import { CheckIcon } from '@heroicons/react/24/outline'
+import { FolderIcon, XMarkIcon } from '@heroicons/react/20/solid'
 import React, { FC, FormEvent, useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router'
@@ -150,7 +150,7 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
         type: 'button',
         buttonType: 'default',
         label: t('common:buttons.cancel'),
-        icon: <XIcon />,
+        icon: <XMarkIcon />,
         action: cancel,
       },
     ],

@@ -1,5 +1,5 @@
-import { StarIcon } from '@heroicons/react/outline'
-import { HomeIcon } from '@heroicons/react/solid'
+import { StarIcon } from '@heroicons/react/24/outline'
+import { HomeIcon } from '@heroicons/react/20/solid'
 import React, { FC, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { GroupListWithProjects } from '../../components/groups/GroupListWithProjects'

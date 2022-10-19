@@ -3,7 +3,7 @@
     "application": {
       "label": "Application",
       "items": {
-        "interface": "interface"
+        "interface": "Interface"
       }
     },
     "database": {
@@ -34,6 +34,10 @@
     "renameDialog": {
       "title": "Rename \"{{category}}\"",
       "inputLabel": "New name"
+    },
+    "deleteDialog": {
+      "title": "Delete \"{{category}}\"",
+      "message": "Do you want to delete category \"{{category}}\"?"
     }
   },
   "links": {

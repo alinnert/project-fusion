@@ -1,4 +1,4 @@
-import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/solid'
+import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/20/solid'
 import classNames from 'classnames'
 import React, { FC, ReactElement, ReactNode } from 'react'
 import { mapBooleanToString } from '../../../utils/map'

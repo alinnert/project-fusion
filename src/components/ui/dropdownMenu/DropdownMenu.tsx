@@ -1,5 +1,5 @@
 import { Menu } from '@headlessui/react'
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid'
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/20/solid'
 import classNames from 'classnames'
 import React, {
   FC,

@@ -1,4 +1,4 @@
-import { LinkIcon, TagIcon, TemplateIcon } from '@heroicons/react/solid'
+import { LinkIcon, TagIcon, WindowIcon } from '@heroicons/react/20/solid'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import colors from 'tailwindcss/colors'
@@ -19,8 +19,8 @@ export function useSettings(): UseSettingsResult {
       interface: {
         id: 'interface',
         name: t('settings:navigation.application.items.interface'),
-        icon: <TemplateIcon />,
-        iconColor: colors.yellow[700]
+        icon: <WindowIcon />,
+        iconColor: colors.yellow[700],
       },
     }
   }, [t])

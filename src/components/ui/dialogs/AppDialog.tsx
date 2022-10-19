@@ -1,6 +1,6 @@
 import { Dialog } from '@headlessui/react'
 import classNames from 'classnames'
-import React, { FC, ReactNode } from 'react'
+import React, { FC, PropsWithChildren, ReactNode } from 'react'
 
 interface Props {
   title: string
@@ -9,7 +9,7 @@ interface Props {
   onClose: () => void
 }
 
-export const AppDialog: FC<Props> = ({
+export const AppDialog: FC<PropsWithChildren<Props>> = ({
   title,
   footer,
   open,

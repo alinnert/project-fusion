@@ -1,9 +1,9 @@
 import {
-  DatabaseIcon,
-  DocumentAddIcon,
+  CircleStackIcon,
+  DocumentPlusIcon,
   FolderIcon,
-  XIcon,
-} from '@heroicons/react/solid'
+  XMarkIcon,
+} from '@heroicons/react/20/solid'
 import React, { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useAppSelector } from '../../redux'
@@ -42,7 +42,7 @@ export const DatabaseMenu: FC = () => {
     const createItem: DropdownMenuItemButton = {
       type: 'button',
       label: t('common:header.menu.database.items.create'),
-      icon: <DocumentAddIcon />,
+      icon: <DocumentPlusIcon />,
       action: createDatabase,
     }
 
@@ -56,7 +56,7 @@ export const DatabaseMenu: FC = () => {
     const closeItem: DropdownMenuItemButton = {
       type: 'button',
       label: t('common:header.menu.database.items.close'),
-      icon: <XIcon />,
+      icon: <XMarkIcon />,
       action: closeDatabase,
     }
 
@@ -89,7 +89,7 @@ export const DatabaseMenu: FC = () => {
   if (!isFileOpen) {
     return (
       <DropdownMenu
-        icon={<DatabaseIcon />}
+        icon={<CircleStackIcon />}
         items={menuItems}
         buttonType="header"
       >
@@ -100,7 +100,7 @@ export const DatabaseMenu: FC = () => {
 
   return (
     <DropdownMenu
-      icon={<DatabaseIcon />}
+      icon={<CircleStackIcon />}
       items={menuItems}
       buttonType="header"
       secondaryLabel={filename ?? undefined}

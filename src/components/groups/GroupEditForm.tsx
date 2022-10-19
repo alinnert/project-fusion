@@ -1,5 +1,5 @@
-import { FolderAddIcon, FolderIcon } from '@heroicons/react/outline'
-import { CheckIcon, XIcon } from '@heroicons/react/solid'
+import { FolderIcon, FolderPlusIcon } from '@heroicons/react/24/outline'
+import { CheckIcon, XMarkIcon } from '@heroicons/react/20/solid'
 import React, { FC, useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router'
@@ -121,7 +121,7 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
         type: 'button',
         buttonType: 'default',
         label: t('common:buttons.cancel'),
-        icon: <XIcon />,
+        icon: <XMarkIcon />,
         action: cancel,
       },
     ],
@@ -146,7 +146,7 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
       toolbarPadding="lg"
     >
       <PageContent
-        icon={isEditForm ? <FolderIcon /> : <FolderAddIcon />}
+        icon={isEditForm ? <FolderIcon /> : <FolderPlusIcon />}
         iconColor={color}
         iconType="outline"
         centered

@@ -1,4 +1,4 @@
-import { FolderIcon } from '@heroicons/react/solid'
+import { FolderIcon } from '@heroicons/react/20/solid'
 import { Dictionary } from '@reduxjs/toolkit'
 import classNames from 'classnames'
 import React, { FC, ReactElement, useMemo } from 'react'

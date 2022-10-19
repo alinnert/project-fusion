@@ -1,17 +1,16 @@
 import {
-  ClipboardListIcon,
-  FolderIcon as FolderIconOutline,
-} from '@heroicons/react/outline'
-import {
   FolderIcon,
   PencilIcon,
   PlusIcon,
   TrashIcon,
-} from '@heroicons/react/solid'
+} from '@heroicons/react/20/solid'
+import {
+  FolderIcon as FolderIconOutline,
+  QueueListIcon,
+} from '@heroicons/react/24/outline'
 import React, { FC, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router'
-import colors from 'tailwindcss/colors'
 import { useGroupFromRoute } from '../../components/groups/useGroupFromRoute'
 import { ProjectList } from '../../components/projects/ProjectList'
 import { useProjectsFromGroup } from '../../components/projects/useProjectsFromGroup'
@@ -182,7 +181,7 @@ export const Group: FC = () => {
 
         <PageContent
           title={t('projects:terms.project_plural')}
-          icon={<ClipboardListIcon />}
+          icon={<QueueListIcon />}
           iconClassName="text-neutral-500"
           iconType="outline"
           dimmed

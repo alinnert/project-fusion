@@ -1,6 +1,6 @@
-import { ExclamationIcon } from '@heroicons/react/solid'
+import { ExclamationTriangleIcon } from '@heroicons/react/20/solid'
 import classNames from 'classnames'
-import React, { FC } from 'react'
+import React, { FC, PropsWithChildren } from 'react'
 import colors from 'tailwindcss/colors'
 import { mapUnionToString } from '../../utils/map'
 import { Heroicon } from './Heroicon'
@@ -9,7 +9,10 @@ interface Props {
   type?: 'warn'
 }
 
-export const Alert: FC<Props> = ({ type = 'warn', children }) => {
+export const Alert: FC<PropsWithChildren<Props>> = ({
+  type = 'warn',
+  children,
+}) => {
   return (
     <div
       className={classNames(
@@ -27,7 +30,7 @@ export const Alert: FC<Props> = ({ type = 'warn', children }) => {
     >
       {type === 'warn' ? (
         <Heroicon
-          icon={<ExclamationIcon />}
+          icon={<ExclamationTriangleIcon />}
           scale={2}
           color={colors.yellow[700]}
         />
