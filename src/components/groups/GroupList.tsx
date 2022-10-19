@@ -4,7 +4,7 @@ import {
   FolderPlusIcon,
   HomeIcon,
   StarIcon,
-  TagIcon,
+  TagIcon
 } from '@heroicons/react/20/solid'
 import classNames from 'classnames'
 import React, { FC, useMemo } from 'react'
@@ -15,7 +15,6 @@ import { selectIsFileOpen } from '../../redux/database'
 import { ProjectGroup, selectGroupsWithoutCategory } from '../../redux/groups'
 import { setCurrentGroupId } from '../../redux/uiState'
 import { capitalize } from '../../utils/capitalize'
-import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { mapBooleanToString } from '../../utils/map'
 import { resolveIds } from '../../utils/resolveIds'
 import { sortByProperty } from '../../utils/sortByProperty'
@@ -26,7 +25,7 @@ import { ToolbarContainer } from '../ui/toolbar/ToolbarContainer'
 import { useGroupFromRoute } from './useGroupFromRoute'
 
 export const GroupList: FC = () => {
-  const { t } = useTranslation(translationNamespaces)
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const location = useLocation()
   const dispatch = useAppDispatch()

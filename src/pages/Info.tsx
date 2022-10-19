@@ -1,10 +1,9 @@
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PageContent } from '../components/ui/PageContent'
-import { translationNamespaces } from '../utils/i18next-namespaces'
 
 export const Info: FC = () => {
-  const { t } = useTranslation(translationNamespaces)
+  const { t } = useTranslation()
 
   return (
     <PageContent

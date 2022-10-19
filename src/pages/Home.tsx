@@ -8,10 +8,9 @@ import { Alert } from '../components/ui/Alert'
 import { EmptyText } from '../components/ui/EmptyText'
 import { Button } from '../components/ui/forms/Button'
 import { useFeatureCheck } from '../utils/featureCheck'
-import { translationNamespaces } from '../utils/i18next-namespaces'
 
 export const Home: FC = () => {
-  const { t } = useTranslation(translationNamespaces)
+  const { t } = useTranslation()
 
   const featureOk = useFeatureCheck()
   const handleCreateDatabaseClick = useCreateDatabase()

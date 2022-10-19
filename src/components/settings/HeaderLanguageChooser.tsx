@@ -1,14 +1,13 @@
 import { CheckIcon, LanguageIcon } from '@heroicons/react/20/solid'
 import React, { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { languages } from '../../utils/languages'
 import { DropdownMenu } from '../ui/dropdownMenu/DropdownMenu'
 import { DropdownMenuItemButton } from '../ui/dropdownMenu/DropdownMenuButton'
 import { PlaceholderIcon } from '../ui/PlaceholderIcon'
 
 export const HeaderLanguageChooser: FC = ({}) => {
-  const { t, i18n } = useTranslation(translationNamespaces)
+  const { t, i18n } = useTranslation()
   const currentLanguageKey = useMemo(() => i18n.language, [i18n.language])
 
   const menuItems = useMemo<Array<DropdownMenuItemButton>>(() => {

@@ -2,7 +2,6 @@ import { LinkIcon, TagIcon, WindowIcon } from '@heroicons/react/20/solid'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import colors from 'tailwindcss/colors'
-import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { CategorizedLinkItems, LinkItem } from '../ui/LinkList'
 
 interface UseSettingsResult {
@@ -12,7 +11,7 @@ interface UseSettingsResult {
 }
 
 export function useSettings(): UseSettingsResult {
-  const { t } = useTranslation(translationNamespaces)
+  const { t } = useTranslation()
 
   const applicationSettings = useMemo<Record<string, LinkItem>>(() => {
     return {

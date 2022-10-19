@@ -2,18 +2,17 @@ import {
   Cog6ToothIcon,
   HomeIcon,
   InformationCircleIcon,
-  RectangleStackIcon,
+  RectangleStackIcon
 } from '@heroicons/react/20/solid'
 import React, { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router'
 import { useAppSelector } from '../../redux'
 import { selectIsFileOpen } from '../../redux/database'
-import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { HeaderTabs, TabItem } from '../ui/header/HeaderTabs'
 
 export const AppTabs: FC = ({}) => {
-  const { t } = useTranslation(translationNamespaces)
+  const { t } = useTranslation()
   const location = useLocation()
 
   const isFileOpen = useAppSelector(selectIsFileOpen)

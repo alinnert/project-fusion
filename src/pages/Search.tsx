@@ -5,10 +5,9 @@ import { useParams } from 'react-router-dom'
 import { GroupListWithProjects } from '../components/groups/GroupListWithProjects'
 import { useAppSelector } from '../redux'
 import { Project } from '../redux/projects'
-import { translationNamespaces } from '../utils/i18next-namespaces'
 
 export const Search: FC = () => {
-  const { t } = useTranslation(translationNamespaces)
+  const { t } = useTranslation()
 
   const { searchTerm } = useParams()
   const searchTermRegExp = useMemo<RegExp>(

@@ -2,13 +2,12 @@ import {
   CircleStackIcon,
   DocumentPlusIcon,
   FolderIcon,
-  XMarkIcon,
+  XMarkIcon
 } from '@heroicons/react/20/solid'
 import React, { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useAppSelector } from '../../redux'
 import { selectIsFileOpen } from '../../redux/database'
-import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { DropdownMenu, DropdownMenuItem } from '../ui/dropdownMenu/DropdownMenu'
 import { DropdownMenuItemButton } from '../ui/dropdownMenu/DropdownMenuButton'
 import { useCloseDatabase } from './useCloseDatabase'
@@ -16,7 +15,7 @@ import { useCreateDatabase } from './useCreateDatabase'
 import { useOpenDatabase } from './useOpenDatabase'
 
 export const DatabaseMenu: FC = () => {
-  const { t } = useTranslation(translationNamespaces)
+  const { t } = useTranslation()
 
   const filename = useAppSelector((state) => state.database.filename)
   const isFileOpen = useAppSelector(selectIsFileOpen)

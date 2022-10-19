@@ -1,6 +1,5 @@
 import React, { ReactElement, useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { translationNamespaces } from '../../../utils/i18next-namespaces'
 import { Button } from '../forms/Button'
 import { Input } from '../forms/Input'
 import { AppDialog } from './AppDialog'
@@ -24,7 +23,7 @@ interface Result {
 const primaryButtonDefaultLabel = 'OK'
 
 export function useTextDialog({ onConfirm }: Options): Result {
-  const { t } = useTranslation(translationNamespaces)
+  const { t } = useTranslation()
   const [title, setTitle] = useState('')
   const [inputLabel, setInputLabel] = useState('')
   const [primaryButtonLabel, setPrimaryButtonLabel] = useState(

@@ -1,5 +1,5 @@
-import { CheckIcon } from '@heroicons/react/24/outline'
 import { FolderIcon, XMarkIcon } from '@heroicons/react/20/solid'
+import { CheckIcon } from '@heroicons/react/24/outline'
 import React, { FC, FormEvent, useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router'
@@ -9,11 +9,10 @@ import {
   addProject,
   Project,
   ProjectTemplate,
-  updateProject,
+  updateProject
 } from '../../redux/projects'
 import { createId } from '../../utils/customNanoId'
 import { useGlobalKeyDown } from '../../utils/events'
-import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { useCtrlOrCmd } from '../../utils/keyboard'
 import { Checkbox } from '../ui/forms/Checkbox'
 import { Form } from '../ui/forms/Form'
@@ -28,7 +27,7 @@ interface Props {
 }
 
 export const ProjectEditForm: FC<Props> = ({ init = null }) => {
-  const { t } = useTranslation(translationNamespaces)
+  const { t } = useTranslation()
   const params = useParams()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()

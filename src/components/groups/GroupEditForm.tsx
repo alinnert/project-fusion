@@ -1,5 +1,5 @@
-import { FolderIcon, FolderPlusIcon } from '@heroicons/react/24/outline'
 import { CheckIcon, XMarkIcon } from '@heroicons/react/20/solid'
+import { FolderIcon, FolderPlusIcon } from '@heroicons/react/24/outline'
 import React, { FC, useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router'
@@ -8,7 +8,6 @@ import { addGroupToCategory, Category } from '../../redux/categories'
 import { addGroup, ProjectGroup, updateGroup } from '../../redux/groups'
 import { createId } from '../../utils/customNanoId'
 import { useGlobalKeyDown } from '../../utils/events'
-import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { useCtrlOrCmd } from '../../utils/keyboard'
 import { useCategoryFromGroup } from '../categories/useCategoryFromGroup'
 import { useOrderedCategories } from '../categories/useOrderedCategories'
@@ -25,7 +24,7 @@ interface Props {
 }
 
 export const GroupEditForm: FC<Props> = ({ init = null }) => {
-  const { t } = useTranslation(translationNamespaces)
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const { orderedCategories } = useOrderedCategories()

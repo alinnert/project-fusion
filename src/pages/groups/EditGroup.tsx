@@ -4,10 +4,9 @@ import { useTranslation } from 'react-i18next'
 import { GroupEditForm } from '../../components/groups/GroupEditForm'
 import { useGroupFromRoute } from '../../components/groups/useGroupFromRoute'
 import { EmptyText } from '../../components/ui/EmptyText'
-import { translationNamespaces } from '../../utils/i18next-namespaces'
 
 export const EditGroup: FC = () => {
-  const { t } = useTranslation(translationNamespaces)
+  const { t } = useTranslation()
 
   const { group } = useGroupFromRoute()
 

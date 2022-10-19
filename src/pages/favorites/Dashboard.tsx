@@ -1,5 +1,5 @@
-import { StarIcon } from '@heroicons/react/24/outline'
 import { HomeIcon } from '@heroicons/react/20/solid'
+import { StarIcon } from '@heroicons/react/24/outline'
 import React, { FC, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { GroupListWithProjects } from '../../components/groups/GroupListWithProjects'
@@ -7,14 +7,13 @@ import { EmptyText } from '../../components/ui/EmptyText'
 import { PageContent } from '../../components/ui/PageContent'
 import {
   ToolbarContainer,
-  ToolbarItem,
+  ToolbarItem
 } from '../../components/ui/toolbar/ToolbarContainer'
 import { useAppSelector } from '../../redux'
 import { Project } from '../../redux/projects'
-import { translationNamespaces } from '../../utils/i18next-namespaces'
 
 export const Dashboard: FC = () => {
-  const { t } = useTranslation(translationNamespaces)
+  const { t } = useTranslation()
 
   const groups = useAppSelector((state) => state.groups.entities)
 

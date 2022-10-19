@@ -2,11 +2,11 @@ import {
   FolderIcon,
   PencilIcon,
   PlusIcon,
-  TrashIcon,
+  TrashIcon
 } from '@heroicons/react/20/solid'
 import {
   FolderIcon as FolderIconOutline,
-  QueueListIcon,
+  QueueListIcon
 } from '@heroicons/react/24/outline'
 import React, { FC, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -20,16 +20,15 @@ import { Markdown } from '../../components/ui/Markdown'
 import { PageContent } from '../../components/ui/PageContent'
 import {
   ToolbarContainer,
-  ToolbarItem,
+  ToolbarItem
 } from '../../components/ui/toolbar/ToolbarContainer'
 import { useAppDispatch } from '../../redux'
 import { removeGroup } from '../../redux/groups'
 import { useGlobalKeyDown } from '../../utils/events'
-import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { useCtrlOrCmd } from '../../utils/keyboard'
 
 export const Group: FC = () => {
-  const { t } = useTranslation(translationNamespaces)
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const params = useParams()

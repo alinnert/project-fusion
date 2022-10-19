@@ -10,10 +10,9 @@ import { PageContent } from '../../components/ui/PageContent'
 import { ToolbarContainer } from '../../components/ui/toolbar/ToolbarContainer'
 import { useAppDispatch, useAppSelector } from '../../redux'
 import { setPrimaryProjectLink } from '../../redux/settings'
-import { translationNamespaces } from '../../utils/i18next-namespaces'
 
 export const ConfigLinks: FC = () => {
-  const { t } = useTranslation(translationNamespaces)
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
 
   const { databaseSettings } = useSettings()

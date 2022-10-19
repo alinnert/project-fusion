@@ -8,7 +8,6 @@ import { useAppSelector } from '../../redux'
 import { Category, NO_CATEGORY } from '../../redux/categories'
 import { ProjectGroup, selectGroupsWithoutCategory } from '../../redux/groups'
 import { Project } from '../../redux/projects'
-import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { isDefined } from '../../utils/isDefined'
 import { sortByProperty } from '../../utils/sortByProperty'
 import { ProjectListItem } from '../projects/ProjectListItem'
@@ -37,7 +36,7 @@ export const GroupListWithProjects: FC<Props> = ({
   showProject,
 }) => {
   const navigate = useNavigate()
-  const { t } = useTranslation(translationNamespaces)
+  const { t } = useTranslation()
 
   const getProjectsFromGroup = useGetProjectsFromGroup()
   const categoryEntities = useAppSelector((state) => state.categories.entities)

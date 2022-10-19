@@ -22,10 +22,9 @@ import {
 } from '../../redux/categories'
 import { swapCategories } from '../../redux/settings'
 import { createId } from '../../utils/customNanoId'
-import { translationNamespaces } from '../../utils/i18next-namespaces'
 
 export const ConfigCategories: FC = () => {
-  const { t } = useTranslation(translationNamespaces)
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
 
   const { databaseSettings } = useSettings()

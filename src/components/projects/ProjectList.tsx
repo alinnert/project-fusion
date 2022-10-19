@@ -1,8 +1,6 @@
-import React, { useMemo } from 'react'
-import { FC } from 'react'
+import React, { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Project } from '../../redux/projects'
-import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { ProjectListGroup } from './ProjectListGroup'
 
 type GroupName = 'active' | 'archived'
@@ -12,7 +10,7 @@ interface Props {
 }
 
 export const ProjectList: FC<Props> = ({ projects }) => {
-  const { t } = useTranslation(translationNamespaces)
+  const { t } = useTranslation()
 
   const groupedProjects = useMemo<Record<GroupName, Project[]>>(() => {
     const groups: Record<GroupName, Project[]> = { active: [], archived: [] }

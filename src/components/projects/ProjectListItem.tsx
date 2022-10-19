@@ -7,7 +7,7 @@ import {
   LinkIcon,
   PencilIcon,
   StarIcon,
-  TrashIcon,
+  TrashIcon
 } from '@heroicons/react/20/solid'
 import classNames from 'classnames'
 import { marked } from 'marked'
@@ -16,7 +16,6 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router'
 import { useAppDispatch, useAppSelector } from '../../redux'
 import { Project, removeProject, updateProject } from '../../redux/projects'
-import { translationNamespaces } from '../../utils/i18next-namespaces'
 import { isDefined } from '../../utils/isDefined'
 import { mapBooleanToString } from '../../utils/map'
 import { useConfirmDialog } from '../ui/dialogs/useConfirmDialog'
@@ -32,7 +31,7 @@ export const ProjectListItem: FC<Project> = ({
   archived,
   notes,
 }) => {
-  const { t } = useTranslation(translationNamespaces)
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
