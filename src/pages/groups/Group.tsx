@@ -23,6 +23,7 @@ import {
   ToolbarItem,
 } from '../../components/ui/toolbar/ToolbarContainer'
 import { useAppDispatch } from '../../redux'
+import { addGroupToCategory } from '../../redux/categories'
 import { removeGroup } from '../../redux/groups'
 import { removeProjects } from '../../redux/projects'
 import { useGlobalKeyDown } from '../../utils/events'
@@ -44,6 +45,7 @@ export const Group: FC = () => {
       onConfirm() {
         if (groupId === null) return
         dispatch(removeProjects(projects.map(({ id }) => id)))
+        dispatch(addGroupToCategory({ groupId, categoryId: null }))
         dispatch(removeGroup(groupId))
         navigate('/groups')
       },
