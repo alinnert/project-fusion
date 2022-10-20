@@ -38,11 +38,10 @@ export const AppLayout: FC<PropsWithChildren<Props>> = ({ children, left }) => {
         >
           <div className={classNames('col-start-1', 'flex items-center')}>
             <AppLogo />
-            {featureOk ? <DatabaseMenu /> : null}
+            <AppTabs />
           </div>
 
           <div className="col-start-2">
-            <AppTabs />
           </div>
 
           <div

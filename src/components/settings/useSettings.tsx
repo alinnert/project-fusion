@@ -1,4 +1,9 @@
-import { LinkIcon, TagIcon, WindowIcon } from '@heroicons/react/20/solid'
+import {
+  InformationCircleIcon,
+  LinkIcon,
+  TagIcon,
+  WindowIcon,
+} from '@heroicons/react/20/solid'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import colors from 'tailwindcss/colors'
@@ -20,6 +25,12 @@ export function useSettings(): UseSettingsResult {
         name: t('settings:navigation.application.items.interface'),
         icon: <WindowIcon />,
         iconColor: colors.yellow[700],
+      },
+      about: {
+        id: 'about',
+        name: t('settings:navigation.application.items.about'),
+        icon: <InformationCircleIcon />,
+        iconColor: colors.sky[700],
       },
     }
   }, [t])

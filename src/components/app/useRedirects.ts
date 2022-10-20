@@ -31,17 +31,8 @@ export function useRedirects() {
       return { path: '/', replace: true }
     }
 
-    // If file is open:
-    // Redirect: / => /groups
-    if (
-      isFileOpen &&
-      (location.pathname === '/' || location.pathname === '/groups')
-    ) {
-      return { path: `/groups`, replace: true }
-    }
-
     return null
-  }, [isFileOpen, pageAvailableWithoutOpenFile, location.pathname])
+  }, [isFileOpen, pageAvailableWithoutOpenFile])
 
   useEffect(() => {
     if (redirectTarget === null) return

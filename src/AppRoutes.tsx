@@ -9,7 +9,7 @@ import { Dashboard } from './pages/favorites/Dashboard'
 import { CreateGroup } from './pages/groups/CreateGroup'
 import { EditGroup } from './pages/groups/EditGroup'
 import { Group } from './pages/groups/Group'
-import { Home } from './pages/Home'
+import { File } from './pages/File'
 import { Info } from './pages/Info'
 import { ConfigLayout } from './pages/layouts/ConfigLayout'
 import { DataLayout } from './pages/layouts/DataLayout'
@@ -17,6 +17,7 @@ import { SimpleLayout } from './pages/layouts/SimpleLayout'
 import { CreateProject } from './pages/projects/CreateProject'
 import { EditProject } from './pages/projects/EditProject'
 import { Search } from './pages/Search'
+import { ConfigAbout } from './pages/config/ConfigAbout'
 
 export const AppRoutes: FC = () => {
   useRedirects()
@@ -25,7 +26,7 @@ export const AppRoutes: FC = () => {
     <Routes>
       <Route element={<App />}>
         <Route element={<SimpleLayout />}>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<File />} />
           <Route path="info" element={<Info />} />
           <Route path="search/:searchTerm" element={<Search />} />
           <Route path="*" element={<div>Custom not found page</div>} />
@@ -45,6 +46,7 @@ export const AppRoutes: FC = () => {
 
         <Route path="config" element={<ConfigLayout />}>
           <Route path="interface" element={<ConfigInterface />} />
+          <Route path="about" element={<ConfigAbout />} />
           <Route path="categories" element={<ConfigCategories />} />
           <Route path="links" element={<ConfigLinks />} />
         </Route>
