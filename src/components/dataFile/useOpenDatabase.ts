@@ -1,4 +1,5 @@
 import { useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../../redux'
 import {
   setDatabase,
@@ -15,6 +16,7 @@ import { addFileToRecentFiles } from '../../redux/database/recentFilesStorage'
 import { asyncTry } from '../../utils/tryCatch'
 
 export function useOpenDatabase(): () => Promise<void> {
+  const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
   const openDatabase = useCallback(async () => {
@@ -60,7 +62,8 @@ export function useOpenDatabase(): () => Promise<void> {
     }
 
     dispatch(setDatabase(payload))
-  }, [dispatch])
+    navigate('/groups')
+  }, [dispatch, navigate])
 
   return openDatabase
 }

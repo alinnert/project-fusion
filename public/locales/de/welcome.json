@@ -2,9 +2,5 @@
   "fileOpen": {
     "title": "Database: {{database}}",
     "body": "Bitte wähle links eine Gruppe aus."
-  },
-  "noFileOpen": {
-    "title": "Willkommen bei $t(common:terms.appName)",
-    "body": "Erstelle eine neue Datenbank oder öffne eine vorhandene über das \"$t(common:header.menu.database.label)\"-Menü oben links."
   }
 }

@@ -2,9 +2,7 @@ import classNames from 'classnames'
 import React, { FC, PropsWithChildren, ReactNode, useMemo } from 'react'
 import { useAppSelector } from '../../redux'
 import { selectIsFileOpen } from '../../redux/database'
-import { useFeatureCheck } from '../../utils/featureCheck'
 import { mapBooleanToString } from '../../utils/map'
-import { DatabaseMenu } from '../dataFile/DatabaseMenu'
 import { HeaderSearch } from '../ui/header/HeaderSearch'
 import { AppLogo } from './AppLogo'
 import { AppTabs } from './AppTabs'
@@ -16,7 +14,6 @@ interface Props {
 
 export const AppLayout: FC<PropsWithChildren<Props>> = ({ children, left }) => {
   const isFileOpen = useAppSelector(selectIsFileOpen)
-  const featureOk = useFeatureCheck()
 
   const showLeftPanel = useMemo(() => (left ?? null) !== null, [left])
 
@@ -38,11 +35,10 @@ export const AppLayout: FC<PropsWithChildren<Props>> = ({ children, left }) => {
         >
           <div className={classNames('col-start-1', 'flex items-center')}>
             <AppLogo />
-            {featureOk ? <DatabaseMenu /> : null}
+            <AppTabs />
           </div>
 
           <div className="col-start-2">
-            <AppTabs />
           </div>
 
           <div

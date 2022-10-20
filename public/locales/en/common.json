@@ -30,10 +30,9 @@
       }
     },
     "tabs": {
-      "home": "Welcome",
-      "data": "Data",
-      "config": "Settings",
-      "info": "Info"
+      "home": "File",
+      "data": "Database",
+      "config": "Settings"
     },
     "search": {
       "inputPlaceholder": "Search / Go to project...",

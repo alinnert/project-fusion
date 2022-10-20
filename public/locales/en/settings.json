@@ -3,7 +3,8 @@
     "application": {
       "label": "Application",
       "items": {
-        "interface": "Interface"
+        "interface": "Interface",
+        "about": "info"
       }
     },
     "database": {
@@ -22,6 +23,17 @@
     "title": "Interface",
     "description": "Change general application settings.",
     "commonSettings": "Common"
+  },
+  "about": {
+    "title": "About $t(common:terms.appName)",
+    "version": "Version",
+    "sourceCode": "Source code",
+    "usedTechnology": {
+      "title": "Credits",
+      "base": "Base",
+      "libs": "Libraries",
+      "apis": "APIs"
+    }
   },
   "categories": {
     "title": "Categories",

@@ -1,8 +1,7 @@
 import {
+  CircleStackIcon,
   Cog6ToothIcon,
-  HomeIcon,
-  InformationCircleIcon,
-  RectangleStackIcon
+  DocumentIcon,
 } from '@heroicons/react/20/solid'
 import React, { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -32,9 +31,16 @@ export const AppTabs: FC = ({}) => {
   }, [currentConfigId])
 
   const tabs = useMemo<Array<TabItem>>(() => {
+    const startItem: TabItem = {
+      label: t('common:header.tabs.home'),
+      icon: <DocumentIcon />,
+      href: '/',
+      current: location.pathname === '/',
+    }
+
     const dataItem: TabItem = {
       label: t('common:header.tabs.data'),
-      icon: <RectangleStackIcon />,
+      icon: <CircleStackIcon />,
       href: groupHref,
       current: location.pathname.startsWith('/groups'),
     }
@@ -46,22 +52,9 @@ export const AppTabs: FC = ({}) => {
       current: location.pathname.startsWith('/config'),
     }
 
-    const startItem: TabItem = {
-      label: t('common:header.tabs.home'),
-      icon: <HomeIcon />,
-      href: '/',
-      current: location.pathname === '/',
-    }
-
-    const infoItem: TabItem = {
-      label: t('common:header.tabs.info'),
-      icon: <InformationCircleIcon />,
-      href: '/info',
-    }
-
     return isFileOpen
-      ? [dataItem, configItem, infoItem]
-      : [startItem, configItem, infoItem]
+      ? [startItem, dataItem, configItem]
+      : [startItem, configItem]
   }, [configHref, groupHref, isFileOpen, location.pathname, t])
 
   return <HeaderTabs tabs={tabs} />

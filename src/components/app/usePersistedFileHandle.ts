@@ -7,7 +7,6 @@ import { useOpenDatabaseWithFileHandle } from '../dataFile/useOpenDatabaseWithFi
 
 export function usePersistedFileHandle() {
   const dispatch = useAppDispatch()
-
   const openDatabaseWithFileHandle = useOpenDatabaseWithFileHandle()
 
   useEffect(() => {

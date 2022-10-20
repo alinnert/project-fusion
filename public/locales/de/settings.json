@@ -3,7 +3,8 @@
     "application": {
       "label": "Anwendung",
       "items": {
-        "interface": "Oberfläche"
+        "interface": "Oberfläche",
+        "about": "Info"
       }
     },
     "database": {
@@ -22,6 +23,17 @@
     "title": "Oberfläche",
     "description": "Hier finden sich allgemeine Einstellungen zur Anwendung.",
     "commonSettings": "Allgemein"
+  },
+  "about": {
+    "title": "Über $t(common:terms.appName)",
+    "version": "Version",
+    "sourceCode": "Quellcode",
+    "usedTechnology": {
+      "title": "Credits",
+      "base": "Basis",
+      "libs": "Bibliotheken",
+      "apis": "APIs"
+    }
   },
   "categories": {
     "title": "Kategorien",
