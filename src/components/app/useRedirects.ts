@@ -17,9 +17,9 @@ export function useRedirects() {
   const pageAvailableWithoutOpenFile = useMemo(() => {
     const pathnamesAvailableWithoutOpenFile: string[] = [
       '/',
-      '/info',
       '/config',
       '/config/interface',
+      '/config/about',
     ]
     return pathnamesAvailableWithoutOpenFile.includes(location.pathname)
   }, [location.pathname])
