@@ -26,7 +26,7 @@ export const Input: FC<Props> = ({
       'box-border',
       mapUnionToString(inputType, {
         default: 'w-auto px-2 py-1 rounded',
-        header: 'w-80 px-3 py-1 rounded',
+        header: 'w-64 px-3 py-1 rounded',
       }),
     )
 

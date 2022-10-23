@@ -10,25 +10,17 @@
     "cancel": "Cancel",
     "edit": "Edit",
     "delete": "Delete",
+    "clear": "Remove all",
     "new": "New",
     "rename": "Rename",
     "create": "Create",
+    "open": "Open",
+    "close": "Close",
     "ok": "OK",
     "duplicate": "Duplicate",
     "sort": "Sort"
   },
   "header": {
-    "menu": {
-      "database": {
-        "label": "Database",
-        "items": {
-          "create": "Create",
-          "open": "Open",
-          "close": "Close",
-          "clearRecent": "Clear list of recent files"
-        }
-      }
-    },
     "tabs": {
       "home": "File",
       "data": "Database",
@@ -37,6 +29,15 @@
     "search": {
       "inputPlaceholder": "Search / Go to project...",
       "button": "Search"
+    }
+  },
+  "filePage": {
+    "currentFile": {
+      "title": "Open file",
+      "showContent": "Show content"
+    },
+    "recentFiles": {
+      "title": "Recently used files"
     }
   },
   "alerts": {
