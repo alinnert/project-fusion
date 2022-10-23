@@ -1,8 +1,7 @@
 import React, { FC, useMemo } from 'react'
-import { Outlet, useLocation, useParams } from 'react-router'
+import { Outlet, useLocation } from 'react-router'
 import { AppLayout } from '../../components/app/AppLayout'
 import { SettingsPagesList } from '../../components/settings/SettingsPagesList'
-import { useSettings } from '../../components/settings/useSettings'
 
 export const ConfigLayout: FC = () => {
   const location = useLocation()

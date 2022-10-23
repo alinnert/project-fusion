@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import React, { FC } from 'react'
-import { defaultMatch, mapStringToString } from '../../../utils/map'
+import { defaultMatch, mapStringToString } from '../../utils/map'
 
 interface Props {
   type?: 'default' | 'header'

@@ -1,19 +1,9 @@
-import { get } from 'idb-keyval'
 import { asyncTry } from '../../../utils/tryCatch'
-import { currentFileStorageKey } from '../../database/currentFileStorage'
+import { getCurrentFile } from './currentFile'
 
 export async function writeToFile(content: string): Promise<void> {
-  const getHandleResult = await asyncTry(() =>
-    get<FileSystemFileHandle>(currentFileStorageKey),
-  )
-  if (getHandleResult.caught) {
-    console.error(getHandleResult.error)
-    return
-  }
-
-  const { value: fileHandle } = getHandleResult
-
-  if (fileHandle === undefined) {
+  const fileHandle = getCurrentFile()
+  if (fileHandle === null) {
     console.error('There is no file handle in the database')
     return
   }
@@ -35,4 +25,6 @@ export async function writeToFile(content: string): Promise<void> {
   if (closeResult.caught) {
     console.error(closeResult.error)
   }
+
+  console.log('file written')
 }

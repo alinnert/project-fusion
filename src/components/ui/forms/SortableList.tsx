@@ -2,7 +2,7 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/20/solid'
 import classNames from 'classnames'
 import React, { FC, ReactElement, ReactNode } from 'react'
 import { mapBooleanToString } from '../../../utils/map'
-import { Separator } from '../header/HeaderSeparator'
+import { Separator } from '../Separator'
 import { Button } from './Button'
 
 export type SwapDirection = 'up' | 'down'

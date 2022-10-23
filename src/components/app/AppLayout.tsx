@@ -1,11 +1,14 @@
 import classNames from 'classnames'
 import React, { FC, PropsWithChildren, ReactNode, useMemo } from 'react'
+import { AppLogo } from '../../components/app/AppLogo'
+import { AppTabs } from '../../components/app/AppTabs'
+import { HeaderSearch } from '../../components/ui/header/HeaderSearch'
 import { useAppSelector } from '../../redux'
 import { selectIsFileOpen } from '../../redux/database'
 import { mapBooleanToString } from '../../utils/map'
-import { HeaderSearch } from '../ui/header/HeaderSearch'
-import { AppLogo } from './AppLogo'
-import { AppTabs } from './AppTabs'
+import { Header } from '../ui/header/Header'
+import { LeftPanel } from '../ui/LeftPanel'
+import { CurrentFile } from './CurrentFile'
 
 interface Props {
   left?: ReactNode
@@ -14,7 +17,6 @@ interface Props {
 
 export const AppLayout: FC<PropsWithChildren<Props>> = ({ children, left }) => {
   const isFileOpen = useAppSelector(selectIsFileOpen)
-
   const showLeftPanel = useMemo(() => (left ?? null) !== null, [left])
 
   return (
@@ -25,44 +27,19 @@ export const AppLayout: FC<PropsWithChildren<Props>> = ({ children, left }) => {
       )}
     >
       <div className={classNames('row-start-1 col-start-1 col-span-3')}>
-        <div
-          className={classNames(
-            'grid grid-cols-[1fr,auto,1fr]',
-            'p-2',
-            'bg-brand-700',
-            'text-white',
-          )}
-        >
-          <div className={classNames('col-start-1', 'flex items-center')}>
-            <AppLogo />
-            <AppTabs />
-          </div>
-
-          <div className="col-start-2">
-          </div>
-
-          <div
-            className={classNames(
-              'col-start-3 justify-self-end',
-              'flex items-center',
-            )}
-          >
-            {isFileOpen ? <HeaderSearch /> : null}
-          </div>
-        </div>
+        <Header
+          left={
+            <>
+              <AppLogo />
+              <CurrentFile />
+            </>
+          }
+          center={<AppTabs />}
+          right={isFileOpen ? <HeaderSearch /> : null}
+        />
       </div>
 
-      {showLeftPanel ? (
-        <div
-          className={classNames(
-            'row-start-2 col-start-1 overflow-hidden',
-            'border-r border-neutral-200',
-            'bg-neutral-50',
-          )}
-        >
-          {left}
-        </div>
-      ) : null}
+      {showLeftPanel ? <LeftPanel>{left}</LeftPanel> : null}
 
       <div
         className={classNames(

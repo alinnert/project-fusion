@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-export function useFeatureCheck(): boolean {
+export function useFeatureOk(): boolean {
   const featureOk = useMemo<boolean>(() => {
     if (typeof showOpenFilePicker !== 'function') return false
 

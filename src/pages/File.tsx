@@ -1,4 +1,5 @@
 import {
+  CircleStackIcon,
   DocumentPlusIcon,
   FolderIcon,
   XMarkIcon,
@@ -6,45 +7,114 @@ import {
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
-import { useCloseDatabase } from '../components/dataFile/useCloseDatabase'
-import { useCreateDatabase } from '../components/dataFile/useCreateDatabase'
-import { useOpenDatabase } from '../components/dataFile/useOpenDatabase'
+import { useNavigate } from 'react-router-dom'
 import { Alert } from '../components/ui/Alert'
+import { ContentSection } from '../components/ui/ContentSection'
+import { EntryListItem } from '../components/ui/EntryListItem'
 import { Button } from '../components/ui/forms/Button'
+import { useCloseDatabase } from '../hooks/database/useCloseDatabase'
+import { useCreateDatabase } from '../hooks/database/useCreateDatabase'
+import { useOpenDatabase } from '../hooks/database/useOpenDatabase'
+import { useOpenDatabaseWithFileHandle } from '../hooks/database/useOpenDatabaseWithFilehandle'
+import { useRecentFiles } from '../hooks/database/useRecentFiles'
+import { useAppSelector } from '../redux'
 import { selectIsFileOpen } from '../redux/database'
-import { useFeatureCheck } from '../utils/featureCheck'
+import { useFeatureOk } from '../utils/featureOk'
 
 export const File: FC = () => {
   const { t } = useTranslation()
+  const navigate = useNavigate()
 
   const isFileOpen = useSelector(selectIsFileOpen)
-  const featureOk = useFeatureCheck()
+  const currentFileName = useAppSelector((state) => state.database.filename)
+  const featureOk = useFeatureOk()
+  const [recentFiles, { clearRecentFiles, removeFromRecentFiles }] =
+    useRecentFiles()
   const handleCreateDatabaseClick = useCreateDatabase()
   const handleOpenDatabaseClick = useOpenDatabase()
+  const handleOpenRecentDatabaseClick = useOpenDatabaseWithFileHandle()
   const handleCloseDatabaseClick = useCloseDatabase()
 
+  function handleShowContentClick(): void {
+    navigate('/groups')
+  }
+
   return (
-    <div className="flex justify-center">
-      <div className="mt-12 w-[600px]">
+    <div className="flex justify-center self-stretch overflow-y-auto h-full">
+      <div className="w-[600px]">
         {!featureOk ? (
           <Alert>{t('common:alerts.apiRequirementsNotMet')}</Alert>
         ) : (
-          <div className="flex gap-x-2">
-            <Button
-              icon={<DocumentPlusIcon />}
-              onClick={handleCreateDatabaseClick}
-            >
-              {t('common:header.menu.database.items.create')}
-            </Button>
+          <div className="py-12">
+            <div className="flex gap-x-2">
+              <Button
+                icon={<DocumentPlusIcon />}
+                onClick={handleCreateDatabaseClick}
+              >
+                {t('common:buttons.create')}
+              </Button>
 
-            <Button icon={<FolderIcon />} onClick={handleOpenDatabaseClick}>
-              {t('common:header.menu.database.items.open')}
-            </Button>
+              <Button icon={<FolderIcon />} onClick={handleOpenDatabaseClick}>
+                {t('common:buttons.open')}
+              </Button>
+            </div>
 
             {isFileOpen ? (
-              <Button icon={<XMarkIcon />} onClick={handleCloseDatabaseClick}>
-                {t('common:header.menu.database.items.close')}
-              </Button>
+              <ContentSection title={t('common:filePage.currentFile.title')}>
+                <div className="flex items-center">
+                  <div className="font-bold">{currentFileName}</div>
+
+                  <div className="ml-auto flex items-center gap-x-2">
+                    <Button
+                      icon={<CircleStackIcon />}
+                      onClick={handleShowContentClick}
+                    >
+                      {t('common:filePage.currentFile.showContent')}
+                    </Button>
+
+                    <Button
+                      icon={<XMarkIcon />}
+                      onClick={handleCloseDatabaseClick}
+                    >
+                      {t('common:buttons.close')}
+                    </Button>
+                  </div>
+                </div>
+              </ContentSection>
+            ) : null}
+
+            {recentFiles.length > 0 ? (
+              <ContentSection title={t('common:filePage.recentFiles.title')}>
+                <div className="my-2">
+                  {recentFiles.map((handle) => (
+                    <EntryListItem
+                      key={handle.name}
+                      label={handle.name}
+                      onClick={() => handleOpenRecentDatabaseClick(handle)}
+                      buttons={[
+                        {
+                          icon: <XMarkIcon />,
+                          onClick() {
+                            removeFromRecentFiles(handle)
+                          },
+                        },
+                      ]}
+                    />
+                  ))}
+                </div>
+
+                <div className="flex items-center">
+                  <div className="ml-auto">
+                    <Button
+                      onClick={clearRecentFiles}
+                      icon={<XMarkIcon />}
+                      type="delete"
+                    >
+                      {t('common:buttons.clear')}
+                    </Button>
+                  </div>
+                </div>
+              </ContentSection>
             ) : null}
           </div>
         )}
