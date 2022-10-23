@@ -3,8 +3,13 @@ import { arrayWithout } from '../../utils/array'
 
 const storageKey = 'recentFiles'
 
-let recentFiles: FileSystemFileHandle[] =
-  (await get<FileSystemFileHandle[]>(storageKey)) ?? []
+let recentFiles: FileSystemFileHandle[] = []
+
+init()
+
+async function init(): Promise<void> {
+  recentFiles = (await get<FileSystemFileHandle[]>(storageKey)) ?? []
+}
 
 const listeners: (() => void)[] = []
 

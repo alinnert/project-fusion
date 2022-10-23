@@ -24,7 +24,7 @@ const config = {
         important: colors.amber,
         danger: colors.rose,
         dangerAccent: colors.red,
-        neutral: colors.blueGray,
+        neutral: colors.slate,
       },
 
       typography: (theme) => ({
