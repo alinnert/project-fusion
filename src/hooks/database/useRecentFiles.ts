@@ -17,12 +17,8 @@ type UseRecentFilesResult = [
 ]
 
 export function useRecentFiles(): UseRecentFilesResult {
-  const recentFiles = useSyncExternalStore<FileSystemFileHandle[]>(
-    subscribe,
-    getSnapshot,
-  )
-
+  const useFileHandlesStore = useSyncExternalStore<FileSystemFileHandle[]>
+  const recentFiles = useFileHandlesStore(subscribe, getSnapshot)
   const api = { addToRecentFiles, removeFromRecentFiles, clearRecentFiles }
-
   return [recentFiles, api]
 }
