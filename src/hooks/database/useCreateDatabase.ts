@@ -32,7 +32,7 @@ export function useCreateDatabase(): UseCreateDatabaseResult {
     if (!permissionGranted) return
 
     setCurrentFile(fileHandle)
-    await addToRecentFiles(fileHandle)
+    addToRecentFiles(fileHandle)
 
     const writeOk = await writeEmptyFile(fileHandle)
     if (!writeOk) return
