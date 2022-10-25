@@ -20,13 +20,11 @@ export function useOpenDatabaseWithFileHandle(): UseOpenDatabaseWithFileHandleRe
 
   return useCallback(
     async (fileHandle: FileSystemFileHandle) => {
-      console.log('open with handle', fileHandle)
       const permissionGranted = await checkPermission(fileHandle)
-      console.log('permission', permissionGranted)
       if (!permissionGranted) return
 
       setCurrentFile(fileHandle)
-      await addToRecentFiles(fileHandle)
+      addToRecentFiles(fileHandle)
       const fileDataResult = await getDataFromFileHandle(fileHandle)
       if (fileDataResult.caught) return
 

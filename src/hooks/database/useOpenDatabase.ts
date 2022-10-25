@@ -28,7 +28,7 @@ export function useOpenDatabase(): UseOpenDatabaseResult {
     if (!permissionGranted) return
 
     setCurrentFile(fileHandle)
-    await addToRecentFiles(fileHandle)
+    addToRecentFiles(fileHandle)
     const fileDataResult = await getDataFromFileHandle(fileHandle)
     if (fileDataResult.caught) return
 
