@@ -17,7 +17,8 @@ const filterHandleWithName = (name: string) => (handle: FileSystemFileHandle) =>
   handle.name === name
 
 export function subscribe(onStoreChange: () => void): () => void {
-  return () => listeners.push(onStoreChange)
+  listeners.push(onStoreChange)
+  return () => listeners.splice(listeners.indexOf(onStoreChange), 1)
 }
 
 export function getSnapshot(): FileSystemFileHandle[] {
