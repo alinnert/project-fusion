@@ -15,7 +15,7 @@ import { Button } from '../components/ui/forms/Button'
 import { useCloseDatabase } from '../hooks/database/useCloseDatabase'
 import { useCreateDatabase } from '../hooks/database/useCreateDatabase'
 import { useOpenDatabase } from '../hooks/database/useOpenDatabase'
-import { useOpenDatabaseWithFileHandle } from '../hooks/database/useOpenDatabaseWithFilehandle'
+import { useReadDatabaseFile } from '../hooks/database/useReadDatabaseFile'
 import { useRecentFiles } from '../hooks/database/useRecentFiles'
 import { useAppSelector } from '../redux'
 import { selectIsFileOpen } from '../redux/database'
@@ -32,7 +32,7 @@ export const File: FC = () => {
     useRecentFiles()
   const handleCreateDatabaseClick = useCreateDatabase()
   const handleOpenDatabaseClick = useOpenDatabase()
-  const handleOpenRecentDatabaseClick = useOpenDatabaseWithFileHandle()
+  const readDatabaseFile = useReadDatabaseFile()
   const handleCloseDatabaseClick = useCloseDatabase()
 
   function handleShowContentClick(): void {
@@ -90,7 +90,7 @@ export const File: FC = () => {
                     <EntryListItem
                       key={handle.name}
                       label={handle.name}
-                      onClick={() => handleOpenRecentDatabaseClick(handle)}
+                      onClick={() => readDatabaseFile(handle)}
                       buttons={[
                         {
                           icon: <XMarkIcon />,

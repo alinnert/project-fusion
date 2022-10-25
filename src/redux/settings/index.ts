@@ -8,19 +8,32 @@ export interface CustomLink {
   url: string
 }
 
+type ProjectSortOrder = {
+  sortBy: 'name' | 'id'
+  sortOrder: 'ascending' | 'descending'
+}
+
 export interface Settings {
   categoryOrder: Array<Category['id']>
   primaryProjectLink: CustomLink | null
   projectLinks: CustomLink[]
+  projectsSortOrder: ProjectSortOrder
+  projectIdWording: string | null
 }
 
-function getInitialState(): Settings {
-  return { categoryOrder: [], primaryProjectLink: null, projectLinks: [] }
+export function getInitialSettingsState(): Settings {
+  return {
+    categoryOrder: [],
+    primaryProjectLink: null,
+    projectLinks: [],
+    projectsSortOrder: { sortBy: 'id', sortOrder: 'ascending' },
+    projectIdWording: null
+  }
 }
 
 const slice = createSlice({
   name: 'settings',
-  initialState: getInitialState(),
+  initialState: getInitialSettingsState(),
 
   reducers: {
     setPrimaryProjectLink(state, action: PayloadAction<CustomLink | null>) {
@@ -44,9 +57,7 @@ const slice = createSlice({
       Object.assign(state, payload.database.settings)
     })
 
-    builder.addCase(closeDatabase, (state) => {
-      return getInitialState()
-    })
+    builder.addCase(closeDatabase, () => getInitialSettingsState())
 
     builder.addCase(addCategory, (state, { payload }) => {
       state.categoryOrder.push(payload.id)

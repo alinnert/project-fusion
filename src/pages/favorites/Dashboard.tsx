@@ -1,4 +1,4 @@
-import { HomeIcon } from '@heroicons/react/20/solid'
+import { HomeIcon, PencilIcon } from '@heroicons/react/20/solid'
 import { StarIcon } from '@heroicons/react/24/outline'
 import React, { FC, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -7,7 +7,7 @@ import { EmptyText } from '../../components/ui/EmptyText'
 import { PageContent } from '../../components/ui/PageContent'
 import {
   ToolbarContainer,
-  ToolbarItem
+  ToolbarItem,
 } from '../../components/ui/toolbar/ToolbarContainer'
 import { useAppSelector } from '../../redux'
 import { Project } from '../../redux/projects'
@@ -23,16 +23,17 @@ export const Dashboard: FC = () => {
 
   const toolbarItems = useMemo<ToolbarItem[]>(() => {
     return [
-      // {
-      //   type: 'button',
-      //   label: t('common:buttons.edit'),
-      //   icon: <PencilIcon />,
-      //   action() {
-      //     console.log('hi')
-      //   },
-      // },
+      {
+        type: 'button',
+        label: t('common:buttons.edit'),
+        icon: <PencilIcon />,
+        visible: false,
+        action() {
+          console.log('hi')
+        },
+      },
     ]
-  }, [])
+  }, [t])
 
   return (
     <ToolbarContainer
