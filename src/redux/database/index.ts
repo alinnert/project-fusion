@@ -6,6 +6,7 @@ import { Project } from '../projects'
 import { Settings } from '../settings'
 
 export interface Database {
+  version?: number
   categories: Record<Category['id'], Category>
   groups: Record<ProjectGroup['id'], ProjectGroup>
   projects: Record<Project['id'], Project>
@@ -15,32 +16,16 @@ export interface Database {
 export interface DatabaseState {
   filename: string | null
   status: 'ok' | 'loading' | string
+  version?: number
 }
 
-export function getEmptyDatabase(): Database {
-  return {
-    categories: {},
-    groups: {},
-    projects: {},
-    settings: { categoryOrder: [], primaryProjectLink: null, projectLinks: [] },
-  }
-}
-
-function getInitialState(): DatabaseState {
-  return {
-    filename: null,
-    status: 'ok',
-  }
-}
-
-export interface SetDatabaseActionPayload {
-  filename: string
-  database: Database
+function getInitialDatabaseState(): DatabaseState {
+  return { filename: null, status: 'ok', version: undefined }
 }
 
 const slice = createSlice({
   name: 'database',
-  initialState: getInitialState(),
+  initialState: getInitialDatabaseState(),
   reducers: {
     startLoading(state) {
       state.status = 'loading'
@@ -50,9 +35,16 @@ const slice = createSlice({
       state.status = action.payload
     },
 
-    setDatabase(state, action: PayloadAction<SetDatabaseActionPayload>) {
+    setDatabase(
+      state,
+      action: PayloadAction<{
+        filename: string
+        database: Database
+      }>,
+    ) {
       state.status = 'ok'
       state.filename = action.payload.filename
+      state.version = action.payload.database.version
     },
 
     closeDatabase(state) {

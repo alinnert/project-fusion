@@ -5,17 +5,17 @@ export interface UiSettings {
   currentConfigId: string
 }
 
-function getInitialState(): UiSettings {
+function getInitialUiSettingsState(): UiSettings {
   return { currentGroupId: null, currentConfigId: 'interface' }
 }
 
 const slice = createSlice({
   name: 'uiState',
-  initialState: getInitialState(),
+  initialState: getInitialUiSettingsState(),
 
   reducers: {
     resetUiState() {
-      return getInitialState()
+      return getInitialUiSettingsState()
     },
 
     setCurrentGroupId(

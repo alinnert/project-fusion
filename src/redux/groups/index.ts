@@ -2,6 +2,7 @@ import {
   createEntityAdapter,
   createSelector,
   createSlice,
+  EntityState,
   PayloadAction,
 } from '@reduxjs/toolkit'
 import { AppState } from '..'
@@ -19,9 +20,13 @@ export interface ProjectGroup {
 
 const adapter = createEntityAdapter<ProjectGroup>()
 
+function getInitialProjectGroupsState(): EntityState<ProjectGroup> {
+  return adapter.getInitialState()
+}
+
 const slice = createSlice({
   name: 'projectGroups',
-  initialState: adapter.getInitialState(),
+  initialState: getInitialProjectGroupsState(),
   reducers: {
     addGroup: adapter.addOne,
     setGroup: adapter.setOne,
@@ -90,10 +95,9 @@ export const selectGroupIdsWithoutCategory = createSelector(
 export const selectGroupsWithoutCategory = createSelector(
   (state: AppState) => state.groups.entities,
   selectGroupIdsWithoutCategory,
-  (groups, groupIds) => {
-    return groupIds.flatMap((groupId) => {
+  (groups, groupIds) =>
+    groupIds.flatMap((groupId) => {
       const group = groups[groupId]
       return group !== undefined ? [group] : []
-    })
-  },
+    }),
 )

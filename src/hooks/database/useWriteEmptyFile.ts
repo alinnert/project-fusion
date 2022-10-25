@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { useAppDispatch } from '../../redux'
-import { getEmptyDatabase, setOpenDatabaseError } from '../../redux/database'
+import { setOpenDatabaseError } from '../../redux/database'
 import { asyncTry } from '../../utils/tryCatch'
 
 type UseWriteEmptyFileResult = (
@@ -20,11 +20,7 @@ export function useWriteEmptyFile(): UseWriteEmptyFileResult {
 
       const { value: writable } = writableResult
 
-      const emptyDatabaseContent = JSON.stringify(getEmptyDatabase())
-
-      const writeResult = await asyncTry(() =>
-        writable.write(emptyDatabaseContent),
-      )
+      const writeResult = await asyncTry(() => writable.write(''))
       if (writeResult.caught) {
         dispatch(setOpenDatabaseError(writeResult.error.message))
         return false

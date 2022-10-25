@@ -1,6 +1,7 @@
 import {
   createEntityAdapter,
   createSlice,
+  EntityState,
   PayloadAction,
 } from '@reduxjs/toolkit'
 import { removeElementsFromArray } from '../../utils/array'
@@ -17,9 +18,13 @@ export const NO_CATEGORY = Symbol('no category')
 
 const adapter = createEntityAdapter<Category>()
 
+function getInitialCategoriesState(): EntityState<Category> {
+  return adapter.getInitialState()
+}
+
 const slice = createSlice({
   name: 'categories',
-  initialState: adapter.getInitialState(),
+  initialState: getInitialCategoriesState(),
   reducers: {
     addCategory: adapter.addOne,
     setCategory: adapter.setOne,

@@ -1,4 +1,4 @@
-import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
+import { createEntityAdapter, createSlice, EntityState } from '@reduxjs/toolkit'
 import { closeDatabase, setDatabase } from '../database'
 
 export interface Project {
@@ -14,9 +14,13 @@ export type ProjectTemplate = Partial<Pick<Project, 'id'>> & Omit<Project, 'id'>
 
 const adapter = createEntityAdapter<Project>()
 
+function getInitialProjectsState(): EntityState<Project> {
+  return adapter.getInitialState()
+}
+
 const slice = createSlice({
   name: 'projects',
-  initialState: adapter.getInitialState(),
+  initialState: getInitialProjectsState(),
   reducers: {
     addProject: adapter.addOne,
     setProject: adapter.setOne,

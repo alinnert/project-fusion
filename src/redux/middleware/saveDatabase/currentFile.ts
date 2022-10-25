@@ -4,6 +4,6 @@ export function setCurrentFile(handle: typeof currentFile): void {
   currentFile = handle
 }
 
-export function getCurrentFile(): typeof currentFile {
+export function getCurrentFile(): FileSystemFileHandle | null {
   return currentFile
 }
