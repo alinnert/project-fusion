@@ -1,7 +1,7 @@
 import { ArrowsUpDownIcon, FolderIcon } from '@heroicons/react/20/solid'
 import {
   FolderIcon as FolderIconOutline,
-  QueueListIcon,
+  QueueListIcon
 } from '@heroicons/react/24/outline'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -10,7 +10,7 @@ import { ProjectList } from '../../components/projects/ProjectList'
 import { useProjectsFromGroup } from '../../components/projects/useProjectsFromGroup'
 import {
   DropdownMenu,
-  DropdownMenuItem,
+  DropdownMenuItem
 } from '../../components/ui/dropdownMenu/DropdownMenu'
 import { EmptyText } from '../../components/ui/EmptyText'
 import { Markdown } from '../../components/ui/Markdown'
@@ -55,6 +55,9 @@ export const Group: FC = () => {
     )
   }
 
+  const getSortLabel = ({ sortBy, sortOrder }: ProjectsSortOrder) =>
+    `${t(`projects:labels.${sortBy}`)} (${t(`common:terms.${sortOrder}`)})`
+
   function createSortMenuItem(
     sortBy: ProjectsSortOrder['sortBy'],
     sortOrder: ProjectsSortOrder['sortOrder'],
@@ -62,9 +65,7 @@ export const Group: FC = () => {
     return {
       type: 'button',
 
-      label: `${t(`projects:labels.${sortBy}`)} (${t(
-        `common:terms.${sortOrder}`,
-      )})`,
+      label: getSortLabel({ sortBy, sortOrder }),
 
       checked:
         projectsSortOrder.sortBy === sortBy &&
@@ -105,13 +106,18 @@ export const Group: FC = () => {
                 align="right"
                 icon={<ArrowsUpDownIcon />}
                 items={[
-                  createSortMenuItem('projectNumber', 'ascending'),
-                  createSortMenuItem('projectNumber', 'descending'),
                   createSortMenuItem('name', 'ascending'),
                   createSortMenuItem('name', 'descending'),
+                  createSortMenuItem('projectNumber', 'ascending'),
+                  createSortMenuItem('projectNumber', 'descending'),
                 ]}
               >
-                {sortButtonText}
+                <span>
+                  {getSortLabel({
+                    sortBy: projectsSortOrder.sortBy,
+                    sortOrder: projectsSortOrder.sortOrder,
+                  })}
+                </span>
               </DropdownMenu>
             </>
           }
