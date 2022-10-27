@@ -6,7 +6,7 @@ import React, {
   KeyboardEvent,
   PropsWithChildren,
 } from 'react'
-import { useCtrlOrCmd } from '../../../utils/keyboard'
+import { ctrlOrCmd } from '../../../utils/keyboard'
 import { mapUnionToString } from '../../../utils/map'
 
 export type FormType = 'unstyled' | 'page' | 'inline'
@@ -32,8 +32,6 @@ export const Form: FC<PropsWithChildren<Props>> = ({
   submitOnCtrlEnter = false,
   onSubmit,
 }) => {
-  const ctrlOrCmd = useCtrlOrCmd()
-
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     onSubmit?.(event)
