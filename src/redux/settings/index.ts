@@ -2,22 +2,23 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { swapArrayElements } from '../../utils/array'
 import { addCategory, Category, removeCategory } from '../categories'
 import { closeDatabase, setDatabase } from '../database'
+import { SortOrder } from './SortOrder'
 
 export interface CustomLink {
   label: string
   url: string
 }
 
-type ProjectSortOrder = {
-  sortBy: 'name' | 'id'
-  sortOrder: 'ascending' | 'descending'
+export type ProjectsSortOrder = {
+  sortBy: 'name' | 'projectNumber'
+  sortOrder: SortOrder
 }
 
 export interface Settings {
   categoryOrder: Array<Category['id']>
   primaryProjectLink: CustomLink | null
   projectLinks: CustomLink[]
-  projectsSortOrder: ProjectSortOrder
+  projectsSortOrder: ProjectsSortOrder
   projectIdWording: string | null
 }
 
@@ -26,8 +27,8 @@ export function getInitialSettingsState(): Settings {
     categoryOrder: [],
     primaryProjectLink: null,
     projectLinks: [],
-    projectsSortOrder: { sortBy: 'id', sortOrder: 'ascending' },
-    projectIdWording: null
+    projectsSortOrder: { sortBy: 'projectNumber', sortOrder: 'ascending' },
+    projectIdWording: null,
   }
 }
 
@@ -49,6 +50,10 @@ const slice = createSlice({
     ) {
       const index = state.categoryOrder.indexOf(action.payload.categoryId)
       swapArrayElements(state.categoryOrder, index, action.payload.direction)
+    },
+
+    setProjectsSortOrder(state, action: PayloadAction<ProjectsSortOrder>) {
+      state.projectsSortOrder = action.payload
     },
   },
 
@@ -72,4 +77,5 @@ const slice = createSlice({
 
 export const settingsReducer = slice.reducer
 
-export const { setPrimaryProjectLink, swapCategories } = slice.actions
+export const { setPrimaryProjectLink, swapCategories, setProjectsSortOrder } =
+  slice.actions

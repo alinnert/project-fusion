@@ -144,7 +144,7 @@ export const GroupListWithProjects: FC<Props> = ({
                 className="mt-8 mb-4"
               />
 
-              {groups.sort(sortByProperty('name')).map((group) => (
+              {groups.sort(sortByProperty((item) => item.name)).map((group) => (
                 <div key={group.id}>
                   <h3
                     style={{ backgroundColor: group.color }}
@@ -169,7 +169,7 @@ export const GroupListWithProjects: FC<Props> = ({
                   </h3>
 
                   {filteredGroups[group.id]
-                    .sort(sortByProperty('name'))
+                    .sort(sortByProperty((item) => item.name))
                     .map((project) => (
                       <ProjectListItem key={project.id} {...project} />
                     ))}

@@ -1,9 +1,20 @@
+import { SortOrder } from '../redux/settings/SortOrder'
+
+export type SortByPropertyOptions = {
+  direction: SortOrder
+}
+
 export function sortByProperty<T>(
-  property: keyof T,
-): (itemA: T, itemB: T) => -1 | 0 | 1 {
+  getProperty: (item: T) => string,
+  options: SortByPropertyOptions = { direction: 'ascending' },
+): (itemA: T, itemB: T) => number {
+  const ascending = options.direction === 'ascending'
   return (itemA, itemB) => {
-    if (itemA[property] < itemB[property]) return -1
-    if (itemA[property] > itemB[property]) return 1
-    return 0
+    const result = getProperty(itemA).localeCompare(
+      getProperty(itemB),
+      undefined,
+      { numeric: true, sensitivity: 'base' },
+    )
+    return ascending ? result : result * -1
   }
 }

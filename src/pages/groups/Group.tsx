@@ -1,4 +1,4 @@
-import { FolderIcon } from '@heroicons/react/20/solid'
+import { ArrowsUpDownIcon, FolderIcon } from '@heroicons/react/20/solid'
 import {
   FolderIcon as FolderIconOutline,
   QueueListIcon,
@@ -8,10 +8,17 @@ import { useTranslation } from 'react-i18next'
 import { useGroupFromRoute } from '../../components/groups/useGroupFromRoute'
 import { ProjectList } from '../../components/projects/ProjectList'
 import { useProjectsFromGroup } from '../../components/projects/useProjectsFromGroup'
+import {
+  DropdownMenu,
+  DropdownMenuItem,
+} from '../../components/ui/dropdownMenu/DropdownMenu'
 import { EmptyText } from '../../components/ui/EmptyText'
 import { Markdown } from '../../components/ui/Markdown'
 import { PageContent } from '../../components/ui/PageContent'
 import { ToolbarContainer } from '../../components/ui/toolbar/ToolbarContainer'
+import { useAppSelector } from '../../redux'
+import { ProjectsSortOrder } from '../../redux/settings'
+import { useGroupActions } from './useGroupActions'
 import { useGroupDialogs } from './useGroupDialogs'
 import { useGroupShortcuts } from './useGroupShortcuts'
 import { useToolbarItems } from './useToolbarItems'
@@ -21,6 +28,11 @@ export const Group: FC = () => {
 
   const { group } = useGroupFromRoute()
   const projects = useProjectsFromGroup(group)
+  const projectsSortOrder = useAppSelector(
+    (state) => state.settings.projectsSortOrder,
+  )
+
+  const { changeProjectsSortOrder } = useGroupActions()
 
   const {
     confirmDelete: {
@@ -33,12 +45,35 @@ export const Group: FC = () => {
 
   useGroupShortcuts()
 
+  const sortButtonText = `${t('common:buttons.sort')}`
+
   if (group === null) {
     return (
       <EmptyText icon={<FolderIcon />} title={t('groups:empty.title')}>
         {t('groups:empty.body')}
       </EmptyText>
     )
+  }
+
+  function createSortMenuItem(
+    sortBy: ProjectsSortOrder['sortBy'],
+    sortOrder: ProjectsSortOrder['sortOrder'],
+  ): DropdownMenuItem {
+    return {
+      type: 'button',
+
+      label: `${t(`projects:labels.${sortBy}`)} (${t(
+        `common:terms.${sortOrder}`,
+      )})`,
+
+      checked:
+        projectsSortOrder.sortBy === sortBy &&
+        projectsSortOrder.sortOrder === sortOrder,
+
+      action() {
+        changeProjectsSortOrder({ sortBy, sortOrder })
+      },
+    }
   }
 
   return (
@@ -62,6 +97,24 @@ export const Group: FC = () => {
 
         <PageContent
           title={t('projects:terms.project_plural')}
+          titleButtons={
+            <>
+              <DropdownMenu
+                buttonType="flat"
+                buttonSize="small"
+                align="right"
+                icon={<ArrowsUpDownIcon />}
+                items={[
+                  createSortMenuItem('projectNumber', 'ascending'),
+                  createSortMenuItem('projectNumber', 'descending'),
+                  createSortMenuItem('name', 'ascending'),
+                  createSortMenuItem('name', 'descending'),
+                ]}
+              >
+                {sortButtonText}
+              </DropdownMenu>
+            </>
+          }
           icon={<QueueListIcon />}
           iconClassName="text-neutral-500"
           iconType="outline"

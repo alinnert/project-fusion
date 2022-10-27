@@ -111,7 +111,7 @@ export const GroupList: FC = () => {
         const categoryGroups = resolveIds(category.groups, groups)
         const categoryLinkItems = categoryGroups
           .map(createLinkItem)
-          .sort(sortByProperty<LinkItem>('name'))
+          .sort(sortByProperty((item) => item.name))
 
         return [category, categoryLinkItems]
       },
