@@ -13,7 +13,7 @@ import {
 } from '../../redux/projects'
 import { createId } from '../../utils/customNanoId'
 import { useGlobalKeyDown } from '../../utils/events'
-import { useCtrlOrCmd } from '../../utils/keyboard'
+import { ctrlOrCmd } from '../../utils/keyboard'
 import { Checkbox } from '../ui/forms/Checkbox'
 import { Form } from '../ui/forms/Form'
 import { Input } from '../ui/forms/Input'
@@ -31,8 +31,6 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
   const params = useParams()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-
-  const ctrlOrCmd = useCtrlOrCmd()
 
   const [name, setName] = useState(init?.name ?? '')
   const [projectNumber, setProjectNumber] = useState(init?.projectNumber ?? '')

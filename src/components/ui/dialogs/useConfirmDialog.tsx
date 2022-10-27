@@ -16,14 +16,17 @@ interface Options {
   onCancel?: () => void
 }
 
-interface Result {
+export interface UseConfirmDialogResult {
   dialog: ReactElement
   openDialog: (options: OpenDialogOptions) => void
 }
 
 const confirmButtonDefaultType: ButtonType = 'primary'
 
-export function useConfirmDialog({ onConfirm, onCancel }: Options): Result {
+export function useConfirmDialog({
+  onConfirm,
+  onCancel,
+}: Options): UseConfirmDialogResult {
   const { t } = useTranslation()
   const [title, setTitle] = useState('')
   const [message, setMessage] = useState('')
