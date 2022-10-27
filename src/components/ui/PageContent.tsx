@@ -5,6 +5,7 @@ import { Heroicon } from './Heroicon'
 
 interface Props {
   title?: string
+  titleButtons?: ReactElement
   icon?: ReactElement
   iconColor?: string
   iconClassName?: string
@@ -22,6 +23,7 @@ interface Props {
 export const PageContent: FC<PropsWithChildren<Props>> = ({
   children,
   title,
+  titleButtons,
   icon,
   iconColor,
   iconClassName,
@@ -57,7 +59,7 @@ export const PageContent: FC<PropsWithChildren<Props>> = ({
         ) : null}
 
         {title !== undefined ? (
-          <div className="text-lg font-semibold mb-4 flex items-center">
+          <div className="mb-4 flex items-center">
             {icon !== undefined ? (
               <div className={classNames('flex-0 mr-2', iconClassName)}>
                 <Heroicon
@@ -69,7 +71,11 @@ export const PageContent: FC<PropsWithChildren<Props>> = ({
               </div>
             ) : null}
 
-            <h2 className="flex-1 select-text">{title}</h2>
+            <h2 className="flex-1 select-text text-lg font-semibold">
+              {title}
+            </h2>
+
+            {titleButtons !== undefined ? <div>{titleButtons}</div> : null}
           </div>
         ) : null}
 

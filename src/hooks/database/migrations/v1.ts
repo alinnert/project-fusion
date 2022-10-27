@@ -5,7 +5,7 @@ export const v1: Migration = {
   run(database) {
     // #23: Make projects sortable
     database.settings.projectsSortOrder = {
-      sortBy: 'id',
+      sortBy: 'name',
       sortOrder: 'ascending',
     }
 

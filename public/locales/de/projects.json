@@ -24,7 +24,7 @@
   },
   "labels": {
     "name": "Name",
-    "id": "Projektnummer",
+    "projectNumber": "Projektnummer",
     "notes": "Notizen (Markdown)",
     "important": "Favorit",
     "archived": "Archiviert"

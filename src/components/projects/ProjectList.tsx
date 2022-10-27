@@ -1,6 +1,8 @@
 import React, { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useAppSelector } from '../../redux'
 import { Project } from '../../redux/projects'
+import { sortByProperty } from '../../utils/sortByProperty'
 import { ProjectListGroup } from './ProjectListGroup'
 
 type GroupName = 'active' | 'archived'
@@ -12,6 +14,10 @@ interface Props {
 export const ProjectList: FC<Props> = ({ projects }) => {
   const { t } = useTranslation()
 
+  const projectsSortOrder = useAppSelector(
+    (state) => state.settings.projectsSortOrder,
+  )
+
   const groupedProjects = useMemo<Record<GroupName, Project[]>>(() => {
     const groups: Record<GroupName, Project[]> = { active: [], archived: [] }
 
@@ -20,8 +26,20 @@ export const ProjectList: FC<Props> = ({ projects }) => {
       groups[groupName].push(project)
     }
 
+    groups.active.sort(
+      sortByProperty((item) => item[projectsSortOrder.sortBy], {
+        direction: projectsSortOrder.sortOrder,
+      }),
+    )
+
+    groups.archived.sort(
+      sortByProperty((item) => item[projectsSortOrder.sortBy], {
+        direction: projectsSortOrder.sortOrder,
+      }),
+    )
+
     return groups
-  }, [projects])
+  }, [projects, projectsSortOrder])
 
   return (
     <div>

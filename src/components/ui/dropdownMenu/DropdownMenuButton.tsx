@@ -1,3 +1,4 @@
+import { CheckIcon } from '@heroicons/react/20/solid'
 import classNames from 'classnames'
 import React, { FC, ReactElement } from 'react'
 import { mapBooleanToString, mapUnionToString } from '../../../utils/map'
@@ -58,6 +59,8 @@ export const DropdownMenuButton: FC<Props> = ({ isActive, item }) => {
         <div className="mr-3">
           {item.icon !== undefined ? (
             <Heroicon icon={item.icon} />
+          ) : item.checked ? (
+            <Heroicon icon={<CheckIcon />} />
           ) : (
             <PlaceholderIcon />
           )}
