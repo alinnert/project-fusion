@@ -3,8 +3,9 @@ import { useAppSelector } from '../../redux'
 import { Database } from '../../redux/database'
 import { writeStateToFile } from '../../redux/middleware/saveDatabase/writeStateToFile'
 import { v1 } from './migrations/v1'
+import { v2 } from './migrations/v2'
 
-const migrations = [v1]
+const migrations = [v1, v2]
 
 export type Migration = { version: number; run: (database: Database) => void }
 

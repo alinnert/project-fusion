@@ -25,7 +25,7 @@
   "labels": {
     "name": "Name",
     "projectNumber": "Project number",
-    "notes": "Notes (Markdown)",
+    "notes": "Notes (supports Markdown)",
     "important": "Favorite",
     "archived": "Archived"
   },

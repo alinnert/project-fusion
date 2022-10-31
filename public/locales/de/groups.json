@@ -21,7 +21,7 @@
     "name": "Gruppenname",
     "color": "Farbe",
     "category": "Kategorie",
-    "notes": "Notizen (Unterstützt Markdown)"
+    "notes": "Notizen (unterstützt Markdown)"
   },
   "editForm": {
     "create": {

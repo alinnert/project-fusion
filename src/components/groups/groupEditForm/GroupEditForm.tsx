@@ -14,7 +14,7 @@ import { PageContent } from '../../ui/PageContent'
 import { ToolbarContainer } from '../../ui/toolbar/ToolbarContainer'
 import { useGroupEditFormActions } from './useGroupEditFormActions'
 import { useGroupEditFormShortcuts } from './useGroupEditFormShortcuts'
-import { useToolbarItems } from './useToolbarItems'
+import { useGroupEditFormToolbarItems } from './useGroupEditFormToolbarItems'
 
 interface Props {
   init?: ProjectGroup | null
@@ -51,7 +51,7 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
     categoryId,
     init,
   })
-  const toolbarItems = useToolbarItems({ init, name, color, saveGroup })
+  const toolbarItems = useGroupEditFormToolbarItems({ init, name, color, saveGroup })
   useGroupEditFormShortcuts({ saveGroup })
 
   return (

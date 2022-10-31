@@ -2,6 +2,7 @@ import { Dictionary } from '@reduxjs/toolkit'
 import { AppState } from '../..'
 import { asyncTry } from '../../../utils/tryCatch'
 import { Category } from '../../categories'
+import { Dashboard } from '../../dashboard'
 import { ProjectGroup } from '../../groups'
 import { Project } from '../../projects'
 import { Settings } from '../../settings'
@@ -15,6 +16,7 @@ export function resetLastFileContent(): void {
 
 export type DatabaseFileContent = {
   version?: number
+  dashboard: Dashboard
   categories: Dictionary<Category>
   groups: Dictionary<ProjectGroup>
   projects: Dictionary<Project>
@@ -24,6 +26,7 @@ export type DatabaseFileContent = {
 export async function writeStateToFile(state: AppState): Promise<void> {
   const content: DatabaseFileContent = {
     version: state.database.version,
+    dashboard: state.dashboard,
     categories: state.categories.entities,
     groups: state.groups.entities,
     projects: state.projects.entities,

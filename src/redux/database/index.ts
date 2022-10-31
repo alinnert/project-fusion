@@ -1,12 +1,14 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppState } from '..'
 import { Category } from '../categories'
+import { Dashboard } from '../dashboard'
 import { ProjectGroup } from '../groups'
 import { Project } from '../projects'
 import { Settings } from '../settings'
 
 export interface Database {
   version?: number
+  dashboard: Dashboard
   categories: Record<Category['id'], Category>
   groups: Record<ProjectGroup['id'], ProjectGroup>
   projects: Record<Project['id'], Project>
