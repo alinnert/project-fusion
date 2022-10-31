@@ -36,11 +36,6 @@ export const DashboardEditForm: FC<Props> = ({ dashboard }) => {
       toolbarPadding="lg"
     >
       <PageContent centered>
-        <div className="text-xl mb-8 flex items-center gap-x-2">
-          <Heroicon icon={<HomeIcon />} scale={1.5} />
-          Dashboard
-        </div>
-
         <Form type="page" onSubmit={handleSubmit} submitOnCtrlEnter>
           <Textarea
             label={t('dashboard:labels.notes')}
