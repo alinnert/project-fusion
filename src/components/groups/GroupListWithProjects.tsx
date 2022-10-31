@@ -12,6 +12,7 @@ import { isDefined } from '../../utils/isDefined'
 import { sortByProperty } from '../../utils/sortByProperty'
 import { ProjectListItem } from '../projects/ProjectListItem'
 import { useGetProjectsFromGroup } from '../projects/useProjectsFromGroup'
+import { useSortMenu } from '../projects/useSortMenu'
 import { Heroicon } from '../ui/Heroicon'
 import { PageContent } from '../ui/PageContent'
 import { TextDivider } from '../ui/TextDivider'
@@ -42,6 +43,11 @@ export const GroupListWithProjects: FC<Props> = ({
   const categoryEntities = useAppSelector((state) => state.categories.entities)
   const categoryOrder = useAppSelector((state) => state.settings.categoryOrder)
   const groupsWithoutCategory = useAppSelector(selectGroupsWithoutCategory)
+  const { sortMenu } = useSortMenu()
+
+  const projectsSortOrder = useAppSelector(
+    (state) => state.settings.projectsSortOrder,
+  )
 
   const categories = useMemo(() => {
     return categoryOrder
@@ -119,6 +125,7 @@ export const GroupListWithProjects: FC<Props> = ({
   return (
     <PageContent
       title={title}
+      titleButtons={<>{sortMenu}</>}
       icon={titleIcon}
       iconType="outline"
       iconClassName={titleIconClassName}
@@ -169,7 +176,11 @@ export const GroupListWithProjects: FC<Props> = ({
                   </h3>
 
                   {filteredGroups[group.id]
-                    .sort(sortByProperty((item) => item.name))
+                    .sort(
+                      sortByProperty((item) => item[projectsSortOrder.sortBy], {
+                        direction: projectsSortOrder.sortOrder,
+                      }),
+                    )
                     .map((project) => (
                       <ProjectListItem key={project.id} {...project} />
                     ))}
