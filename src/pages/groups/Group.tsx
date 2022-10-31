@@ -45,8 +45,6 @@ export const Group: FC = () => {
 
   useGroupShortcuts()
 
-  const sortButtonText = `${t('common:buttons.sort')}`
-
   if (group === null) {
     return (
       <EmptyText icon={<FolderIcon />} title={t('groups:empty.title')}>
