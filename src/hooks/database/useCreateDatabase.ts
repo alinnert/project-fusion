@@ -1,6 +1,7 @@
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../../redux'
+import { getInitialDashboardState } from '../../redux/dashboard'
 import { Database, setDatabase, startLoading } from '../../redux/database'
 import { setCurrentFile } from '../../redux/middleware/saveDatabase/currentFile'
 import { getInitialSettingsState } from '../../redux/settings'
@@ -11,6 +12,7 @@ import { useWriteEmptyFile } from './useWriteEmptyFile'
 
 export function createEmptyDatabase(): Database {
   return {
+    dashboard: getInitialDashboardState(),
     categories: {},
     groups: {},
     projects: {},

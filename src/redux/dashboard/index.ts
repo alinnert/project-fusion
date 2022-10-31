@@ -5,7 +5,7 @@ export type Dashboard = {
   notes: string
 }
 
-function getInitialDashboardState(): Dashboard {
+export function getInitialDashboardState(): Dashboard {
   return { notes: '' }
 }
 
