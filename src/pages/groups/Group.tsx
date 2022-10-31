@@ -15,7 +15,7 @@ import { PageContent } from '../../components/ui/PageContent'
 import { ToolbarContainer } from '../../components/ui/toolbar/ToolbarContainer'
 import { useGroupDialogs } from './useGroupDialogs'
 import { useGroupShortcuts } from './useGroupShortcuts'
-import { useToolbarItems } from './useToolbarItems'
+import { useGroupToolbarItems } from './useGroupToolbarItems'
 
 export const Group: FC = () => {
   const { t } = useTranslation()
@@ -30,7 +30,7 @@ export const Group: FC = () => {
     },
   } = useGroupDialogs()
 
-  const toolbarItems = useToolbarItems({ openConfirmDeleteDialog })
+  const toolbarItems = useGroupToolbarItems({ openConfirmDeleteDialog })
   const { sortMenu } = useSortMenu()
 
   useGroupShortcuts()

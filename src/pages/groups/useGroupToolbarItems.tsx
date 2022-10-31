@@ -6,13 +6,13 @@ import { UseConfirmDialogResult } from '../../components/ui/dialogs/useConfirmDi
 import { ToolbarItem } from '../../components/ui/toolbar/ToolbarContainer'
 import { useGroupActions } from './useGroupActions'
 
-type UseToolbarItemsOptions = {
+type UseGroupToolbarItemsOptions = {
   openConfirmDeleteDialog: UseConfirmDialogResult['openDialog']
 }
 
-export function useToolbarItems({
+export function useGroupToolbarItems({
   openConfirmDeleteDialog,
-}: UseToolbarItemsOptions): ToolbarItem[] {
+}: UseGroupToolbarItemsOptions): ToolbarItem[] {
   const { t } = useTranslation()
   const { groupId, group } = useGroupFromRoute()
   const { createProject, editGroup } = useGroupActions()

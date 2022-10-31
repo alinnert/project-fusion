@@ -2,8 +2,10 @@ import { HomeIcon, PencilIcon } from '@heroicons/react/20/solid'
 import { StarIcon } from '@heroicons/react/24/outline'
 import React, { FC, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 import { GroupListWithProjects } from '../../components/groups/GroupListWithProjects'
 import { EmptyText } from '../../components/ui/EmptyText'
+import { Markdown } from '../../components/ui/Markdown'
 import { PageContent } from '../../components/ui/PageContent'
 import {
   ToolbarContainer,
@@ -14,8 +16,10 @@ import { Project } from '../../redux/projects'
 
 export const Dashboard: FC = () => {
   const { t } = useTranslation()
+  const navigate = useNavigate()
 
   const groups = useAppSelector((state) => state.groups.entities)
+  const notes = useAppSelector((state) => state.dashboard.notes)
 
   const showProject = useCallback((project: Project): boolean => {
     return project.important && !project.archived
@@ -27,13 +31,12 @@ export const Dashboard: FC = () => {
         type: 'button',
         label: t('common:buttons.edit'),
         icon: <PencilIcon />,
-        visible: false,
         action() {
-          console.log('hi')
+          navigate('/groups/dashboard/edit')
         },
       },
     ]
-  }, [t])
+  }, [navigate, t])
 
   return (
     <ToolbarContainer
@@ -42,7 +45,9 @@ export const Dashboard: FC = () => {
       toolbarItems={toolbarItems}
       toolbarPadding="lg"
     >
-      <PageContent centered></PageContent>
+      <PageContent centered>
+        <Markdown text={notes} />
+      </PageContent>
 
       <GroupListWithProjects
         groups={groups}

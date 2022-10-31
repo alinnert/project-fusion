@@ -2,37 +2,24 @@ import { CheckIcon, XMarkIcon } from '@heroicons/react/20/solid'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { ProjectGroup } from '../../../redux/groups'
-import { ToolbarItem } from '../../ui/toolbar/ToolbarContainer'
+import { ToolbarItem } from '../ui/toolbar/ToolbarContainer'
 
-type UseToolbarItemsOptions = {
-  init: ProjectGroup | null
-  name: string
-  color: string
-  saveGroup: () => void
+type UseDashboardToolbarItemsOptions = {
+  saveDashboard: () => void
 }
 
-export function useToolbarItems({
-  init,
-  name,
-  color,
-  saveGroup,
-}: UseToolbarItemsOptions): ToolbarItem[] {
+export function useDashboardToolbarItems({
+  saveDashboard,
+}: UseDashboardToolbarItemsOptions): ToolbarItem[] {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
   function isFormValid(): boolean {
-    if (name.trim() === '') return false
-    if (!color.match(/^#[0-9a-fA-F]{3,6}$/)) return false
+    // Currently the form is always valid. The content of`notes` doesn't matter.
     return true
   }
 
   function cancel(): void {
-    if (init !== null) {
-      navigate(`/groups/${init.id}`)
-      return
-    }
-
     navigate('/groups')
   }
 
@@ -42,8 +29,8 @@ export function useToolbarItems({
       buttonType: 'primary',
       label: t('common:buttons.save'),
       icon: <CheckIcon />,
-      disabled: !isFormValid,
-      action: saveGroup,
+      disabled: !isFormValid(),
+      action: saveDashboard,
     },
     {
       type: 'button',

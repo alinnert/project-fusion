@@ -18,6 +18,7 @@ import { CreateProject } from './pages/projects/CreateProject'
 import { EditProject } from './pages/projects/EditProject'
 import { Search } from './pages/Search'
 import { ConfigAbout } from './pages/config/ConfigAbout'
+import { EditDashboard } from './pages/dashboard/EditDashboard'
 
 export const AppRoutes: FC = () => {
   useRedirects()
@@ -35,6 +36,7 @@ export const AppRoutes: FC = () => {
         <Route path="groups" element={<DataLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="create" element={<CreateGroup />} />
+          <Route path='dashboard/edit' element={<EditDashboard />} />
 
           <Route path=":groupId">
             <Route index element={<Group />} />
