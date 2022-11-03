@@ -4,7 +4,7 @@ import {
   FolderPlusIcon,
   HomeIcon,
   StarIcon,
-  TagIcon
+  TagIcon,
 } from '@heroicons/react/20/solid'
 import classNames from 'classnames'
 import React, { FC, useMemo } from 'react'

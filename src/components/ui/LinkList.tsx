@@ -4,12 +4,12 @@ import { LinkListItem } from './LinkListItem'
 import { TextDivider } from './TextDivider'
 
 export interface LinkCategory {
-  id: string
+  id: string | number
   name: string
 }
 
 export interface LinkItem {
-  id: string | null
+  id: string | number | null
   name: string
   icon?: ReactElement
   iconColor?: string

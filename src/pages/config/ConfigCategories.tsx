@@ -1,4 +1,5 @@
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/20/solid'
+import { EntityId } from '@reduxjs/toolkit'
 import React, { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useOrderedCategories } from '../../components/categories/useOrderedCategories'
@@ -64,7 +65,7 @@ export const ConfigCategories: FC = () => {
     },
   })
 
-  function handleSwap(categoryId: string, direction: SwapDirection): void {
+  function handleSwap(categoryId: EntityId, direction: SwapDirection): void {
     dispatch(swapCategories({ categoryId, direction }))
   }
 

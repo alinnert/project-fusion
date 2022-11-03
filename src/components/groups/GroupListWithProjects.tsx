@@ -1,5 +1,5 @@
 import { FolderIcon } from '@heroicons/react/20/solid'
-import { Dictionary } from '@reduxjs/toolkit'
+import { Dictionary, EntityId } from '@reduxjs/toolkit'
 import classNames from 'classnames'
 import React, { FC, ReactElement, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -69,7 +69,7 @@ export const GroupListWithProjects: FC<Props> = ({
     return result
   }, [getProjectsFromGroup, groups, showProject])
 
-  const filteredGroupIds = useMemo(
+  const filteredGroupIds = useMemo<EntityId[]>(
     () => Object.keys(filteredGroups),
     [filteredGroups],
   )

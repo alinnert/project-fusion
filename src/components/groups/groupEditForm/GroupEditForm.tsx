@@ -51,7 +51,12 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
     categoryId,
     init,
   })
-  const toolbarItems = useGroupEditFormToolbarItems({ init, name, color, saveGroup })
+  const toolbarItems = useGroupEditFormToolbarItems({
+    init,
+    name,
+    color,
+    saveGroup,
+  })
   useGroupEditFormShortcuts({ saveGroup })
 
   return (

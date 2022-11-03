@@ -1,5 +1,7 @@
+import { EntityId } from '@reduxjs/toolkit'
+
 export function resolveIds<T>(
-  ids: string[],
+  ids: EntityId[],
   items: Record<string, T | undefined>,
 ): T[] {
   const result: T[] = []

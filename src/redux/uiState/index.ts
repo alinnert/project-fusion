@@ -1,8 +1,8 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, EntityId, PayloadAction } from '@reduxjs/toolkit'
 
 export interface UiSettings {
-  currentGroupId: string | null
-  currentConfigId: string
+  currentGroupId: EntityId | null
+  currentConfigId: EntityId
 }
 
 function getInitialUiSettingsState(): UiSettings {

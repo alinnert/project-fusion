@@ -10,18 +10,18 @@ import { mapBooleanToString } from '../../../utils/map'
 import { Heroicon } from '../Heroicon'
 
 export interface SelectItem {
-  value: string
+  value: string | number
   label: string
 }
 
 interface SelectNullValue {
-  value: string
+  value: string | number
   label: string
 }
 
 interface Props {
   items: SelectItem[]
-  value: string | null
+  value: string | number | null
   label?: string
   nullValue?: SelectNullValue
   className?: string
@@ -108,7 +108,7 @@ export const Select: FC<Props> = ({
                       )}
                     >
                       <div className="w-8 flex-0 flex justify-center">
-                        {isSelected(selected, item.value) ? (
+                        {isSelected(selected, item.value.toString()) ? (
                           <Heroicon
                             icon={
                               <CheckIcon
@@ -129,7 +129,7 @@ export const Select: FC<Props> = ({
                         className={classNames(
                           'flex-1',
                           mapBooleanToString(
-                            isSelected(selected, item.value),
+                            isSelected(selected, item.value.toString()),
                             classNames(
                               'font-semibold',
                               mapBooleanToString(

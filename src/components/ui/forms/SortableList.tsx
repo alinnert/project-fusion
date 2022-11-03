@@ -1,4 +1,5 @@
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/20/solid'
+import { EntityId } from '@reduxjs/toolkit'
 import classNames from 'classnames'
 import React, { FC, ReactElement, ReactNode } from 'react'
 import { mapBooleanToString } from '../../../utils/map'
@@ -8,12 +9,12 @@ import { Button } from './Button'
 export type SwapDirection = 'up' | 'down'
 
 interface Props {
-  children: (id: string) => ReactNode
-  ids: Array<string>
-  selectedId: string | null
+  children: (id: EntityId) => ReactNode
+  ids: Array<EntityId>
+  selectedId: EntityId | null
   additionalButtons?: ReactElement
-  onSwap: (id: string, direction: SwapDirection) => void
-  onSelectedIdChange: (id: string) => void
+  onSwap: (id: EntityId, direction: SwapDirection) => void
+  onSelectedIdChange: (id: EntityId) => void
 }
 
 export const SortableList: FC<Props> = ({
