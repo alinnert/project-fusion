@@ -2,6 +2,7 @@ import {
   createEntityAdapter,
   createSelector,
   createSlice,
+  EntityId,
   EntityState,
   PayloadAction,
 } from '@reduxjs/toolkit'
@@ -11,7 +12,7 @@ import { closeDatabase, setDatabase } from '../database'
 import { Project } from '../projects'
 
 export interface ProjectGroup {
-  id: string
+  id: EntityId
   name: string
   color: string
   notes: string
@@ -73,6 +74,8 @@ export const {
   setGroups,
   addProjectToGroup,
 } = slice.actions
+
+export const groupsActions = slice.actions
 
 export const selectGroupIdsWithoutCategory = createSelector(
   [

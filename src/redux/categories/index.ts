@@ -1,6 +1,7 @@
 import {
   createEntityAdapter,
   createSlice,
+  EntityId,
   EntityState,
   PayloadAction,
 } from '@reduxjs/toolkit'
@@ -9,7 +10,7 @@ import { closeDatabase, setDatabase } from '../database'
 import { ProjectGroup } from '../groups'
 
 export interface Category {
-  id: string
+  id: EntityId
   name: string
   groups: Array<ProjectGroup['id']>
 }

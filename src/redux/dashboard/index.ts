@@ -27,3 +27,5 @@ const slice = createSlice({
 export const dashboardReducer = slice.reducer
 
 export const { setNotes } = slice.actions
+
+export const dashboardActions = slice.actions

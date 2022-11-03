@@ -3,14 +3,13 @@ import { CheckIcon } from '@heroicons/react/24/outline'
 import React, { FC, FormEvent, useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router'
-import { useAppDispatch, useAppSelector } from '../../redux'
-import { addProjectToGroup } from '../../redux/groups'
 import {
-  addProject,
-  Project,
-  ProjectTemplate,
-  updateProject
-} from '../../redux/projects'
+  createProjectCommand,
+  updateProjectCommand,
+} from '../../commands/projectCommands'
+import { useCommand } from '../../commands/useCommand'
+import { useAppSelector } from '../../redux'
+import { Project, ProjectTemplate } from '../../redux/projects'
 import { createId } from '../../utils/customNanoId'
 import { useGlobalKeyDown } from '../../utils/events'
 import { ctrlOrCmd } from '../../utils/keyboard'
@@ -30,7 +29,9 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
   const { t } = useTranslation()
   const params = useParams()
   const navigate = useNavigate()
-  const dispatch = useAppDispatch()
+
+  const createProjectCommandAction = useCommand(createProjectCommand)
+  const updateProjectCommandAction = useCommand(updateProjectCommand)
 
   const [name, setName] = useState(init?.name ?? '')
   const [projectNumber, setProjectNumber] = useState(init?.projectNumber ?? '')
@@ -67,55 +68,29 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
       : `${t('projects:editForm.create.pageTitle')}`
   }, [isEditingExistingProject, t])
 
+  const project = useMemo<Project>(() => {
+    return { id: createId(), name, projectNumber, important, archived, notes }
+  }, [archived, important, name, notes, projectNumber])
+
   const createProject = useCallback(() => {
     if (groupId === null) return
-
-    const id = createId()
-
-    dispatch(
-      addProject({ id, name, projectNumber, important, archived, notes }),
-    )
-
-    dispatch(addProjectToGroup({ groupId, projectId: id }))
-
-    navigate(`/groups/${groupId}`)
-  }, [
-    groupId,
-    dispatch,
-    name,
-    projectNumber,
-    important,
-    archived,
-    notes,
-    navigate,
-  ])
+    createProjectCommandAction.runAndNavigate({ project, groupId })
+  }, [groupId, createProjectCommandAction, project])
 
   const editProject = useCallback(() => {
     if (init === null) return
     if (init.id === undefined) return
-
-    dispatch(
-      updateProject({
-        id: init.id,
-        changes: { name, projectNumber, important, archived, notes },
-      }),
-    )
-
-    if (groupId !== null) {
-      dispatch(addProjectToGroup({ groupId: groupId, projectId: init.id }))
-    }
-
-    navigate(`/groups/${groupId}`)
+    const changes = { name, projectNumber, important, archived, notes }
+    updateProjectCommandAction.runAndNavigate({ id: init.id, changes, groupId })
   }, [
     init,
-    dispatch,
+    updateProjectCommandAction,
     name,
     projectNumber,
     important,
     archived,
     notes,
     groupId,
-    navigate,
   ])
 
   const saveProject = useCallback(() => {

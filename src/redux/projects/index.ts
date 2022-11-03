@@ -1,8 +1,13 @@
-import { createEntityAdapter, createSlice, EntityState } from '@reduxjs/toolkit'
+import {
+  createEntityAdapter,
+  createSlice,
+  EntityId,
+  EntityState,
+} from '@reduxjs/toolkit'
 import { closeDatabase, setDatabase } from '../database'
 
 export interface Project {
-  id: string
+  id: EntityId
   name: string
   projectNumber: string
   important: boolean
@@ -49,3 +54,5 @@ export const {
   removeProjects,
   setProjects,
 } = slice.actions
+
+export const projectsActions = slice.actions
