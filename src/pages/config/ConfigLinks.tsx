@@ -91,7 +91,7 @@ export const ConfigLinks: FC = () => {
     openConfirmDeletePrimaryProjectLinkDialog({
       title: t('settings:links.projectLinks.primaryLink.deleteDialog.title'),
       message: t('settings:links.projectLinks.primaryLink.deleteDialog.body'),
-      confirmButtonLabel: t('common:buttons.delete'),
+      confirmButtonLabel: t('common:buttons.delete') ?? undefined,
       confirmButtonType: 'delete',
     })
   }
@@ -101,7 +101,7 @@ export const ConfigLinks: FC = () => {
       {confirmDeletePrimaryProjectLinkDialog}
 
       <ToolbarContainer
-        title={t('settings:links.title')}
+        title={t('settings:links.title') ?? undefined}
         icon={{
           element: databaseSettings.links.icon,
           color: databaseSettings.links.iconColor,
@@ -117,12 +117,18 @@ export const ConfigLinks: FC = () => {
               <Input
                 value={primaryProjectLinkLabel}
                 onChange={setPrimaryProjectLinkLabel}
-                label={t('settings:links.projectLinks.primaryLink.labelLabel')}
+                label={
+                  t('settings:links.projectLinks.primaryLink.labelLabel') ??
+                  undefined
+                }
               />
               <Input
                 value={primaryProjectLinkUrl}
                 onChange={setPrimaryProjectLinkUrl}
-                label={t('settings:links.projectLinks.primaryLink.urlLabel')}
+                label={
+                  t('settings:links.projectLinks.primaryLink.urlLabel') ??
+                  undefined
+                }
               />
             </div>
             <div className="flex items-center gap-x-2">

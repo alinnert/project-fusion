@@ -40,7 +40,7 @@ export const Dashboard: FC = () => {
 
   return (
     <ToolbarContainer
-      title={t('groups:list.specialItems.dashboard')}
+      title={t('groups:list.specialItems.dashboard') ?? undefined}
       icon={{ element: <HomeIcon />, className: 'text-brand-700' }}
       toolbarItems={toolbarItems}
       toolbarPadding="lg"
@@ -51,14 +51,14 @@ export const Dashboard: FC = () => {
 
       <GroupListWithProjects
         groups={groups}
-        title={t('groups:terms.favorites')}
+        title={t('groups:terms.favorites') ?? undefined}
         titleIcon={<StarIcon />}
         titleIconClassName="text-yellow-600"
         showTitleWhenEmpty={false}
         showProject={showProject}
         emptyPlaceholder={
           <EmptyText
-            title={t('projects:favorites.noFavorites.title')}
+            title={t('projects:favorites.noFavorites.title') ?? undefined}
             icon={<StarIcon />}
           >
             {t('projects:favorites.noFavorites.body')}

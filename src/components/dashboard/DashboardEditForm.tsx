@@ -1,11 +1,9 @@
-import { HomeIcon } from '@heroicons/react/20/solid'
 import React, { FC, FormEvent, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Dashboard } from '../../redux/dashboard'
+import { PageContent } from '../ui/PageContent'
 import { Form } from '../ui/forms/Form'
 import { Textarea } from '../ui/forms/Textarea'
-import { Heroicon } from '../ui/Heroicon'
-import { PageContent } from '../ui/PageContent'
 import { ToolbarContainer } from '../ui/toolbar/ToolbarContainer'
 import { useDashboardActions } from './useDashboardActions'
 import { useDashboardShortcuts } from './useDashboardShortcuts'
@@ -38,7 +36,7 @@ export const DashboardEditForm: FC<Props> = ({ dashboard }) => {
       <PageContent centered>
         <Form type="page" onSubmit={handleSubmit} submitOnCtrlEnter>
           <Textarea
-            label={t('dashboard:labels.notes')}
+            label={t('dashboard:labels.notes') ?? undefined}
             value={notes}
             onChange={setNotes}
           />

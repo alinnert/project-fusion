@@ -86,7 +86,7 @@ export const ProjectListItem: FC<Project> = ({
     openConfirmDeleteDialog({
       title: t('projects:deleteDialog.title'),
       message: t('projects:deleteDialog.message', { project: name }),
-      confirmButtonLabel: t('common:buttons.delete'),
+      confirmButtonLabel: t('common:buttons.delete') ?? undefined,
       confirmButtonType: 'delete',
     })
   }, [name, openConfirmDeleteDialog, t])

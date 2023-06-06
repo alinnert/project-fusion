@@ -1,4 +1,3 @@
-import { InformationCircleIcon } from '@heroicons/react/20/solid'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSettings } from '../../components/settings/useSettings'
@@ -12,7 +11,7 @@ export const ConfigAbout: FC = () => {
 
   return (
     <ToolbarContainer
-      title={t('settings:about.title')}
+      title={t('settings:about.title') ?? undefined}
       icon={{
         element: applicationSettings.about.icon,
         color: applicationSettings.about.iconColor,
@@ -20,7 +19,7 @@ export const ConfigAbout: FC = () => {
       toolbarPadding="lg"
     >
       <PageContent
-        title={t('settings:about.title')}
+        title={t('settings:about.title') ?? undefined}
         image={{
           src: '/icon-gradient.svg',
           alt: 'Project Fusion Logo',

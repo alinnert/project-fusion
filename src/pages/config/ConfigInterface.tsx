@@ -13,7 +13,7 @@ export const ConfigInterface: FC = ({}) => {
 
   return (
     <ToolbarContainer
-      title={t('settings:interface.title')}
+      title={t('settings:interface.title') ?? undefined}
       icon={{
         element: applicationSettings.interface.icon,
         color: applicationSettings.interface.iconColor,

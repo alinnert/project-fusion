@@ -24,7 +24,7 @@ export const LanguageSelect: FC = ({}) => {
   return (
     <Select
       items={items}
-      label={t('common:terms.language')}
+      label={t('common:terms.language') ?? undefined}
       value={value}
       onChange={handleLanguageChange}
     />
