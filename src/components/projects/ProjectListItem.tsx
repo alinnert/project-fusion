@@ -7,15 +7,21 @@ import {
   LinkIcon,
   PencilIcon,
   StarIcon,
-  TrashIcon
+  TrashIcon,
 } from '@heroicons/react/20/solid'
 import classNames from 'classnames'
 import { marked } from 'marked'
 import React, { FC, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router'
-import { useAppDispatch, useAppSelector } from '../../redux'
-import { Project, removeProject, updateProject } from '../../redux/projects'
+import {
+  removeProjectCommand,
+  setProjectArchivedPropCommand,
+  setProjectImportantPropCommand,
+} from '../../commands/projectCommands'
+import { useCommand } from '../../commands/useCommand'
+import { useAppSelector } from '../../redux'
+import { Project } from '../../redux/projects'
 import { isDefined } from '../../utils/isDefined'
 import { mapBooleanToString } from '../../utils/map'
 import { useConfirmDialog } from '../ui/dialogs/useConfirmDialog'
@@ -32,13 +38,16 @@ export const ProjectListItem: FC<Project> = ({
   notes,
 }) => {
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
   const navigate = useNavigate()
+
+  const removeProject = useCommand(removeProjectCommand)
+  const setProjectImportantProp = useCommand(setProjectImportantPropCommand)
+  const setProjectArchivedProp = useCommand(setProjectArchivedPropCommand)
 
   const { dialog: confirmDeleteDialog, openDialog: openConfirmDeleteDialog } =
     useConfirmDialog({
       onConfirm() {
-        dispatch(removeProject(id))
+        removeProject.run(id)
       },
     })
 
@@ -62,20 +71,20 @@ export const ProjectListItem: FC<Project> = ({
   }, [group, id, navigate])
 
   const handleAddToFavorites = useCallback(() => {
-    dispatch(updateProject({ id, changes: { important: true } }))
-  }, [dispatch, id])
+    setProjectImportantProp.run({ id, important: true })
+  }, [id, setProjectImportantProp])
 
   const handleRemoveFromFavorites = useCallback(() => {
-    dispatch(updateProject({ id, changes: { important: false } }))
-  }, [dispatch, id])
+    setProjectImportantProp.run({ id, important: false })
+  }, [id, setProjectImportantProp])
 
   const handleAddToArchive = useCallback(() => {
-    dispatch(updateProject({ id, changes: { archived: true } }))
-  }, [dispatch, id])
+    setProjectArchivedProp.run({ id, archived: true })
+  }, [id, setProjectArchivedProp])
 
   const handleRestoreFromArchive = useCallback(() => {
-    dispatch(updateProject({ id, changes: { archived: false } }))
-  }, [dispatch, id])
+    setProjectArchivedProp.run({ id, archived: false })
+  }, [id, setProjectArchivedProp])
 
   const handleDuplicate = useCallback(() => {
     if (group === null) return

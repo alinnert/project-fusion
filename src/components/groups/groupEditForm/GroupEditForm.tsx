@@ -1,8 +1,14 @@
 import { FolderIcon, FolderPlusIcon } from '@heroicons/react/24/outline'
 import React, { FC, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import {
+  createGroupCommand,
+  updateGroupCommand,
+} from '../../../commands/groupCommands'
+import { useCommand } from '../../../commands/useCommand'
 import { Category } from '../../../redux/categories'
 import { ProjectGroup } from '../../../redux/groups'
+import { createId } from '../../../utils/customNanoId'
 import { useCategoryFromGroup } from '../../categories/useCategoryFromGroup'
 import { useOrderedCategories } from '../../categories/useOrderedCategories'
 import { ColorInput } from '../../ui/forms/ColorInput'
@@ -12,7 +18,6 @@ import { Select } from '../../ui/forms/Select'
 import { Textarea } from '../../ui/forms/Textarea'
 import { PageContent } from '../../ui/PageContent'
 import { ToolbarContainer } from '../../ui/toolbar/ToolbarContainer'
-import { useGroupEditFormActions } from './useGroupEditFormActions'
 import { useGroupEditFormShortcuts } from './useGroupEditFormShortcuts'
 import { useGroupEditFormToolbarItems } from './useGroupEditFormToolbarItems'
 
@@ -22,6 +27,10 @@ interface Props {
 
 export const GroupEditForm: FC<Props> = ({ init = null }) => {
   const { t } = useTranslation()
+
+  const updateGroup = useCommand(updateGroupCommand)
+  const create = useCommand(createGroupCommand)
+
   const { orderedCategories } = useOrderedCategories()
   const { categoryId: categoryIdFromGroup } = useCategoryFromGroup(init)
 
@@ -44,19 +53,27 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
     ? t('groups:editForm.edit.pageTitle')
     : t('groups:editForm.create.pageTitle')
 
-  const { saveGroup } = useGroupEditFormActions({
-    name,
-    color,
-    notes,
-    categoryId,
-    init,
-  })
+  function saveGroup(): void {
+    if (init !== null) {
+      const { projects } = init
+      const changes: Partial<ProjectGroup> = { name, color, notes, projects }
+      updateGroup.runAndNavigate({ id: init.id, changes, categoryId })
+    }
+
+    if (init === null) {
+      const id = createId()
+      const group: ProjectGroup = { id, name, color, notes, projects: [] }
+      create.runAndNavigate({ group, categoryId, groupId: id })
+    }
+  }
+
   const toolbarItems = useGroupEditFormToolbarItems({
     init,
     name,
     color,
     saveGroup,
   })
+
   useGroupEditFormShortcuts({ saveGroup })
 
   return (

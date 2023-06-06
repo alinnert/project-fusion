@@ -10,10 +10,11 @@ import classNames from 'classnames'
 import React, { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router'
-import { useAppDispatch, useAppSelector } from '../../redux'
+import { setCurrentGroupCommand } from '../../commands/groupCommands'
+import { useCommand } from '../../commands/useCommand'
+import { useAppSelector } from '../../redux'
 import { selectIsFileOpen } from '../../redux/database'
 import { ProjectGroup, selectGroupsWithoutCategory } from '../../redux/groups'
-import { setCurrentGroupId } from '../../redux/uiState'
 import { capitalize } from '../../utils/capitalize'
 import { mapBooleanToString } from '../../utils/map'
 import { resolveIds } from '../../utils/resolveIds'
@@ -28,7 +29,8 @@ export const GroupList: FC = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const location = useLocation()
-  const dispatch = useAppDispatch()
+
+  const setCurrentGroup = useCommand(setCurrentGroupCommand)
 
   const { groupId } = useGroupFromRoute()
   const { orderedCategories } = useOrderedCategories()
@@ -133,7 +135,7 @@ export const GroupList: FC = () => {
   }
 
   function handleItemClick(item: LinkItem): void {
-    dispatch(setCurrentGroupId(item.id))
+    setCurrentGroup.run(item.id)
   }
 
   if (!isFileOpen) {
