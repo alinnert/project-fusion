@@ -74,7 +74,7 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
           />
 
           <ColorInput
-            label={t('groups:labels.color')}
+            label={t('groups:labels.color') ?? undefined}
             value={color}
             onChange={setColor}
           />
@@ -84,14 +84,14 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
               { value: '', label: t('groups:list.noCategory') },
               ...categorySelectItems,
             ]}
-            label={t('groups:labels.category')}
+            label={t('groups:labels.category') ?? undefined}
             value={categoryId}
             nullValue={{ value: '', label: t('groups:list.noCategory') }}
             onChange={setCategoryId}
           />
 
           <Textarea
-            label={t('groups:labels.notes')}
+            label={t('groups:labels.notes') ?? undefined}
             value={notes}
             onChange={setNotes}
           />

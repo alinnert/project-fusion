@@ -7,7 +7,7 @@ export const Info: FC = () => {
 
   return (
     <PageContent
-      title={t('info:title')}
+      title={t('info:title') ?? undefined}
       image={{
         src: '/icon-gradient.svg',
         alt: 'Project Fusion Logo',

@@ -73,7 +73,7 @@ export const ConfigCategories: FC = () => {
       title: t('settings:categories.createDialog.title'),
       inputLabel: t('settings:categories.createDialog.inputLabel'),
       value: '',
-      primaryButtonLabel: t('common:buttons.create'),
+      primaryButtonLabel: t('common:buttons.create') ?? undefined,
     })
   }
 
@@ -87,7 +87,7 @@ export const ConfigCategories: FC = () => {
         category: category.name,
       }),
       inputLabel: t('settings:categories.renameDialog.inputLabel'),
-      primaryButtonLabel: t('common:buttons.rename'),
+      primaryButtonLabel: t('common:buttons.rename') ?? undefined,
       value: category.name,
     })
   }
@@ -102,7 +102,7 @@ export const ConfigCategories: FC = () => {
       message: t('settings:categories.deleteDialog.message', {
         category: category.name,
       }),
-      confirmButtonLabel: t('common:buttons.delete'),
+      confirmButtonLabel: t('common:buttons.delete') ?? undefined,
       confirmButtonType: 'delete',
     })
   }
@@ -114,7 +114,7 @@ export const ConfigCategories: FC = () => {
       {deleteDialog}
 
       <ToolbarContainer
-        title={t('settings:categories.title')}
+        title={t('settings:categories.title') ?? undefined}
         icon={{
           element: databaseSettings.categories.icon,
           color: databaseSettings.categories.iconColor,

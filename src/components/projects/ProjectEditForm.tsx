@@ -6,20 +6,20 @@ import { useNavigate, useParams } from 'react-router'
 import { useAppDispatch, useAppSelector } from '../../redux'
 import { addProjectToGroup } from '../../redux/groups'
 import {
-  addProject,
   Project,
   ProjectTemplate,
-  updateProject
+  addProject,
+  updateProject,
 } from '../../redux/projects'
 import { createId } from '../../utils/customNanoId'
 import { useGlobalKeyDown } from '../../utils/events'
 import { ctrlOrCmd } from '../../utils/keyboard'
+import { Heroicon } from '../ui/Heroicon'
+import { PageContent } from '../ui/PageContent'
 import { Checkbox } from '../ui/forms/Checkbox'
 import { Form } from '../ui/forms/Form'
 import { Input } from '../ui/forms/Input'
 import { Textarea } from '../ui/forms/Textarea'
-import { Heroicon } from '../ui/Heroicon'
-import { PageContent } from '../ui/PageContent'
 import { ToolbarContainer, ToolbarItem } from '../ui/toolbar/ToolbarContainer'
 
 interface Props {
@@ -189,7 +189,7 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
             />
 
             <Input
-              label={t('projects:labels.projectNumber')}
+              label={t('projects:labels.projectNumber') ?? undefined}
               value={projectNumber}
               onChange={setProjectNumber}
             />
@@ -197,20 +197,20 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
 
           <div className="grid grid-cols-3">
             <Checkbox
-              label={t('projects:labels.important')}
+              label={t('projects:labels.important') ?? undefined}
               value={important}
               onChange={setImportant}
             />
 
             <Checkbox
-              label={t('projects:labels.archived')}
+              label={t('projects:labels.archived') ?? undefined}
               value={archived}
               onChange={setArchived}
             />
           </div>
 
           <Textarea
-            label={t('projects:labels.notes')}
+            label={t('projects:labels.notes') ?? undefined}
             value={notes}
             onChange={setNotes}
           />

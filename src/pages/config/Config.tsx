@@ -7,7 +7,10 @@ export const Config: FC = () => {
   const { t } = useTranslation()
 
   return (
-    <EmptyText title={t('settings:index.title')} icon={<Cog6ToothIcon />}>
+    <EmptyText
+      title={t('settings:index.title') ?? undefined}
+      icon={<Cog6ToothIcon />}
+    >
       {t('settings:index.body')}
     </EmptyText>
   )

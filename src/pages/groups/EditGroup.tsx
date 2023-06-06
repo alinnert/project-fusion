@@ -12,7 +12,10 @@ export const EditGroup: FC = () => {
 
   if (group === null) {
     return (
-      <EmptyText icon={<FolderIcon />} title={t('groups:empty.title')}>
+      <EmptyText
+        icon={<FolderIcon />}
+        title={t('groups:empty.title') ?? undefined}
+      >
         {t('groups:empty.body')}
       </EmptyText>
     )

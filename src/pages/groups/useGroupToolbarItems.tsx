@@ -25,7 +25,7 @@ export function useGroupToolbarItems({
     openConfirmDeleteDialog({
       title: t('groups:deleteDialog.title'),
       message: t('groups:deleteDialog.message', { group: groupName }),
-      confirmButtonLabel: t('groups:deleteDialog.confirmButton'),
+      confirmButtonLabel: t('groups:deleteDialog.confirmButton') ?? undefined,
       confirmButtonType: 'delete',
     })
   }, [group, groupId, openConfirmDeleteDialog, t])

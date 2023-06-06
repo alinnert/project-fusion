@@ -37,7 +37,10 @@ export const Group: FC = () => {
 
   if (group === null) {
     return (
-      <EmptyText icon={<FolderIcon />} title={t('groups:empty.title')}>
+      <EmptyText
+        icon={<FolderIcon />}
+        title={t('groups:empty.title') ?? undefined}
+      >
         {t('groups:empty.body')}
       </EmptyText>
     )
@@ -63,7 +66,7 @@ export const Group: FC = () => {
         </PageContent>
 
         <PageContent
-          title={t('projects:terms.project_plural')}
+          title={t('projects:terms.project_plural') ?? undefined}
           titleButtons={<>{sortMenu}</>}
           icon={<QueueListIcon />}
           iconClassName="text-neutral-500"
