@@ -53,6 +53,6 @@
   },
   "deleteDialog": {
     "title": "Delete $t(projects:terms.project)?",
-    "message": "Do you want to delete the $t(projects:terms.project) \"{{project}}\"?"
+    "message": "Do you want to delete the $t(projects:terms.project) \"{{project}}\" ({{id}})?"
   }
 }

@@ -10,7 +10,15 @@ export const Markdown: FC<Props> = ({ text }) => {
     if (text === null) return null
     if (text === undefined) return null
     if (text.trim() === '') return null
-    return marked(text)
+
+    const result = marked.parse(text)
+
+    // `marked.parse()` can return a `Promise<string>`
+    // if the option `async` is set to `true`.
+    // This isn't the case here, so this line is just to satisfy TypeScript.
+    if (typeof result !== 'string') return null
+
+    return result
   }, [text])
 
   if (markdown === null) return null

@@ -46,7 +46,6 @@ export const ToolbarContainer: FC<PropsWithChildren<Props>> = ({
           className={classNames(
             'row-start-2 row-end-3',
             'grid grid-cols-[1fr,auto] items-center',
-            'border-b',
             {
               'px-2': toolbarPadding === 'sm',
               'px-8': toolbarPadding === 'lg',
@@ -61,7 +60,7 @@ export const ToolbarContainer: FC<PropsWithChildren<Props>> = ({
                 </div>
               ) : null}
 
-              <div className="my-4 text-xl font-semibold">{title}</div>
+              <div className="my-3 text-xl font-semibold">{title}</div>
             </div>
           ) : null}
 

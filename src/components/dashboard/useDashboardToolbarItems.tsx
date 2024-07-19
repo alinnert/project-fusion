@@ -34,7 +34,7 @@ export function useDashboardToolbarItems({
     },
     {
       type: 'button',
-      buttonType: 'default',
+      buttonType: 'flat',
       label: t('common:buttons.cancel'),
       icon: <XMarkIcon />,
       action: cancel,

@@ -62,7 +62,7 @@ export function LinkList({
           <div>{item.name}</div>
 
           {secondaryLabel !== null && secondaryLabel !== undefined ? (
-            <div className="mx-2">{secondaryLabel}</div>
+            <div className="ml-2">{secondaryLabel}</div>
           ) : null}
         </div>
       </LinkListItem>

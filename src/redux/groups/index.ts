@@ -37,7 +37,7 @@ const slice = createSlice({
     addProjectToGroup(
       state,
       action: PayloadAction<{
-        groupId: ProjectGroup['id']
+        groupId: ProjectGroup['id'] | null
         projectId: Project['id']
       }>,
     ) {
@@ -48,6 +48,8 @@ const slice = createSlice({
         if (group === undefined) continue
         removeElementsFromArray(group.projects, projectId)
       }
+
+      if (groupId === null) return 
 
       state.entities[groupId]?.projects.push(projectId)
     },

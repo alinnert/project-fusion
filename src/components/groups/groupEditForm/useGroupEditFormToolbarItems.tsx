@@ -39,7 +39,7 @@ export function useGroupEditFormToolbarItems({
   return [
     {
       type: 'button',
-      buttonType: 'primary',
+      buttonType: 'primary-flat',
       label: t('common:buttons.save'),
       icon: <CheckIcon />,
       disabled: !isFormValid(),
@@ -47,7 +47,6 @@ export function useGroupEditFormToolbarItems({
     },
     {
       type: 'button',
-      buttonType: 'default',
       label: t('common:buttons.cancel'),
       icon: <XMarkIcon />,
       action: cancel,
