@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import React, { FC, PropsWithChildren, ReactElement } from 'react'
-import { mapBooleanToString } from '../../utils/map'
 import { Heroicon } from './Heroicon'
 
 interface Props {
@@ -34,22 +33,15 @@ export const PageContent: FC<PropsWithChildren<Props>> = ({
 }) => {
   return (
     <div
-      className={classNames(
-        'px-8 h-full overflow-y-auto',
-        {
-          'bg-neutral-100 mr-2 mb-2 rounded-xl h-auto': dimmed,
-        },
-      )}
+      className={classNames('px-8 overflow-y-auto', {
+        'bg-neutral-100 mr-2 mb-2 rounded-xl h-auto': dimmed,
+      })}
     >
       <div
-        className={classNames(
-          'py-8',
-          mapBooleanToString(
-            centered,
-            'w-[600px] max-w-full mx-auto',
-            'w-full',
-          ),
-        )}
+        className={classNames('py-8', {
+          'w-[600px] max-w-full mx-auto': centered,
+          'w-full': !centered,
+        })}
       >
         {image !== undefined ? (
           <div className="mb-4">
