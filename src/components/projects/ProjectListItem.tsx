@@ -7,7 +7,7 @@ import {
   LinkIcon,
   PencilIcon,
   StarIcon,
-  TrashIcon
+  TrashIcon,
 } from '@heroicons/react/20/solid'
 import classNames from 'classnames'
 import { marked } from 'marked'
@@ -22,6 +22,7 @@ import { useConfirmDialog } from '../ui/dialogs/useConfirmDialog'
 import { DropdownMenu, DropdownMenuItem } from '../ui/dropdownMenu/DropdownMenu'
 import { Button } from '../ui/forms/Button'
 import { Heroicon } from '../ui/Heroicon'
+import { addProjectToGroup } from '../../redux/groups'
 
 export const ProjectListItem: FC<Project> = ({
   id,
@@ -39,6 +40,7 @@ export const ProjectListItem: FC<Project> = ({
     useConfirmDialog({
       onConfirm() {
         dispatch(removeProject(id))
+        dispatch(addProjectToGroup({ projectId: id, groupId: null }))
       },
     })
 
@@ -79,17 +81,20 @@ export const ProjectListItem: FC<Project> = ({
 
   const handleDuplicate = useCallback(() => {
     if (group === null) return
-    navigate(`/groups/${group.id}/new-project`)
-  }, [group, navigate])
+    navigate(`/groups/${group.id}/new-project?from=${id}`)
+  }, [group, id, navigate])
 
   const handleDelete = useCallback(() => {
     openConfirmDeleteDialog({
       title: t('projects:deleteDialog.title'),
-      message: t('projects:deleteDialog.message', { project: name }),
+      message: t('projects:deleteDialog.message', {
+        project: name,
+        id: projectNumber,
+      }),
       confirmButtonLabel: t('common:buttons.delete') ?? undefined,
       confirmButtonType: 'delete',
     })
-  }, [name, openConfirmDeleteDialog, t])
+  }, [name, openConfirmDeleteDialog, projectNumber, t])
 
   const menuItems = useMemo<DropdownMenuItem[]>(() => {
     const items: DropdownMenuItem[] = [
@@ -248,7 +253,7 @@ export const ProjectListItem: FC<Project> = ({
         {notes.trim() !== '' ? (
           <div
             className={classNames(
-              'prose prose-brand select-text text-base mt-4',
+              'prose prose-brand select-text text-base mt-4 max-w-full',
               mapBooleanToString(archived, 'opacity-60'),
             )}
             dangerouslySetInnerHTML={{ __html: parsedNotes }}

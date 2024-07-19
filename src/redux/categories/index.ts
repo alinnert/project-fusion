@@ -47,9 +47,9 @@ const slice = createSlice({
         removeElementsFromArray(category.groups, groupId)
       }
 
-      if (categoryId !== null) {
-        state.entities[categoryId]?.groups.push(groupId)
-      }
+      if (categoryId === null) return
+
+      state.entities[categoryId]?.groups.push(groupId)
     },
   },
   extraReducers(builder) {

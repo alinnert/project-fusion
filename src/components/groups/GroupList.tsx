@@ -61,11 +61,11 @@ export const GroupList: FC = () => {
         iconColor: group.color,
         secondaryLabel(isCurrent) {
           return (
-            <div className="flex gap-x-2 items-center">
+            <div className="flex gap-x-1 items-center">
               {importantProjectsCount > 0 ? (
                 <div
                   className={classNames(
-                    'flex gap-x-1 items-center w-10',
+                    'flex gap-x-0.5 items-center w-10',
                     'text-xs font-semibold',
                     mapBooleanToString(
                       isCurrent,
@@ -81,7 +81,7 @@ export const GroupList: FC = () => {
 
               <div
                 className={classNames(
-                  'flex gap-x-1 items-center w-10',
+                  'flex gap-x-0.5 items-center w-10',
                   'text-xs font-semibold',
                   mapBooleanToString(
                     isCurrent,

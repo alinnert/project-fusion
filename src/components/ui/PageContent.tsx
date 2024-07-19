@@ -36,9 +36,8 @@ export const PageContent: FC<PropsWithChildren<Props>> = ({
     <div
       className={classNames(
         'px-8 h-full overflow-y-auto',
-        'border-l first:border-l-0 border-neutral-200',
         {
-          'bg-neutral-50': dimmed,
+          'bg-neutral-100 mr-2 mb-2 rounded-xl h-auto': dimmed,
         },
       )}
     >

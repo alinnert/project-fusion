@@ -39,7 +39,7 @@ export function useGroupToolbarItems({
     },
     {
       type: 'button',
-      buttonType: 'delete',
+      buttonType: 'delete-flat',
       label: t('common:buttons.delete'),
       icon: <TrashIcon />,
       action: handleDelete,

@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const formsPlugin = require('@tailwindcss/forms')
-const typographyPlugin = require('@tailwindcss/typography')
-const colors = require('tailwindcss/colors')
-const plugin = require('tailwindcss/plugin')
+import formsPlugin from '@tailwindcss/forms'
+import typographyPlugin from '@tailwindcss/typography'
+import colors from 'tailwindcss/colors'
+import plugin from 'tailwindcss/plugin'
 
 /** @type { import('tailwindcss/tailwind-config').TailwindConfig } */
-const config = {
+export default {
   mode: 'jit',
   content: ['./src/**/*.{js,ts,jsx,tsx}', 'index.html'],
 
@@ -68,5 +67,3 @@ const config = {
     }),
   ],
 }
-
-module.exports = config

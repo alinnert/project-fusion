@@ -15,7 +15,9 @@ export type ButtonType =
   | 'default'
   | 'default-open'
   | 'primary'
+  | 'primary-flat'
   | 'delete'
+  | 'delete-flat'
   | 'flat'
   | 'flat-open'
   | 'header'
@@ -134,12 +136,36 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           'active:enabled:border-brand-900',
         )
 
+      case 'primary-flat':
+        return classNames(
+          boxBaseClasses,
+          fontBaseClasses,
+          primaryTextClasses,
+          'bg-white',
+          'border border-brand-300',
+          'hover:enabled:bg-gradient-brand hover:enabled:border-brand-800',
+          'active:enabled:bg-gradient-brand-active',
+          'active:enabled:border-brand-900',
+        )
+
       case 'delete':
         return classNames(
           boxBaseClasses,
           fontBaseClasses,
           dangerTextClasses,
           shadowClasses,
+          'bg-white',
+          'border border-danger-300',
+          'hover:enabled:bg-gradient-danger hover:enabled:border-danger-800',
+          'active:enabled:bg-gradient-danger-active',
+          'active:enabled:border-danger-900',
+        )
+
+      case 'delete-flat':
+        return classNames(
+          boxBaseClasses,
+          fontBaseClasses,
+          dangerTextClasses,
           'bg-white',
           'border border-danger-300',
           'hover:enabled:bg-gradient-danger hover:enabled:border-danger-800',
@@ -154,8 +180,8 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           darkTextClasses,
           'bg-white',
           'hover:enabled:bg-neutral-100 active:enabled:bg-neutral-200',
-          'border border-neutral-200',
-          'hover:enabled:border-neutral-400 active:enabled:border-neutral-400',
+          'border border-neutral-300',
+          'hover:enabled:border-neutral-400 active:enabled:border-neutral-500',
         )
 
       case 'flat-open':
@@ -164,7 +190,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
           fontBaseClasses,
           darkTextClasses,
           'bg-neutral-300',
-          'border border-neutral-200',
+          'border border-neutral-400',
         )
 
       case 'header':
