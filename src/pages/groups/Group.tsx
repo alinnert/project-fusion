@@ -1,27 +1,31 @@
-import { FolderIcon } from '@heroicons/react/20/solid'
+import { FolderIcon, PlusIcon } from '@heroicons/react/20/solid'
 import {
   FolderIcon as FolderIconOutline,
   QueueListIcon,
 } from '@heroicons/react/24/outline'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useGroupFromRoute } from '../../components/groups/useGroupFromRoute'
 import { ProjectList } from '../../components/projects/ProjectList'
 import { useProjectsFromGroup } from '../../components/projects/useProjectsFromGroup'
 import { useSortMenu } from '../../components/projects/useSortMenu'
 import { EmptyText } from '../../components/ui/EmptyText'
+import { Button } from '../../components/ui/forms/Button'
 import { Markdown } from '../../components/ui/Markdown'
 import { PageContent } from '../../components/ui/PageContent'
 import { ToolbarContainer } from '../../components/ui/toolbar/ToolbarContainer'
 import { useGroupDialogs } from './useGroupDialogs'
 import { useGroupShortcuts } from './useGroupShortcuts'
 import { useGroupToolbarItems } from './useGroupToolbarItems'
+import { useGroupActions } from './useGroupActions'
 
 export const Group: FC = () => {
   const { t } = useTranslation()
 
   const { group } = useGroupFromRoute()
   const projects = useProjectsFromGroup(group)
+  const { createProject } = useGroupActions()
 
   const {
     confirmDelete: {
@@ -67,7 +71,19 @@ export const Group: FC = () => {
 
         <PageContent
           title={t('projects:terms.project_plural') ?? undefined}
-          titleButtons={<>{sortMenu}</>}
+          titleButtons={
+            <div className="flex gap-1">
+              {sortMenu}
+              <Button
+                type="flat"
+                icon={<PlusIcon />}
+                onClick={createProject}
+                size="small"
+              >
+                {t('projects:buttons.new')}
+              </Button>
+            </div>
+          }
           icon={<QueueListIcon />}
           iconClassName="text-neutral-500"
           iconType="outline"

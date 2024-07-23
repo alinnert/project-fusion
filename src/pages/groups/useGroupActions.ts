@@ -11,8 +11,7 @@ export type UseGroupActionsResult = {
 export function useGroupActions(): UseGroupActionsResult {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const params = useParams()
-  const { groupId } = params
+  const { groupId } = useParams()
 
   return {
     createProject() {

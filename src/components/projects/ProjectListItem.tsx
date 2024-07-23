@@ -196,10 +196,10 @@ export const ProjectListItem: FC<Project> = ({
 
   const projectItemClasses = useMemo(() => {
     return classNames(
-      'p-4 mb-2 last:mb-0',
+      'p-4 mb-4 last:mb-0',
       'rounded-md',
-      'shadow',
-      'bg-white border border-neutral-300',
+      'shadow-lg',
+      'bg-white',
     )
   }, [])
 

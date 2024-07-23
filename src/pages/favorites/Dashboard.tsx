@@ -25,7 +25,7 @@ export const Dashboard: FC = () => {
     return project.important && !project.archived
   }, [])
 
-  const toolbarItems = useMemo<ToolbarItem[]>(() => {
+  const toolbarItems = useMemo((): ToolbarItem[] => {
     return [
       {
         type: 'button',

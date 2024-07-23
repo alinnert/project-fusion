@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import React from 'react'
 import { FC } from 'react'
-import icon from '../../../public/icon-gradient.svg?raw'
+import icon from '../../assets/icon-gradient.svg?raw'
 
 export const AppSplashScreen: FC = () => {
   return (

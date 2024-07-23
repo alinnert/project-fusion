@@ -26,7 +26,7 @@ export function useDashboardToolbarItems({
   return [
     {
       type: 'button',
-      buttonType: 'primary',
+      buttonType: 'primary-flat',
       label: t('common:buttons.save'),
       icon: <CheckIcon />,
       disabled: !isFormValid(),
