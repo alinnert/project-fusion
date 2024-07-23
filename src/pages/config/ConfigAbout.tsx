@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useSettings } from '../../components/settings/useSettings'
 import { PageContent } from '../../components/ui/PageContent'
 import { ToolbarContainer } from '../../components/ui/toolbar/ToolbarContainer'
+import iconGradient from '../../assets/icon-gradient.svg?url'
 
 export const ConfigAbout: FC = () => {
   const { t } = useTranslation()
@@ -18,25 +19,26 @@ export const ConfigAbout: FC = () => {
       }}
       toolbarPadding="lg"
     >
-      <PageContent
-        title={t('settings:about.title') ?? undefined}
-        image={{
-          src: '/icon-gradient.svg',
-          alt: 'Project Fusion Logo',
-          width: '100',
-          height: '100',
-        }}
-        centered
-      >
+      <PageContent centered>
         <div className="prose prose-brand select-text">
+          <img
+            className="mb-2"
+            src={iconGradient}
+            alt="Project Fusion Logo"
+            width="100"
+            height="100"
+          />
+
+          <h2 className="select-text text-lg font-semibold mt-0">
+            {t('settings:about.title')}
+          </h2>
+
           <p>
             {t('settings:about.sourceCode')}:{' '}
             <a href="https://github.com/alinnert/project-fusion">
               github.com/alinnert/project-fusion
             </a>
-          </p>
-
-          <p>
+            <br />
             Issues:{' '}
             <a href="https://github.com/alinnert/project-fusion/issues">
               github.com/alinnert/project-fusion/issues

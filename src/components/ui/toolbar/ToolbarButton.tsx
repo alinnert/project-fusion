@@ -17,6 +17,7 @@ export const ToolbarButton: FC<ToolbarButtonItem> = (item) => {
       type={item.buttonType ?? 'flat'}
       disabled={item.disabled}
       onClick={item.action}
+      size="small"
     >
       {item.label}
     </Button>

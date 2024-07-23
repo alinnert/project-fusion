@@ -36,35 +36,36 @@ export const ToolbarContainer: FC<PropsWithChildren<Props>> = ({
   return (
     <div
       className={classNames(
-        'grid grid-rows-[auto,auto,1fr]',
-        'h-full',
-        'overflow-hidden',
+        'grid grid-rows-[auto,1fr] grid-flow-col auto-cols-fr',
+        '[&>*:nth-child(1)]:row-start-1 [&>*:nth-child(1)]:row-end-2',
+        '[&>*:nth-child(1)]:col-start-1 [&>*:nth-child(1)]:col-end-2',
+        '[&>*:nth-child(2)]:row-start-2 [&>*:nth-child(2)]:row-end-3',
+        '[&>*:nth-child(2)]:col-start-1 [&>*:nth-child(2)]:col-end-2',
+        '[&>*:nth-child(3)]:row-start-1 [&>*:nth-child(3)]:row-end-3',
+        '[&>*:nth-child(3)]:col-start-2 [&>*:nth-child(3)]:col-end-3',
+        'h-full overflow-hidden',
       )}
     >
-      {title !== undefined || toolbarItems.length > 0 ? (
-        <div
-          className={classNames(
-            'row-start-2 row-end-3',
-            'grid grid-cols-[1fr,auto] items-center',
-            {
-              'px-2': toolbarPadding === 'sm',
-              'px-8': toolbarPadding === 'lg',
-            },
-          )}
-        >
-          {title !== undefined ? (
-            <div className='flex items-center'>
-              {icon !== undefined && icon.element !== undefined ? (
-                <div className={classNames('mr-2', icon.className)}>
-                  <Heroicon icon={icon.element} color={icon.color} scale={1} />
-                </div>
-              ) : null}
+      <div
+        className={classNames('grid grid-cols-[auto,1fr] items-center', 'my-2', {
+          'px-2': toolbarPadding === 'sm',
+          'px-8': toolbarPadding === 'lg',
+        })}
+      >
+        {title !== undefined ? (
+          <div className="flex items-center gap-1 col-start-1 col-end-2 my-4">
+            {icon !== undefined && icon.element !== undefined ? (
+              <div className={classNames('', icon.className)}>
+                <Heroicon icon={icon.element} color={icon.color} scale={1} />
+              </div>
+            ) : null}
 
-              <div className="my-3 text-xl font-semibold">{title}</div>
-            </div>
-          ) : null}
+            <div className="my-0 text-xl font-semibold">{title}</div>
+          </div>
+        ) : null}
 
-          <div className={classNames('flex gap-x-4', 'py-2')}>
+        {toolbarItems.length > 0 ? (
+          <div className={classNames('col-start-2 col-end-3', 'flex justify-end gap-x-2')}>
             {toolbarItems.map((item, index) =>
               item.visible === false ? null : item.type === 'button' ? (
                 <ToolbarButton key={index} {...item} />
@@ -79,17 +80,10 @@ export const ToolbarContainer: FC<PropsWithChildren<Props>> = ({
               ) : null,
             )}
           </div>
-        </div>
-      ) : null}
-
-      <div
-        className={classNames(
-          'row-start-3 row-end-4 h-full overflow-hidden',
-          'grid grid-flow-col auto-cols-fr',
-        )}
-      >
-        {children}
+        ) : null}
       </div>
+
+      {children}
     </div>
   )
 }

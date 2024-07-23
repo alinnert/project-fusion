@@ -28,7 +28,6 @@ export const AppRoutes: FC = () => {
       <Route element={<App />}>
         <Route element={<SimpleLayout />}>
           <Route path="/" element={<File />} />
-          <Route path="info" element={<Info />} />
           <Route path="search/:searchTerm" element={<Search />} />
           <Route path="*" element={<div>Custom not found page</div>} />
         </Route>
