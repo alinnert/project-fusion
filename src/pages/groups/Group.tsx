@@ -18,14 +18,14 @@ import { ToolbarContainer } from '../../components/ui/toolbar/ToolbarContainer'
 import { useGroupDialogs } from './useGroupDialogs'
 import { useGroupShortcuts } from './useGroupShortcuts'
 import { useGroupToolbarItems } from './useGroupToolbarItems'
+import { useGroupActions } from './useGroupActions'
 
 export const Group: FC = () => {
   const { t } = useTranslation()
-  const { groupId } = useParams()
-  const navigate = useNavigate()
 
   const { group } = useGroupFromRoute()
   const projects = useProjectsFromGroup(group)
+  const { createProject } = useGroupActions()
 
   const {
     confirmDelete: {
@@ -36,11 +36,6 @@ export const Group: FC = () => {
 
   const toolbarItems = useGroupToolbarItems({ openConfirmDeleteDialog })
   const { sortMenu } = useSortMenu()
-
-  function createProject() {
-    if (groupId === undefined) return
-    navigate(`/groups/${groupId}/new-project`)
-  }
 
   useGroupShortcuts()
 

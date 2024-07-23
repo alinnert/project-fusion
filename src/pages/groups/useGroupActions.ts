@@ -3,6 +3,7 @@ import { useAppDispatch } from '../../redux'
 import { ProjectsSortOrder, setProjectsSortOrder } from '../../redux/settings'
 
 export type UseGroupActionsResult = {
+  createProject: () => void
   editGroup: () => void
   changeProjectsSortOrder: (sortOrder: ProjectsSortOrder) => void
 }
@@ -13,6 +14,11 @@ export function useGroupActions(): UseGroupActionsResult {
   const { groupId } = useParams()
 
   return {
+    createProject() {
+      if (groupId === undefined) return
+      navigate(`/groups/${groupId}/new-project`)
+    },
+
     editGroup() {
       if (groupId === undefined) return
       navigate(`/groups/${groupId}/edit`)
