@@ -148,7 +148,7 @@ export const GroupListWithProjects: FC<Props> = ({
                     : t('groups:list.noCategory')
                 }
                 color="brand"
-                className="mt-8 mb-4"
+                className="mt-12 mb-4"
               />
 
               {groups.sort(sortByProperty((item) => item.name)).map((group) => (

@@ -5,7 +5,6 @@ import {
 } from '@heroicons/react/24/outline'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate, useParams } from 'react-router-dom'
 import { useGroupFromRoute } from '../../components/groups/useGroupFromRoute'
 import { ProjectList } from '../../components/projects/ProjectList'
 import { useProjectsFromGroup } from '../../components/projects/useProjectsFromGroup'
@@ -15,10 +14,10 @@ import { Button } from '../../components/ui/forms/Button'
 import { Markdown } from '../../components/ui/Markdown'
 import { PageContent } from '../../components/ui/PageContent'
 import { ToolbarContainer } from '../../components/ui/toolbar/ToolbarContainer'
+import { useGroupActions } from './useGroupActions'
 import { useGroupDialogs } from './useGroupDialogs'
 import { useGroupShortcuts } from './useGroupShortcuts'
 import { useGroupToolbarItems } from './useGroupToolbarItems'
-import { useGroupActions } from './useGroupActions'
 
 export const Group: FC = () => {
   const { t } = useTranslation()

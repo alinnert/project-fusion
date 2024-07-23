@@ -5,12 +5,14 @@ import { mapBooleanToString } from '../../utils/map'
 interface Props {
   dimmed?: boolean
   center?: boolean
+  onClick?: () => void
 }
 
 export const Headline: FC<PropsWithChildren<Props>> = ({
   children,
   dimmed = false,
   center = false,
+  onClick = () => {},
 }) => {
   return (
     <div
@@ -23,10 +25,12 @@ export const Headline: FC<PropsWithChildren<Props>> = ({
         ),
         'not-first:mt-12 mb-4',
       )}
+      onClick={onClick}
     >
       {center ? <div className="bg-neutral-300 h-px"></div> : null}
       <div
         className={classNames(
+          'flex gap-1 items-center',
           'text-lg',
           mapBooleanToString(
             dimmed,
