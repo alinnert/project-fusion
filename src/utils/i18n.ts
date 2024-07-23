@@ -14,7 +14,7 @@ i18n
     ns: translationNamespaces,
     interpolation: {
       escapeValue: false,
-      format(value, format, language) {
+      format(value, format) {
         switch (format) {
           default:
             return value

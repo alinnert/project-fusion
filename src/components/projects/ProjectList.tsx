@@ -43,10 +43,7 @@ export const ProjectList: FC<Props> = ({ projects }) => {
 
   return (
     <div>
-      <ProjectListGroup
-        headline={t('projects:list.itemGroups.activeProjects')}
-        projects={groupedProjects['active']}
-      />
+      <ProjectListGroup projects={groupedProjects['active']} />
       <ProjectListGroup
         headline={t('projects:list.itemGroups.archivedProjects')}
         projects={groupedProjects['archived']}

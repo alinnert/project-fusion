@@ -26,7 +26,7 @@ export const PageContent: FC<PropsWithChildren<Props>> = ({
 }) => {
   return (
     <div
-      className={classNames('h-full overflow-hidden', {
+      className={classNames('h-auto overflow-hidden', {
         'bg-neutral-100 m-2 rounded-xl': dimmed,
       })}
     >
