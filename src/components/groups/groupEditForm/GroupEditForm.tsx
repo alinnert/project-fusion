@@ -51,7 +51,14 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
     categoryId,
     init,
   })
-  const toolbarItems = useGroupEditFormToolbarItems({ init, name, color, saveGroup })
+
+  const toolbarItems = useGroupEditFormToolbarItems({
+    init,
+    name,
+    color,
+    saveGroup,
+  })
+
   useGroupEditFormShortcuts({ saveGroup })
 
   return (
@@ -63,7 +70,7 @@ export const GroupEditForm: FC<Props> = ({ init = null }) => {
       <PageContent
         icon={isEditForm ? <FolderIcon /> : <FolderPlusIcon />}
         iconColor={color}
-        iconType="outline"
+        iconType="big"
         centered
       >
         <Form type="page" onSubmit={saveGroup} submitOnCtrlEnter>

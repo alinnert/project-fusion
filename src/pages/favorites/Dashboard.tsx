@@ -1,5 +1,5 @@
-import { HomeIcon, PencilIcon } from '@heroicons/react/20/solid'
-import { StarIcon } from '@heroicons/react/24/outline'
+import { PencilIcon } from '@heroicons/react/16/solid'
+import { HomeIcon, StarIcon } from '@heroicons/react/20/solid'
 import React, { FC, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'

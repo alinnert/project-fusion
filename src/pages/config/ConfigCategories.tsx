@@ -1,4 +1,4 @@
-import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/20/solid'
+import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/16/solid'
 import React, { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useOrderedCategories } from '../../components/categories/useOrderedCategories'
@@ -8,7 +8,7 @@ import { useTextDialog } from '../../components/ui/dialogs/useTextDialog'
 import { Button } from '../../components/ui/forms/Button'
 import {
   SortableList,
-  SwapDirection
+  SwapDirection,
 } from '../../components/ui/forms/SortableList'
 import { Headline } from '../../components/ui/Headline'
 import { PageContent } from '../../components/ui/PageContent'
@@ -18,7 +18,7 @@ import {
   addCategory,
   Category,
   removeCategory,
-  updateCategory
+  updateCategory,
 } from '../../redux/categories'
 import { swapCategories } from '../../redux/settings'
 import { createId } from '../../utils/customNanoId'
@@ -37,16 +37,19 @@ export const ConfigCategories: FC = () => {
       onConfirm() {
         if (selectedId === null) return
         const previousIndex = orderedCategoryIds.indexOf(selectedId)
+
+        if (orderedCategoryIds.length === 1) {
+          // If the only remaining category gets deleted remove selection.
+          setSelectedId(null)
+        } else if (previousIndex === orderedCategoryIds.length - 1) {
+          // If the category at the end of the list gets deleted move selection up.
+          setSelectedId(orderedCategoryIds[previousIndex - 1])
+        } else {
+          // If any other category gets deleted move selection down.
+          setSelectedId(orderedCategoryIds[previousIndex + 1])
+        }
+
         dispatch(removeCategory(selectedId))
-
-        const newSelectedId =
-          orderedCategoryIds.length === 1
-            ? null
-            : previousIndex === orderedCategoryIds.length - 1
-            ? orderedCategoryIds[orderedCategoryIds.length - 2]
-            : orderedCategoryIds[previousIndex + 1]
-
-        setSelectedId(newSelectedId ?? null)
       },
     })
 

@@ -23,25 +23,25 @@ export const Headline: FC<PropsWithChildren<Props>> = ({
           'grid-cols-[1fr,auto,1fr]',
           'grid-cols-[auto,1fr]',
         ),
-        'not-first:mt-12 mb-4',
+        'mb-4 not-first:mt-12',
       )}
       onClick={onClick}
     >
-      {center ? <div className="bg-neutral-300 h-px"></div> : null}
+      {center ? <div className="h-px bg-neutral-300"></div> : null}
       <div
         className={classNames(
-          'flex gap-1 items-center',
+          'flex items-center gap-1',
           'text-lg',
           mapBooleanToString(
             dimmed,
             'text-neutral-500',
-            'text-brand-700 font-semibold',
+            'font-semibold text-brand-700',
           ),
         )}
       >
         {children}
       </div>
-      <div className="bg-neutral-300 h-px"></div>
+      <div className="h-px bg-neutral-300"></div>
     </div>
   )
 }

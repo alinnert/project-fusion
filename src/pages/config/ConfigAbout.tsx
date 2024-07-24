@@ -20,7 +20,7 @@ export const ConfigAbout: FC = () => {
       toolbarPadding="lg"
     >
       <PageContent centered>
-        <div className="prose prose-brand select-text">
+        <div className="prose-brand prose select-text">
           <img
             className="mb-2"
             src={iconGradient}
@@ -29,7 +29,7 @@ export const ConfigAbout: FC = () => {
             height="100"
           />
 
-          <h2 className="select-text text-lg font-semibold mt-0">
+          <h2 className="mt-0 select-text text-lg font-semibold">
             {t('settings:about.title')}
           </h2>
 

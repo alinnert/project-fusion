@@ -3,7 +3,7 @@ import {
   DocumentPlusIcon,
   FolderIcon,
   XMarkIcon,
-} from '@heroicons/react/20/solid'
+} from '@heroicons/react/16/solid'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
@@ -40,7 +40,7 @@ export const File: FC = () => {
   }
 
   return (
-    <div className="flex justify-center self-stretch overflow-y-auto h-full">
+    <div className="flex h-full justify-center self-stretch overflow-y-auto">
       <div className="w-[600px]">
         {!featureOk ? (
           <Alert>{t('common:alerts.apiRequirementsNotMet')}</Alert>

@@ -26,10 +26,7 @@ export function removeElementsFromArray(
   }
 }
 
-export function arrayWithout<T>(
-  array: Array<T>,
-  ...itemsToRemove: T[]
-): T[] {
+export function arrayWithout<T>(array: Array<T>, ...itemsToRemove: T[]): T[] {
   const result: T[] = []
 
   for (const item of array) {

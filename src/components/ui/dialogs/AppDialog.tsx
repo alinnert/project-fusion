@@ -39,7 +39,7 @@ export const AppDialog: FC<PropsWithChildren<Props>> = ({
           'grid grid-cols-1 grid-rows-[auto,auto]',
           'w-[500px] max-w-[90vw]',
           'border border-neutral-200',
-          'bg-white rounded-lg shadow-2xl',
+          'rounded-lg bg-white shadow-2xl',
         )}
       >
         <div className="p-4">
@@ -54,7 +54,7 @@ export const AppDialog: FC<PropsWithChildren<Props>> = ({
           <div
             className={classNames(
               'flex justify-end gap-x-2',
-              'p-2 rounded-b-lg',
+              'rounded-b-lg p-2',
               'bg-neutral-100',
               'border-t border-neutral-200',
             )}

@@ -1,20 +1,21 @@
 import {
-  ArchiveBoxIcon,
+  ArchiveBoxArrowDownIcon,
   ChevronDoubleDownIcon,
   DocumentDuplicateIcon,
-  EllipsisVerticalIcon,
-  InboxIcon,
+  InboxArrowDownIcon,
   LinkIcon,
   PencilIcon,
   StarIcon,
   TrashIcon,
-} from '@heroicons/react/20/solid'
+} from '@heroicons/react/16/solid'
+import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import classNames from 'classnames'
 import { marked } from 'marked'
 import React, { FC, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router'
 import { useAppDispatch, useAppSelector } from '../../redux'
+import { addProjectToGroup } from '../../redux/groups'
 import { Project, removeProject, updateProject } from '../../redux/projects'
 import { isDefined } from '../../utils/isDefined'
 import { mapBooleanToString } from '../../utils/map'
@@ -22,7 +23,6 @@ import { useConfirmDialog } from '../ui/dialogs/useConfirmDialog'
 import { DropdownMenu, DropdownMenuItem } from '../ui/dropdownMenu/DropdownMenu'
 import { Button } from '../ui/forms/Button'
 import { Heroicon } from '../ui/Heroicon'
-import { addProjectToGroup } from '../../redux/groups'
 
 export const ProjectListItem: FC<Project> = ({
   id,
@@ -123,13 +123,13 @@ export const ProjectListItem: FC<Project> = ({
         ? {
             type: 'button',
             label: t('projects:item.actions.unarchiveProject'),
-            icon: <InboxIcon />,
+            icon: <InboxArrowDownIcon />,
             action: handleRestoreFromArchive,
           }
         : {
             type: 'button',
             label: t('projects:item.actions.archiveProject'),
-            icon: <ArchiveBoxIcon />,
+            icon: <ArchiveBoxArrowDownIcon />,
             action: handleAddToArchive,
           },
 
@@ -198,7 +198,7 @@ export const ProjectListItem: FC<Project> = ({
     return classNames(
       'p-4 mb-4 last:mb-0',
       'rounded-md',
-      'shadow-lg',
+      'shadow-md',
       'bg-white',
     )
   }, [])
@@ -219,7 +219,11 @@ export const ProjectListItem: FC<Project> = ({
       <div key={id} className={projectItemClasses}>
         <div className={classNames('flex items-center gap-x-1 text-base')}>
           {important ? (
-            <Heroicon className="text-important-600" icon={<StarIcon />} />
+            <Heroicon
+              className="text-important-600"
+              icon={<StarIcon />}
+              iconType="micro"
+            />
           ) : null}
 
           <div className={classNames('flex-1', textClasses)}>{name}</div>
@@ -253,7 +257,7 @@ export const ProjectListItem: FC<Project> = ({
         {notes.trim() !== '' ? (
           <div
             className={classNames(
-              'prose prose-brand select-text text-base mt-4 max-w-full',
+              'prose-brand prose mt-4 max-w-full select-text text-base',
               mapBooleanToString(archived, 'opacity-60'),
             )}
             dangerouslySetInnerHTML={{ __html: parsedNotes }}

@@ -1,4 +1,4 @@
-import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/20/solid'
+import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/16/solid'
 import classNames from 'classnames'
 import React, { FC, ReactElement, ReactNode } from 'react'
 import { mapBooleanToString } from '../../../utils/map'
@@ -33,7 +33,7 @@ export const SortableList: FC<Props> = ({
 
   return (
     <>
-      <div className="flex items-center gap-x-2 mb-4">
+      <div className="mb-4 flex items-center gap-x-2">
         <Button
           icon={<ArrowUpIcon />}
           onClick={handleSwap('down')}
@@ -57,7 +57,7 @@ export const SortableList: FC<Props> = ({
       <div
         className={classNames(
           'flex flex-col gap-y-1',
-          'p-1 rounded-md',
+          'rounded-md p-1',
           'max-h-[50vh] overflow-y-auto',
           'border border-neutral-300',
         )}

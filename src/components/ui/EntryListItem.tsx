@@ -14,9 +14,9 @@ interface Props {
 
 export const EntryListItem: FC<Props> = ({ label, onClick, buttons = [] }) => {
   return (
-    <div className="flex items-stretch gap-x-2 my-2">
+    <div className="my-2 flex items-stretch gap-x-2">
       <div
-        className="flex items-center flex-grow hover:bg-neutral-100 active:bg-neutral-200 px-3 rounded"
+        className="flex flex-grow items-center rounded px-3 hover:bg-neutral-100 active:bg-neutral-200"
         onClick={onClick}
       >
         {label}

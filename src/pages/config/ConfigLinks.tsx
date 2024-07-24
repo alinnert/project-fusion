@@ -1,4 +1,4 @@
-import { CheckIcon, TrashIcon } from '@heroicons/react/20/solid'
+import { CheckIcon, TrashIcon } from '@heroicons/react/16/solid'
 import React, { FC, FormEvent, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSettings } from '../../components/settings/useSettings'
@@ -113,7 +113,7 @@ export const ConfigLinks: FC = () => {
           <Headline>{t('settings:links.projectLinks.title')}</Headline>
           <p>{t('settings:links.projectLinks.description')}</p>
           <form className="mt-4" onSubmit={handlePrimaryLinkSubmit}>
-            <div className="grid grid-cols-[1fr,2fr] gap-x-2 mb-2">
+            <div className="mb-2 grid grid-cols-[1fr,2fr] gap-x-2">
               <Input
                 value={primaryProjectLinkLabel}
                 onChange={setPrimaryProjectLinkLabel}

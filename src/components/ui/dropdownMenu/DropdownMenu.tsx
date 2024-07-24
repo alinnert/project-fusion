@@ -1,5 +1,5 @@
 import { Menu } from '@headlessui/react'
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/20/solid'
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/16/solid'
 import classNames from 'classnames'
 import React, {
   FC,
@@ -32,6 +32,7 @@ export type DropdownMenuItem =
 
 interface Props {
   icon?: ReactElement
+  iconType?: 'big' | 'mini' | 'micro'
   items: DropdownMenuItem[]
   buttonType: ButtonType
   buttonSize?: ButtonSize
@@ -42,6 +43,7 @@ interface Props {
 export const DropdownMenu: FC<PropsWithChildren<Props>> = ({
   children,
   icon,
+  iconType = 'mini',
   items,
   buttonType,
   buttonSize,
@@ -65,6 +67,7 @@ export const DropdownMenu: FC<PropsWithChildren<Props>> = ({
             <div>
               <Button
                 icon={icon}
+                iconType={iconType}
                 rightIcon={open ? <ChevronUpIcon /> : <ChevronDownIcon />}
                 type={open ? openButtonType : buttonType}
                 size={buttonSize}

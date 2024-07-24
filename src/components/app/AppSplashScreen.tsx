@@ -7,7 +7,7 @@ export const AppSplashScreen: FC = () => {
   return (
     <div className="absolute inset-0 flex flex-col items-center justify-center">
       <div
-        className="w-[100px] h-[100px] animate-pulse"
+        className="h-[100px] w-[100px] animate-pulse"
         dangerouslySetInnerHTML={{ __html: icon }}
       />
       <p

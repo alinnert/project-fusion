@@ -20,29 +20,29 @@ export const EmptyText: FC<PropsWithChildren<Props>> = ({
   image,
 }) => {
   return (
-    <div className="h-full grid items-center justify-center px-12 py-4 overflow-y-auto">
+    <div className="grid h-full items-center justify-center overflow-y-auto px-12 py-4">
       <div className="text-center">
         {image !== undefined ? (
-          <div className="flex justify-center mb-8">
+          <div className="mb-8 flex justify-center">
             <img {...image} />
           </div>
         ) : null}
 
         {icon !== undefined ? (
-          <div className="flex justify-center text-brand-200 mb-8">
+          <div className="mb-8 flex justify-center text-brand-200">
             <Heroicon icon={icon} scale={4} />
           </div>
         ) : null}
 
         {title !== undefined ? (
-          <div className="text-2xl font-semibold mb-4 text-neutral-700">
+          <div className="mb-4 text-2xl font-semibold text-neutral-700">
             {title}
           </div>
         ) : null}
 
         <div
           className={classNames(
-            'text-lg text-gray-800 max-w-lg',
+            'max-w-lg text-lg text-gray-800',
             'flex flex-col gap-y-4',
           )}
         >

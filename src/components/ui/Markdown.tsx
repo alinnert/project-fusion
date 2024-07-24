@@ -25,7 +25,7 @@ export const Markdown: FC<Props> = ({ text }) => {
 
   return (
     <div
-      className="prose prose-brand select-text"
+      className="prose-brand prose select-text"
       dangerouslySetInnerHTML={{ __html: markdown }}
     />
   )

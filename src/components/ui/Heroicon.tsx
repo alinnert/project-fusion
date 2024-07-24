@@ -12,7 +12,7 @@ interface Props {
   icon: ReactElement<{ className: string }>
   color?: string
   scale?: 1 | 1.5 | 2 | 4
-  iconType?: 'solid' | 'outline'
+  iconType?: 'big' | 'mini' | 'micro'
   className?: string
 }
 
@@ -20,7 +20,7 @@ export const Heroicon: FC<Props> = ({
   icon,
   color,
   scale = 1,
-  iconType = 'solid',
+  iconType = 'big',
   className,
 }) => {
   return (
@@ -32,20 +32,24 @@ export const Heroicon: FC<Props> = ({
             child.props.className,
             mapUnionToString(scale, {
               1: mapUnionToString(iconType, {
-                solid: 'w-[20px] h-[20px]',
-                outline: 'w-[24px] h-[24px]',
+                micro: 'w-[16px] h-[16px]',
+                mini: 'w-[20px] h-[20px]',
+                big: 'w-[24px] h-[24px]',
               }),
               1.5: mapUnionToString(iconType, {
-                solid: 'w-[30px] h-[30px]',
-                outline: 'w-[36px] h-[36px]',
+                micro: 'w-[24px] h-[24px]',
+                mini: 'w-[30px] h-[30px]',
+                big: 'w-[36px] h-[36px]',
               }),
               2: mapUnionToString(iconType, {
-                solid: 'w-[40px] h-[40px]',
-                outline: 'w-[48px] h-[48px]',
+                micro: 'w-[32px] h-[32px]',
+                mini: 'w-[40px] h-[40px]',
+                big: 'w-[48px] h-[48px]',
               }),
               4: mapUnionToString(iconType, {
-                solid: 'w-[80px] h-[80px]',
-                outline: 'w-[96px] h-[96px]',
+                micro: 'w-[64px] h-[64px]',
+                mini: 'w-[80px] h-[80px]',
+                big: 'w-[96px] h-[96px]',
               }),
             }),
           ),

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo } from 'react'
 
 export function useFeatureOk(): boolean {
   const featureOk = useMemo<boolean>(() => {

@@ -1,4 +1,4 @@
-import { PencilIcon, TrashIcon } from '@heroicons/react/20/solid'
+import { PencilIcon, TrashIcon } from '@heroicons/react/16/solid'
 import React, { useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useGroupFromRoute } from '../../components/groups/useGroupFromRoute'

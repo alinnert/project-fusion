@@ -8,9 +8,7 @@ import { useCheckPermission } from './useCheckPermission'
 import { useGetDataFromFileHandle } from './useGetDataFromFileHandle'
 import { useRecentFiles } from './useRecentFiles'
 
-type UseReadDatabaseFile = (
-  fileHandle: FileSystemFileHandle,
-) => Promise<void>
+type UseReadDatabaseFile = (fileHandle: FileSystemFileHandle) => Promise<void>
 
 export function useReadDatabaseFile(): UseReadDatabaseFile {
   const navigate = useNavigate()

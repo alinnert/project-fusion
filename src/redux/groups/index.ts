@@ -49,7 +49,7 @@ const slice = createSlice({
         removeElementsFromArray(group.projects, projectId)
       }
 
-      if (groupId === null) return 
+      if (groupId === null) return
 
       state.entities[groupId]?.projects.push(projectId)
     },

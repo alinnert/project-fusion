@@ -1,4 +1,4 @@
-import { ArrowsUpDownIcon } from '@heroicons/react/20/solid'
+import { ArrowsUpDownIcon } from '@heroicons/react/16/solid'
 import React, { ReactElement, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useGroupActions } from '../../pages/groups/useGroupActions'
