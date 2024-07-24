@@ -1,7 +1,7 @@
-import { CheckIcon } from '@heroicons/react/20/solid'
+import { CheckIcon } from '@heroicons/react/16/solid'
 import classNames from 'classnames'
 import React, { FC, ReactElement } from 'react'
-import { mapBooleanToString, mapUnionToString } from '../../../utils/map'
+import { mapUnionToString } from '../../../utils/map'
 import { Heroicon } from '../Heroicon'
 import { PlaceholderIcon } from '../PlaceholderIcon'
 import { DropdownMenuItem, DropdownMenuItemButtonType } from './DropdownMenu'
@@ -34,33 +34,31 @@ export const DropdownMenuButton: FC<Props> = ({ isActive, item }) => {
         onClick={handleItemClick}
         className={classNames(
           'flex items-center',
-          'py-2 pl-2 pr-12 rounded',
+          'rounded py-1.5 pl-2 pr-12',
 
           mapUnionToString(buttonType, {
             default: classNames(
               'active:bg-gradient-brand-active active:text-white',
-              mapBooleanToString(
-                isActive,
-                'bg-gradient-brand text-white',
-                'text-neutral-700',
-              ),
+              {
+                'bg-gradient-brand text-white': isActive,
+                'text-neutral-700': !isActive,
+              },
             ),
             delete: classNames(
               'active:bg-gradient-danger-active active:text-white',
-              mapBooleanToString(
-                isActive,
-                'bg-gradient-danger text-white',
-                'text-danger-800',
-              ),
+              {
+                'bg-gradient-danger text-white': isActive,
+                'text-danger-800': !isActive,
+              },
             ),
           }),
         )}
       >
-        <div className="mr-3">
+        <div className="mr-2">
           {item.icon !== undefined ? (
-            <Heroicon icon={item.icon} />
+            <Heroicon icon={item.icon} iconType="micro" />
           ) : item.checked ? (
-            <Heroicon icon={<CheckIcon />} />
+            <Heroicon icon={<CheckIcon />} iconType="micro" />
           ) : (
             <PlaceholderIcon />
           )}

@@ -26,7 +26,7 @@ export const AppLayout: FC<PropsWithChildren<Props>> = ({ children, left }) => {
         'fixed inset-0',
       )}
     >
-      <div className={classNames('row-start-1 col-start-1 col-span-3')}>
+      <div className={classNames('col-span-3 col-start-1 row-start-1')}>
         <Header
           left={
             <>

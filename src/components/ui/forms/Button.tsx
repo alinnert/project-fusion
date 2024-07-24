@@ -31,6 +31,7 @@ type ExtractedButtonProps = 'onClick' | 'disabled'
 interface Props
   extends Pick<ButtonHTMLAttributes<HTMLButtonElement>, ExtractedButtonProps> {
   icon?: ReactElement
+  iconType?: 'big' | 'mini' | 'micro'
   rightIcon?: ReactElement
   type?: ButtonType
   size?: ButtonSize
@@ -44,6 +45,7 @@ interface Props
 export const Button: FC<PropsWithChildren<Props>> = ({
   children,
   icon,
+  iconType = 'micro',
   rightIcon,
   type = 'default',
   size = 'normal',
@@ -58,7 +60,8 @@ export const Button: FC<PropsWithChildren<Props>> = ({
     const fontBaseClasses = 'text-base leading-none'
 
     const boxBaseClasses = classNames(
-      'flex gap-x-3 items-center',
+      'flex gap-x-2 items-center',
+      'rounded',
       mapBooleanToString(
         hasChildren,
         mapUnionToString(size, {
@@ -73,7 +76,6 @@ export const Button: FC<PropsWithChildren<Props>> = ({
         normal: 'py-2',
         small: 'py-1',
       }),
-      'rounded',
     )
 
     const darkTextClasses = classNames(
@@ -221,7 +223,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
       onClick={onClick}
       {...buttonProps}
     >
-      {icon !== undefined ? <Heroicon icon={icon} /> : null}
+      {icon !== undefined ? <Heroicon icon={icon} iconType={iconType} /> : null}
 
       {hasChildren ? (
         <div
@@ -235,7 +237,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
       ) : null}
 
       {rightIcon !== undefined && hasChildren ? (
-        <Heroicon icon={rightIcon} />
+        <Heroicon icon={rightIcon} iconType="micro" />
       ) : null}
     </button>
   )

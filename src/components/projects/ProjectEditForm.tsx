@@ -1,5 +1,5 @@
+import { CheckIcon } from '@heroicons/react/16/solid'
 import { FolderIcon, XMarkIcon } from '@heroicons/react/20/solid'
-import { CheckIcon } from '@heroicons/react/24/outline'
 import React, { FC, FormEvent, useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router'
@@ -172,11 +172,16 @@ export const ProjectEditForm: FC<Props> = ({ init = null }) => {
       toolbarPadding="lg"
     >
       <PageContent centered>
-        <div className="text-xl mb-8 flex items-center gap-x-2">
-          <Heroicon icon={<FolderIcon />} color={group?.color} scale={1.5} />
-          {group?.name ?? '--'}
-          {' » '}
-          {isEditingExistingProject ? init?.name ?? '-' : null}
+        <div className="mb-8 flex select-text items-center gap-x-2 text-base">
+          <Heroicon
+            icon={<FolderIcon />}
+            color={group?.color}
+            iconType="mini"
+          />
+          <span className="mr-2 font-semibold text-neutral-500">
+            {group?.name ?? '--'}
+          </span>
+          <span>{isEditingExistingProject ? (init?.name ?? '-') : null}</span>
         </div>
 
         <Form type="page" onSubmit={handleSubmit} submitOnCtrlEnter>

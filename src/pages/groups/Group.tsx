@@ -1,8 +1,5 @@
-import { FolderIcon, PlusIcon } from '@heroicons/react/20/solid'
-import {
-  FolderIcon as FolderIconOutline,
-  QueueListIcon,
-} from '@heroicons/react/24/outline'
+import { PlusIcon } from '@heroicons/react/16/solid'
+import { FolderIcon, InboxStackIcon } from '@heroicons/react/20/solid'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useGroupFromRoute } from '../../components/groups/useGroupFromRoute'
@@ -59,12 +56,7 @@ export const Group: FC = () => {
         toolbarItems={toolbarItems}
         toolbarPadding="lg"
       >
-        <PageContent
-          icon={<FolderIconOutline />}
-          iconColor={group.color}
-          iconType="outline"
-          centered
-        >
+        <PageContent>
           <Markdown text={group.notes} />
         </PageContent>
 
@@ -83,9 +75,9 @@ export const Group: FC = () => {
               </Button>
             </div>
           }
-          icon={<QueueListIcon />}
+          icon={<InboxStackIcon />}
           iconClassName="text-neutral-500"
-          iconType="outline"
+          iconType="mini"
           dimmed
         >
           <ProjectList projects={projects} />

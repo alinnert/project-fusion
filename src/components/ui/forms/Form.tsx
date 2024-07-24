@@ -50,7 +50,7 @@ export const Form: FC<PropsWithChildren<Props>> = ({
         mapUnionToString(type, {
           unstyled: '',
           inline: 'flex items-center gap-x-2',
-          page: 'flex flex-col gap-y-6 w-[600px] max-w-full',
+          page: 'flex w-[600px] max-w-full flex-col gap-y-6',
         }),
         className,
       )}

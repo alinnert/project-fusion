@@ -1,11 +1,10 @@
 import {
   DocumentIcon,
-  FolderIcon,
   FolderPlusIcon,
-  HomeIcon,
   StarIcon,
-  TagIcon
-} from '@heroicons/react/20/solid'
+  TagIcon,
+} from '@heroicons/react/16/solid'
+import { FolderIcon, HomeIcon } from '@heroicons/react/20/solid'
 import classNames from 'classnames'
 import React, { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -61,11 +60,11 @@ export const GroupList: FC = () => {
         iconColor: group.color,
         secondaryLabel(isCurrent) {
           return (
-            <div className="flex gap-x-1 items-center">
+            <div className="flex items-center gap-x-1">
               {importantProjectsCount > 0 ? (
                 <div
                   className={classNames(
-                    'flex gap-x-0.5 items-center w-10',
+                    'flex w-10 items-center gap-x-0.5',
                     'text-xs font-semibold',
                     mapBooleanToString(
                       isCurrent,
@@ -74,14 +73,14 @@ export const GroupList: FC = () => {
                     ),
                   )}
                 >
-                  <Heroicon icon={<StarIcon />} />
+                  <Heroicon icon={<StarIcon />} iconType="micro" />
                   {importantProjectsCount}
                 </div>
               ) : null}
 
               <div
                 className={classNames(
-                  'flex gap-x-0.5 items-center w-10',
+                  'flex w-10 items-center gap-x-0.5',
                   'text-xs font-semibold',
                   mapBooleanToString(
                     isCurrent,
@@ -90,7 +89,7 @@ export const GroupList: FC = () => {
                   ),
                 )}
               >
-                <Heroicon icon={<DocumentIcon />} />
+                <Heroicon icon={<DocumentIcon />} iconType="micro" />
                 {group.projects.length}
               </div>
             </div>

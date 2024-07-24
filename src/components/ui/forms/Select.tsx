@@ -1,25 +1,21 @@
 import { Listbox } from '@headlessui/react'
-import {
-  CheckIcon,
-  ChevronDownIcon,
-  ChevronUpIcon,
-} from '@heroicons/react/20/solid'
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/20/solid'
 import classNames from 'classnames'
 import React, { FC, useMemo, useState } from 'react'
-import { mapBooleanToString } from '../../../utils/map'
 import { Heroicon } from '../Heroicon'
+import { SelectListItem } from './SelectListItem'
 
-export interface SelectItem {
+export type SelectItem = {
   value: string
   label: string
 }
 
-interface SelectNullValue {
+type SelectNullValue = {
   value: string
   label: string
 }
 
-interface Props {
+type Props = {
   items: SelectItem[]
   value: string | null
   label?: string
@@ -60,7 +56,7 @@ export const Select: FC<Props> = ({
       <Listbox value={selectedItem} onChange={handleChange}>
         {({ open }) => (
           <div className="relative">
-            <Listbox.Label className="font-semibold text-sm">
+            <Listbox.Label className="text-sm font-semibold">
               {label}
             </Listbox.Label>
 
@@ -75,15 +71,10 @@ export const Select: FC<Props> = ({
             >
               <div>{displayValue}</div>
 
-              <div
-                className={classNames(
-                  'absolute right-0 top-0 bottom-0',
-                  'px-2',
-                  'flex items-center',
-                )}
-              >
+              <div className="absolute bottom-0 right-0 top-0 flex items-center px-2">
                 <Heroicon
                   icon={open ? <ChevronUpIcon /> : <ChevronDownIcon />}
+                  iconType="mini"
                 />
               </div>
             </Listbox.Button>
@@ -92,58 +83,18 @@ export const Select: FC<Props> = ({
               className={classNames(
                 'absolute left-0 top-full w-full',
                 'p-1',
-                'bg-blur shadow-lg rounded-md',
+                'bg-blur rounded-md shadow-lg',
               )}
             >
               {items.map((item) => (
                 <Listbox.Option key={item.value} value={item.value}>
                   {({ selected, active }) => (
-                    <div
-                      className={classNames(
-                        'flex items-center',
-                        'px-2 py-1',
-                        'rounded',
-                        mapBooleanToString(active, 'bg-gradient-brand'),
-                        mapBooleanToString(active, 'text-white'),
-                      )}
-                    >
-                      <div className="w-8 flex-0 flex justify-center">
-                        {isSelected(selected, item.value) ? (
-                          <Heroicon
-                            icon={
-                              <CheckIcon
-                                className={classNames(
-                                  mapBooleanToString(
-                                    active,
-                                    'text-white',
-                                    'text-brand-700',
-                                  ),
-                                )}
-                              />
-                            }
-                          />
-                        ) : null}
-                      </div>
-
-                      <div
-                        className={classNames(
-                          'flex-1',
-                          mapBooleanToString(
-                            isSelected(selected, item.value),
-                            classNames(
-                              'font-semibold',
-                              mapBooleanToString(
-                                active,
-                                'text-white',
-                                'text-brand-700',
-                              ),
-                            ),
-                          ),
-                        )}
-                      >
-                        {item.label}
-                      </div>
-                    </div>
+                    <SelectListItem
+                      item={item}
+                      selected={selected}
+                      active={active}
+                      isSelected={isSelected}
+                    />
                   )}
                 </Listbox.Option>
               ))}

@@ -36,7 +36,7 @@ export const ToolbarContainer: FC<PropsWithChildren<Props>> = ({
   return (
     <div
       className={classNames(
-        'grid grid-rows-[auto,1fr] grid-flow-col auto-cols-fr',
+        'grid auto-cols-fr grid-flow-col grid-rows-[auto,1fr]',
         '[&>*:nth-child(1)]:row-start-1 [&>*:nth-child(1)]:row-end-2',
         '[&>*:nth-child(1)]:col-start-1 [&>*:nth-child(1)]:col-end-2',
         '[&>*:nth-child(2)]:row-start-2 [&>*:nth-child(2)]:row-end-3',
@@ -47,16 +47,24 @@ export const ToolbarContainer: FC<PropsWithChildren<Props>> = ({
       )}
     >
       <div
-        className={classNames('grid grid-cols-[auto,1fr] items-center', 'my-2', {
-          'px-2': toolbarPadding === 'sm',
-          'px-8': toolbarPadding === 'lg',
-        })}
+        className={classNames(
+          'grid grid-cols-[auto,1fr] items-center',
+          'my-2',
+          {
+            'px-2': toolbarPadding === 'sm',
+            'px-8': toolbarPadding === 'lg',
+          },
+        )}
       >
         {title !== undefined ? (
-          <div className="flex items-center gap-1 col-start-1 col-end-2 my-4">
+          <div className="col-start-1 col-end-2 my-4 flex items-center gap-1">
             {icon !== undefined && icon.element !== undefined ? (
-              <div className={classNames('', icon.className)}>
-                <Heroicon icon={icon.element} color={icon.color} scale={1} />
+              <div className={classNames('mr-2', icon.className)}>
+                <Heroicon
+                  icon={icon.element}
+                  color={icon.color}
+                  iconType="mini"
+                />
               </div>
             ) : null}
 
@@ -65,7 +73,12 @@ export const ToolbarContainer: FC<PropsWithChildren<Props>> = ({
         ) : null}
 
         {toolbarItems.length > 0 ? (
-          <div className={classNames('col-start-2 col-end-3', 'flex justify-end gap-x-2')}>
+          <div
+            className={classNames(
+              'col-start-2 col-end-3',
+              'flex justify-end gap-x-2',
+            )}
+          >
             {toolbarItems.map((item, index) =>
               item.visible === false ? null : item.type === 'button' ? (
                 <ToolbarButton key={index} {...item} />

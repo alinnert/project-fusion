@@ -8,7 +8,7 @@ interface Props {
   icon?: ReactElement
   iconColor?: string
   iconClassName?: string
-  iconType?: 'solid' | 'outline'
+  iconType?: 'big' | 'mini' | 'micro'
   centered?: boolean
   dimmed?: boolean
 }
@@ -20,14 +20,14 @@ export const PageContent: FC<PropsWithChildren<Props>> = ({
   icon,
   iconColor,
   iconClassName,
-  iconType = 'solid',
+  iconType = 'big',
   centered = false,
   dimmed = false,
 }) => {
   return (
     <div
       className={classNames('h-auto overflow-hidden', {
-        'bg-neutral-100 m-2 rounded-xl': dimmed,
+        'm-2 rounded-xl bg-neutral-100': dimmed,
       })}
     >
       <div
@@ -35,13 +35,13 @@ export const PageContent: FC<PropsWithChildren<Props>> = ({
           'grid grid-rows-[auto,1fr] overflow-hidden',
           'h-full',
           {
-            'w-[600px] max-w-full mx-auto': centered,
+            'mx-auto w-[600px] max-w-full': centered,
             'w-full': !centered,
           },
         )}
       >
         {title !== undefined ? (
-          <div className="px-8 py-4 flex items-center row-start-1 row-end-2">
+          <div className="row-start-1 row-end-2 flex items-center px-8 py-4">
             {icon !== undefined ? (
               <div className={classNames('flex-0 mr-2', iconClassName)}>
                 <Heroicon
@@ -61,7 +61,9 @@ export const PageContent: FC<PropsWithChildren<Props>> = ({
           </div>
         ) : null}
 
-        <div className="row-start-2 row-end-3 overflow-y-auto px-8 pb-8">{children}</div>
+        <div className="row-start-2 row-end-3 overflow-y-auto px-8 pb-8">
+          {children}
+        </div>
       </div>
     </div>
   )

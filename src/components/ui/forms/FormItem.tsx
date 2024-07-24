@@ -29,7 +29,7 @@ export const FormItem: FC<PropsWithChildren<Props>> = ({
         'flex',
         mapUnionToString(type, {
           block: 'flex-col',
-          inline: 'flex-row gap-x-2 items-center',
+          inline: 'flex-row items-center gap-x-2',
         }),
         className,
       )}
@@ -37,11 +37,11 @@ export const FormItem: FC<PropsWithChildren<Props>> = ({
       {label !== undefined ? (
         <span
           className={classNames(
-            'font-semibold text-sm',
+            'text-sm font-semibold',
             mapBooleanToString(type === 'block', 'mb-1'),
             mapUnionToString(type, {
               block: 'flex-0 order-1',
-              inline: 'flex-1 order-2',
+              inline: 'order-2 flex-1',
             }),
           )}
         >

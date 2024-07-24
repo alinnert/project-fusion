@@ -10,10 +10,10 @@ export const Separator: FC<Props> = ({ type = 'default' }) => {
   return (
     <div
       className={classNames(
-        'w-px h-4',
+        'h-4 w-px',
         mapStringToString(type, {
-          default: 'bg-neutral-300 mx-1',
-          header: 'bg-brand-500 mx-2',
+          default: 'mx-1 bg-neutral-300',
+          header: 'mx-2 bg-brand-500',
           [defaultMatch]: '',
         }),
       )}

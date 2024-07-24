@@ -23,10 +23,10 @@ export const mapBooleanToString = (
   value: boolean,
   whenTrue: string,
   whenFalse?: string,
-): string => (value ? whenTrue : whenFalse ?? '')
+): string => (value ? whenTrue : whenFalse) ?? ''
 
 export const mapBooleanToValue = <T>(
   value: boolean,
   whenTrue: T,
   whenFalse?: T,
-): T | null => (value ? whenTrue : whenFalse ?? null)
+): T | null => (value ? whenTrue : whenFalse) ?? null

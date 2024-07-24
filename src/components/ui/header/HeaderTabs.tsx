@@ -33,6 +33,7 @@ export const HeaderTabs: FC<Props> = ({ tabs }) => {
           <Button
             type={isCurrent(tab) ? 'header-current' : 'header'}
             icon={tab.icon}
+            iconType="mini"
           >
             {tab.label}
           </Button>

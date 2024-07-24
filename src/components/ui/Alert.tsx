@@ -23,7 +23,7 @@ export const Alert: FC<PropsWithChildren<Props>> = ({
         mapUnionToString(type, {
           warn: classNames(
             'text-yellow-900',
-            'bg-yellow-50 border border-yellow-400',
+            'border border-yellow-400 bg-yellow-50',
           ),
         }),
       )}

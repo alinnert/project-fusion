@@ -1,7 +1,7 @@
 import { FolderIcon } from '@heroicons/react/20/solid'
 import { Dictionary } from '@reduxjs/toolkit'
 import classNames from 'classnames'
-import React, { FC, ReactElement, useMemo } from 'react'
+import React, { FC, Fragment, ReactElement, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router'
 import { useAppSelector } from '../../redux'
@@ -127,14 +127,14 @@ export const GroupListWithProjects: FC<Props> = ({
       title={title}
       titleButtons={<>{sortMenu}</>}
       icon={titleIcon}
-      iconType="outline"
+      iconType="mini"
       iconClassName={titleIconClassName}
       dimmed
     >
       {isEmpty
         ? emptyPlaceholder
         : categoriesToDisplay.map(([categoryId, groups]) => (
-            <div
+            <Fragment
               key={
                 typeof categoryId === 'symbol'
                   ? categoryId.toString()
@@ -144,32 +144,30 @@ export const GroupListWithProjects: FC<Props> = ({
               <TextDivider
                 label={
                   typeof categoryId === 'string'
-                    ? categoryEntities[categoryId]?.name ?? '-'
+                    ? (categoryEntities[categoryId]?.name ?? '-')
                     : t('groups:list.noCategory')
                 }
                 color="brand"
-                className="mt-12 mb-4"
+                className="mb-4 first:mt-4 not-first:mt-12"
               />
 
               {groups.sort(sortByProperty((item) => item.name)).map((group) => (
-                <div key={group.id}>
+                <Fragment key={group.id}>
                   <h3
-                    style={{ backgroundColor: group.color }}
                     className={classNames(
                       'flex items-center',
-                      'text-lg font-semibold',
-                      'hover:opacity-80 active:opacity-70',
-                      'text-white',
-                      'mt-4 mb-2 p-2',
+                      'text-base font-semibold',
+                      'hover:bg-neutral-200 active:bg-neutral-300',
+                      'mb-2 mt-4 px-2 py-1',
                       'rounded-md',
                     )}
                     onClick={() => navigate(`/groups/${group.id}`)}
                   >
                     <Heroicon
                       icon={<FolderIcon />}
-                      color="#ffffffcc"
-                      iconType="solid"
-                      scale={1.5}
+                      color={group.color}
+                      iconType="mini"
+                      scale={1}
                       className="mr-2"
                     />
                     {group.name}
@@ -184,9 +182,9 @@ export const GroupListWithProjects: FC<Props> = ({
                     .map((project) => (
                       <ProjectListItem key={project.id} {...project} />
                     ))}
-                </div>
+                </Fragment>
               ))}
-            </div>
+            </Fragment>
           ))}
     </PageContent>
   )

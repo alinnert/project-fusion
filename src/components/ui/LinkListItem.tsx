@@ -25,7 +25,7 @@ export const LinkListItem: FC<PropsWithChildren<Props>> = ({
       style={{ backgroundColor: current ? iconColor : undefined }}
       className={classNames(
         'flex items-center',
-        'p-1 rounded-md',
+        'rounded-md p-1',
         'hover:bg-neutral-200 active:bg-neutral-300',
         'current:text-white',
         { current },
@@ -34,18 +34,18 @@ export const LinkListItem: FC<PropsWithChildren<Props>> = ({
     >
       {icon !== undefined ? (
         <div
-          className={classNames('flex-0 self-center', 'p-1 mr-4', 'rounded')}
+          className={classNames('flex-0 self-center', 'mr-2 p-1', 'rounded')}
           style={{ color: current ? 'rgba(255, 255, 255, 0.95)' : iconColor }}
         >
           {icon !== null ? (
-            <Heroicon icon={icon} />
+            <Heroicon icon={icon} iconType="mini" />
           ) : (
-            <div className="w-[20px] h-[20px]"></div>
+            <div className="h-[20px] w-[20px]"></div>
           )}
         </div>
       ) : (
         <div className="py-1">
-          <div className="w-1 h-[20px]"></div>
+          <div className="h-[20px] w-1"></div>
         </div>
       )}
 

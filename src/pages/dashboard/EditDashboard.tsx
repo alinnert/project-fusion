@@ -4,6 +4,6 @@ import { useAppSelector } from '../../redux'
 
 export const EditDashboard: FC = () => {
   const dashboard = useAppSelector((state) => state.dashboard)
-  
+
   return <DashboardEditForm dashboard={dashboard} />
 }

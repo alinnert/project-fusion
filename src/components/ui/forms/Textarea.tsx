@@ -14,7 +14,7 @@ export const Textarea: FC<Props> = ({ value, label, onChange }) => {
       <textarea
         className={classNames(
           'px-2 py-1',
-          'w-full h-80 min-h-[100px] resize-y',
+          'h-80 min-h-[100px] w-full resize-y',
           'border border-neutral-600',
           'rounded',
           'font-mono leading-relaxed',

@@ -53,7 +53,7 @@ export function LinkList({
     return (
       <LinkListItem
         key={item.id}
-        icon={showIcons ? item.icon ?? defaultIcon : undefined}
+        icon={showIcons ? (item.icon ?? defaultIcon) : undefined}
         iconColor={item.iconColor}
         onClick={() => handleItemClick(item)}
         current={isCurrent}
@@ -70,7 +70,7 @@ export function LinkList({
   }
 
   return (
-    <div className="my-2 px-2 flex flex-col gap-y-1">
+    <div className="my-2 flex flex-col gap-y-1 px-2">
       {prefixedItems.map((item) => createLinkListItem(item)) ?? null}
 
       {items
@@ -81,10 +81,10 @@ export function LinkList({
             <TextDivider
               label={category.name}
               color="brand"
-              className="not-first:mt-6 mb-1"
+              className="mb-1 not-first:mt-6"
             />
 
-            <div className="flex flex-col gap-y-1">
+            <div className="flex flex-col gap-y-px">
               {links.map((group) => createLinkListItem(group))}
             </div>
           </Fragment>
