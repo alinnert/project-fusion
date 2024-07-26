@@ -16,7 +16,7 @@ import { useGroupEditFormActions } from './useGroupEditFormActions'
 import { useGroupEditFormShortcuts } from './useGroupEditFormShortcuts'
 import { useGroupEditFormToolbarItems } from './useGroupEditFormToolbarItems'
 
-interface Props {
+type Props = {
   init?: ProjectGroup | null
 }
 

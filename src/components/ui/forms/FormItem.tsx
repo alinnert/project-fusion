@@ -5,7 +5,7 @@ import { mapBooleanToString, mapUnionToString } from '../../../utils/map'
 
 export type FormItemType = 'block' | 'inline'
 
-interface Props {
+type Props = {
   type?: FormItemType
   label?: string
   className?: string

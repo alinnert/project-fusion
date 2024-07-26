@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import React, { FC, PropsWithChildren } from 'react'
 import { mapBooleanToString } from '../../utils/map'
 
-interface Props {
+type Props = {
   dimmed?: boolean
   center?: boolean
   onClick?: () => void

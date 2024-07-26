@@ -1,7 +1,7 @@
 import React, { FC, PropsWithChildren, ReactNode } from 'react'
 import { Headline } from './Headline'
 
-interface Props {
+type Props = {
   title?: ReactNode
 }
 

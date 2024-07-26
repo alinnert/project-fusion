@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-export interface DropdownMenuItemSeparator {
+export type DropdownMenuItemSeparator = {
   type: 'separator'
 }
 

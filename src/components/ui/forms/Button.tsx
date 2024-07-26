@@ -28,8 +28,7 @@ export type ButtonSize = 'big' | 'normal' | 'small'
 
 type ExtractedButtonProps = 'onClick' | 'disabled'
 
-interface Props
-  extends Pick<ButtonHTMLAttributes<HTMLButtonElement>, ExtractedButtonProps> {
+type Props = {
   icon?: ReactElement
   iconType?: 'big' | 'mini' | 'micro'
   rightIcon?: ReactElement
@@ -40,7 +39,7 @@ interface Props
     ButtonHTMLAttributes<HTMLButtonElement>,
     ExtractedButtonProps
   >
-}
+} & Pick<ButtonHTMLAttributes<HTMLButtonElement>, ExtractedButtonProps>
 
 export const Button: FC<PropsWithChildren<Props>> = ({
   children,

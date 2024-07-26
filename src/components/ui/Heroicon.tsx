@@ -8,7 +8,7 @@ import React, {
 } from 'react'
 import { mapUnionToString } from '../../utils/map'
 
-interface Props {
+type Props = {
   icon: ReactElement<{ className: string }>
   color?: string
   scale?: 1 | 1.5 | 2 | 4

@@ -2,7 +2,7 @@ import { Dialog } from '@headlessui/react'
 import classNames from 'classnames'
 import React, { FC, PropsWithChildren, ReactNode } from 'react'
 
-interface Props {
+type Props = {
   title: string
   footer?: ReactNode
   open: boolean

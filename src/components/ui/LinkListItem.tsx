@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import React, { FC, MouseEvent, PropsWithChildren, ReactElement } from 'react'
 import { Heroicon } from './Heroicon'
 
-interface Props {
+type Props = {
   icon?: ReactElement | null
   iconColor?: string
   current?: boolean

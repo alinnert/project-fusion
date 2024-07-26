@@ -6,7 +6,7 @@ import { ProjectGroup } from '../groups'
 import { Project } from '../projects'
 import { Settings } from '../settings'
 
-export interface Database {
+export type Database = {
   version?: number
   dashboard: Dashboard
   categories: Record<Category['id'], Category>
@@ -15,7 +15,7 @@ export interface Database {
   settings: Settings
 }
 
-export interface DatabaseState {
+export type DatabaseState = {
   filename: string | null
   status: 'ok' | 'loading' | string
   version?: number

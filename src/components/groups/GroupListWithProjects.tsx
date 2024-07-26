@@ -17,7 +17,7 @@ import { Heroicon } from '../ui/Heroicon'
 import { PageContent } from '../ui/PageContent'
 import { TextDivider } from '../ui/TextDivider'
 
-interface Props {
+type Props = {
   groups: Dictionary<ProjectGroup>
   title?: string
   titleIcon?: ReactElement

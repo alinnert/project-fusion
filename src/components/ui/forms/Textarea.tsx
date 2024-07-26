@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import React, { FC } from 'react'
 import { FormItem } from './FormItem'
 
-interface Props {
+type Props = {
   value: string
   label?: string
   onChange?: (value: string) => void

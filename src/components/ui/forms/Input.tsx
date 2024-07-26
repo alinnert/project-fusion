@@ -3,16 +3,12 @@ import React, { ChangeEvent, FC, InputHTMLAttributes, useMemo } from 'react'
 import { mapUnionToString } from '../../../utils/map'
 import { FormItem } from './FormItem'
 
-interface Props
-  extends Omit<
-    InputHTMLAttributes<HTMLInputElement>,
-    'onChange' | 'className'
-  > {
+type Props = {
   inputType?: 'default' | 'header'
   label?: string
   className?: string
   onChange?: (value: string, event: ChangeEvent<HTMLInputElement>) => void
-}
+} & Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'className'>
 
 export const Input: FC<Props> = ({
   inputType = 'default',

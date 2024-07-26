@@ -7,7 +7,7 @@ import { ProjectListGroup } from './ProjectListGroup'
 
 type GroupName = 'active' | 'archived'
 
-interface Props {
+type Props = {
   projects: Array<Project>
 }
 

@@ -3,7 +3,7 @@ import React, { FC, useEffect, useRef, useState } from 'react'
 import { FormItem } from './FormItem'
 import { Input } from './Input'
 
-interface Props {
+type Props = {
   value: string
   label?: string
   onChange?: (value: string) => void

@@ -10,7 +10,7 @@ import { Header } from '../ui/header/Header'
 import { LeftPanel } from '../ui/LeftPanel'
 import { CurrentFile } from './CurrentFile'
 
-interface Props {
+type Props = {
   left?: ReactNode
   right?: ReactNode
 }

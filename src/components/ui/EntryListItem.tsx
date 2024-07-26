@@ -6,7 +6,7 @@ type EntryListItemButton = {
   onClick: () => void
 }
 
-interface Props {
+type Props = {
   label: string
   onClick: () => void
   buttons?: EntryListItemButton[]

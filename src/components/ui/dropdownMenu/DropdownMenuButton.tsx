@@ -6,7 +6,7 @@ import { Heroicon } from '../Heroicon'
 import { PlaceholderIcon } from '../PlaceholderIcon'
 import { DropdownMenuItem, DropdownMenuItemButtonType } from './DropdownMenu'
 
-export interface DropdownMenuItemButton {
+export type DropdownMenuItemButton = {
   type: 'button'
   label: string
   icon?: ReactElement
@@ -15,7 +15,7 @@ export interface DropdownMenuItemButton {
   action?: () => void
 }
 
-interface Props {
+type Props = {
   isActive: boolean
   item: DropdownMenuItem
 }

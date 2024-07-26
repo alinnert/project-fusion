@@ -1,7 +1,7 @@
 import { createEntityAdapter, createSlice, EntityState } from '@reduxjs/toolkit'
 import { closeDatabase, setDatabase } from '../database'
 
-export interface Project {
+export type Project = {
   id: string
   name: string
   projectNumber: string

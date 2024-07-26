@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-export interface ToolbarExpanderItem {
+export type ToolbarExpanderItem = {
   type: 'expander'
 }
 

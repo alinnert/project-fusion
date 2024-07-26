@@ -4,18 +4,18 @@ import { Button } from '../forms/Button'
 import { Input } from '../forms/Input'
 import { AppDialog } from './AppDialog'
 
-interface OpenDialogOptions {
+type OpenDialogOptions = {
   title: string
   inputLabel: string
   primaryButtonLabel?: string
   value: string
 }
 
-interface Options {
+type Options = {
   onConfirm: (value: string) => void
 }
 
-interface Result {
+type Result = {
   dialog: ReactElement
   openDialog: (options: OpenDialogOptions) => void
 }

@@ -2,14 +2,14 @@ import React, { FC, ReactElement } from 'react'
 import { useLocation, useNavigate } from 'react-router'
 import { Button } from '../forms/Button'
 
-export interface TabItem {
+export type TabItem = {
   label: string
   icon?: ReactElement
   href: string
   current?: boolean
 }
 
-interface Props {
+type Props = {
   tabs: Array<TabItem>
 }
 

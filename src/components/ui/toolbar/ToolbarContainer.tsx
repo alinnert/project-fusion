@@ -7,15 +7,15 @@ import { ToolbarDropdown, ToolbarDropdownItem } from './ToolbarDropdown'
 import { ToolbarExpander, ToolbarExpanderItem } from './ToolbarExpander'
 import { ToolbarPopover, ToolbarPopoverItem } from './ToolbarPopover'
 
-export type ToolbarItem = (
+export type ToolbarItem = { visible?: boolean } & (
   | ToolbarButtonItem
   | ToolbarPopoverItem
   | ToolbarDropdownItem
   | ToolbarExpanderItem
   | ToolbarDividerItem
-) & { visible?: boolean }
+)
 
-interface Props {
+type Props = {
   title?: string
   icon?: {
     element?: ReactElement

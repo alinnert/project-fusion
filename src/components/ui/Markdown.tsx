@@ -1,7 +1,7 @@
 import { marked } from 'marked'
 import React, { FC, useMemo } from 'react'
 
-interface Props {
+type Props = {
   text?: string | null
 }
 

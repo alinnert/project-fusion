@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react'
 import { DropdownMenu, DropdownMenuItem } from '../dropdownMenu/DropdownMenu'
 
-export interface ToolbarDropdownItem {
+export type ToolbarDropdownItem = {
   type: 'dropdown'
   label: string
   icon?: ReactElement

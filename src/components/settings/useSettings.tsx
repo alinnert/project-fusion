@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next'
 import colors from 'tailwindcss/colors'
 import { CategorizedLinkItems, LinkItem } from '../ui/LinkList'
 
-interface UseSettingsResult {
+type UseSettingsResult = {
   settingsItems: CategorizedLinkItems
   applicationSettings: Record<string, LinkItem>
   databaseSettings: Record<string, LinkItem>

@@ -30,7 +30,7 @@ export type DropdownMenuItem =
   | DropdownMenuItemButton
   | DropdownMenuItemSeparator
 
-interface Props {
+type Props = {
   icon?: ReactElement
   iconType?: 'big' | 'mini' | 'micro'
   items: DropdownMenuItem[]

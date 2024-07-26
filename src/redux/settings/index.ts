@@ -4,7 +4,7 @@ import { addCategory, Category, removeCategory } from '../categories'
 import { closeDatabase, setDatabase } from '../database'
 import { SortOrder } from './SortOrder'
 
-export interface CustomLink {
+export type CustomLink = {
   label: string
   url: string
 }
@@ -14,7 +14,7 @@ export type ProjectsSortOrder = {
   sortOrder: SortOrder
 }
 
-export interface Settings {
+export type Settings = {
   categoryOrder: Array<Category['id']>
   primaryProjectLink: CustomLink | null
   projectLinks: CustomLink[]
