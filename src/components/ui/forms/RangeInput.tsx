@@ -1,7 +1,7 @@
 import React, { FC, InputHTMLAttributes } from 'react'
 import { FormItem } from './FormItem'
 
-interface Props {
+type Props = {
   value: string
   label?: string
   inputProps?: InputHTMLAttributes<HTMLInputElement>

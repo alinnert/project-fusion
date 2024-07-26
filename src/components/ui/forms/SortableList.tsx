@@ -7,7 +7,7 @@ import { Button } from './Button'
 
 export type SwapDirection = 'up' | 'down'
 
-interface Props {
+type Props = {
   children: (id: string) => ReactNode
   ids: Array<string>
   selectedId: string | null

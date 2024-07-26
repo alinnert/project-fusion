@@ -5,7 +5,7 @@ import { mapBooleanToString } from '../../../utils/map'
 import { Heroicon } from '../Heroicon'
 import { SelectItem } from './Select'
 
-interface Props {
+type Props = {
   item: SelectItem
   selected: boolean
   active: boolean

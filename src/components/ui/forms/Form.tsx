@@ -11,7 +11,7 @@ import { mapUnionToString } from '../../../utils/map'
 
 export type FormType = 'unstyled' | 'page' | 'inline'
 
-interface Props {
+type Props = {
   className?: string
   type?: FormType
   formProps?: Omit<

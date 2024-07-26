@@ -1,16 +1,15 @@
 import React, { ChangeEvent, FC, InputHTMLAttributes } from 'react'
 import { FormItem } from './FormItem'
 
-interface Props
-  extends Omit<
-    InputHTMLAttributes<HTMLInputElement>,
-    'value' | 'onChange' | 'className'
-  > {
+type Props = {
   label?: string
   value: boolean
   className?: string
   onChange?: (value: boolean, event: ChangeEvent<HTMLInputElement>) => void
-}
+} & Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  'value' | 'onChange' | 'className'
+>
 
 export const Checkbox: FC<Props> = ({
   label,

@@ -6,7 +6,7 @@ import { setCurrentConfigId } from '../../redux/uiState'
 import { CategorizedLinkItems, LinkItem, LinkList } from '../ui/LinkList'
 import { useSettings } from './useSettings'
 
-interface Props {
+type Props = {
   currentId: string
 }
 

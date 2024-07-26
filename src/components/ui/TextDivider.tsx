@@ -6,7 +6,7 @@ export type TextDividerColor = 'neutral' | 'brand'
 
 export type TextDividerSize = 'small' | 'normal'
 
-interface Props {
+type Props = {
   label: string
   color?: TextDividerColor
   className?: string

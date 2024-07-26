@@ -6,7 +6,7 @@ import classNames from 'classnames'
 import { Heroicon } from '../ui/Heroicon'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/20/solid'
 
-interface Props {
+type Props = {
   headline?: string
   projects: Array<Project>
 }

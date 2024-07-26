@@ -8,7 +8,7 @@ import { removeElementsFromArray } from '../../utils/array'
 import { closeDatabase, setDatabase } from '../database'
 import { ProjectGroup } from '../groups'
 
-export interface Category {
+export type Category = {
   id: string
   name: string
   groups: Array<ProjectGroup['id']>

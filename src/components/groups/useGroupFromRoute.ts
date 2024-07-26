@@ -3,7 +3,7 @@ import { useParams } from 'react-router'
 import { useAppSelector } from '../../redux'
 import { ProjectGroup } from '../../redux/groups'
 
-interface UseGroupFromRouteResult {
+type UseGroupFromRouteResult = {
   groupId: string | null
   group: ProjectGroup | null
 }

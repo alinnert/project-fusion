@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-export interface ToolbarDividerItem {
+export type ToolbarDividerItem = {
   type: 'divider'
 }
 

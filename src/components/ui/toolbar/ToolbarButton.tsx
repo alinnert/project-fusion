@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react'
 import { Button, ButtonType } from '../forms/Button'
 
-export interface ToolbarButtonItem {
+export type ToolbarButtonItem = {
   type: 'button'
   label: string
   buttonType?: ButtonType

@@ -5,7 +5,7 @@ import colors from 'tailwindcss/colors'
 import { mapUnionToString } from '../../utils/map'
 import { Heroicon } from './Heroicon'
 
-interface Props {
+type Props = {
   type?: 'warn'
 }
 

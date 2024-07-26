@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router'
 import { LinkListItem } from './LinkListItem'
 import { TextDivider } from './TextDivider'
 
-export interface LinkCategory {
+export type LinkCategory = {
   id: string
   name: string
 }
 
-export interface LinkItem {
+export type LinkItem = {
   id: string | null
   name: string
   icon?: ReactElement
@@ -20,7 +20,7 @@ export type CategorizedLinkItems = Array<[LinkCategory, LinkItem[]]>
 
 export type LinkListPrefixedItems = Array<LinkItem>
 
-interface Props {
+type Props = {
   items?: CategorizedLinkItems
   prefixedItems?: LinkListPrefixedItems
   showIcons?: boolean

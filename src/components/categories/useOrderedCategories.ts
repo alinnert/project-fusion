@@ -4,7 +4,7 @@ import { useAppSelector } from '../../redux'
 import { Category } from '../../redux/categories'
 import { resolveIds } from '../../utils/resolveIds'
 
-interface UseOrderedCategoriesResult {
+type UseOrderedCategoriesResult = {
   orderedCategories: Category[]
   orderedCategoryIds: Array<Category['id']>
   categories: Dictionary<Category>

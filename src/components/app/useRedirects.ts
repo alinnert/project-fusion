@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router'
 import { useAppSelector } from '../../redux'
 import { selectIsFileOpen } from '../../redux/database'
 
-interface RedirectTarget {
+type RedirectTarget = {
   path: string
   replace?: boolean
 }

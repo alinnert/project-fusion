@@ -10,7 +10,7 @@ import { removeElementsFromArray } from '../../utils/array'
 import { closeDatabase, setDatabase } from '../database'
 import { Project } from '../projects'
 
-export interface ProjectGroup {
+export type ProjectGroup = {
   id: string
   name: string
   color: string

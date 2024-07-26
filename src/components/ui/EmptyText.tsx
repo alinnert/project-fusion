@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import React, { FC, PropsWithChildren, ReactElement } from 'react'
 import { Heroicon } from './Heroicon'
 
-interface Props {
+type Props = {
   title?: string
   icon?: ReactElement
   image?: {

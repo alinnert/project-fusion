@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import React, { FC, ReactElement } from 'react'
 import { Button, ButtonType } from '../forms/Button'
 
-export interface ToolbarPopoverItem {
+export type ToolbarPopoverItem = {
   type: 'popover'
   label: string
   buttonType?: ButtonType

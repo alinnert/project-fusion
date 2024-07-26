@@ -1,6 +1,6 @@
 export const defaultMatch: unique symbol = Symbol('default match')
 
-interface DefaultMatch<T> {
+type DefaultMatch<T> = {
   [defaultMatch]: T
 }
 

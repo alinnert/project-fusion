@@ -1,7 +1,7 @@
 import { Database, DatabaseState } from '../database'
 import { isDatabaseObject } from './isDatabaseObject'
 
-export interface FilePickerResult {
+export type FilePickerResult = {
   filename: DatabaseState['filename']
   database: Database
 }

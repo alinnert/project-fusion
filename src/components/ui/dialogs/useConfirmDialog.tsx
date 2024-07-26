@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Button, ButtonType } from '../forms/Button'
 import { AppDialog } from './AppDialog'
 
-interface OpenDialogOptions {
+type OpenDialogOptions = {
   title: string
   message: string
   confirmButtonLabel?: string
@@ -11,12 +11,12 @@ interface OpenDialogOptions {
   cancelButtonLabel?: string
 }
 
-interface Options {
+type Options = {
   onConfirm: () => void
   onCancel?: () => void
 }
 
-export interface UseConfirmDialogResult {
+export type UseConfirmDialogResult = {
   dialog: ReactElement
   openDialog: (options: OpenDialogOptions) => void
 }

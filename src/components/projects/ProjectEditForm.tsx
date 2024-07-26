@@ -22,7 +22,7 @@ import { Input } from '../ui/forms/Input'
 import { Textarea } from '../ui/forms/Textarea'
 import { ToolbarContainer, ToolbarItem } from '../ui/toolbar/ToolbarContainer'
 
-interface Props {
+type Props = {
   init?: Project | ProjectTemplate | null
 }
 
