@@ -99,10 +99,7 @@ export const GroupList: FC = () => {
     }
 
     const groupsWithoutCategory: CategorizedLinkItems = [
-      [
-        { id: '', name: t('groups:list.noCategory') },
-        uncategorizedGroups.map(createLinkItem),
-      ],
+      [{ id: '', name: '' }, uncategorizedGroups.map(createLinkItem)],
     ]
 
     const categorizedGroups: CategorizedLinkItems = orderedCategories.map(
@@ -117,7 +114,7 @@ export const GroupList: FC = () => {
     )
 
     return [...groupsWithoutCategory, ...categorizedGroups]
-  }, [orderedCategories, t, uncategorizedGroups, projects, groups])
+  }, [orderedCategories, uncategorizedGroups, projects, groups])
 
   const currentId = useMemo<LinkItem['id']>(() => {
     return location.pathname === `/groups` ? null : groupId

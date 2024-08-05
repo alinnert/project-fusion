@@ -10,6 +10,23 @@
 }
 
 @layer components {
+  .header {
+    margin-left: env(titlebar-area-x, 0);
+    margin-right: calc(
+      100% - env(titlebar-area-x, 0) - env(titlebar-area-width, 0)
+    );
+  }
+
+  .drag {
+    -webkit-app-region: drag;
+    app-region: drag;
+  }
+
+  .no-drag {
+    -webkit-app-region: no-drag;
+    app-region: no-drag;
+  }
+
   .bg-gradient-brand {
     @apply bg-gradient-to-r from-brand-700 to-accent-500;
   }
