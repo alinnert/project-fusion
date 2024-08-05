@@ -19,7 +19,7 @@ export const HeaderSearch: FC = ({}) => {
   }
 
   return (
-    <Form type="inline" onSubmit={handleSearch}>
+    <Form type="inline" onSubmit={handleSearch} className="no-drag">
       <Input
         placeholder={t('common:header.search.inputPlaceholder') ?? undefined}
         inputType="header"

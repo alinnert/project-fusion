@@ -3,10 +3,7 @@ import { useNavigate } from 'react-router'
 import { LinkListItem } from './LinkListItem'
 import { TextDivider } from './TextDivider'
 
-export type LinkCategory = {
-  id: string
-  name: string
-}
+export type LinkCategory = { id: string; name: string }
 
 export type LinkItem = {
   id: string | null
@@ -70,7 +67,7 @@ export function LinkList({
   }
 
   return (
-    <div className="my-2 flex flex-col gap-y-1 px-2">
+    <div className="my-2 flex flex-col gap-y-0.5 px-2">
       {prefixedItems.map((item) => createLinkListItem(item)) ?? null}
 
       {items
@@ -78,15 +75,15 @@ export function LinkList({
         .filter(([, links]) => links.length > 0)
         .map(([category, links]) => (
           <Fragment key={category.id}>
-            <TextDivider
-              label={category.name}
-              color="brand"
-              className="mb-1 not-first:mt-6"
-            />
+            {category.id !== '' ? (
+              <TextDivider
+                label={category.name}
+                color="brand"
+                className="mb-1 not-first:mt-6"
+              />
+            ) : null}
 
-            <div className="flex flex-col gap-y-px">
-              {links.map((group) => createLinkListItem(group))}
-            </div>
+            {links.map((group) => createLinkListItem(group))}
           </Fragment>
         ))}
     </div>

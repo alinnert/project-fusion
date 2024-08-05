@@ -27,7 +27,7 @@ export const HeaderTabs: FC<Props> = ({ tabs }) => {
   }
 
   return (
-    <div className="flex gap-x-2">
+    <div className="no-drag flex gap-x-2">
       {tabs.map((tab) => (
         <div key={tab.href} onClick={() => handleItemClick(tab)}>
           <Button
